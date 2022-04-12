@@ -1,0 +1,7 @@
+Jan Jankovic A 4 6 1985
+Ferdinand Prvy C 4 12 1986
+Viliam Tell F 1 1 1987
+Miriama Balajova B 25 2 1988
+Patrik Arbet A 14 3 1989
+Marian Diko B 11 2 1986
+Peter Novak C 9 3 1987

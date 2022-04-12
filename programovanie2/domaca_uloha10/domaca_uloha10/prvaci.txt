@@ -1,0 +1,5 @@
+Jan Jankovic A 4 6 1985
+Peter Jankovic A 12 6 1985
+Ferdinand Tell C 4 12 1986
+Viliam Tell F 1 1 1987
+Johanka Z_arku C 5 4 1238
