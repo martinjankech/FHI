@@ -1,0 +1,125 @@
+* {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  color: red;
+  background: whitesmoke;
+  height: 8.75rem;
+  text-align: center;
+  font-size: 3vw;
+}
+.navigacia {
+  text-align: center;
+  top: 2px;
+  font-size: 2vw;
+  word-spacing: 6px;
+  background-color: blue;
+}
+a {
+  color: black;
+}
+
+.tacka_logo {
+  height: 70vh;
+  width: 100vw;
+  display: flex;
+}
+.logo {
+  position: absolute;
+  top: 0vw;
+  height: 8.75rem;
+  border-radius: 60%;
+}
+body {
+  background-color: blanchedalmond;
+  height: 100vh;
+}
+
+.uvod {
+  text-align: center;
+  font-size: 45px;
+  border: black solid;
+}
+.aboutus {
+  font-size: 40px;
+  text-align: left;
+  text-decoration: underline;
+}
+p {
+  padding-top: 20px;
+  padding-left: 100px;
+  padding-bottom: 40px;
+  padding-right: 100px;
+  font-size: 20px;
+}
+footer {
+  padding-left: 0;
+  background-color: burlywood;
+
+  left: 0;
+  bottom: 0;
+  width: 100%;
+
+  text-align: center;
+}
+
+.skup_pro_nad {
+  font-size: 40px;
+  text-align: left;
+  color: red;
+}
+.produkty_nadpis {
+  font-size: 25px;
+}
+
+/* Three image containers (use 25% for four, and 50% for two, etc) */
+.column {
+  float: left;
+  width: 33%;
+  padding-left: 2px;
+  position: relative;
+}
+
+/* Clear floats after image containers */
+
+.clear {
+  content: "";
+  clear: both;
+}
+img {
+  width: auto;
+  height: auto;
+}
+a[href^="mailto"]::before {
+  content: "📧 ";
+}
+
+a[href^="tel"]::before {
+  content: "📞 ";
+}
+.kontakt {
+  padding-left: 100px;
+}
+
+@media screen and (max-width: 500px) {
+  .column {
+    float: none;
+  }
+
+  .header {
+    font-size: 15px;
+  }
+
+  .logo {
+    width: 70px;
+    height: 60px;
+    bottom: 20px;
+  }
+}
+.tab_php {
+  width: 1100px;
+  background-color: blue;
+}
