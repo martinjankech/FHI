@@ -1,0 +1,427 @@
+{
+	"info": {
+		"_postman_id": "be3183a7-053e-4ac0-b8e5-884ef211b1e1",
+		"name": "Advance_REST_Jankech",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Read All Movies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status code is 200\",function(){pm.response.to.have.status(200)});\r",
+							"\r",
+							"pm.test(\"Content Type is present\",function(){pm.response.to.have.header(\"Content-Type\")});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}?limit=1000&offset=0",
+					"host": [
+						"{{url}}"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "1000"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post movie",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status code is 201\",function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"    });\r",
+							"\r",
+							"let jsonData=pm.response.json();\r",
+							"let id = jsonData._id;\r",
+							"pm.environment.set(\"movie_id\",id);\r",
+							"//console.log(movie_id);\r",
+							"//pm.environment.get(\"movie_id\")\r",
+							"pm.test(\"Successfull POST request\",function(){\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);\r",
+							"}); \r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"title\": \"Joker\",\r\n    \"category\": \"crimi,drama,Thriller\",\r\n    \"release_year\": 2019,\r\n    \"lenght_in_minutes\": 122,\r\n    \"rating\": \"A\",\r\n    \"Premiere_date\": \"2019-08-31\",\r\n    \"language\":\"English\",\r\n    \"directors\":[{\"firstname\":\"Todd\", \r\n    \"lastname\": \"Phillips\",\r\n    \"bio\": \"blablablabal\",\r\n    \"date_of_birth\":\"1970-12-20\"}],\r\n    \"actors\":[{\"firstname\":\"Joaquin\", \r\n    \"lastname\": \"Phoenix\",\r\n    \"bio\": \"blablablabal\",\r\n    \"date_of_birth\":\"1974-12-20\"},\r\n{\"firstname\":\"Robert \", \r\n    \"lastname\": \"De Niro\",\r\n    \"bio\": \"blablablabal\",\r\n    \"date_of_birth\":\"1943-08-17\"}],\r\n\"prizes\":[{\"name\":\"oscar\",\r\n\"award_date\":\"2020-02-20\",\r\n\"awardet_for\":\"best actor\"}]\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "verify new movie",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status code is 200\",function(){pm.response.to.have.status(200);});\r",
+							"\r",
+							"pm.test(\"verify id\",function(){\r",
+							"    let jsonData=pm.response.json();\r",
+							"let id=jsonData._id;\r",
+							"let id_last=pm.environment.get(\"movie_id\");\r",
+							"return id===id_last;})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/{{movie_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{movie_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get one movie",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status code is 200\",function(){pm.response.to.have.status(200)});\r",
+							"\r",
+							"pm.test(\"Content Type is present\",function(){pm.response.to.have.header(\"Content-Type\")});\r",
+							"\r",
+							"pm.test(\"verify id\",function(){\r",
+							"    let jsonData=pm.response.json();\r",
+							"let id=jsonData._id;\r",
+							"let id_last=pm.environment.get(\"movie_id\");\r",
+							"return id===id_last;})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{url}}/{{movie_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{movie_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create movie forrest gump",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status code is 201\",function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"    });\r",
+							"\r",
+							"let jsonData=pm.response.json();\r",
+							"let id = jsonData._id;\r",
+							"pm.environment.set(\"movie_id1\",id);\r",
+							"//console.log(movie_id);\r",
+							"//pm.environment.get(\"movie_id\")\r",
+							"pm.test(\"Successfull POST request\",function(){\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);\r",
+							"}); "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Forrest Gumb\",\r\n    \"category\": \"Drama, Romance\",\r\n    \"release_year\": 1994,\r\n    \"lenght_in_minutes\": 144,\r\n    \"rating\": \"A\",\r\n    \"Premiere_date\": \"1994-08-31\",\r\n    \"language\":\"English\",\r\n    \"directors\":[{\"firstname\":\"Robert\", \r\n    \"lastname\": \"Zemeckis\",\r\n    \"bio\": \"blablablabal\",\r\n    \"date_of_birth\":\"1951-05-14\"}],\r\n    \"actors\":[{\"firstname\":\"Tom\", \r\n    \"lastname\": \"Hanks\",\r\n    \"bio\": \"blablablabal\",\r\n    \"date_of_birth\":\"1956-07-09\"},\r\n{\"firstname\":\"Sally  \", \r\n    \"lastname\": \"Fieldt\",\r\n    \"bio\": \"blablablabal\",\r\n    \"date_of_birth\":\"1946-11-06\"}],\r\n\"prizes\":[{\"name\":\"oscar\",\r\n\"award_date\":\"1985-02-20\",\r\n\"awardet_for\":\"best actress\"},\r\n{\"name\":\"Golden Globes\",\r\n\"award_date\":\"1985-02-20\",\r\n\"awardet_for\":\"best performance by an Actress\"}]\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete movie forrest gump",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status code is 200\",function(){pm.response.to.have.status(200)});\r",
+							"pm.test(\"verify id\",function(){\r",
+							"    let jsonData=pm.response.json();\r",
+							"let id=jsonData._id;\r",
+							"let id_last=pm.environment.get(\"movie_id1\");\r",
+							"return id===id_last;})\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Forrest Gumb\",\r\n    \"category\": \"Drama, Romance\",\r\n    \"release_year\": 1994,\r\n    \"lenght_in_minutes\": 144,\r\n    \"rating\": \"A\",\r\n    \"Premiere_date\": \"1994-08-31\",\r\n    \"language\":\"English\",\r\n    \"directors\":[{\"firstname\":\"Robert\", \r\n    \"lastname\": \"Zemeckis\",\r\n    \"bio\": \"blablablabal\",\r\n    \"date_of_birth\":\"1951-05-14\"}],\r\n    \"actors\":[{\"firstname\":\"Tom\", \r\n    \"lastname\": \"Hanks\",\r\n    \"bio\": \"blablablabal\",\r\n    \"date_of_birth\":\"1956-07-09\"},\r\n{\"firstname\":\"Sally  \", \r\n    \"lastname\": \"Fieldt\",\r\n    \"bio\": \"blablablabal\",\r\n    \"date_of_birth\":\"1946-11-06\"}],\r\n\"prizes\":[{\"name\":\"oscar\",\r\n\"award_date\":\"1985-02-20\",\r\n\"awardet_for\":\"best actress\"},\r\n{\"name\":\"Golden Globes\",\r\n\"award_date\":\"1985-02-20\",\r\n\"awardet_for\":\"best performance by an Actress\"}]\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/{{movie_id1}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{movie_id1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findnot movie forrest gumo (404 not found because deleted)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status code is 404\",function(){pm.response.to.have.status(404)});\r",
+							"pm.test(\"verify id\",function(){\r",
+							"pm.environment.get(\"movie_id1\")===null\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/{{movie_id1}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{movie_id1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create movie joker 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status code is 201\",function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"    });\r",
+							"\r",
+							"let jsonData=pm.response.json();\r",
+							"let id = jsonData._id;\r",
+							"pm.environment.set(\"movie_id2\",id);\r",
+							"//console.log(movie_id);\r",
+							"//pm.environment.get(\"movie_id\")\r",
+							"pm.test(\"Successfull POST request\",function(){\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);\r",
+							"}); "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Joker2\",\r\n    \"category\": \"crimi,drama,Thriller\",\r\n    \"release_year\": 2019,\r\n    \"lenght_in_minutes\": 122,\r\n    \"rating\": \"A\",\r\n    \"Premiere_date\": \"2019-08-31\",\r\n    \"language\":\"English\",\r\n    \"directors\":[{\"firstname\":\"Todd\", \r\n    \"lastname\": \"Phillips\",\r\n    \"bio\": \"blablablabal\",\r\n    \"date_of_birth\":\"1970-12-20\"}],\r\n    \"actors\":[{\"firstname\":\"Joaquin\", \r\n    \"lastname\": \"Phoenix\",\r\n    \"bio\": \"blablablabal\",\r\n    \"date_of_birth\":\"1974-12-20\"},\r\n{\"firstname\":\"Robert \", \r\n    \"lastname\": \"De Niro\",\r\n    \"bio\": \"blablablabal\",\r\n    \"date_of_birth\":\"1943-08-17\"}],\r\n\"prizes\":[{\"name\":\"oscar\",\r\n\"award_date\":\"2020-02-20\",\r\n\"awardet_for\":\"best actor\"}]\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update movie joker2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"status code is 200\",function(){pm.response.to.have.status(200)});\r",
+							"\r",
+							"pm.test(\"Content Type is present\",function(){pm.response.to.have.header(\"Content-Type\")});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Joker2\",\r\n    \"category\": \"crimi,drama,Thriller\",\r\n    \"release_year\": 2021,\r\n    \"lenght_in_minutes\": 140,\r\n    \"rating\": \"A\",\r\n    \"Premiere_date\": \"2019-08-31\",\r\n    \"language\":\"English\",\r\n    \"directors\":[{\"firstname\":\"Todd\", \r\n    \"lastname\": \"Phillips\",\r\n    \"bio\": \"blablablabal\",\r\n    \"date_of_birth\":\"1970-12-20\"}],\r\n    \"actors\":[{\"firstname\":\"Joaquin\", \r\n    \"lastname\": \"Phoenix\",\r\n    \"bio\": \"blablablabal\",\r\n    \"date_of_birth\":\"1974-12-20\"},\r\n{\"firstname\":\"Robert \", \r\n    \"lastname\": \"De Niro\",\r\n    \"bio\": \"blablablabal\",\r\n    \"date_of_birth\":\"1943-08-17\"}],\r\n\"prizes\":[{\"name\":\"oscar\",\r\n\"award_date\":\"2020-02-20\",\r\n\"awardet_for\":\"best actor\"}]\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/{{movie_id2}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{movie_id2}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "url"
+		},
+		{
+			"key": "movie_id",
+			"value": ""
+		}
+	]
+}

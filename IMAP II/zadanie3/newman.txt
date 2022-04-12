@@ -1,0 +1,3 @@
+ts-node src/server.ts
+
+newman run Advance_REST_Jankech.postman_collection.json -e LOCAL.postman_environment.json

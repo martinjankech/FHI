@@ -1,0 +1,453 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"rating": {
+				"enum": [
+					"A",
+					"B",
+					"C",
+					"D",
+					"E"
+				],
+				"type": "string"
+			},
+			"movieResponse": {
+				"properties": {
+					"_id": {
+						"type": "string"
+					},
+					"title": {
+						"type": "string"
+					},
+					"category": {
+						"type": "string"
+					},
+					"release_year": {
+						"type": "number",
+						"format": "double"
+					},
+					"lenght_in_minutes": {
+						"type": "number",
+						"format": "double"
+					},
+					"rating": {
+						"$ref": "#/components/schemas/rating"
+					},
+					"Premiere_date": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"language": {
+						"type": "string"
+					},
+					"director": {
+						"properties": {
+							"_id": {
+								"type": "string"
+							},
+							"firstname": {
+								"type": "string"
+							},
+							"lastname": {
+								"type": "string"
+							},
+							"bio": {
+								"type": "string"
+							},
+							"date_of_birth": {
+								"type": "string",
+								"format": "date-time"
+							}
+						},
+						"required": [
+							"date_of_birth",
+							"bio",
+							"lastname",
+							"firstname",
+							"_id"
+						],
+						"type": "object",
+						"nullable": true
+					},
+					"actor": {
+						"properties": {
+							"_id": {
+								"type": "string"
+							},
+							"firstname": {
+								"type": "string"
+							},
+							"lastname": {
+								"type": "string"
+							},
+							"bio": {
+								"type": "string"
+							},
+							"date_of_birth": {
+								"type": "string",
+								"format": "date-time"
+							}
+						},
+						"required": [
+							"date_of_birth",
+							"bio",
+							"lastname",
+							"firstname",
+							"_id"
+						],
+						"type": "object",
+						"nullable": true
+					},
+					"prize": {
+						"properties": {
+							"_id": {
+								"type": "string"
+							},
+							"name": {
+								"type": "string"
+							},
+							"award_date": {
+								"type": "string",
+								"format": "date-time"
+							},
+							"awardet_for": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"awardet_for",
+							"award_date",
+							"name",
+							"_id"
+						],
+						"type": "object",
+						"nullable": true
+					}
+				},
+				"required": [
+					"_id",
+					"title",
+					"category",
+					"release_year",
+					"lenght_in_minutes",
+					"rating",
+					"Premiere_date",
+					"language"
+				],
+				"type": "object",
+				"additionalProperties": true
+			},
+			"Movie": {
+				"properties": {
+					"title": {
+						"type": "string"
+					},
+					"category": {
+						"type": "string"
+					},
+					"release_year": {
+						"type": "number",
+						"format": "double"
+					},
+					"lenght_in_minutes": {
+						"type": "number",
+						"format": "double"
+					},
+					"rating": {
+						"$ref": "#/components/schemas/rating"
+					},
+					"Premiere_date": {
+						"type": "string",
+						"format": "date-time"
+					},
+					"language": {
+						"type": "string"
+					},
+					"director": {
+						"properties": {
+							"firstname": {
+								"type": "string"
+							},
+							"lastname": {
+								"type": "string"
+							},
+							"bio": {
+								"type": "string"
+							},
+							"date_of_birth": {
+								"type": "string",
+								"format": "date-time"
+							}
+						},
+						"required": [
+							"date_of_birth",
+							"bio",
+							"lastname",
+							"firstname"
+						],
+						"type": "object",
+						"nullable": true
+					},
+					"actor": {
+						"properties": {
+							"firstname": {
+								"type": "string"
+							},
+							"lastname": {
+								"type": "string"
+							},
+							"bio": {
+								"type": "string"
+							},
+							"date_of_birth": {
+								"type": "string",
+								"format": "date-time"
+							}
+						},
+						"required": [
+							"date_of_birth",
+							"bio",
+							"lastname",
+							"firstname"
+						],
+						"type": "object",
+						"nullable": true
+					},
+					"prize": {
+						"properties": {
+							"name": {
+								"type": "string"
+							},
+							"award_date": {
+								"type": "string",
+								"format": "date-time"
+							},
+							"awardet_for": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"awardet_for",
+							"award_date",
+							"name"
+						],
+						"type": "object",
+						"nullable": true
+					}
+				},
+				"required": [
+					"title",
+					"category",
+					"release_year",
+					"lenght_in_minutes",
+					"rating",
+					"Premiere_date",
+					"language"
+				],
+				"type": "object",
+				"additionalProperties": true
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "advanced_rest_start_jankech",
+		"version": "1.0.0",
+		"license": {
+			"name": "ISC"
+		}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/movies": {
+			"get": {
+				"operationId": "GetAllMovies",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/movieResponse"
+									},
+									"type": "array"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"tags": [
+					"Movie"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "limit",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "offset",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			},
+			"post": {
+				"operationId": "CreateMovie",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/movieResponse"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"tags": [
+					"Movie"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Movie"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/movies/{id}": {
+			"get": {
+				"operationId": "GetMovieById",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/movieResponse"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"tags": [
+					"Movie"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			},
+			"put": {
+				"operationId": "ModifyMovie",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/movieResponse"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"tags": [
+					"Movie"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Movie"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteMovie",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/movieResponse"
+								}
+							}
+						},
+						"description": "Ok"
+					}
+				},
+				"tags": [
+					"Movie"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Movie"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "http://localhost:3000/"
+		}
+	]
+}

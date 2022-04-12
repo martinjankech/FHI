@@ -1,0 +1,25 @@
+{
+    "swagger": {
+        "info": {
+            "description": "A movie API",
+            "version": "1.0.0",
+            "title": "Movie endpoint"
+        },
+        "tags":[
+            {
+                "name":"movie",
+                "description":"Operations about movie"
+            }
+        ],
+        "schemes": [ "http" ],
+        "specVersion": 3,
+        "outputDirectory": ".",
+        "entryFile": "./src/server.ts",
+        "host": "localhost:3000",
+        "basePath": "/"
+    },
+    "routes": {
+        "entryFile": "./src/app.ts",
+        "routesDir": "./src/movie"
+    }
+}
