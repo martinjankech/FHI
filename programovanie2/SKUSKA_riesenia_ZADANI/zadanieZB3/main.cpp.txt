@@ -1,0 +1,72 @@
+#include <iostream>
+#include <string>
+#include <iomanip>
+using namespace std;
+
+#include "triedy.h" 
+
+int main() {
+	cout << "kolko zvierat chcete vkladat do programu? ";
+	int pocet;
+	cin >> pocet;
+	cout << "-----------------------------------------------" << endl;
+	Zviera** pole = new Zviera*[pocet];
+	Zviera stat_obj = Zviera("ZOO_Kosice", "verejno_pravna", 19865789, 98, 283, "Slon_africky", 5897421, 15, 22000);
+	for (int i = 0; i < pocet; i++) {
+		string n, p, zz;
+		long l, r, z, pi;
+		int rr, ps;
+		cout << "vlozte nazov ZOO kde je " << i + 1 << ". zviera                                 : ";
+		cin >> n;
+		cout << "vlozte pravnu formu ZOO kde je " << i + 1 << ". zviera umiestnene               : ";
+		cin >> p;
+		cout << "vlozte ICO ZOO kde je" << i + 1 << ". zviera umiestnene                       : ";
+		cin >> l;
+		cout << "vlozte rozlohu ZOO kde je " << i + 1 << ". zviera umiestnene                    : ";
+		cin >> r;
+		cout << "vlozte pocet zvierat v ZOO, kde je " << i + 1 << ". zviera umiestnene           : ";
+		cin >> z;
+		cout << "vlozte " << i + 1 << ". zviera                                                  : ";
+		cin >> zz;
+		cout << "vlozte cislo " << i + 1 << ". zvierata                                          : ";
+		cin >> rr;
+		cout << "vlozte vek " << i + 1 << ". zvierata                                            : ";
+		cin >> ps;
+		cout << "vlozte spoloc. hodnotu " << i + 1 << ". zvierata [Eur]                          : ";
+		cin >> pi;
+		cout << "----------------------------------------------" << endl;
+		pole[i] = new Zviera(n, p, l, r, z, zz, rr, ps, pi);
+	}
+	cout << "programom vytvoreny a inicializovany objekt pomocou parametrickeho konstruktora triedy 'Zviera'" << endl;
+	cout << "----------------------------------------------" << endl;
+	cout << stat_obj << endl;
+	cout << "hodnoty instan. premennych objektov triedy 'Zviera' (zvierat). vlozene pouzivatelom programu" << endl;
+	for (int i = 0; i < pocet; i++) {
+		cout << "----------------------------------------------" << endl;
+		cout << (*(pole[i]));
+	}
+	cout << "----------------------------------------------" << endl;
+	cout << "vlozte vek, od ktoreho maju byt vyhladane zvierata starsie: ";
+	long vek;
+	cin >> vek;
+	cout << endl << "pocet a zoznam zvierat starsich ako " << vek << " rokov" << endl << endl;
+	int celkovaSuma = 0;
+	int pocetNajdenych = 0;
+	if (stat_obj.getVek() > vek) {
+		celkovaSuma += stat_obj.getHodnota();
+		pocetNajdenych++;
+		cout << stat_obj << endl;
+	}
+	for (int i = 0; i < pocet; i++) {
+		if (pole[i]->getVek() > vek) {
+			pocetNajdenych++;
+			celkovaSuma += pole[i]->getHodnota();
+			cout << (*(pole[i]));
+			cout << "----------------------------------------------" << endl;
+		}
+	}
+	cout << "celkova spolocenska hodnota najdenych " << pocetNajdenych << " zvierat [Eur] : " << celkovaSuma << endl;
+	for (int i = 0; i < pocet; i++)
+		delete pole[i];
+	delete[] pole;
+}

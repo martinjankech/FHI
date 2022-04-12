@@ -1,0 +1,33 @@
+#include <iostream>
+using namespace std;
+
+float derivaciaL(float **body, int i){
+    double h;
+    float pom;
+
+	h = body[1][0]-body[0][0];
+    pom = -3*body[i][1]+4*body[i+1][1]-body[i+2][1];
+	
+	return pom/(2*h);
+}
+
+int main()
+{
+    int n;
+    char L;
+    
+	cin >> n;
+    float ** hodnoty = new float*[n];
+    
+	for (int i=0; i<n; i++)
+	{
+		hodnoty[i] = new float[2];
+		cin >> hodnoty[i][0] >> hodnoty[i][1];
+    }
+    
+	cin >> L;
+    if (L == 'L')
+	cout << '\n' << derivaciaL(hodnoty, 0) << '\n';
+   
+	return 0;
+}

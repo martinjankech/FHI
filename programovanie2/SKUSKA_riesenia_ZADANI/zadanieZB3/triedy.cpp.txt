@@ -1,0 +1,32 @@
+#include <iostream>
+#include <string>
+#include <iomanip>
+using namespace std;
+
+#include "triedy.h" 
+
+ZOO::ZOO(string n, string p, long i, long r, long z) {
+	nazovFirmy = n;
+	pravnaForma = p;
+	rozloha = r;
+	ICO = i;
+	pocetZvierat = z;
+}
+
+Zviera::Zviera(string n, string p, long l, long r, long z, string zz, long rr, long ps, long pi) : ZOO(n, p, l, r, z) {
+	nazov = zz;
+	cislo = rr;
+	vek = ps;
+	hodnota = pi;
+}
+ostream& operator<<(ostream& os, Zviera& t) {
+	os << "nazov ZOO, kde je zviera umiestnene           : " << t.getNazov() << endl;
+	os << "pravna forma ZOO, kde je zviera umiestnene    : " << t.getPravnaForma() << endl;
+	os << "rozloha ZOO, kde je zviera umiestnene         : " << t.getRozloha() << endl;
+	os << "pocet zvierat v ZOO, kde je zviera umiestnene : " << t.getPocetZvierat() << endl;
+	os << "zviera                                        : " << t.getZviera() << endl;
+	os << "cislo zvierata                                : " << t.getCislo() << endl;
+	os << "vek zvierata                                  : " << t.getVek() << endl;
+	os << "spoloc. hodnota zvierata [Eur]                : " << t.getHodnota() << endl;
+	return os;
+}

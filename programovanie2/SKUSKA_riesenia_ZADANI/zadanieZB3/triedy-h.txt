@@ -1,0 +1,44 @@
+#include <iostream>
+#include <string>
+#include <iomanip>
+using namespace std;
+
+class ZOO {
+private:
+	string nazovFirmy;
+	string pravnaForma;
+	long pocetZvierat;
+	long ICO;
+	long rozloha;
+public:
+	ZOO(string n, string p, long i, long r, long z);
+	string getNazov() { return nazovFirmy; };
+	string getPravnaForma() { return pravnaForma; };
+	long getPocetZvierat() { return pocetZvierat; };
+	long getICO() { return ICO; };
+	long getRozloha() { return rozloha; };
+	void setNazov(string s) { nazovFirmy = s; };
+	void setPravnaFirma(string s) { pravnaForma = s; };
+	void setPocetZvierat(long l) { pocetZvierat = l; };
+	void setICO(long l) { ICO = l; };
+	void setDIC(long long d) { rozloha = d; };
+};
+
+class Zviera : private ZOO {
+private:
+	string nazov;
+	long cislo;
+	long vek;
+	long hodnota;
+public:
+	Zviera(string n, string p, long l, long r, long z, string zz, long rr, long ps, long pi);
+	string getZviera() { return nazov; };
+	long getCislo() { return cislo; };
+	long getVek() { return vek; };
+	long getHodnota() { return hodnota; };
+	void setZviera(string s) { nazov = s; };
+	void setCislo(long l) { cislo = l; };
+	void setVek(long i) { vek = i; };
+	void setHodnota(long l) { hodnota = l; };
+	friend ostream& operator<<(ostream& os, Zviera& t);
+};

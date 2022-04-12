@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+float derivaciaP(float **body, int i){
+    double h=body[1][0]-body[0][0];
+    float der = 3*body[i][1]-4*body[i-1][1]+body[i-2][1];
+    return der/(2*h);
+}
+
+int main()
+{
+    int n;
+    char x;
+
+    cin >> n;
+
+    float ** values = new float*[n];
+    
+	for (int i=0; i<n; i++){
+        values[i] = new float[2];
+        cin >> values[i][0] >> values[i][1];
+    }
+    cin >> x;
+
+    if (x=='R')
+        cout << '\n' <<derivaciaP(values, n-1) << '\n';
+    return 0;
+}

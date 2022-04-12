@@ -1,0 +1,239 @@
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Header.h
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#include<iostream>
+using namespace std;
+
+class Automobil
+{
+private:
+	char nazov_firmy[30];
+	char pravna_forma[10];
+	char sidlo_firmy[30];
+	long int Ico_firmy;
+	double Dic_firmy;
+	char znacka_typ[30];
+	int rok_vyroby;
+	long int predaj_cislo;
+	long int predaj_cena;
+public:
+	Automobil() {}
+	Automobil(char *nam, char *pra, char *sid, long int ic, double di, char *zntyp, int rok, long int pcislo, long int pcena);
+
+	void SetFirma(char *nam);
+	void SetPrafor(char *pra);
+	void SetSidlo(char *sid);
+	void SetIco(long int ic);
+	void SetDic(double di);
+	void SetZnackatyp(char *zntyp);
+	void SetRokvyroby(int rok);
+	void SetPredajcislo(long int pcislo);
+	void SetPredajcena(long int pcena);
+
+	char* GetFirma();
+	char* GetPrafor();
+	char* GetSidlo();
+	long int GetIco();
+	double GetDic();
+	char* GetZnackatyp();
+	int GetRokvyroby();
+	long int GetPredajcislo();
+	long int GetPredajcena();
+
+	friend ostream& operator<<(ostream &vyst_prud, Automobil a);
+};
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Classes.cpp
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#include<iostream>
+using namespace std;
+
+#include "header.h"
+
+Automobil::Automobil(char *nam, char *pra, char *sid, long int ic, double di, char *zntyp, int rok, long int pcislo, long int pcena)
+{
+	Automobil::SetFirma(nam);
+	Automobil::SetPrafor(pra);
+	Automobil::SetSidlo(sid);
+	Automobil::SetIco(ic);
+	Automobil::SetDic(di);
+	Automobil::SetZnackatyp(zntyp);
+	Automobil::SetRokvyroby(rok);
+	Automobil::SetPredajcislo(pcislo);
+	Automobil::SetPredajcena(pcena);
+}
+void Automobil::SetFirma(char *nam)
+{
+	strcpy(Automobil::nazov_firmy, nam);
+}
+void Automobil::SetPrafor(char *pra)
+{
+	strcpy(Automobil::pravna_forma, pra);
+}
+void Automobil::SetSidlo(char *sid)
+{
+	strcpy(Automobil::sidlo_firmy, sid);
+}
+void Automobil::SetIco(long int ic)
+{
+	Automobil::Ico_firmy = ic;
+}
+void Automobil::SetDic(double di)
+{
+	Automobil::Dic_firmy = di;
+}
+void Automobil::SetZnackatyp(char *zntyp)
+{
+	strcpy(Automobil::znacka_typ, zntyp);
+}
+void Automobil::SetRokvyroby(int rok)
+{
+	Automobil::rok_vyroby = rok;
+}
+void Automobil::SetPredajcislo(long int pcislo)
+{
+	Automobil::predaj_cislo = pcislo;
+}
+void Automobil::SetPredajcena(long int pcena)
+{
+	Automobil::predaj_cena = pcena;
+}
+
+
+
+
+char *Automobil::GetFirma()
+{
+	return nazov_firmy;
+}
+char *Automobil::GetPrafor()
+{
+	return pravna_forma;
+}
+char *Automobil::GetSidlo()
+{
+	return sidlo_firmy;
+}
+long int Automobil::GetIco()
+{
+	return Ico_firmy;
+}
+double Automobil::GetDic()
+{
+	return Dic_firmy;
+}
+char *Automobil::GetZnackatyp()
+{
+	return znacka_typ;
+}
+int Automobil::GetRokvyroby()
+{
+	return rok_vyroby;
+}
+long int Automobil::GetPredajcislo()
+{
+	return predaj_cislo;
+}
+long int Automobil::GetPredajcena()
+{
+	return predaj_cena;
+}
+ostream& operator<<(ostream &vyst_prud, Automobil a)
+{
+	vyst_prud << "nazov firmy prevadzk. autobazar s predavanym autom: " << a.GetFirma() << endl
+		<< "pravna forma fi. prevadzk. autobazar s pred. autom: " << a.GetPrafor() << endl
+		<< "sidlo firmy prevadzk. autobazar s predavanym autom: " << a.GetSidlo() << endl
+		<< "ICO firmy prevadzk. autobazar s predavanym autom: " << a.GetIco() << endl
+		<< "znacka a typ auta: " << a.GetZnackatyp() << endl
+		<< "rok vyroby: " << a.GetRokvyroby() << endl
+		<< "predajne cislo: " << a.GetPredajcislo() << endl
+		<< "predajna cena [Eur]: " << a.GetPredajcena() << endl;
+	cout << "---------------------------------------------------------" << endl;
+	return vyst_prud;
+}
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Main.cpp
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#include <iostream>
+using namespace std;
+
+#include "header.h"
+
+int main()
+{
+	char firma[30], pravna[10], sidlo[30], znacka[30];
+	long int ico, rok, p_cislo, i, pocet;
+	double cena, suma = 0, priemer = 0, dic;
+
+
+	cout << "kolko automobilov chcete vkladat do programu?: ";
+	cin >> pocet;
+
+	Automobil *automobily = new Automobil[pocet];
+
+
+	for (i = 0; i < pocet; i++)
+	{
+		cout << "\n---------------------------------------------------------" << endl;
+		cout << "vlozte nazov firmy prevadzk. autobazar s " << i + 1 << ". predavanym autom: ";
+		cin >> firma;
+		cout << "vlozte pravnu formu firmy prevadzk. autobazar s " << i + 1 << ". predavanym autom: ";
+		cin >> pravna;
+		cout << "Vlozte sidlo firmy prevadzk. autobazar s " << i + 1 << ". predavanym autom: ";
+		cin >> sidlo;
+		cout << "Vlozte ICO firmy prevadzk. autobazar s " << i + 1 << ". predavanym autom: ";
+		cin >> ico;
+		cout << "vlozte DIC firmy prevadzk. autobazar s " << i + 1 << ". predavanym autom:  ";
+		cin >> dic;
+		cout << "vlozte znacku a typ " << i + 1 << ". auta: ";
+		cin >> znacka;
+		cout << "vlozte rok vyroby " << i + 1 << ". auta: ";
+		cin >> rok;
+		cout << "vlozte predajne cislo: " << i + 1 << ". auta:   ";
+		cin >> p_cislo;
+		cout << "vlozte predajnu cenu: " << i + 1 << ". auta [EUR]: ";
+		cin >> cena;
+
+		(automobily + i)->SetFirma(firma);
+		(automobily + i)->SetPrafor(pravna);
+		(automobily + i)->SetSidlo(sidlo);
+		(automobily + i)->SetIco(ico);
+		(automobily + i)->SetDic(dic);
+		(automobily + i)->SetZnackatyp(znacka);
+		(automobily + i)->SetRokvyroby(rok);
+		(automobily + i)->SetPredajcislo(p_cislo);
+		(automobily + i)->SetPredajcena(cena);
+
+	}
+
+	Automobil aut_parametricky("Happy_Autobazar", "s.r.o", "Trnava", 19865789, 2586578521, "Ford_Mondeo", 2010, 589742, 5230);
+
+	cout << "\n\nprogramom vytvoreny a inicializovany objekt auta pomocou parametrickeho konstruktora triedy 'Automobil':\n\n";
+
+	cout << aut_parametricky;
+
+	cout << "\nhodnoty instan. premennych objektov triedy 'Automobil'(aut), vlozene pouzivatelom programu:\n";
+
+	for (i = 0; i < pocet; i++){
+		cout << automobily[i];
+		suma += automobily[i].GetPredajcena();
+	}
+
+	suma += aut_parametricky.GetPredajcena();
+
+	priemer = (double)suma / (pocet + 1);
+	cout << "\n\ncelkova predajna cena uvedenych " << pocet + 1 << "-roch aut je " << suma << endl;
+	cout << "\npriemerna predajna cena uvedenych " << pocet + 1 << "-roch aut je " << priemer << endl;
+
+	return 0;
+}

@@ -1,0 +1,8 @@
+﻿  Source.cpp
+c:\users\janke\onedrive\počítač\programko skuška\domace ulohy\domaca_uloha11\domaca uloha\source.cpp(82): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\users\janke\onedrive\počítač\programko skuška\domace ulohy\domaca_uloha11\domaca uloha\source.cpp(84): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\users\janke\onedrive\počítač\programko skuška\domace ulohy\domaca_uloha11\domaca uloha\source.cpp(85): warning C4996: '_strlwr': This function or variable may be unsafe. Consider using _strlwr_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\string.h(234): note: see declaration of '_strlwr'
+  zadanie 1.vcxproj -> C:\Users\janke\OneDrive\Počítač\programko skuška\domace ulohy\domaca_uloha11\domaca uloha\Debug\zadanie 1.exe

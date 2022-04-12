@@ -1,0 +1,13 @@
+Jan Jankovic 940604 62 Piestany 65
+Ferdinand Prvy 941204 85 Kostolna-Zarecie 78
+Jana Jankova 975929 89 Bratislava 12
+Maria Balajova 965225 41 Nove-Zamky 98
+Juraj Jankovic 940604 77 Dubnica-nad-Vahom 137
+Patrik Arbet 970314 61 Dunajska-Streda 101
+Petra Novakova 955920 77 Nova-Dubnica 133
+Jana Petrova 975118 55 Bratislava 5
+Marian Diko 940211 61 Dunajska-Streda 101
+Peter Novak 950309 69 Humenne 454
+Jana Petrova 975119 55 Bratislava 5
+Pavol Palko 980812 88 Dunajska-Streda 101
+Jana Petrova 975117 55 Bratislava 5
