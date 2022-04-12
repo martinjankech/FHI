@@ -1,0 +1,31 @@
+<form (ngSubmit)="submit(formElement)" *ngIf="item" #formElement="ngForm"[class.was-validated]="formElement.submitted">
+  <div class="form-group row">
+    <label for="staticName" class="col-sm-2 col-form-label">Name</label>
+    <div class="col-sm-10">
+      <input type="text"  class="form-control" name="name" id="staticName" [(ngModel)]="item.name" required=""
+      [class.is-valid]="formElement.form.controls.name?.valid">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="staticValue" class="col-sm-2 col-form-label">Value</label>
+    <div class="col-sm-10">
+      <input type="number"  class="form-control" name="value" id="staticValue" [(ngModel)]="item.value" required=""
+             [class.is-valid]="formElement.form.controls.value?.valid">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="staticDate" class="col-sm-2 col-form-label">Date</label>
+    <div class="col-sm-10">
+      <div class="input-group">
+        <input class="form-control" placeholder="yyyy-mm-dd" id="staticDate"
+               name="date" [(ngModel)]="item.date" ngbDatepicker #d="ngbDatepicker">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary " (click)="d.toggle()" type="button"><i class="far fa-calendar-alt"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" *ngIf="buttonVisible">Submit</button>
+
+</form>
+

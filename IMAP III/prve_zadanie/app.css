@@ -1,0 +1,13 @@
+.first {
+  background: red;
+  padding-bottom: 20px;
+}
+.second {
+  background: blue;
+  padding-bottom: 20px;
+}
+
+.third {
+  margin-top: 20px;
+  background: yellow;
+}

@@ -1,0 +1,16 @@
+
+
+<div class="modal-header">
+  <h4 class="modal-title">New Budget Item</h4>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <app-budget-item-form [item]="newItem" ></app-budget-item-form>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="submit(newItem)">Submit</button>
+</div>
+

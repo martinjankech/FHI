@@ -1,0 +1,18 @@
+<h1>Todo List</h1>
+
+
+
+<span>{{getRemaining()}} of {{getTotalCount()}}remaining</span>
+<button (click)="removeCompleted()">Remove Completed</button>
+<ul>
+
+  <li *ngFor="let item of items">
+    <input type="checkbox" [(ngModel)]="item.done"
+    (ngModelChange)="toggleItem(item)" >
+    <span [class.completed]="item.done"> {{item.text}}</span>
+    {{item.completed | date:'long'}}
+  </li>
+</ul>
+
+<input type="text" placeholder="add new to do here" #input (keydown.enter)="addNewTodoItem(input)" >
+<button (click)="addNewTodoItem(input)" class="btn btn-primary" >Add</button>

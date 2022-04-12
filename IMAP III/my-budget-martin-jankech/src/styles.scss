@@ -1,0 +1,25 @@
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+/* You can add global styles to this file, and also import other style files */
+.completed{text-decoration: line-through;}
+
+.icon-column{
+  width: 25px;
+}
+a
+{cursor: pointer;}
+
+
+a:hover i{color: blue}
+
+a:not([href]):not(tabindex){color: #007bff}
+
+body{
+  margin: 100px 0;
+}
+agm-map {
+  height: 600px;
+
+}
+.map{border: black solid 3px}
+

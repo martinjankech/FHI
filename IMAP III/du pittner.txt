@@ -1,0 +1,30 @@
+nie spatny html kod ale vygeneruje sa
+vytvorime komponentu bude at vstup nebude mat output vstup bude pole čo je v subore 
+na zaklade 4 prvkoch to vygeneruje 4 li aby to bolo dynamicke 
+
+
+asi ako nato sa nachadza v 2 videu cas cca 1:46
+du 3 video 1:06 
+
+
+app.component.html
+
+- spravit samostnatnu compunent z navbaru (teda  html z app component bude v samostatnej componente , nebudu tam licka, tie licka vygeneruje na zaklade vstupu
+@Input bude pole ,v appcomponente bule len skratena appcomponenta  ktora bude mat vstup , nebude mat output , na zaklade toho vygeneruje 4 licka Home, Calc, Toho<Budget, dynamyckz)
+- zo 4 li cok
+- lubovolny nazov
+
+mala by mat iba jeden vstup
+vstup by bolo pole ktore by malo 4 prvky v nasom pripade 
+
+const items =[{label:'Home',link: 'home',
+...................................}]
+
+
+nazov <app-navbar [items='items']>
+
+do tej nasej novej komponentz bude treba pridat aj metody login / logout 
+
+
+mapa samostatna stranka 
+button na ziskanei polohy a po ziskani sa zobrazi mapa s nasou polohou

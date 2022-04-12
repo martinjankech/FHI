@@ -1,0 +1,27 @@
+
+<button class="bt btn-primary" (click)="findMe()" >Find Me</button>
+
+<table class="table" >
+  <thead>
+  <tr>
+    <th scope="col">Longitude</th>
+    <th scope="col">Latitude</th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <th *ngIf="Longitude">{{Longitude}}</th>
+    <th *ngIf="Latitude">{{Latitude}}</th>
+  </tr>
+  </tbody>
+</table>
+<body>
+<h2 *ngIf="Longitude">Nachádzate sa tu </h2>
+<div *ngIf="Longitude" class="map">
+<agm-map  *ngIf="Latitude" [longitude]="Longitude" [latitude]="Latitude">
+
+  <agm-marker [latitude]="Latitude" [longitude]="Longitude"></agm-marker>
+</agm-map>
+</div>
+

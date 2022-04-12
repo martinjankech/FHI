@@ -1,0 +1,15 @@
+
+<label>Value a:</label>
+<input [(ngModel)]="valueA" type="number">
+<br/>
+
+<label>Value b:</label>
+<input [(ngModel)]="valueB" type="number">
+<br/>
+
+<span>Result {{result}}</span>
+<br/>
+<button class="btn btn-outline-primary" (click)="add()" >Add</button>
+<button class="btn btn-outline-primary" (click)="sub()" >Sub</button>
+<button class="btn btn-outline-primary" (click)="div()" >Div</button>
+<button class="btn btn-outline-primary" (click)="percent()" >Percent</button>
