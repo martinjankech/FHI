@@ -1,0 +1,25 @@
+{
+  "name": "barbell_jankech_oprava",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "inquirer": "^7.3.3",
+    "rx": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^6.5.0",
+    "@types/jest": "^24.9.1",
+    "istanbul": "^0.4.5",
+    "jest": "^26.6.0",
+    "ts-jest": "^26.4.1",
+    "typescript": "^3.9.7"
+  }
+}
