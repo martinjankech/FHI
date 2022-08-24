@@ -1,0 +1,92 @@
+<html>
+<body>
+
+  <script type="text/javascript">
+  
+  //funkcia rozlozi XML dokument do XML DOM (Document Object Model) objektu a vrati ukazovatel nan
+  function loadXMLDoc(dname)
+  {
+    if (window.XMLHttpRequest)
+    { 
+      //kod pre Mozillu Firefox, Operu atd.
+      xhttp=new XMLHttpRequest(); //vytvorenie 'XMLHttpRequest' objektu a vlozenie ukazovatela nan do premen.
+			      //'xhttp'. Objekt sluzi na vymenu dat web aplikacie so serverom na pozadi
+    }
+    else
+    { 
+      //kod pre IE 5 a 6
+      xhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xhttp.open("GET",dname,false);
+    xhttp.send("");
+    return xhttp.responseXML;
+  }
+
+  //tu je zavolana funkcia "loadXMLDoc" a nacitany XML dokument do web aplikacie (u nas do web stranky)
+  xml=loadXMLDoc("people.xml");  
+  
+           //cestny vyraz, ktory vyberie vsetky atributy 'last-name' elementov 'person' korenoveho elementu 'people'
+  path="/people/person/@last-name";
+  
+  //kod pre IE 5 a 6
+  if (window.ActiveXObject)
+  {
+    var nodes=xml.selectNodes(path);
+
+    for (i=0;i<nodes.length;i++)
+    {
+      document.write(nodes[i].childNodes[0].nodeValue);
+      document.write("<br />");
+    }
+  }
+  /* kod pre Mozillu Firefox, Operu atd.
+     Instancna metoda 'document.implementation' vrati object 'DOMImplementation' spojeny s aktualnym 
+     dokumentom.
+     Instancna metoda 'document.implementation.createDocument' vytvori DOM dokument
+  */
+  else if (document.implementation && document.implementation.createDocument)
+  {
+    /* instancna funkcia 'evaluate' objektu 'xml'(ten reprezentuje do skriptu pomocou volania funkcie 'loadXMLDoc' 
+       nacitany XML dokument "people.xml") vyhodnoti XPath vyraz ulozeny v jej prvom parametri 'path'(retazec 
+       obsahujuci XPath vyraz) a vrati jeden uzol alebo sadu uzlov (pole uzlov - nas pripad) do objektu 'nodes'. 
+       Konstanta 'XPathResult.ANY_TYPE' specifikuje pozadovany typ vysledku, ktory je vrateny ako vysledok 
+       vyhodnotenia XPath vyrazu. Posledny parameter 'null' urcuje vytvorenie noveho objektu 'XPathResult'.   
+    */
+    var nodes=xml.evaluate(path, xml, null, XPathResult.ANY_TYPE, null);
+    var result=nodes.iterateNext();
+    var count=0
+
+
+    //zistenie poctu elementov 'person' s atributom 'last-name'
+    //a jeho vypisanie do aktualneho dokumentu okna
+    while (result)
+    {
+      result=nodes.iterateNext();
+      count++
+    }
+    document.write(count);
+    document.write("<br />");
+
+    //"vynulovanie" indexu v poli nodes[0]
+    nodes=xml.evaluate(path, xml, null, XPathResult.ANY_TYPE, null);
+    result=nodes.iterateNext();
+
+    //vypisanie obsahov atributov 'last-name' elementov 'person' do aktualneho dokumentu okna 
+    while (result)
+    {
+      /* V objektovom modeli XML dokumentu (XML DOM - Document Object Model) je vsetko uzlom (node).
+          Elementove uzly (elementy) nemaju textovu hodnotu. Text elementoveho uzla (elementu) je ulozeny
+          v jeho detskom uzle (detskom elemente). Tento uzol sa nazyva textovy uzol. Jednym zo sposobov ako 
+          ziskat textovu hodnotu uzla (elementu) je ziskanie hodnoty jeho detskeho uzla (textoveho uzla).
+      */
+      //document.write(result.childNodes[0].nodeValue); //kod fungujúci v starsich verziach Mozilly Firefox
+      document.write(result.value); //kod fungujuci v Mozille Firefox 19.0
+      document.write("<br />");
+      result=nodes.iterateNext();
+    }
+
+  }
+  </script>
+
+</body>
+</html>

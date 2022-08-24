@@ -1,0 +1,72 @@
+<html>
+<body>
+<script src="/diplomovka/kody/cvika/cviko_5/5_1/people.xml"></script>
+  <script type="text/javascript">
+  function loadXMLDoc(dname)
+  {
+    if (window.XMLHttpRequest)
+    {
+      xhttp=new XMLHttpRequest(); //vytvor. 'XMLHttpRequest' objektu a vlozenie ukazovatela nan do prem. 'xhttp'
+    }
+    else
+    {
+      xhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xhttp.open("GET",dname,false);
+    xhttp.send("");
+    return xhttp.responseXML;
+  }
+
+
+  //tu je zavolana funkcia "loadXMLDoc" a nacitany XML dokument do web aplikacie (u nas do web stranky)
+  xml=loadXMLDoc("/diplomovka/kody/cvika/cviko_5/5_1/people.xml");
+  
+           //cestny vyraz, ktory vyberie vsetky atributy 'first-name' A (sucasne) 'last-name' elementov 'person' koren. 
+           //elementu 'people'
+  path="/people/person/@first-name | /people/person/@last-name";
+  path_people_count="/people/person/@last-name"; 
+  
+  //kod pre IE 5 a 6
+  if (window.ActiveXObject)
+  {
+    var nodes=xml.selectNodes(path);
+
+    for (i=0;i<nodes.length;i++)
+    {
+      document.write(nodes[i].childNodes[0].nodeValue);
+      document.write("<br />");
+    }
+  }
+  //kod pre Mozillu Firefox, Operu atd.
+  else if (document.implementation && document.implementation.createDocument)
+  {
+    var nodes=xml.evaluate(path, xml, null, XPathResult.ANY_TYPE, null);
+    var result=nodes.iterateNext();
+    
+    var nodes_people_count=xml.evaluate(path_people_count, xml, null, XPathResult.ANY_TYPE, null);
+    var result_people_count=nodes_people_count.iterateNext();
+    var count=0;
+
+    //zistenie poctu elementov 'person' s atributom 'last-name'
+    while (result_people_count)
+    {
+      result_people_count=nodes_people_count.iterateNext();
+      count++
+    }
+    document.write(count);
+    document.write("<br />");
+
+    //vypisanie obsahov atributov 'first-name' a 'last-name' elementov 'person' do aktualneho dokumentu okna
+    while (result)
+    {
+      //document.write(result.childNodes[0].nodeValue); //kod fungujúci v starsich verziach Mozilly Firefox
+      document.write(result.value); //kod fungujuci v Mozille Firefox 19.0
+      result=nodes.iterateNext();
+      document.write("<br />");
+    }
+
+  }
+  </script>
+
+</body>
+</html>
