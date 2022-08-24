@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<people>
+
+	<person first-name="steven" last-name="baldvin">
+	  <address street="222 east st" city="atlanta" state="ga" country="usa"/>
+	  <address street="100 north st" city="seattle" state="wa" country="usa"/>
+	  <address street="289 back st" city="washington" state="wa" country="usa"/>
+	</person>
+
+	<person first-name="mike" middle-initial="H" last-name="redford">
+	  <address street="321 south st" city="denver" state="co" country="usa"/>
+	  <address street="123 main st" city="arlington" state="ma" country="usa"/>
+	</person>
+
+	<person first-name="john" last-name="baker">
+	  <address street="328 main st" city="new york" state="ny" country="usa"/>
+	  <address street="105 northwest st" city="seattle" state="wa" country="usa"/>
+	  <address street="111 southeast avenue" city="washington" state="wa" country="usa"/>
+	</person>
+	
+	<person first-name="jack" last-name="peterson">
+	  <address street="258 circular road" city="norman" state="ok" country="usa"/>
+	  <address street="105 northwest st" city="kansas city" state="ks" country="usa"/>
+	</person>
+	 
+	<person first-name="jeremy" last-name="young">
+	  <address street="321 back st" city="atlanta" state="ga" country="usa"/>
+	  <address street="123 west st" city="seattle" state="wa" country="usa"/>
+	  <address street="320 south avenue" city="denver" state="co" country="usa"/>
+	</person>
+	
+	<person first-name="johny" last-name="ford">
+	  <address street="22 northwest st" city="kansas city" state="ks" country="usa"/>
+	  <address street="101 circular road" city="norman" state="ok" country="usa"/>
+	</person>	
+
+</people>

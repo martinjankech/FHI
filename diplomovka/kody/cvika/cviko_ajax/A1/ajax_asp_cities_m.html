@@ -1,0 +1,50 @@
+<html>
+
+<head>
+<script type="text/javascript">
+
+function showHint(str)
+{
+	var xmlhttp;
+	if (str.length==0)
+  	{ 
+  		document.getElementById("txtHint").innerHTML="";
+  		return;
+  	}
+
+	if (window.XMLHttpRequest)
+  	{	// kod pre IE7+, Firefox, Chrome, Opera, Safari
+  		xmlhttp=new XMLHttpRequest();
+  	}
+	else
+  	{	// kod pre IE6, IE5
+  		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  	}
+
+	xmlhttp.onreadystatechange=function()
+  	{
+  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    	{
+    		document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+    	}
+  	}
+'ked webovy prehliadac pozaduje .asp subor, http server odovzda poziadavku ASP engine-u (ASP skriptovaciemu '
+'stroju), ktory cita .asp subor riadok po riadku a vykona skripty v tomto subore. Nakoniec je vysledok tohto '
+'skriptovania serverom vrateny do prehliadaca (do HTML suboru) ako cisty HTML kod'
+xmlhttp.open("GET","gethint_cities_m.asp?q="+str,true);
+xmlhttp.send();
+}
+
+</script>
+</head>
+
+<body>
+
+<h3>Start typing a city name in Slovakia in the input field below:</h3>
+<form action=""> 
+City name (in Slovakia): <input type="text" id="txt1" onkeyup="showHint(this.value)" />
+</form>
+<p>Suggestions: <span id="txtHint"></span></p> 
+
+</body>
+</html>

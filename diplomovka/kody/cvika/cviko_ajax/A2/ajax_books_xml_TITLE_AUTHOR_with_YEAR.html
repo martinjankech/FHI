@@ -1,0 +1,110 @@
+<html>
+
+<head>
+<script type="text/javascript">
+
+function loadXMLDoc(url)
+{
+	var xmlhttp;
+	var txt,x,i;
+
+	if (window.XMLHttpRequest)
+  	{	// kod pre IE7+, Firefox, Chrome, Opera, Safari
+  		xmlhttp=new XMLHttpRequest();
+  	}
+	else
+  	{	// kod pre IE6, IE5
+  		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  	}
+
+	xmlhttp.onreadystatechange=function()
+  	{
+  		if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    	{
+    		xmlDoc=xmlhttp.responseXML;
+      	
+        //ziskanie hodnoty z textoveho pola formulara web stranky s 'id' "user_value"
+        //a jej vlozenie do premennej 'x'
+        var x=document.getElementById("user_value").value; 
+        if (x==2003)
+        { //cestny vyraz, ktory vyberie vsetky elementy 'title' elementov 'book', ktorych detske elementy 'year' 
+          //maju hodnotu totoznu s '2003'
+          //A (sucasne)
+          //vsetky elementy 'author' elementov 'book', ktorych detske elementy 'year' 
+          //maju hodnotu totoznu s '2003'
+          path="/bookstore/book[year=2003]/title | /bookstore/book[year=2003]/author";
+          path_title_count="/bookstore/book[year=2003]/title";
+        }
+        else if (x==2005)
+        { //cestny vyraz, ktory vyberie vsetky elementy 'title' elementov 'book', ktorych detske elementy 'year' 
+          //maju hodnotu totoznu s '2005'
+          //A (sucasne)
+          //vsetky elementy 'author' elementov 'book', ktorych detske elementy 'year' 
+          //maju hodnotu totoznu s '2005'
+          path="/bookstore/book[year=2005]/title | /bookstore/book[year=2005]/author";
+          path_title_count="/bookstore/book[year=2005]/title";
+        }
+        else if (x==1998)
+        { //cestny vyraz, ktory vyberie vsetky elementy 'title' elementov 'book', ktorych detske elementy 'year' 
+          //maju hodnotu totoznu s '1998'
+          //A (sucasne)
+          //vsetky elementy 'author' elementov 'book', ktorych detske elementy 'year' 
+          //maju hodnotu totoznu s '1998'
+          path="/bookstore/book[year=1998]/title | /bookstore/book[year=1998]/author";
+          path_title_count="/bookstore/book[year=1998]/title";
+        }
+        else if (x!=2003 || x!=2005 || x!=1998) //zabranenie vlozenia neplatnej hodnoty elementu 'year' pouzivatelom
+        {
+          document.getElementById("div1").innerHTML="";
+			  alert("Vlozili ste nekorektnu hodnotu " + x + " !!!\nMusite vlozit korektny rok 1998, 2003 alebo 2005!!!");
+          document.getElementById("user_value").focus();
+          return; //ak pouzivatel vlozil neplatnu hodnotu elementu 'year', tak tu tymto prikazom cela funkcia skonci
+        }
+
+      	var nodes=xmlDoc.evaluate(path, xmlDoc, null, XPathResult.ANY_TYPE, null);
+        var result=nodes.iterateNext();
+        
+        var nodes_title=xmlDoc.evaluate(path_title_count, xmlDoc, null, XPathResult.ANY_TYPE, null);
+        var result_title=nodes_title.iterateNext();
+        var count=0;
+
+
+        //zistenie poctu elementov 'book' s pouzivatelom zadanou hodnotou detskeho elementu 'year'
+        while(result_title)
+        {
+          result_title=nodes_title.iterateNext();
+          count++;
+        }
+
+        string="";
+        //vlozenie obsahov hladanych detskych elementov 'title' elementov 'book' do retazcovej premennej 'string'
+        while(result)
+        {
+          string = string + result.childNodes[0].nodeValue + "<br />";
+          result=nodes.iterateNext();
+        }
+
+     string_final="The 'title' and 'author' elements values of the 'book' elements with the value of the 'year' element "  
+                  + x + "<br />" + "(the quantity of such the 'book' elements is " + count + ")" + "<br />" + "<br />" + string;
+
+        document.getElementById("div1").innerHTML=string_final; //prepisanie HTML elementu s id="div1"
+    	}
+  }
+xmlhttp.open("GET",url,true);
+xmlhttp.send();
+}
+</script>
+</head>
+
+<body>
+
+<form>
+  Finding a 'book' element with the child element value: <input type="text" id="user_value" />
+</form>
+
+<button type="button" onclick="loadXMLDoc('books.xml')">Get the 'title' and 'author' elements of the books collection</button>
+<h2>The 'title' and 'author' elements of the books collection with the selected year:</h2>
+<div id="div1"></div>
+
+</body>
+</html>

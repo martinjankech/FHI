@@ -1,0 +1,125 @@
+<html>
+
+<head>
+<script type="text/javascript">
+var xmlhttp;
+function loadXMLDoc(url,cfunc)
+{
+	if (window.XMLHttpRequest)
+  	{	// kod pre IE7+, Firefox, Chrome, Opera, Safari
+  		xmlhttp=new XMLHttpRequest();
+  	}
+	else
+  	{	// kod pre IE6, IE5
+  		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  	}
+	xmlhttp.onreadystatechange=cfunc;
+	xmlhttp.open("GET",url,true);
+	xmlhttp.send();
+}
+function Find_substring_in_street()
+{                        						 //cfunc
+	loadXMLDoc("people.xml",function()
+  {
+  	if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    		xmlDoc=xmlhttp.responseXML;
+         
+    		//ziskanie hodnoty z textoveho pola formulara web stranky s 'id' "user_searched_string"
+      	//a jej vlozenie do premennej 'user_s_string'
+      	var user_s_string=document.getElementById("user_searched_string").value;
+  
+      	if (user_s_string == "main" || user_s_string == "south" || user_s_string == "west")
+      	{
+           /*cestny vyraz, ktory vyberie vsetky atributy 'first-name' elementov 'person', ktorych detske elem. 'address' 
+          	obsahuju v retazci atributu 'street' podretazec 'user_s_string'
+          	A (sucasne)
+          	vsetky atributy 'last-name' elementov 'person', ktorych detske elementy 'address' 
+          	obsahuju v retazci atributu 'street' podretazec 'user_s_string'
+          	A (sucasne)
+          	vsetky atributy 'street' elementov 'address' tychto elementov 'person',  
+          	ktore obsahuju v svojom retazci podretazec 'user_s_string'
+          	A (sucasne)
+          	vsetky atributy 'city' elementov 'address' tychto elementov 'person',  
+          	ktore obsahuju v retazci atributu 'street' elementu 'address' podretazec 'user_s_string'
+          	A (sucasne)
+          	vsetky atributy 'state' elementov 'address' tychto elementov 'person',  
+          	ktore obsahuju v retazci atributu 'street' elementu 'address' podretazec 'user_s_string'
+        	*/
+        	path="/people/person[address[contains(@street, '" + user_s_string + "')]]/@first-name | /people/person[address[contains(@street, '" + user_s_string + "')]]/@last-name | 	/people/person/address[contains(@street, '" + user_s_string + "')]/@street | /people/person/address[contains(@street, '" + user_s_string + "')]/@city | /people/person/address[contains(@street, '" + user_s_string + "')]/@state"; path_person_count="/people/person[address[contains(@street, '" + user_s_string + "')]]/@last-name";
+
+      	}
+      	else if (user_s_string != "main" || user_s_string != "south" || user_s_string != "west")
+      	{	document.getElementById("div1").innerHTML=""; //vymazanie obsahu sekcie "div1"
+        	alert("Vlozili ste nekorektnu hodnotu " + user_s_string + " !!!");
+        	document.getElementById("user_searched_string").focus();
+        	return;
+      	}
+    
+      	var string = "";
+    
+      	// kod pre IE 5 a 6
+      	if (window.ActiveXObject)
+      	{
+        	var nodes=xml.selectNodes(path);
+
+        	for (i=0;i<nodes.length;i++)
+        	{
+          		document.write(nodes[i].nodeValue);
+          		document.write("<br />");
+        	}
+      	}
+      	// kod pre Mozillu Firefox, Operu atd.
+      	else if (document.implementation && document.implementation.createDocument)
+      	{
+        	var nodes=xmlDoc.evaluate(path, xmlDoc, null, XPathResult.ANY_TYPE, null);
+        	var result=nodes.iterateNext();
+var nodes_person_count=xmlDoc.evaluate(path_person_count, xmlDoc, null, XPathResult.ANY_TYPE, null);
+        	var result_person_count=nodes_person_count.iterateNext();
+        	var count=0;
+
+            //zistenie poctu elementov 'person', ktore maju v atribute 'street' ich dcerskych elementov 'address' retazec 
+        	//'main', 'south' alebo 'west'
+        	while (result_person_count)
+        	{
+          		count++;
+          		result_person_count=nodes_person_count.iterateNext();
+        	} 
+
+        	string = "the number of the 'person' elements with the substring" + "<br />'" + user_s_string + "'<br />" + 
+								"in the 'street' attribute their the 'address' child elements: " + count + "<br />";
+
+        	string = string + "<br />" + "The 'first-name' a 'last-name' attributes values of the searched 'person' elements" + "<br />" + "and the 'street', 'city' and 'state' attributes values of their child elements 'address' :" + "<br />" + "<br />";
+
+        	//vlozenie obsahov hladanych atributov 'first-name' a 'last-name' elementov 'person', ktore maju v atribute 
+        	//'street' ich dcerskych elementov 'address' podretazec 'main', 'south' alebo 'west'
+        	//a hodnot atributov 'street', 'city' a 'state' ich dcerskych element. 'address' do retazcoveho objektu 'string'
+        	while (result)
+        	{
+          		string = string + result.value;
+          		result=nodes.iterateNext();
+
+          		string = string + "<br />";
+        	}
+
+        	document.getElementById("div1").innerHTML=string;
+      	} 
+    }
+  });
+}
+</script>
+</head>
+
+
+<body>
+
+<form>
+  Finding the substring: <input type="text" id="user_searched_string" /> in an atribut value
+</form>
+
+<button type="button" onclick="Find_substring_in_street()">Display results</button>
+<h2>The results of finding</h2>
+<div id="div1"><i>This section will be replaced by the results of finding</i></div>
+
+</body>
+</html>
