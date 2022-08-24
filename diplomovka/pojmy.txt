@@ -1,0 +1,34 @@
+cena kacie 211,11
+https://www.youtube.com/watch?v=5oAfXvzM9N4&ab_channel=InscrutableIndian
+
+
+Diplomant v práci zanalyzuje možnosti použitia XML 
+webových služieb na sledovanie 
+parametrov kníh elektronického kníhkupectva 
+vo vybratom období v elektronickom 
+informačnom systéme a porovná 
+ich použitie s doterajším spôsobom 
+sledovania týchto parametrov vo vybraných kníhkupectvách. 
+V rámci diplomovej práce diplomant vo vybratom riadenom programovacom jazyku vytvorí ASP .NET XML webovú službu 
+poskytujúcu prostredníctvom svojej funkcionality jej klientovi podľa vybraných kritérií usporiadané informácie o parametroch kníh elektronického kníhkupectva v sledovanom období, 
+ktorými môžu byť celkový počet kníh v tomto kníhkupectve na začiatku a konci sledovaného obdobia, 
+počty a zoznamy kníh s ich základnými dátami od jednotlivých vydavateľov, autorov, počty a zoznamy kníh s ich základnými dátami s najväčším a najmenším predajom na začiatku a konci sledovaného obdobia a iné ich parametre.
+
+Cieľom diplomovej práce je prieskum v oblasti voľby efektívnych nástrojov eMarketingu
+ upriamených na oblasť elektronickej komercie. Hlavným cieľom teoretickej časti 
+je oboznámiť čitateľa so základnými pojmami v oblasti marketingu a eMarketingu,a 
+taktiež definovať základné prístupy k nástrojom využívaným na propagáciu subjektov pôsobiacich na virtuálnom trhu.
+Prínosom diplomovej práce je dátová analýza pomocou Google Analytics 
+a formulácia základných východísk a odporúčaní 
+ k správnemu rozhodovaniu o voľbe efektívnych nástrojov 
+eMarketingu, ktorých cieľom je vynaložiť optimálne náklady, 
+a tým dosiahnuť maximalizovanie výnosnosti  na na zvýšenie konkurencieschopnosti v oblasti 
+elektronickej komercie v konkrétnej firme.
+
+wfc vs asmx
+soap vs rest
+
+
+ 
+
+
