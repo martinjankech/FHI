@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+
+<head>
+
+  <title>WSDL Description</title>
+
+  <label for="cars">Choose a option:</label>
+
+<select name="options" id="options">
+  <option value="1">ops names</option>
+  <option value="2">ops names with doc</option>
+  <option value="3">ops names with doc and input names</option>
+  <option value="4">ops names with doc, input and outpus messages</option>
+</select>
+
+  <script type="text/javascript">
+  function loadXMLDoc(dname)
+  {
+    if (window.XMLHttpRequest)
+    {
+      xhttp=new XMLHttpRequest();
+    }
+    else
+    {
+      xhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xhttp.open("GET",dname,false);
+    xhttp.send("");
+    return xhttp.responseXML;
+  }
+  function Find_in_wsdl(){
+
+
+let userChoice= document.getElementById("options").value;
+
+if (userChoice>=0 && userChoice<=4)
+{ path_operation_count= "definitions/types/*[\"schema\"=local-name()]/*[\"element\"=local-name()]/@*[\"name\"=local-name()]";
+
+//portType/operation[@name]"
+var nodes=xml.evaluate(path_operation_count, xml, null, XPathResult.ANY_TYPE, null);
+var result=nodes.iterateNext();
+var string = result.value
+var count = 0;
+while(result)
+{ string=string+result.value
+result=nodes.iterateNext();
+    count++;
+    string=string+"\n";
+}
+alert(string)
+alert(count)
+
+
+
+
+
+
+
+}
+else
+{alert("vybrali ste neplatnu moznost")}
+
+
+
+
+
+  }
+  
+  //funkcia najde elementy 'person', ktore maju v atribute 'street' ich dcerskych elementov 'address' retazec 'main', 
+  //'south' alebo 'west'
+  //a zobrazi hodnoty atributov 'first-name' a 'last-name' takychto elementov 'person' a hodnoty atributov 'street', 
+  //'city' a 'state' ich dcerskych elementov 'address' 
+  
+  </script>
+  
+</head>
+
+
+<body>
+
+  <script type="text/javascript">
+  xml=loadXMLDoc("ArithmeticOps_asmx.xml");  //tu je zavolana funkcia "loadXMLDoc"
+
+  </script>
+  
+  <script type="text/javascript">
+  document.getElementById("user_searched_string").focus();
+  </script>
+  <br>
+  <button type="button" onclick="Find_in_wsdl()">Display results</button>
+
+</body>
+</html>
