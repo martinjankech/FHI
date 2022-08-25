@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+
+<head>
+
+  <title>Finding attributes with controls</title>
+
+  <script type="text/javascript">
+  function loadXMLDoc(dname)
+  {
+    if (window.XMLHttpRequest)
+    {
+      xhttp=new XMLHttpRequest();
+    }
+    else
+    {
+      xhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xhttp.open("GET",dname,false);
+    xhttp.send("");
+    return xhttp.responseXML;
+  }
+  
+  //funkcia najde elementy 'person', ktore maju v atribute 'street' ich dcerskych elementov 'address' retazec 'main', 
+  //'south' alebo 'west'
+  //a zobrazi hodnoty atributov 'first-name' a 'last-name' takychto elementov 'person' a hodnoty atributov 'street', 
+  //'city' a 'state' ich dcerskych elementov 'address' 
+  function Find_main_in_street()
+  {
+    //ziskanie hodnoty z textoveho pola formulara web stranky s 'id' "user_searched_string"
+    //a jej vlozenie do premennej 'user_s_string'
+    var user_s_string=document.getElementById("user_searched_string").value;
+  
+    if (user_s_string == "main" || user_s_string == "south" || user_s_string == "west")
+    {
+      /*cestny vyraz, ktory vyberie vsetky atributy 'first-name' elementov 'person', ktorych detske elementy 'address' 
+        obsahuju v retazci atributu 'street' podretazec 'user_s_string'
+        A (sucasne)
+        vsetky atributy 'last-name' elementov 'person', ktorych detske elementy 'address' 
+        obsahuju v retazci atributu 'street' podretazec 'user_s_string'
+        A (sucasne)
+        vsetky atributy 'street' elementov 'address' tychto elementov 'person',  
+        ktore obsahuju v retazci atributu 'street' elementu 'address' 'user_s_string'
+        A (sucasne)
+        vsetky atributy 'city' elementov 'address' tychto elementov 'person',  
+        ktore obsahuju v retazci atributu 'street' elementu 'address' podretazec 'user_s_string'
+        A (sucasne)
+        vsetky atributy 'state' elementov 'address' tychto elementov 'person',  
+        ktore obsahuju v retazci atributu 'street' elementu 'address' podretazec 'user_s_string'
+      */
+      path="/people/person[address[contains(@street, '" + user_s_string + "')]]/@first-name |"+
+	"/people/person[address[contains(@street, '" + user_s_string + "')]]/@last-name |"+
+	"/people/person/address[contains(@street, '" + user_s_string + "')]/@street |"+ 
+	"/people/person/address[contains(@street, '" + user_s_string + "')]/@city |"+ 
+	"/people/person/address[contains(@street, '" + user_s_string + "')]/@state";
+      path_person_count="/people/person[address[contains(@street, '" + user_s_string + "')]]/@last-name";
+      
+      /*funkcne alternativy prikazov, ale s vlozenim retazcovej konstanty 'main' namiesto vlozenia retazcoveho 
+        objektu 'user_s_string' obsahujuceho hladany retazec
+        path="/people/person[address[contains(@street, 'main')]]/@first-name | 
+	  /people/person[address[contains(@street, 'main')]]/@last-name | 
+ 	  /people/person/address[contains(@street, 'main')]/@street | /people/person/address[contains(@street, 
+ 	  'main')]/@city | /people/person/address[contains(@street, 'main')]/@state";
+        path_person_count="/people/person[address[contains(@street, 'main')]]/@last-name";
+      */
+    }
+    else if (user_s_string != "main" || user_s_string != "south" || user_s_string != "west")
+    {
+      alert("Vlozili ste nekorektnu hodnotu !!!");
+      document.getElementById("user_searched_string").focus();
+      return;
+    }
+    
+    var string = "";
+    
+    //kod pre IE 5 a 6
+    if (window.ActiveXObject)
+    {
+      var nodes=xml.selectNodes(path);
+
+      for (i=0;i<nodes.length;i++)
+      {
+        document.write(nodes[i].nodeValue);
+        document.write("<br />");
+      }
+    }
+    //kod pre Mozillu Firefox, Operu atd.
+    else if (document.implementation && document.implementation.createDocument)
+    {
+      var nodes=xml.evaluate(path, xml, null, XPathResult.ANY_TYPE, null);
+      var result=nodes.iterateNext();
+    
+      var nodes_person_count=xml.evaluate(path_person_count, xml, null, XPathResult.ANY_TYPE, null);
+      var result_person_count=nodes_person_count.iterateNext();
+      var count=0;
+
+      //zistenie poctu elementov 'person', ktore maju v atribute 'street' ich dcerskych elementov 'address' retazec 
+      //'main', 'south' alebo 'west'
+      while (result_person_count)
+      {
+        count++;
+        result_person_count=nodes_person_count.iterateNext();
+      }
+      string = "pocet elementov 'person' s retazcom" + "\n'" + user_s_string + "'\n" + "v atribute 'street' ich dcerskych elementov 'address' : " + count + "\n";
+
+      string = string + "\n" + "Hodnoty atributov 'first-name' a 'last-name' tychto elementov a hodnoty atributov 'street', 'city' a 'state' ich dcerskych elementov 'address' :" + "\n\n";
+
+      //vlozenie obsahov hladanych atributov 'first-name' a 'last-name' elementov 'person', ktore maju v atribute 
+      //'street' ich dcerskych elementov 'address' retazec 'main', 'south' alebo 'west'
+      //a hodnot atributov 'street', 'city' a 'state' ich dcerskych elementov 'address' do retazcoveho objektu 'string'
+      while (result)
+      {
+        string = string + result.value;
+        result=nodes.iterateNext();
+        
+        string = string + "\n";
+      }
+      
+      alert(string);
+    }
+  }
+  </script>
+  
+</head>
+
+
+<body>
+
+  <script type="text/javascript">
+  xml=loadXMLDoc("people.xml");  //tu je zavolana funkcia "loadXMLDoc"
+  </script>
+  
+  <form>
+  Finding the substring in an atribut value: <input type="text" id="user_searched_string" />
+  </form>
+  
+  <script type="text/javascript">
+  document.getElementById("user_searched_string").focus();
+  </script>
+  
+  <button type="button" onclick="Find_main_in_street()">Display results</button>
+
+</body>
+</html>

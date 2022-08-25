@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+
+  <title>Titles of books with controls</title>
+
+  <script type="text/javascript">
+  //funkcia rozlozi XML dokument do XML DOM (Document Object Model) objektu a vrati ukazovatel nan
+  function loadXMLDoc(dname)
+  {
+    if (window.XMLHttpRequest)
+    {
+      xhttp=new XMLHttpRequest(); //vytvorenie 'XMLHttpRequest' objektu a vlozenie ukaz. nan do prem. 'xhttp'
+    }
+    else
+    {
+      xhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xhttp.open("GET",dname,false);
+    xhttp.send("");
+    return xhttp.responseXML;
+  }
+
+  //funkcia zisti pocet elementov 'book', ktore maju v dcerskom elemente 'year' pouzivatelom hladanu hodnotu 
+  //a vypise hodnoty dcerskych elementov 'title' takychto 'book' elementov    
+  function Find_title_with_year()
+  {
+    //ziskanie hodnoty z textoveho pola formulara web stranky s 'id' "user_value" a jej vlozenie do premennej 'x'
+    //"user_value" je hodnota 'id' atributu ovladacieho prvku (elementu) textove pole (text box) vytvoreneho vo 
+    //formulari web stranky
+    var x=document.getElementById("user_value").value; 
+    if (x==2003)
+    {          //cestny vyraz, ktory vyberie vsetky elementy 'title' elementov 'book', ktorych detske elementy 'year' 
+               //maju hodnotu totoznu s '2003'
+      path="/bookstore/book[year=2003]/title";
+    }
+    else if (x==2005)
+    {          //cestny vyraz, ktory vyberie vsetky elementy 'title' elementov 'book', ktorych detske elementy 'year' 
+               //maju hodnotu totoznu s '2005'
+      path="/bookstore/book[year=2005]/title";
+    }
+    else if (x!=2003 || x!=2005) //zabranenie vlozenia neplatnej hodnoty elementu 'year' pouzivatelom
+    {
+      alert("Vlozili ste nekorektnu hodnotu !!!\nMusite vlozit korektny rok !!!");
+      document.getElementById("user_value").focus();
+      return; //ak pouzivatel vlozil neplatnu hodnotu elementu 'year', tak tu tymto prikazom cela funkcia skonci 
+    }
+
+    var string = ""; //vytvorenie retazcovej premennej (objektu) 'string'
+
+    //kod pre IE 5 a 6
+    if (window.ActiveXObject)
+    {
+      var nodes=xml.selectNodes(path);
+
+      for (i=0;i<nodes.length;i++)
+      {
+        document.write(nodes[i].childNodes[0].nodeValue);
+        document.write("<br />");
+      }
+    }
+    //kod pre Mozillu Firefox, Operu atd.
+    else if (document.implementation && document.implementation.createDocument)
+    {
+      var nodes=xml.evaluate(path, xml, null, XPathResult.ANY_TYPE, null);
+      var result=nodes.iterateNext();
+      var count=0;
+
+
+      //zistenie poctu elementov 'book' s pouzivatelom zadanou hodnotou detskeho elementu 'year'
+      while (result)
+      {
+        result=nodes.iterateNext();
+        count++;
+      }
+      string = "pocet vyskytov knih s rokom vydania " + x + ": " + count + "\n";
+  
+      var nodes1=xml.evaluate(path, xml, null, XPathResult.ANY_TYPE, null);
+      var result1=nodes1.iterateNext();
+
+      string = string + "\n" + "Tituly tychto knih:" + "\n\n";
+
+      //vlozenie obsahov hladanych detskych elementov 'title' elementov 'book' do retazcoveho objektu 'string' 
+      while (result1)
+      {
+        string = string + result1.childNodes[0].nodeValue + "\n";
+        result1=nodes1.iterateNext();
+      }
+
+      //zobrazenie retazca ulozeneho v objekte 'string' v dialogovom okne pomocou volania funkcie 'alert' 
+      alert(string);
+    }
+  }
+  </script>
+
+</head>
+
+
+<body>
+
+  <script type="text/javascript">
+  //tu je zavolana funkcia "loadXMLDoc" a nacitany XML dokument do web aplikacie (u nas do web stranky)
+  xml=loadXMLDoc("books.xml");
+  </script>
+
+  <!-- vytvorenie jednoducheho formulara s textovym polom s atributom 'id', ktory ma hodnotu "user_value" -->
+  <form>
+  Finding a book element with the child element value: <input type="text" id="user_value" />
+  </form>
+  
+  <script type="text/javascript">
+  //nastavenie fokusu (aktivneho kurzora) do textoveho pola s 'id' "user_value"
+  document.getElementById("user_value").focus();
+  </script>
+
+  <!-- vytvorenie tlacidla s popisom "Display results" a priradenie volania funkcie 'Find_title_with_year' k jeho   
+         udalosti 'onclick' (jedno kliknutie) -->
+  <button type="button" onclick="Find_title_with_year()">Display results</button>
+
+</body>
+</html>
