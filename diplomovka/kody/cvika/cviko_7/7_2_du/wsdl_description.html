@@ -37,28 +37,40 @@
 let userChoice= document.getElementById("options").value;
 
 if (userChoice>=0 && userChoice<=4)
-{ path_operation_count= "definitions/types/*[\"schema\"=local-name()]/*[\"element\"=local-name()]/@*[\"name\"=local-name()]";
+{ //path_operation_count= "definitions/types/*[\"schema\"=local-name()]/*[\"element\"=local-name()]/@*[\"name\"=local-name()]";
+    path_operation_names="definitions/portType/operation//@*[\"name\"=local-name()]"
+    path_operation_description="definitions/portType/operation//*[\"documentation\"=local-name()]"
+    path_input="definitions/portType/operation/input/@message"
+    path_output="definitions/portType/operation/output/@message"
 
-//portType/operation[@name]"
-var nodes=xml.evaluate(path_operation_count, xml, null, XPathResult.ANY_TYPE, null);
+var nodes=xml.evaluate(path_operation_names, xml, null, XPathResult.ANY_TYPE, null);
 var result=nodes.iterateNext();
-var string = result.value
+var nodesOperationDescription=xml.evaluate(path_operation_description, xml, null, XPathResult.ANY_TYPE, null);
+var resultDescription=nodesOperationDescription.iterateNext();
+var nodesInput=xml.evaluate(path_input, xml, null, XPathResult.ANY_TYPE, null);
+var resultInput=nodesInput.iterateNext();
+var nodesOutput=xml.evaluate(path_output, xml, null, XPathResult.ANY_TYPE, null);
+var resultOutput=nodesInput.iterateNext();
+alert(resultInput.value)
+alert(resultOutput.value)
+
+
+var string=""
 var count = 0;
 while(result)
-{ string=string+result.value
-result=nodes.iterateNext();
-    count++;
-    string=string+"\n";
+{
+  string=string+result.value+"\n"+resultDescription.childNodes[0].nodeValue +"\n" + resultInput.value + "\n" +resultOutput.value
+  result=nodes.iterateNext();
+  resultDescription=nodesOperationDescription.iterateNext();
+  resultInput=nodesInput.iterateNext();
+  resultOutput=nodesOutput.iterateNext();
+  count++;
+  string=string+"\n";
 }
-alert(string)
-alert(count)
-
-
-
-
-
-
-
+var messageNumberService = "pocet metod poskytovanych sluzboj je " + count+"\n"
+var messageNameService = "Web sluzbov poskytovane operacie s ich popisom a vstupnymi spravami"+"\n"+string
+var finalAlert= messageNumberService+messageNameService
+alert(finalAlert)
 }
 else
 {alert("vybrali ste neplatnu moznost")}
