@@ -4,6 +4,7 @@
 <html>
 
 <head>
+  
 
   <title>WSDL Description</title>
 
@@ -17,6 +18,20 @@
 </select>
 
   <script type="text/javascript">
+    xml=loadXMLDoc("ArithmeticOps_asmx.xml");  //tu je zavolana funkcia "loadXMLDoc"
+  var path_operation_names="definitions/portType/operation//@*[\"name\"=local-name()]"
+  var path_operation_description="definitions/portType/operation//*[\"documentation\"=local-name()]"
+  var  path_input="definitions/portType/operation/input/@message"
+  var path_output="definitions/portType/operation/output/@message"
+  var node1=xmlQuery(path_operation_names);
+  var string1=createStringFromQuery(node1);
+  var node2=xmlQuery(path_operation_description);
+  var string2=createStringFromQuery(node2);
+  var count=string1.length
+
+   var messageNumberService = "pocet metod poskytovanych sluzboj je "
+   //var messageNameService = "Web sluzbov poskytovane operacie s ich popisom a vstupnymi spravami"+"\n"+string
+
   function loadXMLDoc(dname)
   {
     if (window.XMLHttpRequest)
@@ -31,55 +46,92 @@
     xhttp.send("");
     return xhttp.responseXML;
   }
+ function xmlQuery(path){
+var node=xml.evaluate(path, xml, null, XPathResult.ANY_TYPE, null);
+return node;
+}
+
+function createStringFromQuery(node)
+{ 
+  var result=node.iterateNext();
+  var string=[]
+  var i=0
+  while(result){
+  string[i]=result;
+  result=node.iterateNext();
+  i++;
+}return string;
+}
   function Find_in_wsdl(){
-
-
-let userChoice= document.getElementById("options").value;
-
-if (userChoice>=0 && userChoice<=4)
-{ //path_operation_count= "definitions/types/*[\"schema\"=local-name()]/*[\"element\"=local-name()]/@*[\"name\"=local-name()]";
-    path_operation_names="definitions/portType/operation//@*[\"name\"=local-name()]"
-    path_operation_description="definitions/portType/operation//*[\"documentation\"=local-name()]"
-    path_input="definitions/portType/operation/input/@message"
-    path_output="definitions/portType/operation/output/@message"
-
-var nodes=xml.evaluate(path_operation_names, xml, null, XPathResult.ANY_TYPE, null);
-var result=nodes.iterateNext();
-var nodesOperationDescription=xml.evaluate(path_operation_description, xml, null, XPathResult.ANY_TYPE, null);
-var resultDescription=nodesOperationDescription.iterateNext();
-var nodesInput=xml.evaluate(path_input, xml, null, XPathResult.ANY_TYPE, null);
-var resultInput=nodesInput.iterateNext();
-var nodesOutput=xml.evaluate(path_output, xml, null, XPathResult.ANY_TYPE, null);
-var resultOutput=nodesInput.iterateNext();
-alert(resultInput.value)
-alert(resultOutput.value)
-
-
-var string=""
-var count = 0;
-while(result)
-{
-  string=string+result.value+"\n"+resultDescription.childNodes[0].nodeValue +"\n" + resultInput.value + "\n" +resultOutput.value
-  result=nodes.iterateNext();
-  resultDescription=nodesOperationDescription.iterateNext();
-  resultInput=nodesInput.iterateNext();
-  resultOutput=nodesOutput.iterateNext();
-  count++;
-  string=string+"\n";
-}
-var messageNumberService = "pocet metod poskytovanych sluzboj je " + count+"\n"
-var messageNameService = "Web sluzbov poskytovane operacie s ich popisom a vstupnymi spravami"+"\n"+string
-var finalAlert= messageNumberService+messageNameService
-alert(finalAlert)
-}
-else
-{alert("vybrali ste neplatnu moznost")}
-
-
-
-
-
+//path_operation_count= "definitions/types/*[\"schema\"=local-name()]/*[\"element\"=local-name()]/@*[\"name\"=local-name()]";
+   
+ 
+   switch(document.getElementById("options").value) {
+  case "1":{
+    var message=messageNumberService+""+count+"\n";
+    for(st of string1){
+     message=message+"\n"+st.value;
+    }
+    alert(message)
+    break;
   }
+    case "2":
+    var message=messageNumberService+""+count+"\n";
+    let i=0
+    for(st of string1){
+     message=message+"\n"+st.value+"\n"+string2[i].childNodes[0].nodeValue
+     i++
+    }
+    alert(message)
+    
+
+
+    break;
+  
+  default:
+ alert("este nehotovo")
+}
+
+
+ 
+
+
+
+
+
+}
+
+
+
+
+
+
+// var nodes=xml.evaluate(path_operation_names, xml, null, XPathResult.ANY_TYPE, null);
+// var result=nodes.iterateNext();
+// var nodesOperationDescription=xml.evaluate(path_operation_description, xml, null, XPathResult.ANY_TYPE, null);
+// var resultDescription=nodesOperationDescription.iterateNext();
+// var nodesInput=xml.evaluate(path_input, xml, null, XPathResult.ANY_TYPE, null);
+// var resultInput=nodesInput.iterateNext();
+
+// var nodesOutput=xml.evaluate(path_output, xml, null, XPathResult.ANY_TYPE, null);
+// var resultOutput=nodesOutput.iterateNext();
+// var string=""
+// var count = 0;
+// while(result)
+// {
+//   string=string+result.value+"\n"+resultDescription.childNodes[0].nodeValue+"\n"+resultInput.value+"\n"+resultOutput.value;
+ 
+//   result=nodes.iterateNext();
+//   resultDescription=nodesOperationDescription.iterateNext();
+//   resultInput=nodesInput.iterateNext();
+//   resultOutput=nodesOutput.iterateNext();
+//   count++;
+//   string=string+"\n";
+// }
+
+// var finalAlert= messageNumberService+messageNameService
+// alert(finalAlert)
+
   
   //funkcia najde elementy 'person', ktore maju v atribute 'street' ich dcerskych elementov 'address' retazec 'main', 
   //'south' alebo 'west'
@@ -93,10 +145,7 @@ else
 
 <body>
 
-  <script type="text/javascript">
-  xml=loadXMLDoc("ArithmeticOps_asmx.xml");  //tu je zavolana funkcia "loadXMLDoc"
-
-  </script>
+  
   
   <script type="text/javascript">
   document.getElementById("user_searched_string").focus();
