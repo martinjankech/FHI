@@ -27,9 +27,17 @@
   var string1=createStringFromQuery(node1);
   var node2=xmlQuery(path_operation_description);
   var string2=createStringFromQuery(node2);
+  var node3=xmlQuery(path_input);
+  var string3=createStringFromQuery(node3);
+  var node4=xmlQuery(path_output);
+  var string4=createStringFromQuery(node4); 
   var count=string1.length
 
    var messageNumberService = "pocet metod poskytovanych sluzboj je "
+   var messageMainService1 = "počet operácií vystavených web službou a ich identifikátory: "
+   var messageMainService2 = "počet operácií vystavených web službou, ich identifikátory a popisy,"
+   var messageMainService3 = "počet operácií vystavených web službou, ich identifikátory, popisy a vstupné správy, "
+   var messageMainService4 = "počet operácií vystavených web službou, ich identifikátory, popisy, vstupné a výstupné správy"
    //var messageNameService = "Web sluzbov poskytovane operacie s ich popisom a vstupnymi spravami"+"\n"+string
 
   function loadXMLDoc(dname)
@@ -68,7 +76,7 @@ function createStringFromQuery(node)
  
    switch(document.getElementById("options").value) {
   case "1":{
-    var message=messageNumberService+""+count+"\n";
+    var message=messageNumberService+""+count+"\n"+messageMainService1+"\n";
     for(st of string1){
      message=message+"\n"+st.value;
     }
@@ -76,18 +84,34 @@ function createStringFromQuery(node)
     break;
   }
     case "2":
-    var message=messageNumberService+""+count+"\n";
-    let i=0
+    var message=messageNumberService+""+count+"\n"+messageMainService2+"\n";
+    var i=0
     for(st of string1){
      message=message+"\n"+st.value+"\n"+string2[i].childNodes[0].nodeValue
      i++
     }
     alert(message)
-    
-
-
     break;
-  
+
+  case "3":
+  var message=messageNumberService+""+count+"\n"+messageMainService3+"\n";
+   i=0
+    for(st of string1){
+     message=message+"\n"+st.value+"\n"+string2[i].childNodes[0].nodeValue+"\n"+string3[i].value
+     i++
+    }
+    alert(message)
+
+  break
+  case "4":
+  var message=messageNumberService+""+count+"\n"+messageMainService4+"\n";
+  i=0
+    for(st of string1){
+     message=message+"\n"+st.value+"\n"+string2[i].childNodes[0].nodeValue+"\n"+string3[i].value+"\n"+string4[i].value+"\n";
+     i++
+    }
+    alert(message)
+  break;
   default:
  alert("este nehotovo")
 }
