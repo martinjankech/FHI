@@ -9,7 +9,7 @@ using System.Web.Services.Protocols;
 using System.Xml;
 using System.Xml.Linq;
 using System.Windows.Forms;
-namespace WebService_XML_file
+namespace Bookstore
 {
     /// <summary>
     /// Summary description for Service1
@@ -18,16 +18,18 @@ namespace WebService_XML_file
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
-    // [System.Web.Script.Services.ScriptService]
-    public class Work_with_XML_file : System.Web.Services.WebService
+     [System.Web.Script.Services.ScriptService]
+    public class WebService_XML_file : System.Web.Services.WebService
     {
         //nazov skumaneho .xml suboru (lokalny subor) s cestou k nemu
-        private string FileName = "D:\\CVICENIA\\LS_11\\PSaDSDIII\\XPath\\priklady\\books\\books.xml";
+        private string FileName = " D:\\git_repositories\\FHI\\diplomovka\\kody\\cvika\\cviko_10\\1\\Bookstore\\Bookstore\\books.xml";
+     
+           // "D:\\CVICENIA\\LS_11\\PSaDSDIII\\XPath\\priklady\\books\\books.xml";
         private XmlDocument doc;
 
 
         //konstruktor triedy 'Work_with_XML_file'
-        public Work_with_XML_file()
+        public WebService_XML_file()
         {
             //vytvorenie objektu 'doc' triedy 'XmlDocument'
             doc = new XmlDocument();
@@ -118,8 +120,7 @@ namespace WebService_XML_file
 
             XmlElement root = doc.DocumentElement; //ziskanie korenoveho elementu v nacitanom .xml subore 
             //v argumente instancnej metody 'SelectNodes' je pouzity regularny XPath vyraz
-            nodeList = root.SelectNodes("/bookstore/book[@category='" + AttributValue + "']/title | 
-                          / bookstore / book[@category = '" + AttributValue + "'] / author");
+            nodeList = root.SelectNodes("/bookstore/book[@category='" + AttributValue + "']/title |   / bookstore / book[@category = '" + AttributValue + "'] / author");
             XmlNodeList nodeList_title = root.SelectNodes("/bookstore/book[@category='" + AttributValue + "']/title");
 
             int nodeList_titleCount = nodeList_title.Count;
