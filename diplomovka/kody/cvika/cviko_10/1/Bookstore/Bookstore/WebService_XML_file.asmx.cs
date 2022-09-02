@@ -9,6 +9,7 @@ using System.Web.Services.Protocols;
 using System.Xml;
 using System.Xml.Linq;
 using System.Windows.Forms;
+using System.Diagnostics;
 namespace Bookstore
 {
     /// <summary>
@@ -120,7 +121,7 @@ namespace Bookstore
 
             XmlElement root = doc.DocumentElement; //ziskanie korenoveho elementu v nacitanom .xml subore 
             //v argumente instancnej metody 'SelectNodes' je pouzity regularny XPath vyraz
-            nodeList = root.SelectNodes("/bookstore/book[@category='" + AttributValue + "']/title |   / bookstore / book[@category = '" + AttributValue + "'] / author");
+            nodeList = root.SelectNodes("/bookstore/book[@category='" + AttributValue + "']/title |   / bookstore / book[@category = '" + AttributValue + "']/author");
             XmlNodeList nodeList_title = root.SelectNodes("/bookstore/book[@category='" + AttributValue + "']/title");
 
             int nodeList_titleCount = nodeList_title.Count;
@@ -140,6 +141,36 @@ namespace Bookstore
              nodeList_titleCount + "\n\nTituly knih s hodnotou atributu 'category'='" + AttributValue + "'   s ich autormi\n\n" + x, "Vystup metody 'GetTitleAuthorElementswithCategory'",   MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             return return_x;
         }
+       
+        [WebMethod(Description = "v XML dokumente books.xml zistí a vráti zoznam hodnôt elementov title a author rodičovských elementov book (tiež ich počet), ktoré majú v atribútoch lang elementov title používateľom zadanú hodnotu (môže byť zadaná hodnota \"en\" alebo \"sk\"),")]
+        public string GetTitleAuthorElementswithLang(string lang ) {
+            if (lang != "sk" && lang != "en" )
+            {
+                MessageBox.Show("Vlozili ste nekorektny vstup '" + lang + "' do metody  'GetTitleAuthorElementswithLang' webovej sluzby!!!" + "\n\nKorektne vstupy su:\nsk\nen\n", "Nekorektny vstup do metody 'GetTitleAuthorElementswithLang'", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return "chybny vstup";
+            }
+            string x ="";
+            string return_x = "";
+            XmlNodeList nodeList;
+
+            XmlElement root = doc.DocumentElement; //ziskanie korenoveho elementu v nacitanom .xml subore 
+            //v argumente instancnej metody 'SelectNodes' je pouzity regularny XPath vyraz
+            nodeList = root.SelectNodes("/bookstore/book/title[@lang='" +lang+ "'] | /bookstore/book[title[@lang='" +lang+ "']]/author");
+            XmlNodeList nodeList_title = root.SelectNodes("/bookstore/book/title[@lang='" + lang + "'] ");
+           
+
+            int nodeList_titleCount = nodeList.Count;
+            int nodeListCount = nodeList.Count;
+            int i = 0;
+            while (i < nodeListCount)
+            {
+                XmlNode title = nodeList.Item(i);
+               return_x += title.OuterXml;
+                x += title.InnerText + "\n";
+                i++;
+            }
+
+            return return_x; }
 
     }
 }
