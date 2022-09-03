@@ -1,0 +1,36 @@
+﻿<html>
+<body>
+
+   <h3>Vyberte hodnoty vstupov metod poskytovanych web sluzbou 'WebService_input_output_XML_file.asmx'</h3>
+   </br>
+
+   <form method=POST action='http://localhost/WebService_input_output_XML_file.asmx/GetElementsCount'>
+       <p>Metoda 'GetElementsCount' vrati POCET elementov 'book' so zadanou hodnotou ich detskeho elementu 'year'</p>
+       Vlozte hodnotu detskeho elementu 'year' :  
+       <input type="text" size="5" name='ElementValue'\"></td>
+       <input type=submit value="GetElementsCount"> </td>
+       </br> </br> </br>
+   </form>
+
+   <form method=POST action='http://localhost/WebService_input_output_XML_file.asmx/GetTitleElementswithYear'>
+       <p>Metoda 'GetTitleElementswithYear' vrati ZOZNAM hodnot elementov 'title' rodicovskych elementov 'book', ktore maju 
+              v detskom elemente 'year' zadanu hodnotu</p>
+       Vlozte hodnotu detskeho elementu 'year' :
+       <input type="text" size="5" name='ElementValue'\"></td>
+       <input type=submit value="GetTitleElementswithYear"> </td>
+       </br> </br> </br>
+   </form>
+
+
+   <form method=POST 
+ 	             action='http://localhost/WebService_input_output_XML_file.asmx/GetTitleAuthorElementswithCategory'>
+       <p>Metoda 'GetTitleAuthorElementswithCategory' vrati ZOZNAM hodnot elementov 'title' a 'author' rodicovskych 
+             elementov 'book', ktore maju v atribute 'category' zadanu hodnotu</p>
+       Vlozte hodnotu atributu 'category' :
+       <input type="text" size="7" name='AttributValue'\"></td>
+       <input type=submit value="GetTitleAuthorElementswithCategory"> </td>
+   </form>
+   
+</body>
+</html>
+

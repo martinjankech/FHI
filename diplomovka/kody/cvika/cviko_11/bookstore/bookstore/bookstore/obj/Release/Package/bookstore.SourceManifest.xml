@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="D:\git_repositories\FHI\diplomovka\kody\cvika\cviko_11\bookstore\bookstore\bookstore\obj\Release\Package\PackageTmp" />
+  <setAcl path="D:\git_repositories\FHI\diplomovka\kody\cvika\cviko_11\bookstore\bookstore\bookstore\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
+  <setAcl path="D:\git_repositories\FHI\diplomovka\kody\cvika\cviko_11\bookstore\bookstore\bookstore\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
+</sitemanifest>

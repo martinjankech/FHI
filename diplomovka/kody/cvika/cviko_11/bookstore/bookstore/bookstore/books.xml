@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<bookstore>
+
+  <book category="COOKING">
+    <title lang="en">Everyday Russian</title>
+    <author>Sergey Chelemendik</author>
+    <year>2005</year>
+    <price>32.00</price>
+  </book>
+
+  <book category="WEB">
+    <title lang="en">HTTP servers</title>
+    <author>James Millan</author>
+    <author>Per Goessle</author>
+    <author>Kurt Kainne</author>
+    <author>James Lynche</author>
+    <author>Vaidyanathan Barkakati</author>
+    <year>2003</year>
+    <price>39.99</price>
+  </book>
+
+  <book category="CHILDREN">
+    <title lang="en">Nice Day</title>
+    <author>J. K. Brown</author>
+    <year>2005</year>
+    <price>28.99</price>
+  </book>
+
+  <book category="WEB">
+    <title lang="en">Learning XML</title>
+    <author>Frank T. Cole</author>
+    <year>2003</year>
+    <price>37.95</price>
+  </book>
+
+  <book category="WEB">
+    <title lang="en">Learning JavaScript</title>
+    <author>Dave Stewart</author>
+    <year>2003</year>
+    <price>29.85</price>
+  </book>
+
+  <book category="KLASIKA">
+    <title lang="sk">Reci a prednasky</title>
+    <author>Ludovit Stur</author>
+    <year>2003</year>
+    <price>10.50</price>
+  </book>
+
+  <book category="KLASIKA">
+    <title lang="sk">Mor ho!</title>
+    <author>Samo Chalupka</author>
+    <year>1998</year>
+    <price>9.50</price>
+  </book>
+
+  <book category="KLASIKA">
+    <title lang="sk">Marina</title>
+    <author>Andrej Sladkovic</author>
+    <year>1998</year>
+    <price>9.60</price>
+  </book>
+
+</bookstore>
+
