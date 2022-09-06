@@ -1,0 +1,15 @@
+D:\git_repositories\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\SkusamXML\SkusamXML\bin\Debug\net6.0\SkusamXML.exe
+D:\git_repositories\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\SkusamXML\SkusamXML\bin\Debug\net6.0\SkusamXML.deps.json
+D:\git_repositories\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\SkusamXML\SkusamXML\bin\Debug\net6.0\SkusamXML.runtimeconfig.json
+D:\git_repositories\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\SkusamXML\SkusamXML\bin\Debug\net6.0\SkusamXML.dll
+D:\git_repositories\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\SkusamXML\SkusamXML\bin\Debug\net6.0\SkusamXML.pdb
+D:\git_repositories\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\SkusamXML\SkusamXML\obj\Debug\net6.0\SkusamXML.csproj.AssemblyReference.cache
+D:\git_repositories\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\SkusamXML\SkusamXML\obj\Debug\net6.0\SkusamXML.GeneratedMSBuildEditorConfig.editorconfig
+D:\git_repositories\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\SkusamXML\SkusamXML\obj\Debug\net6.0\SkusamXML.AssemblyInfoInputs.cache
+D:\git_repositories\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\SkusamXML\SkusamXML\obj\Debug\net6.0\SkusamXML.AssemblyInfo.cs
+D:\git_repositories\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\SkusamXML\SkusamXML\obj\Debug\net6.0\SkusamXML.csproj.CoreCompileInputs.cache
+D:\git_repositories\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\SkusamXML\SkusamXML\obj\Debug\net6.0\SkusamXML.dll
+D:\git_repositories\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\SkusamXML\SkusamXML\obj\Debug\net6.0\refint\SkusamXML.dll
+D:\git_repositories\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\SkusamXML\SkusamXML\obj\Debug\net6.0\SkusamXML.pdb
+D:\git_repositories\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\SkusamXML\SkusamXML\obj\Debug\net6.0\SkusamXML.genruntimeconfig.cache
+D:\git_repositories\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\SkusamXML\SkusamXML\obj\Debug\net6.0\ref\SkusamXML.dll

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Format version="0.0.1">
+  <Product>
+    <Title>Title 5</Title>
+  </Product>
+  <Product>
+    <Title>Title 4</Title>
+  </Product>
+  <Product>
+    <Title>Title 1</Title>
+  </Product>
+  <Product>
+    <Title>Title 2</Title>
+  </Product>
+  <Product>
+    <Title>Title 3</Title>
+  </Product>
+  <Property>
+    <Name>Property 1</Name>
+    <Setting>0xB100</Setting>
+  </Property>
+  <Property>
+    <Name>Property 3</Name>
+    <Setting>0xCFBA</Setting>
+  </Property>
+  <Property>
+    <Name>Property 2</Name>
+    <Setting>0xF824</Setting>
+  </Property>
+</Format>

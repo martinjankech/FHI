@@ -1,0 +1,104 @@
+﻿<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    
+    <script>
+      
+      
+      //thead.appendChild(trheading);
+      function go() {
+        var req = new XMLHttpRequest();
+        req.open(
+          "GET",
+          "http://localhost:8045/jsonOutput.asmx/ClearJson",
+          true
+        );
+
+        req.onreadystatechange = function () {
+     let table = document.createElement("table");
+     table.classList.add('table')
+     table.classList.add('table-dark')
+      let thead = document.createElement("thead");
+      let tbody = document.createElement("tbody");
+      table.appendChild(thead);
+      table.appendChild(tbody);
+          if (req.readyState == 4) {
+            if ((req.status >= 200 && req.status < 300) || req.status == 304) {
+              var returnData = req.responseText;
+              Jsondata = JSON.parse(req.responseText);
+              console.log(Jsondata);
+              objectCount = Object.keys(Jsondata.bookstore.book).length;
+              let trheading = document.createElement("tr");
+              thead.appendChild(trheading);
+              let thheading1 = document.createElement("th");
+              for (data of Object.keys(Jsondata.bookstore.book[1])) {
+                let thheading1 = document.createElement("th");
+                if (data != "title") {
+                  thheading1.innerText = data;
+                  thheading1.setAttribute('scope','col')
+                  trheading.appendChild(thheading1);
+                } else {
+                  for (data1 of Object.keys(Jsondata.bookstore.book[1].title)) {
+                    console.log(typeof data);
+                    if (data1 != "text") {
+                      let thHeadingAt = document.createElement("th");
+                      thHeadingAt.setAttribute('scope','col')
+                      
+                      thHeadingAt.innerText = data1;
+                      
+                      trheading.appendChild(thHeadingAt);
+                    }
+                  }
+                  thheading1.innerText = data;
+                  thheading1.setAttribute('scope','col')
+                  trheading.appendChild(thheading1);
+                  
+                }
+                
+              }
+              for (let i = 0; i < objectCount; i++) {
+                let trheading = document.createElement("tr");
+                tbody.appendChild(trheading)
+                Object.entries(Jsondata.bookstore.book[i]).forEach(
+                  ([key, value]) => {
+                    if (key != "title") {
+                        let tdheading = document.createElement("td");
+                        tdheading.innerText=value;
+                        trheading.appendChild(tdheading)
+                      //console.log(`${key}: ${value}`);
+                    } else {
+                      Object.entries(Jsondata.bookstore.book[i].title).forEach(
+                        ([key, value]) => {
+                            let tdheading = document.createElement("td");
+                            tdheading.innerText=value;
+                            trheading.appendChild(tdheading)
+                          //console.log(`${key}: ${value}`);
+                        }
+                      );
+                    }
+                  }
+                );
+              }
+
+              // Adding the entire table to the body tag
+              document.getElementById("body").appendChild(table);
+            } else {
+              alert("Error; request.status = " + req.status);
+            }
+            req = null;
+          }
+        };
+
+        req.send();
+      }
+    </script>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+  </head>
+  <body id="body">
+    <div id="demo">
+      <button style="margin-bottom: 20px;" onclick="go()">klini na mna</button>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+https://opac.crzp.sk/?fn=detailBiblioForm&sid=E75B5E22D326BA6A9AA594CFFF20 - bankovy učet 
+vytvoril aplikaciu aj s sql čo podla mna nemusime robiť ale zaujimave 
+
+https://opac.crzp.sk/?fn=detailBiblioForm&sid=728DDAFCA0C23A4506FC6655699D&seo=CRZP-detail-kniha - banove smenkovanie a diskontovanie 
+popísané aj kody napr čo je xml node list, serializacia, využil ajax ma aj uspopriadanie na tlačitkach 
+https://opac.crzp.sk/?fn=detailBiblioForm&sid=EE347D3FB9176FA23A62607BB7F1&seo=CRZP-detail-kniha - automobilovy park
+použil konkretne firmy asi vymyslene , aj kody jednotlivých metod podlľa mna veľke metody z vela parametrami uvidime či sa to bude dať jednoduchšie 
+
+https://opac.crzp.sk/?fn=detailBiblioForm&sid=99467F2B4D35905AF25F2764CF03&seo=CRZP-detail-kniha . naklady firmy
+statistiky o vyrobkoch dobry napad ajax popis tvorby webovej služby, využil newebove čiastkove metody
+https://opac.crzp.sk/?fn=detailBiblioForm&sid=72994EA9AD52E4DE4B944C064587&seo=CRZP-detail-kniha realitna kancelaria 
+využil rest api , na konci hobori o bezpečnosti, vyzera profesionalne 
+https://opac.crzp.sk/?fn=detailBiblioForm&sid=99467F2B4D35905AF25F2064CF03&seo=CRZP-detail-kniha platby firmy
+stromova štruktura xml dokumentu, menne priestory webovej služby zoradenie v jquery ajax volaniach a rovno do tabulky, tento sa s tym nesral a očividne prešiel 
+https://opac.crzp.sk/?fn=detailBiblioForm&sid=DF521320909666631472E1F290DD&seo=CRZP-detail-kniha zásoby
+proxy trieda neviem či take niečo vyuťije je to obdoba ajax alebo post volania aspon tak mi to zatial pride ale na tutorialspointe je to tak 
+https://opac.crzp.sk/?fn=detailBiblioForm&sid=75B7A01F43629DD3F92908287959&seo=CRZP-detail-kniha bankovy učet
+https://opac.crzp.sk/?fn=detailBiblioForm&sid=1F20E14014F543F14C0050A60BD9 služobne cesty 2022 nezverejnena zatial

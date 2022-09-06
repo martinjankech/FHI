@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Text;
 using System.Runtime.InteropServices;
+using Newtonsoft.Json;
 
 namespace bookstore
 {
@@ -37,6 +38,9 @@ namespace bookstore
         {
             //vytvorenie objektu 'doc' triedy 'XmlDocument'
             doc = new XmlDocument();
+
+            
+
 
             //nacitanie .xml suboru do stream-u (datoveho prudu), cez ktory web sluzba pracuje s .xml suborom
             doc.Load(FileName);
@@ -65,6 +69,7 @@ namespace bookstore
 
             //v argumente instancnej metody 'SelectNodes' je pouzity regularny XPath vyraz
             nodeList = root.SelectNodes("/bookstore/book[year=" + ElementValue + "]/title");
+           
             return nodeList.Count;
         }
 

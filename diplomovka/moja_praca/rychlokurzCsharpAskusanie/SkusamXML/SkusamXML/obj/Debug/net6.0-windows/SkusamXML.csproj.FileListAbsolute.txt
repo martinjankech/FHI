@@ -1,0 +1,6 @@
+D:\git_repositories\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\SkusamXML\SkusamXML\obj\Debug\net6.0-windows\SkusamXML.csproj.AssemblyReference.cache
+D:\git_repositories\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\SkusamXML\SkusamXML\obj\Debug\net6.0-windows\SkusamXML.csproj.ResolveComReference.cache
+D:\git_repositories\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\SkusamXML\SkusamXML\obj\Debug\net6.0-windows\SkusamXML.GeneratedMSBuildEditorConfig.editorconfig
+D:\git_repositories\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\SkusamXML\SkusamXML\obj\Debug\net6.0-windows\SkusamXML.AssemblyInfoInputs.cache
+D:\git_repositories\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\SkusamXML\SkusamXML\obj\Debug\net6.0-windows\SkusamXML.AssemblyInfo.cs
+D:\git_repositories\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\SkusamXML\SkusamXML\obj\Debug\net6.0-windows\SkusamXML.csproj.CoreCompileInputs.cache
