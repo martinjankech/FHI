@@ -1,0 +1,77 @@
+{
+
+	"look": [{
+		"category": "COOKING",
+		"title": {
+			"lang": "en",
+			"text": "Everyday Russian"
+		},
+		"author": "Sergey Chelemendik",
+		"year": "2005",
+		"price": "32.00"
+	}, {
+		"category": "WEB",
+		"title": {
+			"lang": "en",
+			"text": "HTTP servers"
+		},
+		"author": ["James Millan", "Per Goessle", "Kurt Kainne", "James Lynche", "Vaidyanathan Barkakati"],
+		"year": "2003",
+		"price": "39.99"
+	}, {
+		"category": "CHILDREN",
+		"title": {
+			"lang": "en",
+			"text": "Nice Day"
+		},
+		"author": "J. K. Brown",
+		"year": "2005",
+		"price": "28.99"
+	}, {
+		"category": "WEB",
+		"title": {
+			"lang": "en",
+			"text": "Learning XML"
+		},
+		"author": "Frank T. Cole",
+		"year": "2003",
+		"price": "37.95"
+	}, {
+		"category": "WEB",
+		"title": {
+			"lang": "en",
+			"text": "Learning JavaScript"
+		},
+		"author": "Dave Stewart",
+		"year": "2003",
+		"price": "29.85"
+	}, {
+		"category": "KLASIKA",
+		"title": {
+			"lang": "sk",
+			"text": "Reci a prednasky"
+		},
+		"author": "Ludovit Stur",
+		"year": "2003",
+		"price": "10.50"
+	}, {
+		"category": "KLASIKA",
+		"title": {
+			"lang": "sk",
+			"text": "Mor ho!"
+		},
+		"author": "Samo Chalupka",
+		"year": "1998",
+		"price": "9.50"
+	}, {
+		"category": "KLASIKA",
+		"title": {
+			"lang": "sk",
+			"text": "Marina"
+		},
+		"author": "Andrej Sladkovic",
+		"year": "1998",
+		"price": "9.60"
+	}]
+
+}

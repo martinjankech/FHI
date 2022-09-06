@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+   
+   
+    <title>Jquery Ajax ASMX consum</title>
+</head>
+
+<body>
+    <div>
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button" id="employee">
+                Get Record</button>
+        </span>
+        <table id="content">
+            <thead>
+                <tr>
+                    <th>
+                        title
+                    </th>
+                    <th>
+                        author
+                    </th>
+                    <th>
+                   year
+                    </th>
+                    <th>
+                        price
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="emp">
+            </tbody>
+        </table>
+    </div>
+   
+    <script type="text/javascript">
+        /*
+        $(function () {
+            $("#employee").on("click", function () {
+                $.ajax({
+                    url: "http://localhost:8045/jsonOutput.asmx/ClearJson",
+                    type: "GET",
+                    dataType: "json",
+                    //contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                      
+                        var json = JSON.parse(data.d);
+                         $(data).each(function (index, item) {
+                             var questionId = json[index].author;
+                            console.log(questionId)
+                             var question = json[index].question;
+                             var course = json[index].course;
+                             for (var option = 0; option <json[index].answerEntities.length; option++) {
+                                varans =json[index].answerEntities[option].ans;
+                                varansId =json[index].answerEntities[option].id;
+                                varansStatus =json[index].answerEntities[option].status;
+                        objectLen=Object.keys(data.bookstore.book).length
+                        for(let i=0;i<objectLen;i++){
+                                $('tbody#emp').append(
+                                '<tr><td>'
+                                + data.bookstore.book[i].title.text
+                                + '</td><td>'
+                                + data.bookstore.book[i].author
+                                + '</td><td>'
+                                + data.bookstore.book[i].year
+                                + '</td><td>'
+                                + data.bookstore.book[i].price
+                                + '</td><td>'
+                                + '</td></tr>')}
+                            //}
+                      //  });
+                    },
+                    error: function (data) { alert(data.responseText); }
+                });
+            });
+        });
+        */
+     
+    </script>
+    
+        
+
+</body>
+</html>
