@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <bookstore>
 
   <book category="COOKING">
-    <title lang="en">Everyday Russian</title>
+    <title lang="en">Šukola má výhranoäôň</title>
     <author>Sergey Chelemendik</author>
     <year>2005</year>
     <price>32.00</price>

@@ -1,0 +1,61 @@
+Názov konania
+Martinus hľadá PHP programátora
+
+Miesto práce
+Obchodná 26, Bratislava, Slovensko
+
+Stručná charakteristika spoločnosti
+Martinus a Foxford je veľká partia nadšených a sem-tam uletených ľudí s opakujúcimi sa diagnózami – knihomoľ či kávoľub. Spájame ľudí s knihami, aby v sebe rozvíjali to dobré: cez naše kamenné kníhkupectvá, kaviarne aj internetové obchody, na Slovensku i v Česku, kde patríme medzi najväčších kníhkupcov vôbec.
+
+Veľkosť však nikdy nebola naším hlavným cieľom. Tým je byť najlepší pre našich zákazníkov, pre ľudí, s ktorými spolupracujeme a denno-denne prinášame tisícky malých i veľkých príbehov, ktoré robia ich deň krajším. Snívame o krajine, ktorá číta a a posúva sa vpred: my tomu chceme prispievať aj podporou čítania u mladých ľudí (projekt Krajina čitateľov), začínajúcich podnikateľov, mentorovaním start-upov či organizácií ako Dobrý Anjel či Slovenská debatná asociácia.
+
+Našu prácu už ocenilo viacero organizácií:
+
+- V rokoch 2014-2020 sme sa napríklad stali absolútnymi víťazmi prestížnej súťaže MasterCard Obchodník roka.
+- Niekoľkokrát sme sa objavili v prvej päťke ocenených v súťaži Najatraktívnejší zamestnávateľ
+- V roku 2012 sme získali hlavnú cenu v oceňovaní Via Bona Slovakia pre malé a stredné podniky za uplatňovanie princípov zodpovedného podnikania
+- Náš CEO Mišo Meško sa objavil medzi finalistami súťaže EY podnikateľ roka 2011 a 2014 a je TREND TOP Manažér roka 2018
+- V rokoch 2019 až 2021 sme získali prvenstvo v prieskume KPMG ako Zákaznícky najobľúbenejšia značka na Slovensku
+- Naše marketingové kampane za uplynulé roky získali viacero klincov v celoslovenskej reklamne súťaži Zlatý klinec
+
+Na toto všetko sme hrdí a vážime si to. V rámci našej hodnoty #stálelepší sa zároveň snažíme napredovať ďalej. Budeme radi, ak budeš chcieť byť súčasťou tejto našej cesty a pridáš sa k nám!
+
+Tisíce príbehov. Jedno kníhkupectvo. Martinus.
+
+Popis pozície
+- Kamarátiš sa s PHP, ale tvorba bežných webov ťa už nenapĺňa?
+- Rád za sebou vidíš výsledok a chceš svojou prácou pomáhať vytvárať lepší svet?
+- Chceš mať na veci dosah a ovplyvňovať napríklad aj to, koľko krokov ľudia v sklade vďaka tebe ušetria?
+
+Ak je odpoveď na naše otázky "ÁNO", tak určite čítaj ďalej :-)
+
+Do nášho hviezdneho developerského tímu hľadáme senior programátora. Hľadáme parťáka, ktorý:
+- rád skúša nové veci, hrá sa a vymýšľa. Zároveň sa však nebojí občas zabrdnúť aj do starších kúskov kódu
+- je samostatný a doťahuje úspešne svoje úlohy od začiatku až do konca
+- má skúsenosti z predošlých projektov a za sebou úspechy aj momenty, kedy sa pri vývoji popálil a aj vďaka tomu posunul ďalej
+- môže sa pochváliť veľmi dobrou znalosťou PHP a MySQL, kamaráti sa tiež s JavaScriptom a ani CakePHP mu nie je vzdialený
+- rád sa učí a rozvíja a vždy hľadá najefektívnejšiu cestu k naplneniu cieľa
+
+Môžeš sa spoľahnúť, že:
+* nehľadáme zamestnanca, ale parťáka, s ktorým nám bude dobre. Za odmenu bude dobre aj tebe s nami! :-)
+* budeš mať voľnosť v zadaniach a možnosť ovplyvňovať projekty, na ktorých pracuješ
+* budeš mať možnosť pracovať na našej vlastnej aplikácii
+* ocitneš sa medzi ľuďmi, ktorí majú chuť meniť svet k lepšiemu v sebe doslova zakódovanú
+* príspevkom na rozvoj a vzdelávanie uhasíme aj tvoj smäd po nových vedomostiach
+* nikto sa nebude čudovať, ak si počas dňa odskočíš do virtuálnej reality. A je dosť možné, že tam nebudeš sám!
+
+Stále si nevieš predstaviť, čo by si u nás robil(a)? Tak niekoľko príkladov toho, čo sme riešili posledné mesiace:
+* na webe pribudla možnosť rezervovať knihu v kníhkupectve. Na to aby sa to celé mohlo udiať, sme museli prepojiť skladové zásoby jednotlivých kníhkupectiev, pripraviť proces vyberania knižiek pomocou smartphonov a celé to spojiť do jedného funkčného celku
+* nové zobrazenie vo vyhľadávaní kníh - na webe používame na vyhľadávanie Elasticsearch, mnoho kníh má však rôzne vydania a preto sme ich spojili dohromady, skĺbili sme pritom naše dáta v databáze so silou elasticsearchu. To všetko sme ešte predtým nadizajnovali a potom otestovali na používateľoch
+* multipozičný skladový systém - každá knižka má svoje miesto a my vždy o ňom jednoznačne vieme, našim zamestnancom ukazujeme najkratšiu cestu, aby vybrali knihy z políc a tým šetríme ich kroky
+* automatizácia pre prácu s produktami na našom webe - od desiatok dodávateľov si načítavame dáta, procesujeme ich, aby sa potom dostali automaticky na náš web
+a množstvo ďalších úloh
+
+Doplňujúce informácie
+- skvelý tím
+- možnosť realizovať vlastné nápady
+- zamestnanecké výhody a benefity
+- podpora rozvoja a vzdelávania vo forme štipendia
+
+Základná zložka mzdy (brutto) a ďalšie odmeny
+2 000 EUR/mesiac

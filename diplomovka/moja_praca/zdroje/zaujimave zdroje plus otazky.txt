@@ -1,1 +1,5 @@
 https://stackoverflow.com/questions/602279/stringwriter-or-stringbuilder stringwriter a stringbuilder 
+http://www.rpbourret.com/xml/XMLAndDatabases.htm xml document as database 
+https://www.youtube.com/watch?v=HkfoW7qeYeo&ab_channel=GautamMokal xpath priklady v c#
+https://umne.sk/test-eshopov-2018-knihkupectva/ test knihkupectiev
+https://www.profesia.sk/mark/4066417/https-www-martinus-sk-pridajsa-129-programator

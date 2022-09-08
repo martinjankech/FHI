@@ -31,7 +31,7 @@ namespace skusam_xml
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void ClearJson() {
             XmlDocument xDocument = new XmlDocument();
-            xDocument.Load("D:\\git_repositories\\FHI\\diplomovka\\moja_praca\\rychlokurzCsharpAskusanie\\xml_net_framework_skusam\\xml_net_framework_skusam\\books.xml");
+            xDocument.Load("D:\\git_repositories\\FHI\\diplomovka\\moja_praca\\rychlokurzCsharpAskusanie\\skusam_xml\\skusam_xml\\books.xml");
             xDocument.RemoveChild(xDocument.FirstChild);
             var builder = new StringBuilder();
             JsonSerializer.Create().Serialize(new CustomJsonWriter(new StringWriter(builder)), xDocument);

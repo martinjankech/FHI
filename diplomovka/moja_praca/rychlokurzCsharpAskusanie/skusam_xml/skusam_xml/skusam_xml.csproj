@@ -70,6 +70,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="books.xml" />
     <Content Include="jqueryAjaxConsuption.html" />
     <Content Include="jsonOutput.asmx" />
     <Content Include="loadjson.html" />
