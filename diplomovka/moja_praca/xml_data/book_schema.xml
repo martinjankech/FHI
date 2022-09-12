@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <Bookstore>
+  <books>
+  <book>
+    <id>1</id>
+    <nazov>Harry Potter a Tajomná komnata</nazov>
+    <autori>
+    <autor1>J.K. Rowling</autor1>
+    </autori>
+    <kategoria>Fantasy</kategoria>
+    <isbn>9788055143088</isbn>
+    <jazyk>sk</jazyk>
+    <pocet_stran>360</pocet_stran>
+    <vazba>brožovaná väzba</vazba>
+    <rok_vydania>2015</rok_vydania>
+    <vydavatelstvo>Ikar</vydavatelstvo>
+    <predajna_cena>11,9</predajna_cena>
+    <nakupna_cena>8,25</nakupna_cena>
+    <marza>44,24%</marza>
+    <zisk_kus>3,65</zisk_kus>
+    <obsah>Dursleyovci boli v to leto takí odporní, že Harry Potter sa už nevedel dočkať, kedy sa vráti do čarodejníckej školy. Jedného dňa sa v jeho izbe objaví čudné, zlomyseľné stvorenie. Volá sa Dobby a tvrdí, že ak sa Harry vráti na Rokfort, hrozí mu smrteľné nebezpečenstvo.
+A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole tajuplné a hrôzostrašné veci. Niekto, lepšie povedané niečo napáda rokfortských študentov a premieňa ich na kameň. Že by bol za tým Draco Malfoy, Harryho úhlavný nepriateľ? Alebo to má na svedomí ten, koho na Rokforte najviac upodozrievajú – samotný Harry Potter?</obsah>
+    <priemerne_hodnotenie>4,7</priemerne_hodnotenie>
+  </book>
+  <book>
+    <id>10</id>
+    <nazov>Hacking bez tajemství - Webové aplikace</nazov>
+    <autori>
+    <autor1>Mike Shema</autor1>
+    <autor2>Joel Scambray</autor2>
+    </autori>
+    <kategoria>Odborné a náučné</kategoria>
+    <isbn>8072267698</isbn>
+    <jazyk>cz</jazyk>
+    <pocet_stran>360</pocet_stran>
+    <vazba>brožovaná väzba</vazba>
+    <rok_vydania>2003</rok_vydania>
+    <vydavatelstvo>Computer Press</vydavatelstvo>
+    <predajna_cena>18,5</predajna_cena>
+    <nakupna_cena>11,89</nakupna_cena>
+    <marza>0,555929352</marza>
+    <zisk_kus>6,61</zisk_kus>
+    <obsah>Před časem kniha Hacking bez tajemství ukázala početné administrátorské obci, jak je pro patřičně zlomyslné nebo ctižádostivé jedince snadné proniknout do počítačových sítí a systémů. Ačkoliv je mezi administrátory stále hodně těch, kteří tuto krutou zkušenost dosud nemají za sebou, většina již snad začíná chápat nezbytnost firewallů, bezpečných konfigurací operačních systémů, svědomitého používání záplat od dodavatelů a dalších dříve opomíjených zásad bezpečnosti informačních systémů.</obsah>
+    <priemerne_hodnotenie>5</priemerne_hodnotenie>
+  </book>
+  </books>
+  </Bookstore>
