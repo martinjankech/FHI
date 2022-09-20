@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <knihy_transakcie>
+  <transakcia>
+    <id_transakcie>1</id_transakcie>
+    <id_knihy>1</id_knihy>
+    <datum>2020-01-08</datum>
+    <typ_transakcie>nákup</typ_transakcie>
+    <mnozstvo>120</mnozstvo>
+    <cena_za_jednotku>8.25</cena_za_jednotku>
+    <celkovo_cena>990</celkovo_cena>
+    <aktualne_mnozstvo_na_sklade>120</aktualne_mnozstvo_na_sklade>
+    </transakcia>
+    <transakcia>
+    <id_transakcie>35</id_transakcie>
+    <id_knihy>19</id_knihy>
+    <datum>2020-01-09</datum>
+    <typ_transakcie>predaj</typ_transakcie>
+    <mnozstvo>-8</mnozstvo>
+    <cena_za_jednotku>14,17</cena_za_jednotku>
+    <celkovo_cena>193</celkovo_cena>
+    <aktualne_mnozstvo_na_sklade>112</aktualne_mnozstvo_na_sklade>
+    </transakcia>
+    </knihy_transakcie >
