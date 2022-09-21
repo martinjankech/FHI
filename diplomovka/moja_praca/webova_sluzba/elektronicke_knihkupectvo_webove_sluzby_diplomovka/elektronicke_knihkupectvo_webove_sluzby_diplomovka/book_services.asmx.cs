@@ -23,13 +23,17 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
     public class book_services : System.Web.Services.WebService
     { private String fileBookInfo = "D:\\git_repozitare\\FHI\\diplomovka\\moja_praca\\webova_sluzba\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\book_moje.xml ";
       private String fileBookTransactionInfo = "D:\\git_repozitare\\FHI\\diplomovka\\moja_praca\\webova_sluzba\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\book_transakcie_moje.xml ";
+        public XmlDocument LoadDocument(string docu) {
 
+            XmlDocument doc = new XmlDocument();
+            doc.Load(docu);
+            return doc;
+        }
         [WebMethod]
         public void SinglebookDataById(int id)
 
         {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(fileBookInfo);
+            XmlDocument doc = LoadDocument(fileBookInfo);
             XmlNodeList AllBook= doc.SelectNodes("Bookstore/books/book");
             int allBookCount = AllBook.Count;
             // id su radene od 1... preto tato podmienka je postacujuca
@@ -48,10 +52,12 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
         [WebMethod]
         public void GetListAllBooks()
         {
-
-
-
-
+            XmlDocument doc = new XmlDocument();
+            doc.Load(fileBookInfo);
+            XmlNodeList AllBook = doc.SelectNodes("Bookstore/books");
+            // nastavenie UTF-8 sady pre http response 
+            Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+            Context.Response.Write(JsonConvert.SerializeXmlNode(AllBook.Item(0), Formatting.Indented));
         }
 
     }
