@@ -45,7 +45,7 @@ namespace skusam_xml
         public void  HelloWorld()
         {
             XmlDocument doc = new XmlDocument();
-            doc.Load("D:\\git_repositories\\FHI\\diplomovka\\moja_praca\\rychlokurzCsharpAskusanie\\xml_net_framework_skusam\\xml_net_framework_skusam\\books.xml");
+            doc.Load("D:\\git_repozitare\\FHI\\diplomovka\\moja_praca\\rychlokurzCsharpAskusanie\\skusam_xml\\skusam_xml\\books.xml");
             doc.RemoveChild(doc.FirstChild);
             string json = JsonConvert.SerializeXmlNode(doc, Formatting.Indented);
             var details = JObject.Parse(json);

@@ -114,8 +114,9 @@ D:\git_repozitare\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\skusam_xml
 D:\git_repozitare\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\skusam_xml\skusam_xml\bin\Newtonsoft.Json.dll
 D:\git_repozitare\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\skusam_xml\skusam_xml\bin\Newtonsoft.Json.xml
 D:\git_repozitare\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\skusam_xml\skusam_xml\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\git_repozitare\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\skusam_xml\skusam_xml\obj\Debug\skusam_xml.csprojAssemblyReference.cache
 D:\git_repozitare\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\skusam_xml\skusam_xml\obj\Debug\skusam_xml.csproj.CoreCompileInputs.cache
 D:\git_repozitare\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\skusam_xml\skusam_xml\obj\Debug\skusam_xml.csproj.CopyComplete
 D:\git_repozitare\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\skusam_xml\skusam_xml\obj\Debug\skusam_xml.dll
 D:\git_repozitare\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\skusam_xml\skusam_xml\obj\Debug\skusam_xml.pdb
+D:\git_repozitare\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\skusam_xml\skusam_xml\obj\Debug\skusam_xml.csproj.AssemblyReference.cache
+D:\git_repozitare\FHI\diplomovka\moja_praca\rychlokurzCsharpAskusanie\skusam_xml\skusam_xml\bin\skusam_xml.dll.config

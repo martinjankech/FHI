@@ -45,5 +45,14 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
 
 
         }
+        [WebMethod]
+        public void GetListAllBooks()
+        {
+
+
+
+
+        }
+
     }
 }
