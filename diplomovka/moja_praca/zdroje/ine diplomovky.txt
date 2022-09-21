@@ -16,3 +16,6 @@ https://opac.crzp.sk/?fn=detailBiblioForm&sid=DF521320909666631472E1F290DD&seo=C
 proxy trieda neviem či take niečo vyuťije je to obdoba ajax alebo post volania aspon tak mi to zatial pride ale na tutorialspointe je to tak 
 https://opac.crzp.sk/?fn=detailBiblioForm&sid=75B7A01F43629DD3F92908287959&seo=CRZP-detail-kniha bankovy učet
 https://opac.crzp.sk/?fn=detailBiblioForm&sid=1F20E14014F543F14C0050A60BD9 služobne cesty 2022 nezverejnena zatial
+
+
+C:\Users\janke\source\repos\elektronicke_knihkupectvo_webove_sluzby_diplomovka\elektronicke_knihkupectvo_webove_sluzby_diplomovka\
