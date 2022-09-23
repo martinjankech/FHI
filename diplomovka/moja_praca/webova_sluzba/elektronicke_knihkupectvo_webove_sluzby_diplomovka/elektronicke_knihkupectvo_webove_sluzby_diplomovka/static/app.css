@@ -1,4 +1,4 @@
-body {
+.menu {
  
  background-color: #333;
  display: flex;
@@ -6,6 +6,8 @@ body {
  justify-content: center;
  margin: 0;
  height: 100vh;
+
+ 
 }
 ul {
  padding: 0;
@@ -22,9 +24,7 @@ text-align: center;
 }
 
 .footer{
-
 position: absolute;
- margin-top: 37em;
  width: 100%;
  background-color:lightskyblue;
  padding-bottom: 3em;
@@ -32,6 +32,14 @@ position: absolute;
 .footer-par{
 display:flex;
 justify-content: center;
+}
+.pic{
+position: relative;
+ display: flex;
+ width: auto;
+max-height: 300px;
+
+
 
 
 }
