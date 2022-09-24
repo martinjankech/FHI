@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="books.xml" />
+    <Content Include="datatable.html" />
     <Content Include="jqueryAjaxConsuption.html" />
     <Content Include="jsonOutput.asmx" />
     <Content Include="loadjson.html" />

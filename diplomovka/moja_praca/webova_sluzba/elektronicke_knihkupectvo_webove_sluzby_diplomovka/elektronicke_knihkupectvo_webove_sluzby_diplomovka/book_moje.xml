@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Bookstore xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<books>
+  <books>
 		<book>
 			<id>1</id>
 			<nazov>Harry Potter a Tajomná komnata</nazov>
@@ -625,5 +625,5 @@ Saint-Exupéry svoju knižku s čistým detským pohľadom na svet venoval najle
 			<obsah>V knihe nájdete overené recepty na rôzne jedlá z kotlíka, pahreby a grilu. Taktiež recepty na marinády a omáčky ku grilovaným jedlám, ale aj šaláty. Veríme, že pri listovaní v knihe si každý z Vás vyberie to, čo si bude často a rád pripravovať.</obsah>
 			<priemerne_hodnotenie>3.9</priemerne_hodnotenie>
 		</book>
-	</books>
+    </books>
 </Bookstore>

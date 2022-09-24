@@ -30,14 +30,14 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
             return doc;
         }
         [WebMethod]
-        public void SinglebookDataById(int id)
+        public void SinglebookDataById(string  id)
 
         {
             XmlDocument doc = LoadDocument(fileBookInfo);
             XmlNodeList AllBook= doc.SelectNodes("Bookstore/books/book");
             int allBookCount = AllBook.Count;
             // id su radene od 1... preto tato podmienka je postacujuca
-            if (id <= allBookCount)
+            if (Int32.Parse(id)<= allBookCount)
             {
                 XmlNodeList nodeListBook = doc.SelectNodes("Bookstore/books/book[id=" + id + "]");
                 // nastavenie UTF-8 sady pre http response 
@@ -62,3 +62,4 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
 
     }
 }
+
