@@ -25,63 +25,9 @@
 
 <body>
   <div w3-include-html="navbar.html"></div>
-
   <script>
     includeHTML();
   </script>
-  <!-- <script>
-    $(document).ready(function () {
-      $("#button1").click(function () {
-        $.ajax({
-          url: "http://localhost:8045/book_services.asmx/GetListAllBooks",
-          dataType: "json",
-          type: "POST",
-          success: function (result) {
-            //$("#h11").html(result.books.book[2].predajna_cena);
-            Object.entries(result.books.book).forEach((entry) => {
-              //const [key, value] = entry;
-              //console.log(`${key}: ${value.obsah} ${value.nazov}`);
-              $("#id").html(entry[1].id)
-              $("#nazov").html(entry[1].nazov)
-              $("#autori").html(entry[1].autori.autor1)
-              $("#kategoria").html(entry[1].kategoria)
-              $("#isbn").html(entry[1].isbn)
-              $("#jazyk").html(entry[1].jazyk)
-              $("#pocet_stran").html(entry[1].pocet_stran)
-              $("#vazba").html(entry[1].vazba)
-              $("#rok_vydania").html(entry[1].rok_vydania)
-              $("#vydavatelstvo").html(entry[1].vydavatelstvo)
-              $("#predajna_cena").html(entry[1].predajna_cena)
-              $("#nakupna_cena").html(entry[1].nakupna_cena)
-              $("#marza").html(entry[1].marza)
-              $("#zisk_kus").html(entry[1].zisk_kus)
-              $("#obsah").html(entry[1].obsah)
-
-            });
-          }
-        });
-      });
-    });
-  </script>
-  <button id="button1">zobraz vsetko</button>
-  <p>id: <span id="id"></span></p>
-  <p>nazov: <span id="nazov"></span></p>
-  <p>autori: <span id="autori"></span></p>
-  <p>kategoria: <span id="kategoria"></span></p>
-  <p>isbn: <span id="isbn"></span></p>
-  <p>jazyk: <span id="jazyk"></span></p>
-  <p>pocet_stran: <span id="pocet_stran"></span></p>
-  <p>vazba: <span id="vazba"></span></p>
-  <p>rok vydania: <span id="rok_vydania"></span></p>
-  <p>vydavatelstvo: <span id="vydavatelstvo"></span></p>
-  <p>predajna_cena: <span id="predajna_cena"></span></p>
-  <p>nakupna_cena: <span id="nakupna_cena"></span></p>
-  <p>marza: <span id="marza"></span></p>
-  <p>zisk_kus: <span id="zisk_kus"></span></p>
-  <p>obsah <span id="obsah"></span></p> -->
-
-
-
   <div class="container ">
     <form class="mt-5" method="POST">
       <div class="form-row">
@@ -96,49 +42,39 @@
         </div> -->
       </div>
       <button type="submit" class="btn btn-primary  mt-2">Find Book</button>
-
-
     </form>
     <div class="card mt-4">
       <div class="card-body">
-        <h3 id="name1" class="card-title">Book Name</h3>
-        <h6 id="autor" class="card-subtitle">Book Authors</h6>
+        <h3 id="nazov_hore" class="card-title">Book Name</h3>
+        <h6 id="autori_hore" class="card-subtitle">Book Authors</h6>
         <div class="row">
           <div class="col-lg-5 col-md-5 col-sm-6">
-            <div class="white-box text-center"><img src="https://via.placeholder.com/430x600/00CED1/000000"
+            <!-- <div class="white-box text-center"><img id="obrazok" src="https://via.placeholder.com/430x600/00CED1/000000"
+                class="img-responsive"></div> -->
+            <div class="white-box text-center"><img id="obrazok" src="https://via.placeholder.com/430x600/00CED1/000000"
                 class="img-responsive"></div>
           </div>
           <div class="col-lg-7 col-md-7 col-sm-6">
             <h4 class="box-title ">Obsah knihy</h4>
             <p id="obsah"></p>
-            <h2 id="cena" class="mt-2">
-              €153
+            <h2 id="cena_hl" class="mt-2">
             </h2>
             <h3 class="box-title mt-5">údaje o knihe</h3>
             <ul class="list-unstyled">
-              <li id="nazov"><i class="fa fa-check text-success"><span>nazov:</span></i>Nazov</li>
-              <li id="nazov"><i class="fa fa-check text-success"></i>Designed to foster easy portability</li>
-              <li id="autori"><i class="fa fa-check text-success"></i>Perfect furniture to flaunt your wonderful
-                collectibles</li>
-              <li id="kategoria"><i class="fa fa-check text-success"></i>Nazov</li>
-              <li id="isbn"><i class="fa fa-check text-success"></i>Designed to foster easy portability</li>
-              <li id="jazyk"><i class="fa fa-check text-success"></i>Perfect furniture to flaunt your wonderful
-                collectibles
+              <li><i class="fa fa-check text-success"></i>nazov: <span id="nazov"></span></li>
+              <li><i class="fa fa-check text-success"></i>autori: <span id="autori"></span></li>
+              <li><i class="fa fa-check text-success"></i>kategoria: <span id="kategoria"></span></li>
+              <li><i class="fa fa-check text-success"></i>isbn: <span id="isbn"></span></li>
+              <li><i class="fa fa-check text-success"></i>jazyk: <span id="jazyk"></span></li>
+              <li><i class="fa fa-check text-success"></i>pocet stran: <span id="pocet_stran"></span></li>
+              <li><i class="fa fa-check text-success"></i>rok vydania: <span id="rok_vydania"></span></li>
+              <li><i class="fa fa-check text-success"></i>vydavateľstvo: <span id="vydavatelstvo"></span>
               </li>
-              <li id="pocet_stran"><i class="fa fa-check text-success"></i>Nazov</li>
-              <li id="rok_vydania"><i class="fa fa-check text-success"></i>Designed to foster easy portability</li>
-              <li id="vydavatelstvo"><i class="fa fa-check text-success"></i>Perfect furniture to flaunt your wonderful
-                collectibles
+              <li><i class="fa fa-check text-success"></i>predajna cena: <span id="predajna_cena"></span>
               </li>
-              <li id="predajna_cena"><i class="fa fa-check text-success"></i>Nazov</li>
-              <li id="nakupna_cena"><i class="fa fa-check text-success"></i>Designed to foster easy portability</li>
-              <li id="marza"><i class="fa fa-check text-success"></i>Perfect furniture to flaunt your wonderful
-                collectibles
-              <li id="zisk_kus"><i class="fa fa-check text-success"></i>Perfect furniture to flaunt your wonderful
-                collectibles
-              <li id="marza"><i class="fa fa-check text-success"></i>Perfect furniture to flaunt your wonderful
-                collectibles
-              </li>
+              <li><i class="fa fa-check text-success"></i>nakupna cena: <span id="nakupna_cena"></span></li>
+              <li><i class="fa fa-check text-success"></i>marza: <span id="marza"></span></li>
+              <li><i class="fa fa-check text-success"></i>zisk kus: <span id="zisk_kus"></span></li>
             </ul>
           </div>
         </div>
@@ -151,7 +87,6 @@
         var formData = {
           id: $("#id").val(),
         };
-
         $.ajax({
           type: "POST",
           url: "http://localhost:8045/book_services.asmx/SinglebookDataById",
@@ -159,20 +94,34 @@
           dataType: "json",
           encode: true,
         }).done(function (data) {
-          console.log(data.book.nazov);
-          $("#name1").html(data.book.nazov)
-          $("#nazov").html(data.book.nazov)
-          $("#autor").html(data.book.autori.autor1)
+          if (data.book.autori.autor2 != undefined) {
+            $("#autori").html(data.book.autori.autor1 + "," + data.book.autori.autor2)
+            $("#autori_hore").html(data.book.autori.autor1 + "," + data.book.autori.autor2)
+          }
+          else {
+            $("#autori").html(data.book.autori.autor1)
+            $("#autori_hore").html(data.book.autori.autor1)
+          }
+          $("#obrazok").attr('src', data.book.obrazok)
           $("#obsah").html(data.book.obsah)
+          $("#cena_hl").html("€" + data.book.predajna_cena)
+          $("#nazov_hore").html(data.book.nazov)
+          $("#nazov").html(data.book.nazov)
+          $("#kategoria").html(data.book.kategoria)
+          $("#isbn").html(data.book.isbn)
+          $("#jazyk").html(data.book.jazyk)
+          $("#pocet_stran").html(data.book.pocet_stran)
+          $("#rok_vydania").html(data.book.rok_vydania)
+          $("#vydavatelstvo").html(data.book.vydavatelstvo)
+          $("#predajna_cena").html(data.book.predajna_cena)
+          $("#nakupna_cena").html(data.book.nakupna_cena)
+          $("#marza").html(parseFloat(data.book.marza).toFixed(2) * 100 + "%")
+          $("#zisk_kus").html(data.book.zisk_kus)
         });
         event.preventDefault();
       });
     });
-
-
   </script>
-
-
 </body>
 
 </html>
