@@ -5,15 +5,12 @@
  align-items: center;
  justify-content: center;
  margin: 0;
- height: 100vh;
-
- 
+ height: 100vh; 
 }
 ul {
  padding: 0;
  list-style-type: none;
 }
-
 .heading{
 position: absolute;
 margin-bottom: 40em;
@@ -22,26 +19,11 @@ display: block;
 width: 100%;
 text-align: center;
 }
-
-.footer{
-position: absolute;
- width: 100%;
- background-color:lightskyblue;
- padding-bottom: 3em;
-}
-.footer-par{
-display:flex;
-justify-content: center;
-}
 .pic{
 position: relative;
  display: flex;
  width: auto;
 max-height: 300px;
-
-
-
-
 }
 li {
  font-size: 25px;
@@ -53,7 +35,6 @@ li {
  margin-top: 0.8em;
  cursor: pointer;
 }
-
 li::before,
 li::after {
  content: '';
@@ -62,21 +43,18 @@ li::after {
  border-left: inherit;
  z-index: -1;
 }
-
 li::before {
  height: 80%;
  top: 10%;
  left: calc(-0.15em - 0.08em * 2);
  filter: brightness(0.8);
 }
-
 li::after {
  height: 60%;
  top: 20%;
  left: calc(-0.15em * 2 - 0.08em * 3);
  filter: brightness(0.6);
 }
-
 li span {
  position: relative;
  height: 120%;

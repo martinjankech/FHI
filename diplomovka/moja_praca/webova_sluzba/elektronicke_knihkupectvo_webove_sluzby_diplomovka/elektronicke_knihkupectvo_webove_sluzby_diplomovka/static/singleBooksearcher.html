@@ -20,26 +20,38 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="app.js"></script>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="footer.css">
   <title>Document</title>
 </head>
 
-<body>
+<body style="min-height: 100%;">
   <div w3-include-html="navbar.html"></div>
   <script>
     includeHTML();
   </script>
   <div class="container ">
     <form class="mt-5" method="POST">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+        <label class="form-check-label" for="defaultCheck1">
+          Default checkbox
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
+        <label class="form-check-label" for="defaultCheck2">
+          Disabled checkbox
+        </label>
+      </div>
       <div class="form-row">
-
         <div class="col">
-          <label for="inputEmail4">Book ID</label>
+          <label for="inputEmail4">ID knihy</label>
           <input type="text" class="form-control" id="id" placeholder="Book ID" name="id">
         </div>
-        <!-- <div class="col">
-          <label for="inputEmail4">Book ID</label>
-          <input type="text" class="form-control" id="inputEmail4" placeholder="Book ID" name="id">
-        </div> -->
+        <div class="col">
+          <label for="inputEmail4">Nazov knihy</label>
+          <input type="text" class="form-control" id="inputEmail4" placeholder="Book ID" name="nazov">
+        </div>
       </div>
       <button type="submit" class="btn btn-primary  mt-2">Find Book</button>
     </form>
@@ -48,13 +60,13 @@
         <h3 id="nazov_hore" class="card-title">Book Name</h3>
         <h6 id="autori_hore" class="card-subtitle">Book Authors</h6>
         <div class="row">
-          <div class="col-lg-5 col-md-5 col-sm-6">
+          <div class="col-lg-6 col-md-8 col-sm-12 col-12">
             <!-- <div class="white-box text-center"><img id="obrazok" src="https://via.placeholder.com/430x600/00CED1/000000"
                 class="img-responsive"></div> -->
-            <div class="white-box text-center"><img id="obrazok" src="https://via.placeholder.com/430x600/00CED1/000000"
-                class="img-responsive"></div>
+            <div class=" img-responsive"><img id="obrazok" src="https://via.placeholder.com/430x600/00CED1/000000">
+            </div>
           </div>
-          <div class="col-lg-7 col-md-7 col-sm-6">
+          <div class="col-lg-6 col-md-4 col-sm-12 col-12">
             <h4 class="box-title ">Obsah knihy</h4>
             <p id="obsah"></p>
             <h2 id="cena_hl" class="mt-2">
@@ -122,6 +134,7 @@
       });
     });
   </script>
+  <div w3-include-html="footer.html"></div>
 </body>
 
 </html>

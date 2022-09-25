@@ -29,6 +29,12 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
             doc.Load(docu);
             return doc;
         }
+        private string DecodeFromUtf8(string utf8_String)
+        {
+            byte[] bytes = Encoding.Default.GetBytes(utf8_String);
+            string utf8 = Encoding.UTF8.GetString(bytes);
+            return utf8;
+        }
         [WebMethod]
         public void SinglebookDataById(string  id)
 
@@ -46,10 +52,28 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
             }
             else
                 Context.Response.Write("nenasiel sa zaznam pre zadane id ");
-
-
         }
+        
         [WebMethod]
+        public string SinglebookDataByName(string name)
+
+        {
+
+            string utf8Input = HttpUtility.HtmlDecode(name);
+            XmlDocument doc = LoadDocument(fileBookInfo);
+            XmlNodeList AllBook = doc.SelectNodes("Bookstore/books/book");
+            int allBookCount = AllBook.Count;
+            
+            XmlNodeList nodeListBook = doc.SelectNodes("Bookstore/books/book[nazov=" + utf8Input + "]");
+            // nastavenie UTF-8 sady pre http response 
+            // Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+            // Context.Response.Write(JsonConvert.SerializeXmlNode(nodeListBook.Item(0), Formatting.Indented));
+            return utf8Input;
+          
+                //Context.Response.Write("nenasiel sa zaznam pre zadane id ");
+           }
+
+            [WebMethod]
         public void GetListAllBooks()
         {
             XmlDocument doc = new XmlDocument();
