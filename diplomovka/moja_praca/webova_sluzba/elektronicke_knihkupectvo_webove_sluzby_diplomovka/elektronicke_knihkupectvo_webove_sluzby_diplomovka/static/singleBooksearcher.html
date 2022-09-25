@@ -16,7 +16,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="navbar.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="app.js"></script>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -24,43 +23,45 @@
   <title>Document</title>
 </head>
 
-<body style="min-height: 100%;">
+<body>
   <div w3-include-html="navbar.html"></div>
   <script>
     includeHTML();
   </script>
   <div class="container ">
+
     <form class="mt-5" method="POST">
+      <p>hladat pomocou</p>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-        <label class="form-check-label" for="defaultCheck1">
-          Default checkbox
+        <input class="form-check-input1" type="radio" name="exampleRadios" id="id_checkbox1" value="option1">
+        <label class="form-check-label" for="exampleRadios1">
+          Id knihy
         </label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-        <label class="form-check-label" for="defaultCheck2">
-          Disabled checkbox
+        <input class="form-check-input2" type="radio" name="exampleRadios" id="name_checkbox2" value="option2">
+        <label class="form-check-label" for="exampleRadios2">
+          Meno knihy
         </label>
       </div>
-      <div class="form-row">
-        <div class="col">
-          <label for="inputEmail4">ID knihy</label>
-          <input type="text" class="form-control" id="id" placeholder="Book ID" name="id">
+      <div class="form-row mt-3">
+        <div id="input_place" class="col ">
+          <!-- <label for="inputEmail4">ID knihy</label>
+          <input type="text" class="form-control" id="id_input" placeholder="Book ID" name="id">
         </div>
         <div class="col">
           <label for="inputEmail4">Nazov knihy</label>
-          <input type="text" class="form-control" id="inputEmail4" placeholder="Book ID" name="nazov">
+          <input type="text" class="form-control" id="name_input" placeholder="Nazov knihy" name="nazov"> -->
         </div>
       </div>
       <button type="submit" class="btn btn-primary  mt-2">Find Book</button>
     </form>
-    <div class="card mt-4">
+    <div class="card mt-4  ">
       <div class="card-body">
         <h3 id="nazov_hore" class="card-title">Book Name</h3>
         <h6 id="autori_hore" class="card-subtitle">Book Authors</h6>
-        <div class="row">
-          <div class="col-lg-6 col-md-8 col-sm-12 col-12">
+        <div class="row ">
+          <div class="col-lg-6 col-md-8 col-sm-12 col-12 ">
             <!-- <div class="white-box text-center"><img id="obrazok" src="https://via.placeholder.com/430x600/00CED1/000000"
                 class="img-responsive"></div> -->
             <div class=" img-responsive"><img id="obrazok" src="https://via.placeholder.com/430x600/00CED1/000000">
@@ -97,7 +98,7 @@
     $(document).ready(function () {
       $("form").submit(function (event) {
         var formData = {
-          id: $("#id").val(),
+          id: $("#id_input").val(),
         };
         $.ajax({
           type: "POST",
@@ -105,6 +106,7 @@
           data: formData,
           dataType: "json",
           encode: true,
+
         }).done(function (data) {
           if (data.book.autori.autor2 != undefined) {
             $("#autori").html(data.book.autori.autor1 + "," + data.book.autori.autor2)
@@ -134,6 +136,43 @@
       });
     });
   </script>
+
+  <script>
+    $(function () {
+      $("#id_checkbox1").click(function () {
+        if ($(this).is(":checked")) {
+          //  $("#id_input").show();
+          //$("#name_input").hide();
+          $("#input_place").html(" <label for= \"inputEmail4\">ID knihy</label> <input type=\"text\"" + "class=\"form-control\" id=\"id_input\" placeholder=\"Book ID\" name=\"id\">" +
+            "");
+
+        }
+      })
+    });
+    $(function () {
+      $("#name_checkbox2").click(function () {
+        if ($(this).is(":checked")) {
+          //  $("#id_input").show();
+          //$("#name_input").hide();
+          $("#input_place").html(" <label for= \"inputEmail4\">Nazov knihy</label> <input type=\"text\"" + "class=\"form-control\" id=\"name_input\" placeholder=\"Nazov knihy\" name=\"nazov\">" +
+            "</div>");
+        }
+      })
+    });
+
+  </script>
+  <!-- <script> $(function () {
+      $("#name_checkbox2").click(function () {
+        if ($(this).is(":checked")) {
+          $("#id_input").hide();
+          $("#name_input").show();
+        } else {
+          $("#id_input").show();
+          $("#name_input").hide();
+        }
+      });
+    });</script> -->
+
   <div w3-include-html="footer.html"></div>
 </body>
 
