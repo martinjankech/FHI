@@ -27,7 +27,7 @@ max-height: 300px;
 }
 li {
  font-size: 25px;
- width: 8em;
+ width: auto;
  height: 2em;
  color: orange;
  border-left: 0.08em solid;
