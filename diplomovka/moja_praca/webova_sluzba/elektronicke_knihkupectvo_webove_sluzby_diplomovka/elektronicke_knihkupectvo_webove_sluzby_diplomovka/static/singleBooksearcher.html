@@ -44,6 +44,12 @@
           Meno knihy
         </label>
       </div>
+      <div class="form-check">
+        <input class="form-check-input2" type="radio" name="exampleRadios" id="isnb_checkbox3" value="option2">
+        <label class="form-check-label" for="exampleRadios2">
+          ISBN
+        </label>
+      </div>
       <div class="form-row mt-3">
         <div id="input_place" class="col ">
           <!-- <label for="inputEmail4">ID knihy</label>
@@ -95,8 +101,10 @@
     </div>
   </div>
   <script>
+
     $(document).ready(function () {
       $("form").submit(function (event) {
+
         var formData = {
           id: $("#id_input").val(),
         };
@@ -141,8 +149,6 @@
     $(function () {
       $("#id_checkbox1").click(function () {
         if ($(this).is(":checked")) {
-          //  $("#id_input").show();
-          //$("#name_input").hide();
           $("#input_place").html(" <label for= \"inputEmail4\">ID knihy</label> <input type=\"text\"" + "class=\"form-control\" id=\"id_input\" placeholder=\"Book ID\" name=\"id\">" +
             "");
 
@@ -152,9 +158,15 @@
     $(function () {
       $("#name_checkbox2").click(function () {
         if ($(this).is(":checked")) {
-          //  $("#id_input").show();
-          //$("#name_input").hide();
           $("#input_place").html(" <label for= \"inputEmail4\">Nazov knihy</label> <input type=\"text\"" + "class=\"form-control\" id=\"name_input\" placeholder=\"Nazov knihy\" name=\"nazov\">" +
+            "</div>");
+        }
+      })
+    });
+    $(function () {
+      $("#isbn_checkbox3").click(function () {
+        if ($(this).is(":checked")) {
+          $("#input_place").html(" <label for= \"inputEmail4\">ISBN knihy</label> <input type=\"text\"" + "class=\"form-control\" id=\"isbn_input\" placeholder=\"ISBN knihy\" name=\"isbn\">" +
             "</div>");
         }
       })
