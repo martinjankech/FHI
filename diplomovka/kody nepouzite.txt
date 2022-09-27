@@ -1,0 +1,19 @@
+ $(function () {
+      $("#id_checkbox1").click(function () {
+        if ($(this).is(":checked")) {
+          $("#input_place").html("<form id=\"form1\" class=\"mt-5\" method=\"POST\">" +
+            " <div class=\"form-row mt-3\">" +
+            "<div id=\"input_place\" class=\"col \">" +
+            " <label for=\"inputEmail\">ID knihy</label>" +
+            "<input type=\"text\" class=\"form-control\" id=\"id_input\" placeholder=\"Book ID\" name=\"id\">" +
+            " </div>" +
+            " <div class=\"col\">" +
+            " <label for=\"inputEmail4\">Nazov knihy</label>" +
+            "<input type=\"text\" class=\"form-control\" id=\"name_input\" placeholder=\"Nazov knihy\" name=\"nazov\">" +
+            "</div>" +
+            " </div>" +
+            " <button type=\"submit\" class=\"btn btn-primary  mt-2\">Find Book</button>" +
+            "</form>")
+        }
+      })
+    });

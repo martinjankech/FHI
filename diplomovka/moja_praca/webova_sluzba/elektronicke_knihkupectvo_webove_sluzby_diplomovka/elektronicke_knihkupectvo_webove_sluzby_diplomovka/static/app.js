@@ -27,9 +27,8 @@ function includeHTML() {
   }
 }
 
-function ajaxSingleBook(url, method = 'POST', data)
-       {$(document).ready(function (event) {
-      // $("form").submit(function (event) {
+function ajaxSingleBook(elementid,url, method = 'POST', data)
+      $(elementid).submit(function (event) {
             $.ajax({
                 url: url,
                 method: method,
@@ -61,7 +60,7 @@ function ajaxSingleBook(url, method = 'POST', data)
           $("#zisk_kus").html(data.book.zisk_kus)
         })
        event.preventDefault();
-      })}
+      })
       
               
          

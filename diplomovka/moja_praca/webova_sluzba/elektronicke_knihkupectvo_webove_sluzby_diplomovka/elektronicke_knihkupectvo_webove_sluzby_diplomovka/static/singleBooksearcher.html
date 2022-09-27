@@ -30,38 +30,40 @@
   </script>
   <div class="container ">
 
-    <form class="mt-5" method="POST">
-      <p>hladat pomocou</p>
-      <div class="form-check">
-        <input class="form-check-input1" type="radio" name="exampleRadios" id="id_checkbox1" value="option1">
-        <label class="form-check-label" for="exampleRadios1">
-          Id knihy
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input2" type="radio" name="exampleRadios" id="name_checkbox2" value="option2">
-        <label class="form-check-label" for="exampleRadios2">
-          Meno knihy
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input2" type="radio" name="exampleRadios" id="isnb_checkbox3" value="option2">
-        <label class="form-check-label" for="exampleRadios2">
-          ISBN
-        </label>
-      </div>
-      <div class="form-row mt-3">
+    <!-- <form class="mt-5" method="POST"> -->
+    <p>hladat pomocou</p>
+    <div class="form-check">
+      <input class="form-check-input1" type="radio" name="exampleRadios" id="id_checkbox" value="option1">
+      <label class="form-check-label" for="exampleRadios1">
+        Id knihy
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input2" type="radio" name="exampleRadios" id="name_checkbox" value="option2">
+      <label class="form-check-label" for="exampleRadios2">
+        Meno knihy
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input2" type="radio" name="exampleRadios" id="isbn_checkbox" value="option2">
+      <label class="form-check-label" for="exampleRadios2">
+        ISBN
+      </label>
+    </div>
+    <div id="input_place" class="col">
+      <!-- <div class="form-row mt-3">
         <div id="input_place" class="col ">
-          <!-- <label for="inputEmail4">ID knihy</label>
+          <label for="inputEmail4">ID knihy</label>
           <input type="text" class="form-control" id="id_input" placeholder="Book ID" name="id">
         </div>
         <div class="col">
           <label for="inputEmail4">Nazov knihy</label>
-          <input type="text" class="form-control" id="name_input" placeholder="Nazov knihy" name="nazov"> -->
+          <input type="text" class="form-control" id="name_input" placeholder="Nazov knihy" name="nazov">
         </div>
       </div>
       <button type="submit" class="btn btn-primary  mt-2">Find Book</button>
-    </form>
+    </form> -->
+    </div>
     <div class="card mt-4  ">
       <div class="card-body">
         <h3 id="nazov_hore" class="card-title">Book Name</h3>
@@ -103,8 +105,8 @@
   <script>
 
     $(document).ready(function () {
-      $("form").submit(function (event) {
-
+      // $("form").submit(function (event) {
+      $(document).on('submit', 'form', function (event) {
         var formData = {
           id: $("#id_input").val(),
         };
@@ -141,50 +143,63 @@
           $("#zisk_kus").html(data.book.zisk_kus)
         });
         event.preventDefault();
-      });
+      }
+
+      )
+
+
     });
+    //});
   </script>
 
   <script>
     $(function () {
-      $("#id_checkbox1").click(function () {
+      $("#id_checkbox").click(function () {
         if ($(this).is(":checked")) {
-          $("#input_place").html(" <label for= \"inputEmail4\">ID knihy</label> <input type=\"text\"" + "class=\"form-control\" id=\"id_input\" placeholder=\"Book ID\" name=\"id\">" +
-            "");
+          $("#input_place").html("<form  class=\"mt-5\" method=\"POST\">" +
+            " <div class=\"form-row mt-3\">" +
 
+            " <label for=\"inputEmail\">ID knihy</label>" +
+            "<input type=\"text\" class=\"form-control\" id=\"id_input\" placeholder=\"Book ID\" name=\"id\">" +
+            " </div>" +
+            " </div>" +
+            " <button type=\"submit\" class=\"btn btn-primary  mt-2\">Find Book</button>" +
+            "</form>")
         }
       })
     });
     $(function () {
-      $("#name_checkbox2").click(function () {
+      $("#name_checkbox").click(function () {
         if ($(this).is(":checked")) {
-          $("#input_place").html(" <label for= \"inputEmail4\">Nazov knihy</label> <input type=\"text\"" + "class=\"form-control\" id=\"name_input\" placeholder=\"Nazov knihy\" name=\"nazov\">" +
-            "</div>");
+          $("#input_place").html("<form  class=\"mt-5\" method=\"POST\">" +
+            " <div class=\"form-row mt-3\">" +
+
+            " <label for=\"inputEmail\">ID knihy</label>" +
+            "<input type=\"text\" class=\"form-control\" id=\"name_input\" placeholder=\"nazov knihy\" name=\"nazov\">" +
+            " </div>" +
+            " </div>" +
+            " <button type=\"submit\" class=\"btn btn-primary  mt-2\">Find Book</button>" +
+            "</form>")
         }
       })
     });
     $(function () {
-      $("#isbn_checkbox3").click(function () {
+      $("#isbn_checkbox").click(function () {
         if ($(this).is(":checked")) {
-          $("#input_place").html(" <label for= \"inputEmail4\">ISBN knihy</label> <input type=\"text\"" + "class=\"form-control\" id=\"isbn_input\" placeholder=\"ISBN knihy\" name=\"isbn\">" +
-            "</div>");
+          $("#input_place").html("<form  class=\"mt-5\" method=\"POST\">" +
+            " <div class=\"form-row mt-3\">" +
+
+            " <label for=\"inputEmail\">ID knihy</label>" +
+            "<input type=\"text\" class=\"form-control\" id=\"id_input\" placeholder=\"Book ID\" name=\"id\">" +
+            " </div>" +
+            " </div>" +
+            " <button type=\"submit\" class=\"btn btn-primary  mt-2\">Find Book</button>" +
+            "</form>")
         }
       })
     });
 
   </script>
-  <!-- <script> $(function () {
-      $("#name_checkbox2").click(function () {
-        if ($(this).is(":checked")) {
-          $("#id_input").hide();
-          $("#name_input").show();
-        } else {
-          $("#id_input").show();
-          $("#name_input").hide();
-        }
-      });
-    });</script> -->
-
   <div w3-include-html="footer.html"></div>
 </body>
 
