@@ -27,8 +27,8 @@ function includeHTML() {
   }
 }
 
-function ajaxSingleBook(elementid,url, method = 'POST', data)
-      $(elementid).submit(function (event) {
+function ajaxSingleBook(formid,url, method = 'POST', data){
+      $("#"+formid+"").submit(function (event) {
             $.ajax({
                 url: url,
                 method: method,
@@ -61,6 +61,7 @@ function ajaxSingleBook(elementid,url, method = 'POST', data)
         })
        event.preventDefault();
       })
+    }
       
               
          

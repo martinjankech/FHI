@@ -1,0 +1,12 @@
+.footer {
+ position: absolute;
+ width: 100%;
+ background-color: lightskyblue;
+ padding-bottom: 3em;
+}
+
+.footer-par {
+ display: flex;
+ justify-content: center;
+ color: white;
+}
