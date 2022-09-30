@@ -71,7 +71,23 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
                 //Context.Response.Write("nenasiel sa zaznam pre zadane id ");
            }
 
-            [WebMethod]
+        [WebMethod]
+        public void SinglebookDataByIsbn(string isbn)
+
+        {
+            XmlDocument doc = LoadDocument(fileBookInfo);
+            XmlNodeList AllBook = doc.SelectNodes("Bookstore/books/book");
+            int allBookCount = AllBook.Count;
+
+            XmlNodeList nodeListBook = doc.SelectNodes("Bookstore/books/book[isbn=\"" + isbn + "\"]");
+            //nastavenie UTF-8 sady pre http response 
+            Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+            Context.Response.Write(JsonConvert.SerializeXmlNode(nodeListBook.Item(0), Formatting.Indented));
+
+
+            //Context.Response.Write("nenasiel sa zaznam pre zadane id ");
+        }
+        [WebMethod]
         public void GetListAllBooks()
         {
             XmlDocument doc = new XmlDocument();
