@@ -21,6 +21,11 @@
 
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" href="footer.css">
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"
+    integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
+  <!-- jqury kniznica na obmedzenie maximalneho poctu poloziek v autocomplete  -->
+  <script src="jquery.ui.autocomplete.scroll.min.js"></script>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.css" rel="stylesheet" />
   <title>Document</title>
 </head>
 
@@ -53,9 +58,10 @@
         }
       }
     }
-  </script>
-  <div w3-include-html="navbar.html"></div>
 
+  </script>
+
+  <div w3-include-html="navbar.html"></div>
   <div class="container ">
 
     <!-- <form class="mt-5" method="POST"> -->
@@ -79,27 +85,14 @@
       </label>
     </div>
     <div id="input_place" class="col">
-      <!-- <div class="form-row mt-3">
-        <div id="input_place" class="col ">
-          <label for="inputEmail4">ID knihy</label>
-          <input type="text" class="form-control" id="id_input" placeholder="Book ID" name="id">
-        </div>
-        <div class="col">
-          <label for="inputEmail4">Nazov knihy</label>
-          <input type="text" class="form-control" id="name_input" placeholder="Nazov knihy" name="nazov">
-        </div>
-      </div>
-      <button type="submit" class="btn btn-primary  mt-2">Find Book</button>
-    </form> -->
+
     </div>
-    <div class="card mt-4  ">
+    <div class="card mt-4">
       <div class="card-body">
         <h3 id="nazov_hore" class="card-title">Book Name</h3>
         <h6 id="autori_hore" class="card-subtitle">Book Authors</h6>
         <div class="row ">
           <div class="col-lg-6 col-md-8 col-sm-12 col-12 ">
-            <!-- <div class="white-box text-center"><img id="obrazok" src="https://via.placeholder.com/430x600/00CED1/000000"
-                class="img-responsive"></div> -->
             <div class=" img-responsive"><img id="obrazok" src="https://via.placeholder.com/430x600/00CED1/000000">
             </div>
           </div>
@@ -131,59 +124,12 @@
     </div>
   </div>
   <script>
-
-    // $(document).ready(function () {
-    //   // $("form").submit(function (event) {
-    //   $(document).on('submit', 'form', function (event) {
-    //     var formData = {
-    //       id: $("#id_input").val(),
-    //     };
-    //     $.ajax({
-    //       type: "POST",
-    //       url: "http://localhost:8045/book_services.asmx/SinglebookDataById",
-    //       data: formData,
-    //       dataType: "json",
-    //       encode: true,
-
-    //     }).done(function (data) {
-    //       if (data.book.autori.autor2 != undefined) {
-    //         $("#autori").html(data.book.autori.autor1 + "," + data.book.autori.autor2)
-    //         $("#autori_hore").html(data.book.autori.autor1 + "," + data.book.autori.autor2)
-    //       }
-    //       else {
-    //         $("#autori").html(data.book.autori.autor1)
-    //         $("#autori_hore").html(data.book.autori.autor1)
-    //       }
-    //       $("#obrazok").attr('src', data.book.obrazok)
-    //       $("#obsah").html(data.book.obsah)
-    //       $("#cena_hl").html("€" + data.book.predajna_cena)
-    //       $("#nazov_hore").html(data.book.nazov)
-    //       $("#nazov").html(data.book.nazov)
-    //       $("#kategoria").html(data.book.kategoria)
-    //       $("#isbn").html(data.book.isbn)
-    //       $("#jazyk").html(data.book.jazyk)
-    //       $("#pocet_stran").html(data.book.pocet_stran)
-    //       $("#rok_vydania").html(data.book.rok_vydania)
-    //       $("#vydavatelstvo").html(data.book.vydavatelstvo)
-    //       $("#predajna_cena").html(data.book.predajna_cena)
-    //       $("#nakupna_cena").html(data.book.nakupna_cena)
-    //       $("#marza").html(parseFloat(data.book.marza).toFixed(2) * 100 + "%")
-    //       $("#zisk_kus").html(data.book.zisk_kus)
-    //     });
-    //     event.preventDefault();
-    //   }
-
-    //   )
-
-
-    // });
-    //});
-    function ajaxSingleBook(formid, url, parameter, parameterdata) {
+    function ajaxSingleBookForm(formid, url, parameter, parameterdata) {
       $(document).on('submit', formid, function (event) {
         console.log(parameterdata)
         var formData = {};
         formData[parameter] = $("#" + parameterdata).val();
-        console.log(formData)
+
         $.ajax({
           url: url,
           method: "POST",
@@ -218,10 +164,19 @@
         event.preventDefault();
       })
     }
+    // asynchronna funkcia vracia promise 
+    async function GetallbookNames() {
+      // await zabezpeci sychronny priebeh a caka kym nedostane promise 
+      const result = await $.ajax({
+        url: 'http://localhost:8045/book_services.asmx/GetListAllBooks',
+        type: "POST",
+        dataType: 'json',
+      }).done(function (data) { })
 
+      return result.books.book
+    }
 
   </script>
-
   <script>
     $(function () {
       $("#id_checkbox").click(function () {
@@ -230,7 +185,7 @@
             " <div class=\"form-row mt-3\">" +
 
             " <label for=\"inputEmail\">ID knihy</label>" +
-            "<input type=\"text\" class=\"form-control\" id=\"id_input\" placeholder=\"Book ID\" name=\"id\">" +
+            "<input type=\"text\" class=\"form-control \" id=\"id_input\" placeholder=\"Book ID\" name=\"id\">" +
             " </div>" +
             " </div>" +
             " <button type=\"submit\" class=\"btn btn-primary  mt-2\">Find Book</button>" +
@@ -244,11 +199,13 @@
           $("#input_place").html("<form id=\"formname\" class=\"mt-5\" method=\"POST\">" +
             " <div class=\"form-row mt-3\">" +
 
-            " <label for=\"inputEmail\">ID knihy</label>" +
+            " <label for=\"inputEmail\">Nazov knihy</label>" +
             "<input type=\"text\" class=\"form-control\" id=\"name_input\" placeholder=\"nazov knihy\" name=\"name\">" +
             " </div>" +
             " </div>" +
+            "<div align=\"right\">" +
             " <button type=\"submit\" class=\"btn btn-primary  mt-2\">Find Book</button>" +
+            "</div>" +
             "</form>")
         }
       })
@@ -256,11 +213,11 @@
     $(function () {
       $("#isbn_checkbox").click(function () {
         if ($(this).is(":checked")) {
-          $("#input_place").html("<form  class=\"mt-5\" method=\"POST\">" +
+          $("#input_place").html("<form  id=\"formisbn\" class=\"mt-5\" method=\"POST\">" +
             " <div class=\"form-row mt-3\">" +
 
-            " <label for=\"inputEmail\">ID knihy</label>" +
-            "<input type=\"text\" class=\"form-control\" id=\"id_input\" placeholder=\"Book ID\" name=\"id\">" +
+            " <label for=\"inputEmail\">ISBN knihy</label>" +
+            "<input type=\"text\" class=\"form-control\" id=\"isbn_input\" placeholder=\"ISBN\" name=\"isbn\">" +
             " </div>" +
             " </div>" +
             " <button type=\"submit\" class=\"btn btn-primary  mt-2\">Find Book</button>" +
@@ -272,11 +229,64 @@
 
   <div w3-include-html="footer.html"></div>
 
+
   <script>
     includeHTML();
-    ajaxSingleBook("#formid", "http://localhost:8045/book_services.asmx/SinglebookDataById", "id", "id_input")
-    ajaxSingleBook("#formname", "http://localhost:8045/book_services.asmx/SinglebookDataByName", "name", "name_input")
+    ajaxSingleBookForm("#formid", "http://localhost:8045/book_services.asmx/SinglebookDataById", "id", "id_input")
+    ajaxSingleBookForm("#formname", "http://localhost:8045/book_services.asmx/SinglebookDataByName", "name", "name_input")
+    ajaxSingleBookForm("#formisbn", "http://localhost:8045/book_services.asmx/SinglebookDataByIsbn", "isbn", "isbn_input")
+
   </script>
+  <!-- <script>
+    $(function () {
+      var availableTags = [
+        "ActionScript",
+        "AppleScript",
+        "Asp",
+        "BASIC",
+        "C",
+        "C++",
+        "Clojure",
+        "COBOL",
+        "ColdFusion",
+        "Erlang",
+        "Fortran",
+        "Groovy",
+        "Haskell",
+        "Java",
+        "JavaScript",
+        "Lisp",
+        "Perl",
+        "PHP",
+        "Python",
+        "Ruby",
+        "Scala",
+        "Scheme"
+      ];
+      $("#name_input").autocomplete({
+        source: availableTags
+      });
+    });
+  </script> -->
+  <script>
+    // naplnenie pola bookNamesArray s menami vsetkych knih ziskanych zo strany servera 
+    let bookNamesArray = []
+    GetallbookNames().then((data) => {
+      for (values of data) {
+        bookNamesArray.push(values.nazov)
+
+      }
+    })
+    var selector = '#name_input';
+    $(document).on('click', selector, function () {
+      $(this).autocomplete({
+        maxShowItems: 5, // Make list height fit to 5 items when items are over 5.
+        source: bookNamesArray
+      });
+    });
+  </script>
+
+
 
 </body>
 
