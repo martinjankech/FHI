@@ -65,7 +65,7 @@
   <div class="container ">
 
     <!-- <form class="mt-5" method="POST"> -->
-    <p>hladat pomocou</p>
+    <h2 class="mt-4">hladat pomocou</h2>
     <div class="form-check">
       <input class="form-check-input1" type="radio" name="exampleRadios" id="id_checkbox" value="option1">
       <label class="form-check-label" for="exampleRadios1">
@@ -203,9 +203,7 @@
             "<input type=\"text\" class=\"form-control\" id=\"name_input\" placeholder=\"nazov knihy\" name=\"name\">" +
             " </div>" +
             " </div>" +
-            "<div align=\"right\">" +
             " <button type=\"submit\" class=\"btn btn-primary  mt-2\">Find Book</button>" +
-            "</div>" +
             "</form>")
         }
       })
@@ -261,7 +259,7 @@
     // do zadaneho inputu prida autonavhy 
     function autoCompleteInput(inputSelector, maxItem, sourceArray) {
       var selector = inputSelector;
-      $(document).on('click keydown', selector, function () {
+      $(document).on("click", selector, function () {
         $(this).autocomplete({
           maxShowItems: maxItem, // Make list height fit to 5 items when items are over 5.
           source: sourceArray
