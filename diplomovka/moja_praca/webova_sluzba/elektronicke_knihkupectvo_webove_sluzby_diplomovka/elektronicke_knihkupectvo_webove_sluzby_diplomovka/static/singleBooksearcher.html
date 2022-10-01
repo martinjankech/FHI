@@ -165,7 +165,7 @@
       })
     }
     // asynchronna funkcia vracia promise 
-    async function GetallbookNames() {
+    async function Getallbook() {
       // await zabezpeci sychronny priebeh a caka kym nedostane promise 
       const result = await $.ajax({
         url: 'http://localhost:8045/book_services.asmx/GetListAllBooks',
@@ -243,38 +243,38 @@
     let bookNamesArray = []
     let bookIdArray = []
     let bookIsbnArray = []
+    let attributename = "nazov"
+    let atributeid = "id"
+    let atributeisbn = "isbn"
+    createArrayFromOneAttribute(attributename, bookNamesArray)
+    createArrayFromOneAttribute(atributeid, bookIdArray)
+    createArrayFromOneAttribute(atributeisbn, bookIsbnArray)
+    // naplni vybrane pole udajom o jednom atribute vsetkzch knih 
+    function createArrayFromOneAttribute(attribute, array) {
 
-    function createArrayFromOneAttribute(attribute) {
-      GetallbookNames().then((data) => {
+      Getallbook().then((data) => {
         for (values of data) {
-          bookNamesArray.push(values.attribute)
-
+          array.push(values[attribute])
         }
       })
-
-
     }
-
-
-    GetallbookNames().then((data) => {
-      for (values of data) {
-        bookNamesArray.push(values.nazov)
-
-      }
-    })
-    GetallbookNames().then((data) => {
-      for (values of data) {
-        bookNamesArray.push(values.nazov)
-
-      }
-    })
-    var selector = '#name_input';
-    $(document).on('click', selector, function () {
-      $(this).autocomplete({
-        maxShowItems: 5, // Make list height fit to 5 items when items are over 5.
-        source: bookNamesArray
+    // do zadaneho inputu prida autonavhy 
+    function autoCompleteInput(inputSelector, maxItem, sourceArray) {
+      var selector = inputSelector;
+      $(document).on('click keydown', selector, function () {
+        $(this).autocomplete({
+          maxShowItems: maxItem, // Make list height fit to 5 items when items are over 5.
+          source: sourceArray
+        });
       });
-    });
+    }
+    nameInputId = '#name_input'
+    isbnInputId = '#isbn_input'
+    idInputId = '#id_input'
+    autoCompleteInput(nameInputId, 5, bookNamesArray)
+    autoCompleteInput(isbnInputId, 5, bookIsbnArray)
+    autoCompleteInput(idInputId, 5, bookIdArray)
+
   </script>
 
 
