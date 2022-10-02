@@ -6,6 +6,7 @@ using System.Text;
 using System.Web;
 using System.Web.Services;
 using System.Xml;
+using System.Xml.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Formatting = Newtonsoft.Json.Formatting;
@@ -59,17 +60,33 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
 
         {
             XmlDocument doc = LoadDocument(fileBookInfo);
-            XmlNodeList AllBook = doc.SelectNodes("Bookstore/books/book");
-            int allBookCount = AllBook.Count;
             
-            XmlNodeList nodeListBook = doc.SelectNodes("Bookstore/books/book[nazov=\"" + name + "\"]");
-            //nastavenie UTF-8 sady pre http response 
-             Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
-            Context.Response.Write(JsonConvert.SerializeXmlNode(nodeListBook.Item(0), Formatting.Indented));
-       
-          
-                //Context.Response.Write("nenasiel sa zaznam pre zadane id ");
-           }
+            
+   
+            //XmlNodeList nodeListBook = doc.SelectNodes("Bookstore/books/book[nazov=\"" + name + "\"]");
+            // prekovertujeme name na lowercase kedze to iste spravim aj na frontende a tym padom aj ked pouzivatel zada nazov v inom case tak vrati dobry vysledok 
+            XmlNodeList nodeListBook = doc.SelectNodes("Bookstore/books/book[translate(nazov,'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞŸŽŠŒ','abcdefghijklmnopqrstuvwxyzàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿžšœ') = \"" +name+"\"]");
+
+            // string node=  nodeListBook.Item(0).ChildNodes[2].FirstChild.InnerXml;
+
+            //Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+           // Context.Response.Write(JsonConvert.SerializeXmlNode(nodeListBook.Item(0), Formatting.Indented));
+
+            if (nodeListBook.Item(0) == null)
+            {
+              Context.Response.StatusCode = 404;
+               Context.Response.StatusDescription = "Zadaný záznam sa nenasiel prosím skontrolujte svoj vstup";
+             Context.Response.Write("Pre zadanu hodnotu sa nenasiel ziaden zaznam");
+
+            }
+             else
+             {//nastavenie UTF-8 sady pre http response 
+                 Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+              Context.Response.Write(JsonConvert.SerializeXmlNode(nodeListBook.Item(0), Formatting.Indented));
+             }
+           
+            
+        }
 
         [WebMethod]
         public void SinglebookDataByIsbn(string isbn)

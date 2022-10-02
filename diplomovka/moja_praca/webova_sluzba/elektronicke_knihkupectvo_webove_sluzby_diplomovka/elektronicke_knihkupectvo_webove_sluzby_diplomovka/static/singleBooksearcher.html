@@ -31,6 +31,48 @@
   <div id="navbar">
 
   </div>
+  <div style="display: none;" id="alert_error">
+    <div class="alert alert-danger" role="alert">
+      <span id="alert-text"></span>
+    </div>
+    <div style="display: none;" id="alert_success">
+      <div class="alert alert-success" role="alert">
+        <span id="alert-text"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- <script>
+    $("#alert").html("<div class=\"alert alert-danger mt-2\" role=\"alert\">" +
+      "This is a danger alert—check it out!" +
+      "</div>")
+    setInterval(function () { $("#alert").fadeOut(); }, 3000);</script> -->
+
+  <script>
+
+    function showAlertError(message) {
+
+      $("#alert_error").show()
+      $("#alert-text").html(message)
+      $("#alert_error").fadeTo(2000, 500).slideUp(500, function () {
+        $("#alert_error").slideUp(500);
+      });
+    }
+
+    function showAlertSucces(message) {
+
+      $("#alert_success").show()
+      $("#alert-text").html("message")
+      $("#alert_success").fadeTo(2000, 500).slideUp(500, function () {
+        $("#alert_success").slideUp(500);
+      });
+    }
+
+
+
+
+  </script>
+
   <!-- <div w3-include-html="navbar.html"></div> -->
   <div class="container ">
     <!-- <form class="mt-5" method="POST"> -->
@@ -96,7 +138,7 @@
       $(document).on('submit', formid, function (event) {
         console.log(parameterdata)
         var formData = {};
-        formData[parameter] = $("#" + parameterdata).val();
+        formData[parameter] = $("#" + parameterdata).val().toLowerCase();
 
         $.ajax({
           url: url,
@@ -104,6 +146,8 @@
           data: formData,
           dataType: "json",
           encode: true,
+          // 
+
         }).done(function (data) {
 
           $(".card-body").show();
@@ -111,7 +155,8 @@
             'position': ' relative',
             ' width': '100 %',
             'bottom': '1vh',
-          });
+          })
+
 
           if (data.book.autori.autor2 != undefined) {
             $("#autori").html(data.book.autori.autor1 + "," + data.book.autori.autor2)
@@ -136,7 +181,7 @@
           $("#nakupna_cena").html(data.book.nakupna_cena)
           $("#marza").html(parseFloat(data.book.marza).toFixed(2) * 100 + "%")
           $("#zisk_kus").html(data.book.zisk_kus)
-        })
+        }).fail(function (jqXHR, textStatus, errorThrown) { showAlertError(errorThrown) });
         event.preventDefault();
       })
     }
@@ -164,7 +209,7 @@
             "<input type=\"text\" class=\"form-control \" id=\"id_input\" placeholder=\"Book ID\" name=\"id\">" +
             " </div>" +
             " </div>" +
-            " <button type=\"submit\" class=\"btn btn-primary  mt-2\">Find Book</button>" +
+            " <button type=\"submit\" class=\"btn btn-primary  mt-2\">Najdi Knihu</button>" +
             "</form>")
         }
       })
@@ -179,7 +224,7 @@
             "<input type=\"text\" class=\"form-control\" id=\"name_input\" placeholder=\"nazov knihy\" name=\"name\">" +
             " </div>" +
             " </div>" +
-            " <button type=\"submit\" class=\"btn btn-primary  mt-2\">Find Book</button>" +
+            " <button type=\"submit\" class=\"btn btn-primary  mt-2\">Najdi Knihu</button>" +
             "</form>")
         }
       })
@@ -194,7 +239,7 @@
             "<input type=\"text\" class=\"form-control\" id=\"isbn_input\" placeholder=\"ISBN\" name=\"isbn\">" +
             " </div>" +
             " </div>" +
-            " <button type=\"submit\" class=\"btn btn-primary  mt-2\">Find Book</button>" +
+            " <button type=\"submit\" class=\"btn btn-primary  mt-2\">Najdi Knihu</button>" +
             "</form>")
         }
       })
