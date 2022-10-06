@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
@@ -24,18 +25,49 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
     public class book_services : System.Web.Services.WebService
     { private String fileBookInfo = "D:\\git_repozitare\\FHI\\diplomovka\\moja_praca\\webova_sluzba\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\book_moje.xml ";
       private String fileBookTransactionInfo = "D:\\git_repozitare\\FHI\\diplomovka\\moja_praca\\webova_sluzba\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\book_transakcie_moje.xml ";
+        public String fileOutputSingleSearch = "D:\\git_repozitare\\FHI\\diplomovka\\moja_praca\\webova_sluzba\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\output.xml";
         public XmlDocument LoadDocument(string docu) {
 
             XmlDocument doc = new XmlDocument();
             doc.Load(docu);
             return doc;
         }
-        private string DecodeFromUtf8(string utf8_String)
+        public string DecodeFromUtf8(string utf8_String)
         {
             byte[] bytes = Encoding.Default.GetBytes(utf8_String);
             string utf8 = Encoding.UTF8.GetString(bytes);
             return utf8;
         }
+        public static String GetTimestamp(DateTime value)
+        {
+            return value.ToString("yyyy-MM-dd-HH-mm-ss");
+        }
+
+        public void WriteToTheFileWithTimeStamp(string path,XmlNodeList data)
+        {
+            StreamWriter sw = new StreamWriter(path, false, Encoding.UTF8);
+            string x_to_file = "";
+            int nodeListCount = data.Count;
+            int i = 0;
+            sw.Write("<output>" + "\n\n");
+
+            while (i < nodeListCount)
+            {
+                XmlNode title = data.Item(i);
+                //jednotlive hodnoty title elementov su zobrazene aj s prislusnymi znackami z .xml suboru
+                x_to_file = title.OuterXml;
+                sw.Write("\t" + x_to_file + "\n");
+                i++;
+            }
+            sw.Write("<timestamp>" + "\n\n");
+            String timeStamp = GetTimestamp(DateTime.Now);
+            sw.Write("\t" + timeStamp + "\n");
+            sw.Write("\n</timespamp>");
+            sw.Write("\n</output>");
+            sw.Close();
+        }
+
+
         [WebMethod]
         public void SinglebookDataById(string  id)
 
@@ -47,9 +79,11 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
             if (Int32.Parse(id)<= allBookCount)
             {
                 XmlNodeList nodeListBook = doc.SelectNodes("Bookstore/books/book[id=" + id + "]");
+                WriteToTheFileWithTimeStamp(fileOutputSingleSearch, nodeListBook);
                 // nastavenie UTF-8 sady pre http response 
                 Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
                 Context.Response.Write(JsonConvert.SerializeXmlNode(nodeListBook.Item(0), Formatting.Indented));
+                
             }
             else
                 Context.Response.Write("nenasiel sa zaznam pre zadane id ");
