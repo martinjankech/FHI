@@ -23,11 +23,10 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     // [System.Web.Script.Services.ScriptService]
     public class book_services : System.Web.Services.WebService
-    { private String fileBookInfo = "D:\\git_repozitare\\FHI\\diplomovka\\moja_praca\\webova_sluzba\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\book_moje.xml ";
-      private String fileBookTransactionInfo = "D:\\git_repozitare\\FHI\\diplomovka\\moja_praca\\webova_sluzba\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\book_transakcie_moje.xml ";
-        public String fileOutputSingleSearch = "D:\\git_repozitare\\FHI\\diplomovka\\moja_praca\\webova_sluzba\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\output.xml";
+    { private String fileBookInfo = "D:\\git_repozitare\\FHI\\diplomovka\\moja_praca\\webova_sluzba\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\xml\\book_moje.xml ";
+      private String fileBookTransactionInfo = "D:\\git_repozitare\\FHI\\diplomovka\\moja_praca\\webova_sluzba\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\xml\\book_transakcie_moje.xml ";
+        public String fileOutputSingleSearch = "D:\\git_repozitare\\FHI\\diplomovka\\moja_praca\\webova_sluzba\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\xml\\output.xml";
         public XmlDocument LoadDocument(string docu) {
-
             XmlDocument doc = new XmlDocument();
             doc.Load(docu);
             return doc;
@@ -73,20 +72,24 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
 
         {
             XmlDocument doc = LoadDocument(fileBookInfo);
-            XmlNodeList AllBook= doc.SelectNodes("Bookstore/books/book");
-            int allBookCount = AllBook.Count;
-            // id su radene od 1... preto tato podmienka je postacujuca
-            if (Int32.Parse(id)<= allBookCount)
+            XmlNodeList singleBookById = doc.SelectNodes("Bookstore/books/book[id=" + id + "]");
+            if (singleBookById.Item(0) == null)
             {
-                XmlNodeList nodeListBook = doc.SelectNodes("Bookstore/books/book[id=" + id + "]");
-                WriteToTheFileWithTimeStamp(fileOutputSingleSearch, nodeListBook);
-                // nastavenie UTF-8 sady pre http response 
-                Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
-                Context.Response.Write(JsonConvert.SerializeXmlNode(nodeListBook.Item(0), Formatting.Indented));
-                
+                Context.Response.StatusCode = 404;
+                Context.Response.StatusDescription = "Zadaný záznam sa nenasiel prosím skontrolujte svoj vstup";
+                Context.Response.Write("Pre zadanu hodnotu sa nenasiel ziaden zaznam");
+
             }
             else
-                Context.Response.Write("nenasiel sa zaznam pre zadane id ");
+            {
+                
+                WriteToTheFileWithTimeStamp(fileOutputSingleSearch, singleBookById);
+                // nastavenie UTF-8 sady pre http response 
+                Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+                Context.Response.Write(JsonConvert.SerializeXmlNode(singleBookById.Item(0), Formatting.Indented));
+                
+            }
+            
         }
         
         [WebMethod]
@@ -94,18 +97,8 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
 
         {
             XmlDocument doc = LoadDocument(fileBookInfo);
-            
-            
-   
-            //XmlNodeList nodeListBook = doc.SelectNodes("Bookstore/books/book[nazov=\"" + name + "\"]");
             // prekovertujeme name na lowercase kedze to iste spravim aj na frontende a tym padom aj ked pouzivatel zada nazov v inom case tak vrati dobry vysledok 
             XmlNodeList nodeListBook = doc.SelectNodes("Bookstore/books/book[translate(nazov,'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞŸŽŠŒ','abcdefghijklmnopqrstuvwxyzàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿžšœ') = \"" +name+"\"]");
-
-            // string node=  nodeListBook.Item(0).ChildNodes[2].FirstChild.InnerXml;
-
-            //Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
-           // Context.Response.Write(JsonConvert.SerializeXmlNode(nodeListBook.Item(0), Formatting.Indented));
-
             if (nodeListBook.Item(0) == null)
             {
               Context.Response.StatusCode = 404;
@@ -118,8 +111,6 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
                  Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
               Context.Response.Write(JsonConvert.SerializeXmlNode(nodeListBook.Item(0), Formatting.Indented));
              }
-           
-            
         }
 
         [WebMethod]
@@ -131,11 +122,20 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
             int allBookCount = AllBook.Count;
 
             XmlNodeList nodeListBook = doc.SelectNodes("Bookstore/books/book[isbn=\"" + isbn + "\"]");
-            //nastavenie UTF-8 sady pre http response 
-            Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
-            Context.Response.Write(JsonConvert.SerializeXmlNode(nodeListBook.Item(0), Formatting.Indented));
+            if (nodeListBook.Item(0) == null)
+            {
+                Context.Response.StatusCode = 404;
+                Context.Response.StatusDescription = "Zadaný záznam sa nenasiel prosím skontrolujte svoj vstup";
+                Context.Response.Write("Pre zadanu hodnotu sa nenasiel ziaden zaznam");
 
+            }
+            else
+            {
+                //nastavenie UTF-8 sady pre http response 
+                Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+                Context.Response.Write(JsonConvert.SerializeXmlNode(nodeListBook.Item(0), Formatting.Indented));
 
+            }
             //Context.Response.Write("nenasiel sa zaznam pre zadane id ");
         }
         [WebMethod]
