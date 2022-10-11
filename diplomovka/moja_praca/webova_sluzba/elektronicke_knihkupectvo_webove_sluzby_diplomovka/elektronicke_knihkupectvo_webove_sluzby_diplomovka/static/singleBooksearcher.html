@@ -29,6 +29,7 @@
 
 <body>
   <div id="navbar">
+
   </div>
   <div style="display: none;" id="alert_error">
     <div class="alert alert-danger" role="alert">
@@ -100,93 +101,81 @@
       </div>
     </div>
   </div>
-  <script>
-    $(function () {
-      $("#id_checkbox").click(function () {
-        if ($(this).is(":checked")) {
-          $("#input_place").html("<form id=\"formid\" class=\"mt-5\" method=\"POST\">" +
-            " <div class=\"form-row mt-1\">" +
-
-            " <label for=\"inputEmail\">ID knihy</label>" +
-            "<input type=\"text\" class=\"form-control \" id=\"id_input\" placeholder=\"Book ID\" name=\"id\">" +
-            " </div>" +
-            " </div>" +
-            " <button type=\"submit\" class=\"btn btn-primary  mt-2\">Najdi Knihu</button>" +
-            "</form>")
-        }
-      })
-    });
-    $(function () {
-      $("#name_checkbox").click(function () {
-        if ($(this).is(":checked")) {
-          $("#input_place").html("<form id=\"formname\" class=\"mt-5\" method=\"POST\">" +
-            " <div class=\"form-row mt-1\">" +
-
-            " <label for=\"inputEmail\">Nazov knihy</label>" +
-            "<input type=\"text\" class=\"form-control\" id=\"name_input\" placeholder=\"nazov knihy\" name=\"name\">" +
-            " </div>" +
-            " </div>" +
-            " <button type=\"submit\" class=\"btn btn-primary  mt-2\">Najdi Knihu</button>" +
-            "</form>")
-        }
-      })
-    });
-    $(function () {
-      $("#isbn_checkbox").click(function () {
-        if ($(this).is(":checked")) {
-          $("#input_place").html("<form  id=\"formisbn\" class=\"mt-5\" method=\"POST\">" +
-            " <div class=\"form-row mt-1\">" +
-
-            " <label for=\"inputEmail\">ISBN knihy</label>" +
-            "<input type=\"text\" class=\"form-control\" id=\"isbn_input\" placeholder=\"ISBN\" name=\"isbn\">" +
-            " </div>" +
-            " </div>" +
-            " <button type=\"submit\" class=\"btn btn-primary  mt-2\">Najdi Knihu</button>" +
-            "</form>")
-        }
-      })
-    });
-    ajaxSingleBookForm("#formid", "http://localhost:8045/book_services.asmx/SinglebookDataById", "id", "id_input")
-    ajaxSingleBookForm("#formname", "http://localhost:8045/book_services.asmx/SinglebookDataByName", "name", "name_input")
-    ajaxSingleBookForm("#formisbn", "http://localhost:8045/book_services.asmx/SinglebookDataByIsbn", "isbn", "isbn_input")
-
-    // naplnenie pola bookNamesArray s menami vsetkych knih ziskanych zo strany servera
-    let bookNamesArray = []
-    let bookIdArray = []
-    let bookIsbnArray = []
-    let attributename = "nazov"
-    let atributeid = "id"
-    let atributeisbn = "isbn"
-    createArrayFromOneAttribute(attributename, bookNamesArray)
-    createArrayFromOneAttribute(atributeid, bookIdArray)
-    createArrayFromOneAttribute(atributeisbn, bookIsbnArray)
-    nameInputId = '#name_input'
-    isbnInputId = '#isbn_input'
-    idInputId = '#id_input'
-    autoCompleteInput(nameInputId, 5, bookNamesArray)
-    autoCompleteInput(isbnInputId, 5, bookIsbnArray)
-    autoCompleteInput(idInputId, 5, bookIdArray)
-    $(".card-body").hide();
-
-
-    jQuery(function ($) {
-      $(document).ready(function () {
-        if ($('body').height() < $(window).height()) {
-          $('footer').css({
-            'position': 'fixed',
-            'bottom': '12vh',
-            'left': '0',
-            'right': '0'
-          });
-        }
-      });
-    });
-    $("#navbar").load("navbar.html")
-    $("footer").load("footer.html")
-  </script>
   <footer>
   </footer>
 </body>
-</body>
+<script>
+  $(function () {
+    $("#id_checkbox").click(function () {
+      if ($(this).is(":checked")) {
+        $("#input_place").html("<form id=\"formid\" class=\"mt-5\" method=\"POST\">" +
+          " <div class=\"form-row mt-1\">" +
+
+          " <label for=\"inputEmail\">ID knihy</label>" +
+          "<input type=\"text\" class=\"form-control \" id=\"id_input\" placeholder=\"Book ID\" name=\"id\">" +
+          " </div>" +
+          " </div>" +
+          " <button type=\"submit\" class=\"btn btn-primary  mt-2\">Najdi Knihu</button>" +
+          "</form>")
+      }
+    })
+  });
+  $(function () {
+    $("#name_checkbox").click(function () {
+      if ($(this).is(":checked")) {
+        $("#input_place").html("<form id=\"formname\" class=\"mt-5\" method=\"POST\">" +
+          " <div class=\"form-row mt-1\">" +
+
+          " <label for=\"inputEmail\">Nazov knihy</label>" +
+          "<input type=\"text\" class=\"form-control\" id=\"name_input\" placeholder=\"nazov knihy\" name=\"name\">" +
+          " </div>" +
+          " </div>" +
+          " <button type=\"submit\" class=\"btn btn-primary  mt-2\">Najdi Knihu</button>" +
+          "</form>")
+      }
+    })
+  });
+  $(function () {
+    $("#isbn_checkbox").click(function () {
+      if ($(this).is(":checked")) {
+        $("#input_place").html("<form  id=\"formisbn\" class=\"mt-5\" method=\"POST\">" +
+          " <div class=\"form-row mt-1\">" +
+
+          " <label for=\"inputEmail\">ISBN knihy</label>" +
+          "<input type=\"text\" class=\"form-control\" id=\"isbn_input\" placeholder=\"ISBN\" name=\"isbn\">" +
+          " </div>" +
+          " </div>" +
+          " <button type=\"submit\" class=\"btn btn-primary  mt-2\">Najdi Knihu</button>" +
+          "</form>")
+      }
+    })
+  });
+  ajaxSingleBookForm("#formid", "http://localhost:8045/book_services.asmx/SinglebookDataById", "id", "id_input")
+  ajaxSingleBookForm("#formname", "http://localhost:8045/book_services.asmx/SinglebookDataByName", "name", "name_input")
+  ajaxSingleBookForm("#formisbn", "http://localhost:8045/book_services.asmx/SinglebookDataByIsbn", "isbn", "isbn_input")
+
+  // naplnenie pola bookNamesArray s menami vsetkych knih ziskanych zo strany servera
+  let bookNamesArray = []
+  let bookIdArray = []
+  let bookIsbnArray = []
+  let attributename = "nazov"
+  let atributeid = "id"
+  let atributeisbn = "isbn"
+  createArrayFromOneAttribute(attributename, bookNamesArray)
+  createArrayFromOneAttribute(atributeid, bookIdArray)
+  createArrayFromOneAttribute(atributeisbn, bookIsbnArray)
+  nameInputId = '#name_input'
+  isbnInputId = '#isbn_input'
+  idInputId = '#id_input'
+  autoCompleteInput(nameInputId, 5, bookNamesArray)
+  autoCompleteInput(isbnInputId, 5, bookIsbnArray)
+  autoCompleteInput(idInputId, 5, bookIdArray)
+  $(".card-body").hide();
+
+
+  $("#navbar").load("navbar.html")
+  $("footer").load("footer.html")
+  fixedFooter()
+</script>
 
 </html>

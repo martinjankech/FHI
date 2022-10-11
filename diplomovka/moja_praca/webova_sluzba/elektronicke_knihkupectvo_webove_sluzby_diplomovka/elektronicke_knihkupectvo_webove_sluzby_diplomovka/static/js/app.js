@@ -98,3 +98,18 @@
       });
     });
   }
+function fixedFooter(){
+  jQuery(function ($) {
+    $(document).ready(function () {
+      if ($('body').height() < $(window).height()) {
+        $('footer').css({
+          'position': 'fixed',
+          'bottom': '12vh',
+          'left': '0',
+          'right': '0'
+        });
+      }
+    });
+  });
+ }
+  

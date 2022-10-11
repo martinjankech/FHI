@@ -1,9 +1,9 @@
 ﻿<output>
 
-	<book><id>10</id><nazov>Hacking bez tajemství - Webové aplikace</nazov><autori><autor1>Mike Shema</autor1><autor2>Joel Scambray</autor2></autori><kategoria>Odborné a náučné</kategoria><isbn>8072267698</isbn><jazyk>cz</jazyk><pocet_stran>360</pocet_stran><vazba>brožovaná väzba</vazba><rok_vydania>2003</rok_vydania><vydavatelstvo>Computer Press</vydavatelstvo><predajna_cena>18.5</predajna_cena><nakupna_cena>11.89</nakupna_cena><marza>0.555929352396972</marza><zisk_kus>6.61</zisk_kus><obsah>Před časem kniha Hacking bez tajemství ukázala početné administrátorské obci, jak je pro patřičně zlomyslné nebo ctižádostivé jedince snadné proniknout do počítačových sítí a systémů. Ačkoliv je mezi administrátory stále hodně těch, kteří tuto krutou zkušenost dosud nemají za sebou, většina již snad začíná chápat nezbytnost firewallů, bezpečných konfigurací operačních systémů, svědomitého používání záplat od dodavatelů a dalších dříve opomíjených zásad bezpečnosti informačních systémů.</obsah><priemerne_hodnotenie>5</priemerne_hodnotenie><obrazok>../img/10.jpg</obrazok></book>
+	<book><id>3</id><nazov>Jednoduché účtovníctvo pre neziskovky</nazov><autori><autor1>Jaroslava Lukačovičová</autor1></autori><kategoria>Biznis a manažment</kategoria><isbn>9788097029142</isbn><jazyk>sk</jazyk><pocet_stran>165</pocet_stran><vazba>pevná väzba</vazba><rok_vydania>2022</rok_vydania><vydavatelstvo>Sauno</vydavatelstvo><predajna_cena>9.64</predajna_cena><nakupna_cena>6.24</nakupna_cena><marza>0.544871794871795</marza><zisk_kus>3.4</zisk_kus><obsah>Ďalšia publikácia autorky zavedie čitateľov do sveta, ktorý by mal byť jednoduchý, ale podľa jej názoru a skúsenosti svet jednoduchého účtovníctva neziskových účtovných jednotiek až taký jednoduchý nie je.</obsah><priemerne_hodnotenie>4.4</priemerne_hodnotenie><obrazok>../img/3.jpg</obrazok></book>
 <timestamp>
 
-	2022-10-11-20-17-17
+	2022-10-11-20-35-45
 
 </timespamp>
 </output>

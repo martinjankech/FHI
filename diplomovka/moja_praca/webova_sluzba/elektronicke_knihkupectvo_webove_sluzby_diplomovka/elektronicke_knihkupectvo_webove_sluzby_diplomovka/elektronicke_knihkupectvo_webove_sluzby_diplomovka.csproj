@@ -70,13 +70,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="book_moje.xml" />
     <Content Include="book_services.asmx" />
     <Content Include="book_transakcie_moje.xml" />
     <Content Include="output.xml" />
     <Content Include="static\index.html" />
     <Content Include="static\navbar.html" />
     <Content Include="Web.config" />
+    <Content Include="xml\book_moje.xml" />
+    <Content Include="xml\book_transakcie_moje.xml" />
+    <Content Include="xml\output.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="book_services.asmx.cs">
