@@ -112,4 +112,12 @@ function fixedFooter(){
     });
   });
  }
+
+ function displayHash() {
+  var theHash = window.location.hash;
+  if (theHash.length == 0) { theHash = "_index"; }
+  var elems = document.querySelectorAll("#caption");
+  elems[0].innerText = "Current Hash: " + theHash;
+  return true;
+}
   
