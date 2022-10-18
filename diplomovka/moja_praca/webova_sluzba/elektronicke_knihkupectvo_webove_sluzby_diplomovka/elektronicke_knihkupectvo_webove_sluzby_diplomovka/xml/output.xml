@@ -1,9 +1,9 @@
 ﻿<output>
 
-	<book><id>2</id><nazov>Harry Potter a Ohnivá čaša</nazov><autori><autor1>J.K. Rowling</autor1></autori><kategoria>Fantasy</kategoria><isbn>9788055143866</isbn><jazyk>sk</jazyk><pocet_stran>712</pocet_stran><vazba>pevná väzba</vazba><rok_vydania>2015</rok_vydania><vydavatelstvo>Ikar</vydavatelstvo><predajna_cena>16.11</predajna_cena><nakupna_cena>10.25</nakupna_cena><marza>0.571707317073171</marza><zisk_kus>5.86</zisk_kus><obsah>Harry Potter je znovu na prázdninách u otravných Dursleyovcov. Chce sa od nich odpútať, a tak sa zúčastní na Svetovom pohári v metlobale spolu s Hermionou, Ronom a Weasleyovcami. Okrem toho sa po sto rokoch na Rokforte pripravuje Trojčarodejnícky turnaj a majú sa na ňom zúčastniť dve ďalšie čarodejnícke školy. Harry aj naďalej túži byť obyčajným štrnásťročným čarodejníkom. Má však smolu, lebo nie je obyčajný - dokonca ani podľa čarodejníckych meradiel. V jeho prípade to môže mať smrteľné dôsledky...</obsah><priemerne_hodnotenie>4.5</priemerne_hodnotenie><obrazok>../img/2.jpg</obrazok></book>
+	<book><id>2</id><nazov>Harry Potter a Ohnivá čaša</nazov><autori><autor1>J.K. Rowling</autor1><autor2>-</autor2></autori><kategoria>Fantasy</kategoria><isbn>9788055143866</isbn><jazyk>sk</jazyk><pocet_stran>712</pocet_stran><vazba>pevná väzba</vazba><rok_vydania>2015</rok_vydania><vydavatelstvo>Ikar</vydavatelstvo><predajna_cena>16.11</predajna_cena><nakupna_cena>10.25</nakupna_cena><marza>0.571707317073171</marza><zisk_kus>5.86</zisk_kus><obsah>Harry Potter je znovu na prázdninách u otravných Dursleyovcov. Chce sa od nich odpútať, a tak sa zúčastní na Svetovom pohári v metlobale spolu s Hermionou, Ronom a Weasleyovcami. Okrem toho sa po sto rokoch na Rokforte pripravuje Trojčarodejnícky turnaj a majú sa na ňom zúčastniť dve ďalšie čarodejnícke školy. Harry aj naďalej túži byť obyčajným štrnásťročným čarodejníkom. Má však smolu, lebo nie je obyčajný - dokonca ani podľa čarodejníckych meradiel. V jeho prípade to môže mať smrteľné dôsledky...</obsah><priemerne_hodnotenie>4.5</priemerne_hodnotenie><obrazok>../img/2.jpg</obrazok></book>
 <timestamp>
 
-	2022-10-12-16-10-07
+	2022-10-18-15-09-22
 
 </timespamp>
 </output>

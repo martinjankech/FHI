@@ -73,6 +73,7 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
         {
             XmlDocument doc = LoadDocument(fileBookInfo);
             XmlNodeList singleBookById = doc.SelectNodes("Bookstore/books/book[id=" + id + "]");
+            // vzdy nam vracia 1 hodnotu a preto ak sa item(0) rovna null tak vrati status code 404 s popisom 
             if (singleBookById.Item(0) == null)
             {
                 Context.Response.StatusCode = 404;
@@ -86,6 +87,7 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
                 WriteToTheFileWithTimeStamp(fileOutputSingleSearch, singleBookById);
                 // nastavenie UTF-8 sady pre http response 
                 Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+                // do responsu nam zapise serializovane xml na json 
                 Context.Response.Write(JsonConvert.SerializeXmlNode(singleBookById.Item(0), Formatting.Indented));
                 
             }

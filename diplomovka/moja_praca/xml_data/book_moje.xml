@@ -6,6 +6,7 @@
 			<nazov>Harry Potter a Tajomná komnata</nazov>
 			<autori>
 				<autor1>J.K. Rowling</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>Fantasy</kategoria>
 			<isbn>9788055143088</isbn>
@@ -28,6 +29,7 @@ A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole
 			<nazov>Harry Potter a Ohnivá čaša</nazov>
 			<autori>
 				<autor1>J.K. Rowling</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>Fantasy</kategoria>
 			<isbn>9788055143866</isbn>
@@ -49,6 +51,7 @@ A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole
 			<nazov>Jednoduché účtovníctvo pre neziskovky</nazov>
 			<autori>
 				<autor1>Jaroslava Lukačovičová</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>Biznis a manažment</kategoria>
 			<isbn>9788097029142</isbn>
@@ -70,6 +73,7 @@ A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole
 			<nazov>Jediná kniha o jídle, kterou potřebujete</nazov>
 			<autori>
 				<autor1>Karolína Fourová</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>Kuchárky</kategoria>
 			<isbn>9788024271576</isbn>
@@ -91,6 +95,7 @@ A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole
 			<nazov>Setkání s Rámou</nazov>
 			<autori>
 				<autor1>Arthur C. Clarke</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>Fantasy</kategoria>
 			<isbn>9788025738726</isbn>
@@ -112,6 +117,7 @@ A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole
 			<nazov>2010: Druhá vesmírná odysea</nazov>
 			<autori>
 				<autor1>Arthur C. Clarke</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>Fantasy</kategoria>
 			<isbn>9788025720936</isbn>
@@ -133,6 +139,7 @@ A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole
 			<nazov>Nová taliančina pre samoukov</nazov>
 			<autori>
 				<autor1>Michaela  Vannini</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>Odborné a náučné</kategoria>
 			<isbn>9788081092923</isbn>
@@ -154,6 +161,7 @@ A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole
 			<nazov>Programování v C#</nazov>
 			<autori>
 				<autor1>Miroslav Virius</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>Odborné a náučné</kategoria>
 			<isbn>9788027112166</isbn>
@@ -175,6 +183,7 @@ A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole
 			<nazov>Hacking Web Apps</nazov>
 			<autori>
 				<autor1>Mike Shema</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>Odborné a náučné</kategoria>
 			<isbn>9781597499514</isbn>
@@ -218,6 +227,7 @@ A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole
 			<nazov>Tajomný závoj</nazov>
 			<autori>
 				<autor1>Dominik Dán</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>Detektívky</kategoria>
 			<isbn>9788055656922</isbn>
@@ -239,6 +249,7 @@ A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole
 			<nazov>Smrť na druhom brehu</nazov>
 			<autori>
 				<autor1>Dominik Dán</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>Detektívky</kategoria>
 			<isbn>9788055625935</isbn>
@@ -260,6 +271,7 @@ A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole
 			<nazov>Mucha</nazov>
 			<autori>
 				<autor1>Dominik Dán</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>Detektívky</kategoria>
 			<isbn>9788080858650</isbn>
@@ -281,6 +293,7 @@ A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole
 			<nazov>Nemý svedok</nazov>
 			<autori>
 				<autor1>Agatha Christie</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>Detektívky</kategoria>
 			<isbn>9788022022125</isbn>
@@ -304,6 +317,7 @@ Keď bohatá stará dáma Emily Arundellová nešťastne spadne zo schodov, vše
 			<nazov>Veľká štvorka</nazov>
 			<autori>
 				<autor1>Agatha Christie</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>Detektívky</kategoria>
 			<isbn>9788022021678</isbn>
@@ -327,6 +341,7 @@ Každý osve predstavoval obrovskú hrozbu. Keď sa spojili, stali sa prakticky 
 			<nazov>Eiffel</nazov>
 			<autori>
 				<autor1>Nicolas d'Estienne d'Orves</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>Spoločenská beletria</kategoria>
 			<isbn>9788056630006</isbn>
@@ -350,6 +365,7 @@ Ako sa hovorí, „cherchez la femme“ - za všetkým hľadaj ženu. Od opätov
 			<nazov>Pán prsteňov III. - Návrat kráľa</nazov>
 			<autori>
 				<autor1>J.R.R. Tolkien</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>Fantasy</kategoria>
 			<isbn>9788055606309</isbn>
@@ -371,6 +387,7 @@ Ako sa hovorí, „cherchez la femme“ - za všetkým hľadaj ženu. Od opätov
 			<nazov>Kaviareň v Kodani</nazov>
 			<autori>
 				<autor1>Julie Caplin</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>Spoločenská beletria</kategoria>
 			<isbn>9788080900946</isbn>
@@ -392,6 +409,7 @@ Ako sa hovorí, „cherchez la femme“ - za všetkým hľadaj ženu. Od opätov
 			<nazov>Hotelík na Islande</nazov>
 			<autori>
 				<autor1>Julie Caplin</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>Spoločenská beletria</kategoria>
 			<isbn>9788080902650</isbn>
@@ -413,6 +431,7 @@ Ako sa hovorí, „cherchez la femme“ - za všetkým hľadaj ženu. Od opätov
 			<nazov>Ako si získavať priateľov a pôsobiť na ľudí</nazov>
 			<autori>
 				<autor1>Dale Carnegie</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>Sebarozvoj</kategoria>
 			<isbn>9788055149134</isbn>
@@ -434,6 +453,7 @@ Ako sa hovorí, „cherchez la femme“ - za všetkým hľadaj ženu. Od opätov
 			<nazov>Ako sa zbaviť starostí a začať žiť</nazov>
 			<autori>
 				<autor1>Dale Carnegie</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>Sebarozvoj</kategoria>
 			<isbn>9788055149240</isbn>
@@ -455,6 +475,7 @@ Ako sa hovorí, „cherchez la femme“ - za všetkým hľadaj ženu. Od opätov
 			<nazov>Diana</nazov>
 			<autori>
 				<autor1>Andrew Morton</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>Životopisy</kategoria>
 			<isbn>9788024275925</isbn>
@@ -476,6 +497,7 @@ Ako sa hovorí, „cherchez la femme“ - za všetkým hľadaj ženu. Od opätov
 			<nazov>Steve Jobs</nazov>
 			<autori>
 				<autor1>Walter Isaacson</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>Životopisy</kategoria>
 			<isbn>9788081091940</isbn>
@@ -523,6 +545,7 @@ Ako sa hovorí, „cherchez la femme“ - za všetkým hľadaj ženu. Od opätov
 			<nazov>Malý princ</nazov>
 			<autori>
 				<autor1>Antoine De Saint-Exupéry</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>klasika</kategoria>
 			<isbn>9788010034666</isbn>
@@ -546,6 +569,7 @@ Saint-Exupéry svoju knižku s čistým detským pohľadom na svet venoval najle
 			<nazov>1984</nazov>
 			<autori>
 				<autor1>George Orwell</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>klasika</kategoria>
 			<isbn>9788055610832</isbn>
@@ -567,6 +591,7 @@ Saint-Exupéry svoju knižku s čistým detským pohľadom na svet venoval najle
 			<nazov>Mimo dobro a zlo</nazov>
 			<autori>
 				<autor1>Friedrich Nietzsche</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>Filozofia</kategoria>
 			<isbn>9788072985852</isbn>
@@ -588,6 +613,7 @@ Saint-Exupéry svoju knižku s čistým detským pohľadom na svet venoval najle
 			<nazov>Co znamená myslet?</nazov>
 			<autori>
 				<autor1>Martin Heidegger</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>Filozofia</kategoria>
 			<isbn>9788072984947</isbn>
@@ -609,6 +635,7 @@ Saint-Exupéry svoju knižku s čistým detským pohľadom na svet venoval najle
 			<nazov>Návod na prežitie pre muža</nazov>
 			<autori>
 				<autor1>Igor Bukovský</autor1>
+				<autor2>-</autor2>
 			</autori>
 			<kategoria>Odborné a náučné</kategoria>
 			<isbn>9788097023072</isbn>

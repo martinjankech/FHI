@@ -28,6 +28,7 @@
   <script type="text/javascript" charset="utf8"
     src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
   <link rel="stylesheet" href="css/datatable.css">
+  <link rel="stylesheet" href="css/allbooks.css">
   <title>Vsetky knihy</title>
 
 </head>
@@ -111,51 +112,11 @@
           </button>
         </div>
         <div class="modal-body">
-          <div class="container ">
-            <div class="card mt-4 ">
-              <div class="card-body">
-                <h3 id="nazov_hore" class="card-title">Book Name</h3>
-                <h6 id="autori_hore" class="card-subtitle">Book Authors</h6>
-                <div class="row ">
-                  <div class="col-lg-6 col-md-8 col-sm-12 col-12 ">
-                    <div class=" img-responsive"><img id="obrazok"
-                        src="https://via.placeholder.com/350x700/00CED1/000000">
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-4 col-sm-12 col-12">
-                    <h4 class="box-title ">Obsah knihy</h4>
-                    <p id="obsah">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, necessitatibus quis
-                      repellendus natus eos non beatae a iusto ad, tempora excepturi alias mollitia repellat quidem
-                      similique ratione ipsam? Rem ducimus porro officia. Culpa quibusdam sed vero voluptas veniam at
-                      iusto, vitae atque modi est perspiciatis temporibus quas asperiores quia? Velit?</p>
-                    <h2 id="cena_hl" class="mt-2">
-                    </h2>
-                    <h3 class="box-title mt-5">údaje o knihe</h3>
-                    <ul class="list-unstyled">
-                      <li><i class="fa fa-check text-success"></i>nazov: <span id="nazov"></span></li>
-                      <li><i class="fa fa-check text-success"></i>autori: <span id="autori"></span></li>
-                      <li><i class="fa fa-check text-success"></i>kategoria: <span id="kategoria"></span></li>
-                      <li><i class="fa fa-check text-success"></i>isbn: <span id="isbn"></span></li>
-                      <li><i class="fa fa-check text-success"></i>jazyk: <span id="jazyk"></span></li>
-                      <li><i class="fa fa-check text-success"></i>pocet stran: <span id="pocet_stran"></span></li>
-                      <li><i class="fa fa-check text-success"></i>rok vydania: <span id="rok_vydania"></span></li>
-                      <li><i class="fa fa-check text-success"></i>vydavateľstvo: <span id="vydavatelstvo"></span>
-                      </li>
-                      <li><i class="fa fa-check text-success"></i>predajna cena: <span id="predajna_cena"></span>
-                      </li>
-                      <li><i class="fa fa-check text-success"></i>nakupna cena: <span id="nakupna_cena"></span></li>
-                      <li><i class="fa fa-check text-success"></i>marza: <span id="marza"></span></li>
-                      <li><i class="fa fa-check text-success"></i>zisk kus: <span id="zisk_kus"></span></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
+          <img style="width: 30% ;height: 30%;" src="" alt="">
         </div>
       </div>
     </div>
@@ -166,6 +127,8 @@
 
   $(document).ready(function () {
     $('#example').DataTable({
+      // defaultne sortovanie podla id 
+      order: [[1, 'asc']],
       autoWidth: false,
       ajax: {
         type: 'GET',
@@ -182,7 +145,7 @@
           render: (data, type, row) => {
 
             // return `<a href="singleBookSearcher.html/${row.isbn}` + '"><img style="width:55px ; height:85px ;" src="' + data + '" /> </a>';
-            return '<a href=""data-toggle="modal" data-target="#bookmodal" data-id="' + row.id + '" data-nazov="' + row.nazov + '" data-kategoria="' + row.kategoria + '" data-isbn="' + row.isbn + '" data-jazyk="' + row.jazyk + '" data-pocet_stran="' + row.pocet_stran + '" data-vazba="' + row.vazba + '" data-rok_vydania="' + row.rok_vydania + '" data-vydavatelstvo="' + row.vydavatelstvo + '" data-predajna_cena="' + row.predajna_cena + '" data-nakupna_cena="' + row.nakupna_cena + '" data-marza="' + row.marza + '" data-zisk_kus="' + row.zisk_kus + '" data-priemerne_hodnotenie="' + row.priemerne_hodnotenie + '"><img style="width:55px ; height:85px ;" src="' + data + '" /> </a>';
+            return '<a href=""data-toggle="modal" data-target="#bookmodal" data-obsah="' + row.obsah + '"  data-autor1="' + row.autori.autor1 + '"  data-autor2="' + row.autori.autor2 + '" data-obrazok="' + row.obrazok + '" data-id="' + row.id + '" data-nazov="' + row.nazov + '" data-kategoria="' + row.kategoria + '" data-isbn="' + row.isbn + '" data-jazyk="' + row.jazyk + '" data-pocet_stran="' + row.pocet_stran + '" data-vazba="' + row.vazba + '" data-rok_vydania="' + row.rok_vydania + '" data-vydavatelstvo="' + row.vydavatelstvo + '" data-predajna_cena="' + row.predajna_cena + '" data-nakupna_cena="' + row.nakupna_cena + '" data-marza="' + row.marza + '" data-zisk_kus="' + row.zisk_kus + '" data-priemerne_hodnotenie="' + row.priemerne_hodnotenie + '"><img style="width:55px ; height:85px ;" src="' + row.obrazok + '" /> </a>';
 
           }
         },
@@ -194,12 +157,6 @@
         {
 
           data: 'autori.autor2',
-          render: (data, type, row) => {
-            if (autori.autor2 === undefined)
-              return "-"
-            else
-              return data
-          },
         },
         { data: 'nazov' },
         { data: 'kategoria' },
@@ -231,45 +188,91 @@
     var triggerLink = $(e.relatedTarget);
     var id = triggerLink.data("id");
     var nazov = triggerLink.data("nazov");
-    var kategoria = triggerLink.data("nazov");
-    var isbn = triggerLink.data("nazov");
-    var jazyk = triggerLink.data("nazov");
-    var pocet_stran = triggerLink.data("nazov");
-    var vazba = triggerLink.data("nazov");
-    var rok_vydania = triggerLink.data("nazov");
-    var vydavatelstvo = triggerLink.data("nazov");
-    var predajna_cena = triggerLink.data("nazov");
-    var nakupna_cena = triggerLink.data("nazov");
-    var marza = triggerLink.data("nazov");
-    var zisk_kus = triggerLink.data("nazov");
-    var zisk_kus = triggerLink.data("priemerne_hodnotenie");
-    //var cover_small = triggerLink.data("cover_small");
+    var kategoria = triggerLink.data("kategoria");
+    var isbn = triggerLink.data("isbn");
+    var jazyk = triggerLink.data("jazyk");
+    var pocet_stran = triggerLink.data("pocet_stran");
+    var vazba = triggerLink.data("vazba");
+    var rok_vydania = triggerLink.data("rok_vydania");
+    var vydavatelstvo = triggerLink.data("vydavatelstvo");
+    var predajna_cena = triggerLink.data("predajna_cena");
+    var nakupna_cena = triggerLink.data("nakupna_cena");
+    var marza = triggerLink.data("marza");
+    var zisk_kus = triggerLink.data("zisk_kus");
+    var priemerne_hodnotenie = triggerLink.data("priemerne_hodnotenie");
+    var obsah = triggerLink.data("obsah");
+    var obrazok = triggerLink.data("obrazok");
+    var autor1 = triggerLink.data("autori1");
+    var autor2 = triggerLink.data("autori2");
+
 
     // $("#modalTitle").text(title);
     //$(this).find(".modal-body").html("<h5>id: " + id + "</h5> " + "<h5>id: " + nazov + "</h5>");
-    if (data.book.autori.autor2 != undefined) {
-      $("#autori").html(data.book.autori.autor1 + "," + data.book.autori.autor2)
-      $("#autori_hore").html(data.book.autori.autor1 + "," + data.book.autori.autor2)
-    }
-    else {
-      $("#autori").html(data.book.autori.autor1)
-      $("#autori_hore").html(data.book.autori.autor1)
-    }
-    $("#obrazok").attr('src', data.book.obrazok)
-    $("#obsah").html(data.book.obsah)
-    $("#cena_hl").html("€" + data.book.predajna_cena)
-    $("#nazov_hore").html(data.book.nazov)
-    $("#nazov").html(data.book.nazov)
-    $("#kategoria").html(data.book.kategoria)
-    $("#isbn").html(data.book.isbn)
-    $("#jazyk").html(data.book.jazyk)
-    $("#pocet_stran").html(data.book.pocet_stran)
-    $("#rok_vydania").html(data.book.rok_vydania)
-    $("#vydavatelstvo").html(data.book.vydavatelstvo)
-    $("#predajna_cena").html(data.book.predajna_cena)
-    $("#nakupna_cena").html(data.book.nakupna_cena)
-    $("#marza").html(parseFloat(data.book.marza).toFixed(2) * 100 + "%")
-    $("#zisk_kus").html(data.book.zisk_kus)
+    $(this).find(".modal-body").html("<div class=\"container \">" +
+      "<div class=\"card mt-4 \">" +
+      "<div class=\"card-body\">" +
+      "<h3 id=\"nazov_hore\" class=\"card-title\">Book Name</h3>" +
+      "<h6 id=\"autori_hore\" class=\"card-subtitle\">Book Authors</h6>" +
+      " <div class=\"row \">" +
+      "<div class=\"col-lg-6 col-md-8 col-sm-12 col-12 \">" +
+      " <div  class=\" img-responsive\"><img  id=\"obrazok\"" +
+      "src=\"https://via.placeholder.com/350x700/00CED1/000000\">" +
+      " </div>" +
+      "</div>" +
+      " <div class=\"col-lg-6 col-md-4 col-sm-12 col-12\">" +
+      "  <h4 class=\"box-title \">Obsah knihy</h4>" +
+      "<p id=\"obsah\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, necessitatibus quis" +
+      "repellendus natus eos non beatae a iusto ad, tempora excepturi alias mollitia repellat quidem" +
+      "similique ratione ipsam? Rem ducimus porro officia. Culpa quibusdam sed vero voluptas veniam at" +
+      "iusto, vitae atque modi est perspiciatis temporibus quas asperiores quia? Velit?</p>" +
+      "<h2 id=\"cena_hl\" class=\"mt - 2\">" +
+      " </h2>" +
+      " <h3 class=\"box-title mt-5\">údaje o knihe</h3>" +
+      " <ul class=\"list-unstyled\">" +
+      "<li><i class=\"fa fa-check text-success\"></i>nazov: <span id=\"nazov\"></span></li>" +
+      "<li><i class=\"fa fa-check text-success\"></i>autori: <span id=\"autori\"></span></li>" +
+      "<li><i class=\"fa fa-check text-success\"></i>kategoria: <span id=\"kategoria\"></span></li>" +
+      "<li><i class=\"fa fa-check text-success\"></i>isbn: <span id=\"isbn\"></span></li>" +
+      "<li><i class=\"fa fa-check text-success\"></i>jazyk: <span id=\"jazyk\"></span></li>" +
+      "  <li><i class=\"fa fa-check text-success\"></i>pocet stran: <span id=\"pocet_stran\"></span></li>" +
+      "<li><i class=\"fa fa-check text-success\"></i>rok vydania: <span id=\"rok_vydania\"></span></li>" +
+      " <li><i class=\"fa fa-check text-success\"></i>vydavateľstvo: <span id=\"vydavatelstvo\"></span>" +
+      "  </li>" +
+      "<li><i class=\"fa fa-check text-success\"></i>predajna cena: <span id=\"predajna_cena\"></span>" +
+      " </li>" +
+      "<li><i class=\"fa fa-check text-success\"></i>nakupna cena: <span id=\"nakupna_cena\"></span></li>" +
+      " <li><i class=\"fa fa-check text-success\"></i>marza: <span id=\"marza\"></span></li>" +
+      "<li><i class=\"fa fa-check text-success\"></i>zisk kus: <span id=\"zisk_kus\"></span></li>" +
+      " </ul>" +
+      " </div>" +
+      "</div>" +
+      "</div>" +
+      "</div >" +
+
+      "</div >");
+    // if (data.book.autori.autor2 != "-") {
+    //   $("#autori").html(data.book.autori.autor1 + "," + data.book.autori.autor2)
+    //   $("#autori_hore").html(data.book.autori.autor1 + "," + data.book.autori.autor2)
+    // }
+    // else {
+    //   $("#autori").html(data.book.autori.autor1)
+    //   $("#autori_hore").html(data.book.autori.autor1)
+    // }
+    $("#obrazok").attr('src', obrazok)
+    $("#obsah").html(obsah)
+    $("#cena_hl").html("€" + predajna_cena)
+    $("#nazov_hore").html(nazov)
+    $("#nazov").html(nazov)
+    $("#kategoria").html(kategoria)
+    $("#isbn").html(isbn)
+    $("#jazyk").html(jazyk)
+    $("#pocet_stran").html(pocet_stran)
+    $("#rok_vydania").html(rok_vydania)
+    $("#vydavatelstvo").html(vydavatelstvo)
+    $("#predajna_cena").html(predajna_cena)
+    $("#nakupna_cena").html(nakupna_cena)
+    $("#marza").html(parseFloat(marza).toFixed(2) * 100 + "%")
+    $("#zisk_kus").html(zisk_kus)
   });
 
 

@@ -40,7 +40,7 @@
           })
 
 
-          if (data.book.autori.autor2 != undefined) {
+          if (data.book.autori.autor2 != "-") {
             $("#autori").html(data.book.autori.autor1 + "," + data.book.autori.autor2)
             $("#autori_hore").html(data.book.autori.autor1 + "," + data.book.autori.autor2)
           }
