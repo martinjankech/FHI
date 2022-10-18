@@ -116,7 +116,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <img style="width: 30% ;height: 30%;" src="" alt="">
+
         </div>
       </div>
     </div>
@@ -202,8 +202,8 @@
     var priemerne_hodnotenie = triggerLink.data("priemerne_hodnotenie");
     var obsah = triggerLink.data("obsah");
     var obrazok = triggerLink.data("obrazok");
-    var autor1 = triggerLink.data("autori1");
-    var autor2 = triggerLink.data("autori2");
+    var autor1 = triggerLink.data("autor1");
+    var autor2 = triggerLink.data("autor2");
 
 
     // $("#modalTitle").text(title);
@@ -250,14 +250,14 @@
       "</div >" +
 
       "</div >");
-    // if (data.book.autori.autor2 != "-") {
-    //   $("#autori").html(data.book.autori.autor1 + "," + data.book.autori.autor2)
-    //   $("#autori_hore").html(data.book.autori.autor1 + "," + data.book.autori.autor2)
-    // }
-    // else {
-    //   $("#autori").html(data.book.autori.autor1)
-    //   $("#autori_hore").html(data.book.autori.autor1)
-    // }
+    if (autor2 != "-") {
+      $("#autori").html(autor1 + "," + autor2)
+      $("#autori_hore").html(autor1 + "," + autor2)
+    }
+    else {
+      $("#autori").html(autor1)
+      $("#autori_hore").html(autor1)
+    }
     $("#obrazok").attr('src', obrazok)
     $("#obsah").html(obsah)
     $("#cena_hl").html("€" + predajna_cena)
