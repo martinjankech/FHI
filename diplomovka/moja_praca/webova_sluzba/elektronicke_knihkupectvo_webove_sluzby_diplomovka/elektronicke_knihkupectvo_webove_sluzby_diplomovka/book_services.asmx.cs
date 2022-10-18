@@ -31,12 +31,12 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
             doc.Load(docu);
             return doc;
         }
-        public string DecodeFromUtf8(string utf8_String)
-        {
-            byte[] bytes = Encoding.Default.GetBytes(utf8_String);
-            string utf8 = Encoding.UTF8.GetString(bytes);
-            return utf8;
-        }
+        //public string DecodeFromUtf8(string utf8_String)
+        //{
+        //    byte[] bytes = Encoding.Default.GetBytes(utf8_String);
+        //    string utf8 = Encoding.UTF8.GetString(bytes);
+        //    return utf8;
+        //}
         public static String GetTimestamp(DateTime value)
         {
             return value.ToString("yyyy-MM-dd-HH-mm-ss");
@@ -44,11 +44,11 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
 
         public void WriteToTheFileWithTimeStamp(string path,XmlNodeList data)
         {
-            StreamWriter sw = new StreamWriter(path, false, Encoding.UTF8);
+            StreamWriter sw = new StreamWriter(path, true, Encoding.UTF8);
             string x_to_file = "";
             int nodeListCount = data.Count;
             int i = 0;
-            sw.Write("<output>" + "\n\n");
+            sw.Write("\n"+"<output>" + "\n\n");
 
             while (i < nodeListCount)
             {
@@ -61,7 +61,7 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
             sw.Write("<timestamp>" + "\n\n");
             String timeStamp = GetTimestamp(DateTime.Now);
             sw.Write("\t" + timeStamp + "\n");
-            sw.Write("\n</timespamp>");
+            sw.Write("\n</timestamp>");
             sw.Write("\n</output>");
             sw.Close();
         }
@@ -109,8 +109,10 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
 
             }
              else
-             {//nastavenie UTF-8 sady pre http response 
-                 Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+             {
+                WriteToTheFileWithTimeStamp(fileOutputSingleSearch, nodeListBook);
+                //nastavenie UTF-8 sady pre http response 
+                Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
               Context.Response.Write(JsonConvert.SerializeXmlNode(nodeListBook.Item(0), Formatting.Indented));
              }
         }
@@ -133,6 +135,7 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
             }
             else
             {
+                WriteToTheFileWithTimeStamp(fileOutputSingleSearch, nodeListBook);
                 //nastavenie UTF-8 sady pre http response 
                 Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
                 Context.Response.Write(JsonConvert.SerializeXmlNode(nodeListBook.Item(0), Formatting.Indented));
@@ -150,7 +153,35 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
             Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
             Context.Response.Write(JsonConvert.SerializeXmlNode(AllBook.Item(0), Formatting.Indented));
         }
+        [WebMethod]
+        public void GetListBooksBySelectedKategory(string category,string input ) {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(fileBookInfo);
+            // input musi byt string!
+            XmlNodeList Selectedbooks = doc.SelectNodes("Bookstore/books/book["+category+"=\""+input+"\"]");
+         
+            int count = Selectedbooks.Count;
+            
+            for (int i = 0; i < count; i++)
 
+            {
+                Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+                Context.Response.Write(JsonConvert.SerializeXmlNode(Selectedbooks.Item(i),Formatting.Indented));
+
+            }
+          
+           
+
+
+
+
+
+
+
+
+
+
+        }
     }
 }
 
