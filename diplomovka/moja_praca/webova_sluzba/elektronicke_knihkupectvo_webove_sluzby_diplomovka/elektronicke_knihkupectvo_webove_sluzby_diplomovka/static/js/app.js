@@ -1,3 +1,5 @@
+  
+  // zobrazi chybovu hlasku vo vybranom elemente  
   function showAlertError(message) {
 
       $("#alert_error").show()
@@ -6,16 +8,16 @@
         $("#alert_error").slideUp(500);
       });
     }
-
+// zobrazi hlasenie o uspechu vo vybranom elemente 
     function showAlertSucces(message) {
 
       $("#alert_success").show()
-      $("#alert-text").html("message")
+      $("#alert-text").html(message)
       $("#alert_success").fadeTo(2000, 500).slideUp(500, function () {
         $("#alert_success").slideUp(500);
       });
     }
-
+// odosle ajaxovy request na webovú službu  cesta na ktoru sa nachadzadza v  parametri url s parametrom a datami podľa dynamicky vygenerovaneho formulara na zaklade uživatelového výberu. Pri uspechu vloži html do vybraných html elementov 
     function ajaxSingleBookForm(formid, url, parameter, parameterdata) {
       $(document).on('submit', formid, function (event) {
         console.log(parameterdata)
@@ -67,7 +69,7 @@
         event.preventDefault();
       })
     }
-
+// asynchronne zavola službu ktora vrati všetky knihy asychnronne je kvoli tomu ze musime pockat kym server vrati hodnoty az potom mozme v casti done vratit data
      async function Getallbook() {
       // await zabezpeci sychronny priebeh a caka kym nedostane promise 
       const result = await $.ajax({
@@ -79,16 +81,42 @@
       return result.books.book
     }
 
-     // naplni vybrane pole udajom o jednom atribute vsetkzch knih 
-  function createArrayFromOneAttribute(attribute, array) {
+     // naplni vybrane pole udajom o jednom atribute vsetkých knih 
+  async function createArrayFromOneAttribute(attribute, array) {
 
-    Getallbook().then((data) => {
+   await Getallbook().then((data) => {
+
       for (values of data) {
         array.push(values[attribute])
       }
+      
     })
   }
-  // do zadaneho inputu prida autonavhy 
+   async function createArrayFromOneAttribute1(attribute) {
+let array=[]
+   await Getallbook().then((data) => {
+     
+      for (values of data) {
+        array.push(values[attribute])
+      }
+     
+    })
+     const uniqueArray = [...new Set(array)];
+    return uniqueArray
+  }
+  
+  async function createArrayFromNestedAttribute(parent,child) {
+let array=[]
+   await Getallbook().then((data) => {
+     
+      for (values of data) {
+        array.push(values[parent][child])
+      }
+    })
+     const uniqueArray = [...new Set(array)];
+    return uniqueArray
+  }
+  // do zadaneho inputu prida autonávrhy data ziska z poľa ktoré vytvorí funkcia ceateArrayFromOneAttribute  
   function autoCompleteInput(inputSelector, maxItem, sourceArray) {
     var selector = inputSelector;
     $(document).on("click", selector, function () {

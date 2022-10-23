@@ -6,3 +6,5 @@ https://www.profesia.sk/mark/4066417/https-www-martinus-sk-pridajsa-129-programa
 https://colorlib.com/wp/bootstrap-navbar/ 
 https://stackoverflow.com/questions/28285813/style-jquery-autocomplete-in-a-bootstrap-input-field autocomplete v bosstrape ako
 https://petetasker.com/using-async-await-jquerys-ajax asynchrinnz js pre ajax dobry clanok  
+https://stackoverflow.com/questions/14220321/how-do-i-return-the-response-from-an-asynchronous-call dalsie dobre vysvetlenie
+https://stackoverflow.com/questions/35147038/how-to-place-the-datatables-horizontal-scrollbar-on-top-of-the-table top sscroll bar 

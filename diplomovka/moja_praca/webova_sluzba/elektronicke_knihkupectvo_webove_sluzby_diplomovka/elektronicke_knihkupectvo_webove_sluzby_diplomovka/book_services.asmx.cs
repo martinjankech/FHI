@@ -37,6 +37,24 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
         //    string utf8 = Encoding.UTF8.GetString(bytes);
         //    return utf8;
         //}
+
+        //zatial nedokoncena
+        //public void SavetoRootSingleSearchedBook(string Path, XmlNodeList data)
+        //{
+        //    XmlDocument doc = new XmlDocument();
+        //    doc.Load(Path);
+        //    XmlNode root = doc.DocumentElement;
+        //    var items = doc.GetElementsByTagName("testsuite");
+
+        //    for (int i = 0; i < data.Count; i++)
+        //    {// tu prenasame data medzi dvoma xml dokumentami preto musime pouzit metodu importNode
+        //        XmlNode newdata = doc.ImportNode(data.Item(i), true);
+        //        root.AppendChild(newdata);
+        //    }
+
+        //    doc.Save(Path);
+
+        //}
         public static String GetTimestamp(DateTime value)
         {
             return value.ToString("yyyy-MM-dd-HH-mm-ss");
@@ -52,9 +70,9 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
 
             while (i < nodeListCount)
             {
-                XmlNode title = data.Item(i);
-                //jednotlive hodnoty title elementov su zobrazene aj s prislusnymi znackami z .xml suboru
-                x_to_file = title.OuterXml;
+                XmlNode book = data.Item(i);
+                //jednotlive hodnoty book elementov su zobrazene aj s prislusnymi znackami z .xml suboru
+                x_to_file = book.OuterXml;
                 sw.Write("\t" + x_to_file + "\n");
                 i++;
             }
@@ -83,7 +101,7 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
             }
             else
             {
-                
+                //SavetoRoot(fileOutputSingleSearch, singleBookById);
                 WriteToTheFileWithTimeStamp(fileOutputSingleSearch, singleBookById);
                 // nastavenie UTF-8 sady pre http response 
                 Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
@@ -169,19 +187,11 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
                 Context.Response.Write(JsonConvert.SerializeXmlNode(Selectedbooks.Item(i),Formatting.Indented));
 
             }
-          
-           
-
-
-
-
-
-
-
-
 
 
         }
+        
+        
     }
 }
 

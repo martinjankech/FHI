@@ -32,50 +32,65 @@
 <body>
  <div id="navbar">
  </div>
- <h1>Hľadaj počty knih podľa: </h1>
- <form>
-  <div class="form-row">
-   <div class="form-group col-md-6">
-    <label for="inputEmail4">Datum id</label>
-    <input type="date" class="form-control" id="inputEmail4" placeholder="Email">
+ <div class="container">
+  <h1 class="mb-3 mt-5">Hľadaj počty kníh podľa: </h1>
+  <form class="col-12">
+   <div class="form-row ">
+    <div class="form-group col-md-6">
+     <label for="inputEmail4">Datum od</label>
+     <input type="date" class="form-control" id="inputEmail4" placeholder="Email">
+    </div>
+    <div class="form-group col-md-6">
+     <label for="inputPassword4">Datum do</label>
+     <input type="date" class="form-control" id="inputPassword4" placeholder="Password">
+    </div>
    </div>
-   <div class="form-group col-md-6">
-    <label for="inputPassword4">Datum do</label>
-    <input type="date" class="form-control" id="inputPassword4" placeholder="Password">
-   </div>
-  </div>
-  <div class="form-row">
-   <div class="form-group col-md-6">
-    <label for="inputState">hľadať podľa atribútu</label>
-    <select id="inputState" class="form-control">
-     <option selected>Autor</option>
-     <option selected>Kategoria</option>
-     <option selected>Vydavatelstvo</option>
-     <option selected>Vazba...</option>
-     <option selected>Rok_vydania...</option>
-     <option selected>jazyk</option>
-     <option selected>vazba</option>
+   <div class="form-row ">
+    <div class="form-group col-md-6">
+     <label for="inputState">hľadať podľa atribútu</label>
+     <select id="atributesSelect" class="form-control">
+      <option disabled selected value> zvoľte si možnosť prosím </option>
+      <option value="autor">autor</option>
+      <option value="kategoria">kategoria</option>
+      <option value="vydavatelstvo">vydavatelstvo</option>
+      <option value="jazyk">jazyk</option>
+      <option value="vazba">vazba</option>
 
-    </select>
-   </div>
-   <div class="form-group col-md-6">
-    <label for="inputState">Zoradiť podľa atribútu</label>
-    <select id="inputState" class="form-control">
-     <option selected>Autor</option>
-     <option selected>Kategoria</option>
-     <option selected>Vydavatelstvo</option>
-     <option selected>Vazba...</option>
-     <option selected>Rok_vydania...</option>
-     <option selected>jazyk</option>
-     <option selected>vazba</option>
-     <option selected>najvačši predaj</option>
-     <option selected>najmenši predaj</option>
+     </select>
+    </div>
+    <div class="form-group col-md-6">
+     <label for="inputState">Zoradiť podľa atribútu</label>
+     <select id="inputState" class="form-control">
+      <option disabled selected value> zvolte si možnosť prosím </option>
+      <option>názov</option>
+      <option>počet strán</option>
+      <option>rok vydania</option>
+      <option>cena</option>
+      <option>priemerné_hodnotenie</option>
+     </select>
 
-    </select>
+     <div class="form-check mt-2">
+      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+      <label class="form-check-label" for="exampleRadios1">
+       Vzostupne
+      </label>
+     </div>
+     <div class="form-check">
+      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+      <label class="form-check-label" for="exampleRadios2">
+       Zostupne
+      </label>
+     </div>
+    </div>
    </div>
-  </div>
-  <button type="submit" class="btn btn-primary">potvrdit</button>
- </form>
+   <h6>hodnota hľadaného atribútu </h6>
+   <input class="form-control col-10 mb-3" type="text" name="" id="vstup" placeholder="">
+
+   <button type="submit" class="btn btn-primary ">potvrdiť</button>
+
+  </form>
+
+ </div>
  <footer>
 
  </footer>
@@ -83,6 +98,37 @@
 <script>
  $("#navbar").load("navbar.html")
  $("footer").load("footer.html")
+ $("#atributesSelect").on('change', function () {
+  $('#input').attr('placeholder', "zadajte hodnotu atributu " + $("select option:selected").val())
+  switch ($("select option:selected").val()) {
+   case "autor":
+    createArrayFromNestedAttribute("autori", 'autor1').then(resolve => {
+     data1 = resolve;
+     createArrayFromNestedAttribute('autori', 'autor2').then(resolve => {
+      data2 = resolve; let final = data2.concat(data1)
+
+      console.log(final);
+
+      autoCompleteInput('#vstup', 5, final)
+     })
+    })
+    break;
+   case "kategoria":
+    createArrayFromOneAttribute1("kategoria").then(resolve => { autoCompleteInput('#vstup', 5, resolve); })
+    break;
+   case "vydavatelstvo":
+    createArrayFromOneAttribute1("vydavatelstvo").then(resolve => { autoCompleteInput('#vstup', 5, resolve) })
+    break;
+   case "jazyk":
+    createArrayFromOneAttribute1("jazyk").then(resolve => { autoCompleteInput('#vstup', 5, resolve) })
+    break;
+   case "vazba":
+    createArrayFromOneAttribute1("vazba").then(resolve => { autoCompleteInput('#vstup', 5, resolve) })
+    break;
+   default:
+    alert("volaco sa porantalo")
+  }
+ })
  fixedFooter()
 </script>
 

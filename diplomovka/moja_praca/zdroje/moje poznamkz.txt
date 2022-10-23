@@ -1,0 +1,2 @@
+xElement vs Qdokument 
+Linq to xml quering  vs xpath vs sql 

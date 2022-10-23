@@ -1,1 +1,137 @@
 ﻿
+
+<output>
+
+	<book><id>10</id><nazov>Hacking bez tajemství - Webové aplikace</nazov><autori><autor1>Mike Shema</autor1><autor2>Joel Scambray</autor2></autori><kategoria>Odborné a náučné</kategoria><isbn>8072267698</isbn><jazyk>cz</jazyk><pocet_stran>360</pocet_stran><vazba>brožovaná väzba</vazba><rok_vydania>2003</rok_vydania><vydavatelstvo>Computer Press</vydavatelstvo><predajna_cena>18.5</predajna_cena><nakupna_cena>11.89</nakupna_cena><marza>0.555929352396972</marza><zisk_kus>6.61</zisk_kus><obsah>Před časem kniha Hacking bez tajemství ukázala početné administrátorské obci, jak je pro patřičně zlomyslné nebo ctižádostivé jedince snadné proniknout do počítačových sítí a systémů. Ačkoliv je mezi administrátory stále hodně těch, kteří tuto krutou zkušenost dosud nemají za sebou, většina již snad začíná chápat nezbytnost firewallů, bezpečných konfigurací operačních systémů, svědomitého používání záplat od dodavatelů a dalších dříve opomíjených zásad bezpečnosti informačních systémů.</obsah><priemerne_hodnotenie>5</priemerne_hodnotenie><obrazok>../img/10.jpg</obrazok></book>
+<timestamp>
+
+	2022-10-19-15-00-22
+
+</timestamp>
+</output>
+<output>
+
+	<book><id>16</id><nazov>Eiffel</nazov><autori><autor1>Nicolas d'Estienne d'Orves</autor1><autor2>-</autor2></autori><kategoria>Spoločenská beletria</kategoria><isbn>9788056630006</isbn><jazyk>sk</jazyk><pocet_stran>256</pocet_stran><vazba>pevná väzba</vazba><rok_vydania>2022</rok_vydania><vydavatelstvo>Lindeni,</vydavatelstvo><predajna_cena>14.49</predajna_cena><nakupna_cena>7.68</nakupna_cena><marza>0.88671875</marza><zisk_kus>6.81</zisk_kus><obsah>Píše sa rok 1886 a Paríž sa pripravuje na Svetovú výstavu. Gustave Eiffel má ohromiť Francúzsko dosiaľ nevídaným monumentom, 300-metrovou vežou, ktorá bude najvyššou na svete. Je to však jediný dôvod posadnutosti kovovou stavbou, ktorá núti „básnika železa“ neúnavne a bez prestávky pracovať, rysovať plány a hľadať pre ňu dokonalý tvar?
+
+Ako sa hovorí, „cherchez la femme“ - za všetkým hľadaj ženu. Od opätovného stretnutia so svojou osudovou, dávno stratenou láskou akoby sa Adrienne vtelila do Eiffelovho životného projektu. Je to krivka jej chrbta, ktorá ho inšpirovala, veľké A, ktoré sa bude navždy týčiť k parížskemu nebu.</obsah><priemerne_hodnotenie>4.2</priemerne_hodnotenie><obrazok>../img/16.jpg</obrazok></book>
+<timestamp>
+
+	2022-10-19-15-00-45
+
+</timestamp>
+</output>
+<output>
+
+	<book><id>5</id><nazov>Setkání s Rámou</nazov><autori><autor1>Arthur C. Clarke</autor1><autor2>-</autor2></autori><kategoria>Fantasy</kategoria><isbn>9788025738726</isbn><jazyk>cz</jazyk><pocet_stran>256</pocet_stran><vazba>pevná väzba</vazba><rok_vydania>2022</rok_vydania><vydavatelstvo>Argo</vydavatelstvo><predajna_cena>15.56</predajna_cena><nakupna_cena>8.29</nakupna_cena><marza>0.876960193003619</marza><zisk_kus>7.27</zisk_kus><obsah>Po ničivém dopadu meteoritu na Itálii v roce 2077 se nejvyšší představitelé lidstva rozhodli vytvořit systém radarů a teleskopů, jenž monitoruje všechna tělesa prolétávající Sluneční soustavou. V roce 2130 systém zachytil objekt mimořádných rozměrů. Pohyboval se po přímce, nikoliv po elipse jako ostatní asteroidy. Dostal jméno Ráma a na čas se na něj zapomnělo. Až když se přiblížil k Marsu, byla k němu vyslána sonda, jejíž kamerové snímky vyrazily lidstvu dech. Ráma je válec o délce padesát kilometrů a průměru dvacet kilometrů. Jeho povrch je zcela hladký a podle slabého gravitačního pole lze předpokládat, že je dutý. Lidstvo se chystá na první návštěvu z hvězd…</obsah><priemerne_hodnotenie>4.8</priemerne_hodnotenie><obrazok>../img/5.jpg</obrazok></book>
+<timestamp>
+
+	2022-10-19-15-56-48
+
+</timestamp>
+</output>
+<output>
+
+	<book><id>8</id><nazov>Programování v C#</nazov><autori><autor1>Miroslav Virius</autor1><autor2>-</autor2></autori><kategoria>Odborné a náučné</kategoria><isbn>9788027112166</isbn><jazyk>cz</jazyk><pocet_stran>424</pocet_stran><vazba>brožovaná väzba</vazba><rok_vydania>2020</rok_vydania><vydavatelstvo>Grada</vydavatelstvo><predajna_cena>17.89</predajna_cena><nakupna_cena>10.99</nakupna_cena><marza>0.627843494085532</marza><zisk_kus>6.9</zisk_kus><obsah>Přehledná a praktická učebnice programování v jazyku C# pro začátečníky i pro uživatele ostatních programovacích jazyků, která vás naučí základy a dovede až k pokročilým konstrukcím.</obsah><priemerne_hodnotenie>4.3</priemerne_hodnotenie><obrazok>../img/8.jpg</obrazok></book>
+<timestamp>
+
+	2022-10-23-14-58-38
+
+</timestamp>
+</output>
+<output>
+
+	<book><id>7</id><nazov>Nová taliančina pre samoukov</nazov><autori><autor1>Michaela  Vannini</autor1><autor2>-</autor2></autori><kategoria>Odborné a náučné</kategoria><isbn>9788081092923</isbn><jazyk>sk</jazyk><pocet_stran>296</pocet_stran><vazba>pevná väzba</vazba><rok_vydania>2016</rok_vydania><vydavatelstvo>Eastone Books</vydavatelstvo><predajna_cena>14.75</predajna_cena><nakupna_cena>8.56</nakupna_cena><marza>0.723130841121495</marza><zisk_kus>6.19</zisk_kus><obsah>Táto kniha je určená všetkým, ktorí sa chcú učiť taliansky jazyk a zároveň spoznávať taliansku kultúru. Učebnica je zostavená tak, aby sa z nej mohli učiť úplní začiatočníci aj pokročilejší používatelia tohto jazyka, samouci aj účastníci kurzov. Slovíčka, dôležité frázy aj gramatiku sa učíte popri čítaní príbehu o Anne a Petrovi, ktorí žijú a pracujú v talianskom mestečku Barga. Prevedú vás bežnými situáciami, s ktorými sa pri pobyte v Taliansku môžete stretnúť.</obsah><priemerne_hodnotenie>4.2</priemerne_hodnotenie><obrazok>../img/7.jpg</obrazok></book>
+<timestamp>
+
+	2022-10-23-15-49-11
+
+</timestamp>
+</output>
+<output>
+
+	<book><id>16</id><nazov>Eiffel</nazov><autori><autor1>Nicolas d'Estienne d'Orves</autor1><autor2>-</autor2></autori><kategoria>Spoločenská beletria</kategoria><isbn>9788056630006</isbn><jazyk>sk</jazyk><pocet_stran>256</pocet_stran><vazba>pevná väzba</vazba><rok_vydania>2022</rok_vydania><vydavatelstvo>Lindeni,</vydavatelstvo><predajna_cena>14.49</predajna_cena><nakupna_cena>7.68</nakupna_cena><marza>0.88671875</marza><zisk_kus>6.81</zisk_kus><obsah>Píše sa rok 1886 a Paríž sa pripravuje na Svetovú výstavu. Gustave Eiffel má ohromiť Francúzsko dosiaľ nevídaným monumentom, 300-metrovou vežou, ktorá bude najvyššou na svete. Je to však jediný dôvod posadnutosti kovovou stavbou, ktorá núti „básnika železa“ neúnavne a bez prestávky pracovať, rysovať plány a hľadať pre ňu dokonalý tvar?
+
+Ako sa hovorí, „cherchez la femme“ - za všetkým hľadaj ženu. Od opätovného stretnutia so svojou osudovou, dávno stratenou láskou akoby sa Adrienne vtelila do Eiffelovho životného projektu. Je to krivka jej chrbta, ktorá ho inšpirovala, veľké A, ktoré sa bude navždy týčiť k parížskemu nebu.</obsah><priemerne_hodnotenie>4.2</priemerne_hodnotenie><obrazok>../img/16.jpg</obrazok></book>
+<timestamp>
+
+	2022-10-23-18-19-32
+
+</timestamp>
+</output>
+<output>
+
+	<book><id>1</id><nazov>Harry Potter a Tajomná komnata</nazov><autori><autor1>J.K. Rowling</autor1><autor2>-</autor2></autori><kategoria>Fantasy</kategoria><isbn>9788055143088</isbn><jazyk>sk</jazyk><pocet_stran>360</pocet_stran><vazba>brožovaná väzba</vazba><rok_vydania>2015</rok_vydania><vydavatelstvo>Ikar</vydavatelstvo><predajna_cena>11.9</predajna_cena><nakupna_cena>8.25</nakupna_cena><marza>0.442424242424242</marza><zisk_kus>3.65</zisk_kus><obsah>Dursleyovci boli v to leto takí odporní, že Harry Potter sa už nevedel dočkať, kedy sa vráti do čarodejníckej školy. Jedného dňa sa v jeho izbe objaví čudné, zlomyseľné stvorenie. Volá sa Dobby a tvrdí, že ak sa Harry vráti na Rokfort, hrozí mu smrteľné nebezpečenstvo.
+A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole tajuplné a hrôzostrašné veci. Niekto, lepšie povedané niečo napáda rokfortských študentov a premieňa ich na kameň. Že by bol za tým Draco Malfoy, Harryho úhlavný nepriateľ? Alebo to má na svedomí ten, koho na Rokforte najviac upodozrievajú – samotný Harry Potter?</obsah><priemerne_hodnotenie>4.7</priemerne_hodnotenie><obrazok>../img/1.jpg</obrazok></book>
+<timestamp>
+
+	2022-10-23-19-54-40
+
+</timestamp>
+</output>
+<output>
+
+	<book><id>16</id><nazov>Eiffel</nazov><autori><autor1>Nicolas d'Estienne d'Orves</autor1><autor2>-</autor2></autori><kategoria>Spoločenská beletria</kategoria><isbn>9788056630006</isbn><jazyk>sk</jazyk><pocet_stran>256</pocet_stran><vazba>pevná väzba</vazba><rok_vydania>2022</rok_vydania><vydavatelstvo>Lindeni,</vydavatelstvo><predajna_cena>14.49</predajna_cena><nakupna_cena>7.68</nakupna_cena><marza>0.88671875</marza><zisk_kus>6.81</zisk_kus><obsah>Píše sa rok 1886 a Paríž sa pripravuje na Svetovú výstavu. Gustave Eiffel má ohromiť Francúzsko dosiaľ nevídaným monumentom, 300-metrovou vežou, ktorá bude najvyššou na svete. Je to však jediný dôvod posadnutosti kovovou stavbou, ktorá núti „básnika železa“ neúnavne a bez prestávky pracovať, rysovať plány a hľadať pre ňu dokonalý tvar?
+
+Ako sa hovorí, „cherchez la femme“ - za všetkým hľadaj ženu. Od opätovného stretnutia so svojou osudovou, dávno stratenou láskou akoby sa Adrienne vtelila do Eiffelovho životného projektu. Je to krivka jej chrbta, ktorá ho inšpirovala, veľké A, ktoré sa bude navždy týčiť k parížskemu nebu.</obsah><priemerne_hodnotenie>4.2</priemerne_hodnotenie><obrazok>../img/16.jpg</obrazok></book>
+<timestamp>
+
+	2022-10-23-20-51-30
+
+</timestamp>
+</output>
+<output>
+
+	<book><id>1</id><nazov>Harry Potter a Tajomná komnata</nazov><autori><autor1>J.K. Rowling</autor1><autor2>-</autor2></autori><kategoria>Fantasy</kategoria><isbn>9788055143088</isbn><jazyk>sk</jazyk><pocet_stran>360</pocet_stran><vazba>brožovaná väzba</vazba><rok_vydania>2015</rok_vydania><vydavatelstvo>Ikar</vydavatelstvo><predajna_cena>11.9</predajna_cena><nakupna_cena>8.25</nakupna_cena><marza>0.442424242424242</marza><zisk_kus>3.65</zisk_kus><obsah>Dursleyovci boli v to leto takí odporní, že Harry Potter sa už nevedel dočkať, kedy sa vráti do čarodejníckej školy. Jedného dňa sa v jeho izbe objaví čudné, zlomyseľné stvorenie. Volá sa Dobby a tvrdí, že ak sa Harry vráti na Rokfort, hrozí mu smrteľné nebezpečenstvo.
+A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole tajuplné a hrôzostrašné veci. Niekto, lepšie povedané niečo napáda rokfortských študentov a premieňa ich na kameň. Že by bol za tým Draco Malfoy, Harryho úhlavný nepriateľ? Alebo to má na svedomí ten, koho na Rokforte najviac upodozrievajú – samotný Harry Potter?</obsah><priemerne_hodnotenie>4.7</priemerne_hodnotenie><obrazok>../img/1.jpg</obrazok></book>
+<timestamp>
+
+	2022-10-23-21-04-18
+
+</timestamp>
+</output>
+<output>
+
+	<book><id>1</id><nazov>Harry Potter a Tajomná komnata</nazov><autori><autor1>J.K. Rowling</autor1><autor2>-</autor2></autori><kategoria>Fantasy</kategoria><isbn>9788055143088</isbn><jazyk>sk</jazyk><pocet_stran>360</pocet_stran><vazba>brožovaná väzba</vazba><rok_vydania>2015</rok_vydania><vydavatelstvo>Ikar</vydavatelstvo><predajna_cena>11.9</predajna_cena><nakupna_cena>8.25</nakupna_cena><marza>0.442424242424242</marza><zisk_kus>3.65</zisk_kus><obsah>Dursleyovci boli v to leto takí odporní, že Harry Potter sa už nevedel dočkať, kedy sa vráti do čarodejníckej školy. Jedného dňa sa v jeho izbe objaví čudné, zlomyseľné stvorenie. Volá sa Dobby a tvrdí, že ak sa Harry vráti na Rokfort, hrozí mu smrteľné nebezpečenstvo.
+A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole tajuplné a hrôzostrašné veci. Niekto, lepšie povedané niečo napáda rokfortských študentov a premieňa ich na kameň. Že by bol za tým Draco Malfoy, Harryho úhlavný nepriateľ? Alebo to má na svedomí ten, koho na Rokforte najviac upodozrievajú – samotný Harry Potter?</obsah><priemerne_hodnotenie>4.7</priemerne_hodnotenie><obrazok>../img/1.jpg</obrazok></book>
+<timestamp>
+
+	2022-10-23-23-05-44
+
+</timestamp>
+</output>
+<output>
+
+	<book><id>4</id><nazov>Jediná kniha o jídle, kterou potřebujete</nazov><autori><autor1>Karolína Fourová</autor1><autor2>-</autor2></autori><kategoria>Kuchárky</kategoria><isbn>9788024271576</isbn><jazyk>cz</jazyk><pocet_stran>200</pocet_stran><vazba>pevná väzba</vazba><rok_vydania>2020</rok_vydania><vydavatelstvo>Esence</vydavatelstvo><predajna_cena>16</predajna_cena><nakupna_cena>8.36</nakupna_cena><marza>0.913875598086125</marza><zisk_kus>7.64</zisk_kus><obsah>Kniha Karolíny Fourové, odbornice na výživu a kvalitu potravin, vám pomůže pochopit základní principy stravování, představí jednotlivé složky výživy a jejich úkol v lidském organismu. Naučíte se správně nakupovat a dostanete odpověď na většinu otázek o jídle a potravinách, které vás kdy napadly. A abyste se v té zdravé stravě neztratili hned na začátku, najdete v knize i 40 autorčiných nejoblíbenějších receptů, které vám cestu usnadní.</obsah><priemerne_hodnotenie>3.8</priemerne_hodnotenie><obrazok>../img/4.jpg</obrazok></book>
+<timestamp>
+
+	2022-10-23-23-12-58
+
+</timestamp>
+</output>
+<output>
+
+	<book><id>5</id><nazov>Setkání s Rámou</nazov><autori><autor1>Arthur C. Clarke</autor1><autor2>-</autor2></autori><kategoria>Fantasy</kategoria><isbn>9788025738726</isbn><jazyk>cz</jazyk><pocet_stran>256</pocet_stran><vazba>pevná väzba</vazba><rok_vydania>2022</rok_vydania><vydavatelstvo>Argo</vydavatelstvo><predajna_cena>15.56</predajna_cena><nakupna_cena>8.29</nakupna_cena><marza>0.876960193003619</marza><zisk_kus>7.27</zisk_kus><obsah>Po ničivém dopadu meteoritu na Itálii v roce 2077 se nejvyšší představitelé lidstva rozhodli vytvořit systém radarů a teleskopů, jenž monitoruje všechna tělesa prolétávající Sluneční soustavou. V roce 2130 systém zachytil objekt mimořádných rozměrů. Pohyboval se po přímce, nikoliv po elipse jako ostatní asteroidy. Dostal jméno Ráma a na čas se na něj zapomnělo. Až když se přiblížil k Marsu, byla k němu vyslána sonda, jejíž kamerové snímky vyrazily lidstvu dech. Ráma je válec o délce padesát kilometrů a průměru dvacet kilometrů. Jeho povrch je zcela hladký a podle slabého gravitačního pole lze předpokládat, že je dutý. Lidstvo se chystá na první návštěvu z hvězd…</obsah><priemerne_hodnotenie>4.8</priemerne_hodnotenie><obrazok>../img/5.jpg</obrazok></book>
+<timestamp>
+
+	2022-10-23-23-13-45
+
+</timestamp>
+</output>
+<output>
+
+	<book><id>26</id><nazov>1984</nazov><autori><autor1>George Orwell</autor1><autor2>-</autor2></autori><kategoria>klasika</kategoria><isbn>9788055610832</isbn><jazyk>sk</jazyk><pocet_stran>253</pocet_stran><vazba>pevná väzba</vazba><rok_vydania>2013</rok_vydania><vydavatelstvo>Slovart</vydavatelstvo><predajna_cena>12.85</predajna_cena><nakupna_cena>8.89</nakupna_cena><marza>0.445444319460067</marza><zisk_kus>3.96</zisk_kus><obsah>Nové vydanie románu 1984 - jedného z najznámejších diel svetovej literatúry. Spája v sebe prvky spoločensko-politického a vedecko-fantastického románu. Je obžalobou komunistickej diktatúry, ktorá roku 1984 ovládla všetko, vrátane ľudského myslenia. Román opisuje osudy čestného, citlivého a uvažujúceho jednotlivca (Winstona Smitha), ktorý sa vzoprie systému, za čo platí krutú daň.</obsah><priemerne_hodnotenie>4.7</priemerne_hodnotenie><obrazok>../img/26.jpg</obrazok></book>
+<timestamp>
+
+	2022-10-23-23-13-48
+
+</timestamp>
+</output>
+<output>
+
+	<book><id>2</id><nazov>Harry Potter a Ohnivá čaša</nazov><autori><autor1>J.K. Rowling</autor1><autor2>-</autor2></autori><kategoria>Fantasy</kategoria><isbn>9788055143866</isbn><jazyk>sk</jazyk><pocet_stran>712</pocet_stran><vazba>pevná väzba</vazba><rok_vydania>2015</rok_vydania><vydavatelstvo>Ikar</vydavatelstvo><predajna_cena>16.11</predajna_cena><nakupna_cena>10.25</nakupna_cena><marza>0.571707317073171</marza><zisk_kus>5.86</zisk_kus><obsah>Harry Potter je znovu na prázdninách u otravných Dursleyovcov. Chce sa od nich odpútať, a tak sa zúčastní na Svetovom pohári v metlobale spolu s Hermionou, Ronom a Weasleyovcami. Okrem toho sa po sto rokoch na Rokforte pripravuje Trojčarodejnícky turnaj a majú sa na ňom zúčastniť dve ďalšie čarodejnícke školy. Harry aj naďalej túži byť obyčajným štrnásťročným čarodejníkom. Má však smolu, lebo nie je obyčajný - dokonca ani podľa čarodejníckych meradiel. V jeho prípade to môže mať smrteľné dôsledky...</obsah><priemerne_hodnotenie>4.5</priemerne_hodnotenie><obrazok>../img/2.jpg</obrazok></book>
+<timestamp>
+
+	2022-10-23-23-13-51
+
+</timestamp>
+</output>

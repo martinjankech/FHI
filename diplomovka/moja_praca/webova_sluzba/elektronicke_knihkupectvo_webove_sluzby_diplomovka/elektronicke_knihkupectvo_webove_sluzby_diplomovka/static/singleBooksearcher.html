@@ -44,7 +44,7 @@
   <!-- <div w3-include-html="navbar.html"></div> -->
   <div class="container ">
     <!-- <form class="mt-5" method="POST"> -->
-    <h2 class="mt-4">Hľadat podľa :</h2>
+    <h2 class="mt-4">Hľadať podľa :</h2>
     <div class="form-check">
       <input class="form-check-input1" type="radio" name="exampleRadios" id="id_checkbox" value="option1">
       <label class="form-check-label" for="exampleRadios1">
@@ -104,7 +104,9 @@
   <footer>
   </footer>
 </body>
+
 <script>
+  // na vytvori input pre formular na zaklade toho ktorý checkbox si vyberie pouzivatel 
   $(function () {
     $("#id_checkbox").click(function () {
       if ($(this).is(":checked")) {
@@ -161,15 +163,19 @@
   let attributename = "nazov"
   let atributeid = "id"
   let atributeisbn = "isbn"
-  createArrayFromOneAttribute(attributename, bookNamesArray)
-  createArrayFromOneAttribute(atributeid, bookIdArray)
-  createArrayFromOneAttribute(atributeisbn, bookIsbnArray)
-  nameInputId = '#name_input'
-  isbnInputId = '#isbn_input'
-  idInputId = '#id_input'
-  autoCompleteInput(nameInputId, 5, bookNamesArray)
-  autoCompleteInput(isbnInputId, 5, bookIsbnArray)
-  autoCompleteInput(idInputId, 5, bookIdArray)
+  let nameInputId = '#name_input'
+  let isbnInputId = '#isbn_input'
+  let idInputId = '#id_input'
+  // createArrayFromOneAttribute(attributename, bookNamesArray)
+  // createArrayFromOneAttribute(atributeid, bookIdArray)
+  // createArrayFromOneAttribute(atributeisbn, bookIsbnArray)
+  createArrayFromOneAttribute1(attributename).then(resolve => { autoCompleteInput(nameInputId, 5, resolve); })
+  createArrayFromOneAttribute1(atributeid).then(resolve => { autoCompleteInput(idInputId, 5, resolve); })
+  createArrayFromOneAttribute1(atributeisbn).then(resolve => { autoCompleteInput(isbnInputId, 5, resolve); })
+
+  // autoCompleteInput(nameInputId, 5, bookNamesArray)
+  // autoCompleteInput(isbnInputId, 5, bookIsbnArray)
+  // autoCompleteInput(idInputId, 5, bookIdArray)
   $(".card-body").hide();
 
 
