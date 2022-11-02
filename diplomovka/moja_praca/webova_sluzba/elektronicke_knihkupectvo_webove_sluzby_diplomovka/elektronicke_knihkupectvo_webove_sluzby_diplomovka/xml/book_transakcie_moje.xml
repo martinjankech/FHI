@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <knihy_transakcie xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
 	<transakcia>
 		<id_transakcie>1</id_transakcie>
 		<id_knihy>1</id_knihy>
@@ -68730,4 +68731,5 @@
 		<celkovo_cena>174.93</celkovo_cena>
 		<aktualne_mnozstvo_na_sklade>6</aktualne_mnozstvo_na_sklade>
 	</transakcia>
+
 </knihy_transakcie>

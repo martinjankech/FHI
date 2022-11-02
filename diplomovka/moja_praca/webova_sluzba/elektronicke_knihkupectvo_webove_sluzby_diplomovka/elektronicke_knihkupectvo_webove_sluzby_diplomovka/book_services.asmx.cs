@@ -59,7 +59,7 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
         {
             return value.ToString("yyyy-MM-dd-HH-mm-ss");
         }
-
+        // zapise data o vsetkych hladaniach do jedneho suboru aj s casovou peciatkov 
         public void WriteToTheFileWithTimeStamp(string path,XmlNodeList data)
         {
             StreamWriter sw = new StreamWriter(path, true, Encoding.UTF8);
@@ -187,7 +187,6 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
                 Context.Response.Write(JsonConvert.SerializeXmlNode(Selectedbooks.Item(i),Formatting.Indented));
 
             }
-
 
         }
         
