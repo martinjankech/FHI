@@ -1,0 +1,503 @@
+{
+  "name": "hotel_tabular",
+  "compatibilityLevel": 1200,
+  "model": {
+    "culture": "sk-SK",
+    "dataSources": [
+      {
+        "name": "SqlServer DESKTOP-O7MS5VC hotel",
+        "connectionString": "Provider=SQLNCLI11;Data Source=DESKTOP-O7MS5VC;Integrated Security=SSPI;Persist Security Info=false;Initial Catalog=hotel",
+        "impersonationMode": "impersonateServiceAccount",
+        "annotations": [
+          {
+            "name": "ConnectionEditUISource",
+            "value": "SqlServer"
+          }
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "name": "D_JANKECH_cas",
+        "columns": [
+          {
+            "name": "id_cas",
+            "dataType": "int64",
+            "sourceColumn": "id_cas",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "mesiac",
+            "dataType": "string",
+            "sourceColumn": "mesiac",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "rok",
+            "dataType": "string",
+            "sourceColumn": "rok",
+            "sourceProviderType": "Char"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "D_JANKECH_cas",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [dbo].[D_JANKECH_cas].*   FROM [dbo].[D_JANKECH_cas] ",
+              "dataSource": "SqlServer DESKTOP-O7MS5VC hotel"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [dbo].[D_JANKECH_cas].*   FROM [dbo].[D_JANKECH_cas] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "D_JANKECH_cas"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "D_JANKECH_izba",
+        "columns": [
+          {
+            "name": "id_izba",
+            "dataType": "int64",
+            "sourceColumn": "id_izba",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "typ",
+            "dataType": "string",
+            "sourceColumn": "typ",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "poschodie",
+            "dataType": "int64",
+            "sourceColumn": "poschodie",
+            "sourceProviderType": "Integer"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "D_JANKECH_izba",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [dbo].[D_JANKECH_izba].*   FROM [dbo].[D_JANKECH_izba] ",
+              "dataSource": "SqlServer DESKTOP-O7MS5VC hotel"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [dbo].[D_JANKECH_izba].*   FROM [dbo].[D_JANKECH_izba] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "D_JANKECH_izba"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "D_JANKECH_obec",
+        "columns": [
+          {
+            "name": "id_obec",
+            "dataType": "int64",
+            "sourceColumn": "id_obec",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "obec",
+            "dataType": "string",
+            "sourceColumn": "obec",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "nadm_vyska",
+            "dataType": "string",
+            "sourceColumn": "nadm_vyska",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "okres",
+            "dataType": "string",
+            "sourceColumn": "okres",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "je_NP",
+            "dataType": "int64",
+            "sourceColumn": "je_NP",
+            "sourceProviderType": "UnsignedTinyInt"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "D_JANKECH_obec",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [dbo].[D_JANKECH_obec].*   FROM [dbo].[D_JANKECH_obec] ",
+              "dataSource": "SqlServer DESKTOP-O7MS5VC hotel"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [dbo].[D_JANKECH_obec].*   FROM [dbo].[D_JANKECH_obec] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "D_JANKECH_obec"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "D_JANKECH_stat",
+        "columns": [
+          {
+            "name": "id_stat",
+            "dataType": "int64",
+            "sourceColumn": "id_stat",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "stat",
+            "dataType": "string",
+            "sourceColumn": "stat",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "eu",
+            "dataType": "int64",
+            "sourceColumn": "eu",
+            "sourceProviderType": "UnsignedTinyInt"
+          },
+          {
+            "name": "pocet_obyv",
+            "dataType": "int64",
+            "sourceColumn": "pocet_obyv",
+            "sourceProviderType": "Integer"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "D_JANKECH_stat",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [dbo].[D_JANKECH_stat].*   FROM [dbo].[D_JANKECH_stat] ",
+              "dataSource": "SqlServer DESKTOP-O7MS5VC hotel"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [dbo].[D_JANKECH_stat].*   FROM [dbo].[D_JANKECH_stat] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "D_JANKECH_stat"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "D_JANKECH_zamestnanec",
+        "columns": [
+          {
+            "name": "id_zam",
+            "dataType": "int64",
+            "sourceColumn": "id_zam",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "typ_vzdelania",
+            "dataType": "string",
+            "sourceColumn": "typ_vzdelania",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "jazyk_znalosti",
+            "dataType": "string",
+            "sourceColumn": "jazyk_znalosti",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "prax",
+            "dataType": "string",
+            "sourceColumn": "prax",
+            "sourceProviderType": "Char"
+          },
+          {
+            "name": "pohlavie",
+            "dataType": "string",
+            "sourceColumn": "pohlavie",
+            "sourceProviderType": "Char"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "D_JANKECH_zamestnanec",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [dbo].[D_JANKECH_zamestnanec].*   FROM [dbo].[D_JANKECH_zamestnanec] ",
+              "dataSource": "SqlServer DESKTOP-O7MS5VC hotel"
+            }
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [dbo].[D_JANKECH_zamestnanec].*   FROM [dbo].[D_JANKECH_zamestnanec] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "D_JANKECH_zamestnanec"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "JANKECH_hostia",
+        "columns": [
+          {
+            "name": "id",
+            "dataType": "int64",
+            "sourceColumn": "id",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "JANKECH_FKid_cas",
+            "dataType": "int64",
+            "sourceColumn": "JANKECH_FKid_cas",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "JANKECH_FKid_obec",
+            "dataType": "int64",
+            "sourceColumn": "JANKECH_FKid_obec",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "JANKECH_FKid_stat",
+            "dataType": "int64",
+            "sourceColumn": "JANKECH_FKid_stat",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "JANKECH_FKid_izba",
+            "dataType": "int64",
+            "sourceColumn": "JANKECH_FKid_izba",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "pocet",
+            "dataType": "int64",
+            "sourceColumn": "pocet",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "priem_minanie",
+            "dataType": "double",
+            "sourceColumn": "priem_minanie",
+            "sourceProviderType": "Numeric"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "JANKECH_hostia",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [dbo].[JANKECH_hostia].*   FROM [dbo].[JANKECH_hostia] ",
+              "dataSource": "SqlServer DESKTOP-O7MS5VC hotel"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "TotalAverageSpending",
+            "expression": "SUM(JANKECH_hostia[priem_minanie])"
+          },
+          {
+            "name": "TotalGuests",
+            "expression": [
+              "SUM(JANKECH_hostia[pocet]",
+              ")"
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [dbo].[JANKECH_hostia].*   FROM [dbo].[JANKECH_hostia] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "JANKECH_hostia"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      },
+      {
+        "name": "JANKECH_staznosti",
+        "columns": [
+          {
+            "name": "id",
+            "dataType": "int64",
+            "sourceColumn": "id",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "JANKECH_FKid_cas",
+            "dataType": "int64",
+            "sourceColumn": "JANKECH_FKid_cas",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "JANKECH_FKid_obec",
+            "dataType": "int64",
+            "sourceColumn": "JANKECH_FKid_obec",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "JANKECH_FKid_zam",
+            "dataType": "int64",
+            "sourceColumn": "JANKECH_FKid_zam",
+            "sourceProviderType": "Integer"
+          },
+          {
+            "name": "pocet",
+            "dataType": "int64",
+            "sourceColumn": "pocet",
+            "sourceProviderType": "Integer"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "JANKECH_staznosti",
+            "dataView": "full",
+            "source": {
+              "type": "query",
+              "query": " \t\t\t\tSELECT [dbo].[JANKECH_staznosti].*   FROM [dbo].[JANKECH_staznosti] ",
+              "dataSource": "SqlServer DESKTOP-O7MS5VC hotel"
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "TotalComplains",
+            "expression": [
+              "SUM(JANKECH_staznosti[pocet]",
+              ")"
+            ]
+          }
+        ],
+        "annotations": [
+          {
+            "name": "_TM_ExtProp_QueryDefinition",
+            "value": " \t\t\t\tSELECT [dbo].[JANKECH_staznosti].*   FROM [dbo].[JANKECH_staznosti] "
+          },
+          {
+            "name": "_TM_ExtProp_DbTableName",
+            "value": "JANKECH_staznosti"
+          },
+          {
+            "name": "_TM_ExtProp_DbSchemaName",
+            "value": "dbo"
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "eae18aee-d41d-4f45-8b8d-c3f87237fc0f",
+        "fromTable": "JANKECH_hostia",
+        "fromColumn": "JANKECH_FKid_obec",
+        "toTable": "D_JANKECH_obec",
+        "toColumn": "id_obec"
+      },
+      {
+        "name": "bb52906e-40e7-481a-8f15-f83e1cd5c477",
+        "fromTable": "JANKECH_staznosti",
+        "fromColumn": "JANKECH_FKid_cas",
+        "toTable": "D_JANKECH_cas",
+        "toColumn": "id_cas"
+      },
+      {
+        "name": "3de54989-eb9d-487d-8869-354f35184a1d",
+        "fromTable": "JANKECH_hostia",
+        "fromColumn": "JANKECH_FKid_cas",
+        "toTable": "D_JANKECH_cas",
+        "toColumn": "id_cas"
+      },
+      {
+        "name": "6e1d7d8e-0939-467f-90d3-3eb268d7da63",
+        "fromTable": "JANKECH_hostia",
+        "fromColumn": "JANKECH_FKid_izba",
+        "toTable": "D_JANKECH_izba",
+        "toColumn": "id_izba"
+      },
+      {
+        "name": "c88b226f-e0d1-42cf-961b-edbd6884e3fb",
+        "fromTable": "JANKECH_hostia",
+        "fromColumn": "JANKECH_FKid_stat",
+        "toTable": "D_JANKECH_stat",
+        "toColumn": "id_stat"
+      },
+      {
+        "name": "6ba73c49-bb0b-44e0-a69a-cbf6bd423c9d",
+        "fromTable": "JANKECH_staznosti",
+        "fromColumn": "JANKECH_FKid_obec",
+        "toTable": "D_JANKECH_obec",
+        "toColumn": "id_obec"
+      },
+      {
+        "name": "271b1979-b7db-4d1d-af23-8a8000d1097f",
+        "fromTable": "JANKECH_staznosti",
+        "fromColumn": "JANKECH_FKid_zam",
+        "toTable": "D_JANKECH_zamestnanec",
+        "toColumn": "id_zam"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "400"
+      }
+    ]
+  }
+}

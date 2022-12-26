@@ -1,0 +1,9 @@
+D:\git_repozitare\FHI\BI\multidimensional\hotel_tabular\hotel_tabular\bin\hotelcube.asdatabase
+D:\git_repozitare\FHI\BI\multidimensional\hotel_tabular\hotel_tabular\bin\hotelcube.deploymenttargets
+D:\git_repozitare\FHI\BI\multidimensional\hotel_tabular\hotel_tabular\bin\hotelcube.deploymentoptions
+D:\git_repozitare\FHI\BI\multidimensional\hotel_tabular\hotel_tabular\obj\Development\hotel_tabular.smproj.AssemblyReference.cache
+D:\git_repozitare\FHI\BI\multidimensional\hotel_tabular\hotel_tabular\obj\Development\hotel_tabular.smproj.SuggestedBindingRedirects.cache
+D:\git_repozitare\FHI\BI\multidimensional\hotel_tabular\hotel_tabular\obj\Development\hotel_tabular.smproj.CoreCompileInputs.cache
+D:\git_repozitare\FHI\BI\multidimensional\hotel_tabular\hotel_tabular\obj\Development\hotelcube.asdatabase
+D:\git_repozitare\FHI\BI\multidimensional\hotel_tabular\hotel_tabular\obj\Development\hotelcube.deploymentoptions
+D:\git_repozitare\FHI\BI\multidimensional\hotel_tabular\hotel_tabular\obj\Development\hotelcube.deploymenttargets
