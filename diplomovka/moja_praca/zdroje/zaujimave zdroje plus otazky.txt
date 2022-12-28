@@ -8,3 +8,4 @@ https://stackoverflow.com/questions/28285813/style-jquery-autocomplete-in-a-boot
 https://petetasker.com/using-async-await-jquerys-ajax asynchrinnz js pre ajax dobry clanok  
 https://stackoverflow.com/questions/14220321/how-do-i-return-the-response-from-an-asynchronous-call dalsie dobre vysvetlenie
 https://stackoverflow.com/questions/35147038/how-to-place-the-datatables-horizontal-scrollbar-on-top-of-the-table top sscroll bar 
+https://trends.google.com/trends/explore?date=2004-01-10%202019-03-01&q=GraphQL,REST%20API,OData,WSDL,gRPC vyvoj hladanua technologii na googli 
