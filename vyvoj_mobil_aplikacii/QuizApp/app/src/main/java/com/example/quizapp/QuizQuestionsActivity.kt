@@ -1,5 +1,6 @@
 package com.example.quizapp
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_quiz_questions.*
 
@@ -15,22 +17,29 @@ class QuizQuestionsActivity : AppCompatActivity(),View.OnClickListener {
     private var mCurrentPosition:Int=1
     private var mQuestionsList:ArrayList<Question>?=null
     private var mSelectedOptionsPosition:Int=1
+    private var mCorrectAnswers:Int=0
+    private var mUserName:String?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_quiz_questions)
+        mUserName=intent.getStringExtra(Constants.USER_NAME)
          mQuestionsList=Constants.getQuestion()
        setQuestion()
         tv_option_one.setOnClickListener(this)
         tv_option_two.setOnClickListener(this)
         tv_option_three.setOnClickListener(this)
         tv_option_four.setOnClickListener(this)
+        btn_submit.setOnClickListener(this)
 
 
     }
     private fun setQuestion(){
         val question=mQuestionsList!![mCurrentPosition-1]
         defaultOptionsView()
+        if(mCurrentPosition==mQuestionsList!!.size){
+            btn_submit.text="FINISH"
+        }else{btn_submit.text="SUBMIT"}
         progressBar.progress=mCurrentPosition
         tv_progress.text="$mCurrentPosition"+"/"+progressBar.getMax()
         tv_question.text=question!!.question
@@ -69,14 +78,61 @@ class QuizQuestionsActivity : AppCompatActivity(),View.OnClickListener {
             R.id.tv_option_four->{
                 selectedOptionView(tv_option_four,4)
             }
+            R.id.btn_submit->{
+                if(mSelectedOptionsPosition==0){
+                    mCurrentPosition++
+                    when{
+                        mCurrentPosition<=mQuestionsList!!.size ->{
+                            setQuestion()
+                        }else->{
+                            val intent= Intent(this,ResultActivity::class.java)
+                             intent.putExtra(Constants.USER_NAME,mUserName)
+                             intent.putExtra(Constants.CORRECT_ANSWERS,mCorrectAnswers)
+                             intent.putExtra(Constants.TOTAL_QUESTIOMS,mQuestionsList!!.size)
+                             startActivity(intent)
+                        }
+                    }
+                }else{
+                    val question=mQuestionsList?.get(mCurrentPosition-1)
+                    if(question!!.correctAnswer!=mSelectedOptionsPosition){
+                        answerView(mSelectedOptionsPosition,R.drawable.wrong_option_border_bg)
+                    }else{
+                        mCorrectAnswers++
+                    }
+                    answerView(question.correctAnswer,R.drawable.correct_option_border_bg)
+                    if(mCurrentPosition==mQuestionsList!!.size){
+                        btn_submit.text="FINISH"
+                    }else{
+                        btn_submit.text="GO TO NEXT QUESTION"
+                    }
+                    mSelectedOptionsPosition=0
+                }
+            }
 
 
         }
 
     }
+    private fun answerView(answer:Int,drawableview:Int) {
+        when (answer) {
+            1 -> {
+                tv_option_one.background = ContextCompat.getDrawable(this, drawableview)
+            }
+            2 -> {
+                tv_option_two.background = ContextCompat.getDrawable(this, drawableview)
+            }
+            3-> {
+                tv_option_three.background = ContextCompat.getDrawable(this, drawableview)
+            }
+            4 -> {
+                tv_option_four.background = ContextCompat.getDrawable(this, drawableview)
+            }
+
+        }
+    }
     private  fun selectedOptionView(tv:TextView,selectedOptionNum:Int){
         defaultOptionsView()
-        mSelectedOptionsPosition=selectedOptionNum
+        mSelectedOptionsPosition= selectedOptionNum
 
             tv.setTextColor(Color.parseColor("#363A43"))
             tv.setTypeface(tv.typeface,Typeface.BOLD)
