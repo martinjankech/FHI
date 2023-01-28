@@ -1,6 +1,12 @@
+
+teoreticka
+webové služby- komponenty,archutektura(porovnat mozno aj rest vs SOAP vs moderny GraphQL), popis zakladných jazykov(otvorene stadardy) + rest vs soap 
+metodika a ciele 
+zadefinovat požiadavky teda čo ideme vytvarat 
+popisať ako sme to alebo čim sme to vytvarali 
 webovy server- iis pouzity 
 frontend - jqery kniznice- ui napr plus technologia ajax 
-webové služby- komponenty,archutektura(porovnat mozno aj rest vs SOAP vs moderny GraphQL), popis zakladných jazykov(otvorene stadardy)+ frameworkov pouzitých v praci (xpath vs linq ) ASP NET Csharp 
+ frameworkov pouzitých v praci (xpath vs linq ) ASP NET Csharp 
 porovnat rozdiel medzi webovov službo a webovou aplikaciov 
 
 prakticka - popis vytvorenia zakladnej webovej sluzby
@@ -8,5 +14,6 @@ prakticka - popis vytvorenia zakladnej webovej sluzby
           - popis jednotlivých webových služieb - najpr teoreticky potom aj na urivkoch kodov 
           - popis vybraných frontend prvkov + hlavne konzumacie webových služieb klientom.
           - návrh obrazoviek ak bude čas zabije strany plus obrazky pekne 
+testovanie manualne, automaticke , soap ui a pod. 
 
 

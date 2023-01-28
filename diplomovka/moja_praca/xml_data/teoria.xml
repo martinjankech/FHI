@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zoznamStudentov>
+  <student id="1">
+    <meno>Marek </meno>
+    <cena mena="euro">30<cena>
+      <priezvisko>Berith</priezvisko>
+      <certifikat>áno</certifikat>
+      <body>
+        <programovanie>100</programovanie>
+        <matematika>70</matematika>
+        <statistika>90</statistika>
+      </body>
+    </student>
+    <student id="2">
+      <meno>Matúš </meno>
+      <priezvisko>Pešta</priezvisko>
+      <certifikat>áno</certifikat>
+      <body>
+        <programovanie>80</programovanie>
+        <matematika>90</matematika>
+        <statistika>85</statistika>
+      </body>
+    </student>
+  </zoznamStudentov>
+  <cena>30</cena>
+
