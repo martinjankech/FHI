@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<z:Zakaznik xmlns:z="https://.../Zakaznici"
+    xmlns:o="https://....com /Objednavky"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation=
+     "https://.../schemas/people.xsd 
+      https://.../schemas/vehicles.xsd">
+    <z:ID>1</z:ID>
+    <z:meno>John</z:meno>
+    <z:priezvisko>John</z:priezvisko>
+    <z:vek>28</z:vek>
+    <o:Objednavka>
+        <o:ID>25</o:ID>
+        <o:tovar>4</o:tovar>
+        <o:mnoztvo>2</o:mnozstvo>
+    </o:Objednavka>
+</z:Zakaznik>

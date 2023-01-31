@@ -1,0 +1,26 @@
+{
+  "zoznamStudentov": {
+    "student": [
+      {
+        "meno": "Marek",
+        "priezvisko": "Berith",
+        "certifikat": "áno",
+        "body": {
+          "programovanie": 100,
+          "matematika": 70,
+          "statistika": 90
+        }
+      },
+      {
+        "meno": "Matúš",
+        "priezvisko": "Pešta",
+        "certifikat": "áno",
+        "body": {
+          "programovanie": 80,
+          "matematika": 90,
+          "statistika": 85
+        }
+      }
+    ]
+  }
+}
