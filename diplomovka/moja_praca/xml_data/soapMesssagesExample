@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope/" soap:encodingStyle="http://www.w3.org/2003/05/soap-encoding">
+
+ <soap:Body>
+  <!--Nazov metódy ktorá sa má spustiť na servery-->
+  <o:ZiskajCenu xmlns:o="https://nasObchod/ceny">
+   <!--Názov položky je vstupná hodnota-->
+   <o:Polozka>pohár-sklenený </o:Polozka>
+  </o:ZiskajCenu>
+ </soap:Body>
+
+</soap:Envelope>
+
+<?xml version="1.0"?>
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope/" soap:encodingStyle="http://www.w3.org/2003/05/soap-encoding">
+
+ <soap:Body>
+  <o:ZiskajCenuOdpoved xmlns:o="https://nasObchod/ceny">
+   <o:Cena>5.2</o:Cena>
+  </o:ZiskajCenuOdpoved>
+ </soap:Body>
+
+</soap:Envelope>
