@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
@@ -189,8 +190,74 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
             }
 
         }
-        
-        
+        [WebMethod]
+        public void GetBooks(string selectedCategory,string selectedValueCategory, string startDate, string endDate, string sortField, string sortOrder)
+        {
+            var booksXml = XElement.Load(fileBookInfo);
+            var warehouseXml = XElement.Load(fileBookTransactionInfo);
+            
+            DateTime start = DateTime.Parse(startDate);
+            DateTime end = DateTime.Parse(endDate);
+            IEnumerable<XElement> elements = booksXml.Descendants("autori");
+
+
+
+            var result = from b in booksXml.Descendants("book")
+                         join w1 in warehouseXml.Descendants("transakcia") on (string)b.Element("id") equals (string)w1.Element("id_knihy") into g
+                         from w1 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - start).Ticks)).Take(1)
+                         let startAmount = (int)w1.Element("aktualne_mnozstvo_na_sklade")
+                 
+            from w2 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - end).Ticks)).Take(1)
+                 where (string)b.Element(selectedCategory) == selectedValueCategory || b.Element(selectedCategory).DescendantNodes().ElementAt(0).ToString() == selectedValueCategory || b.Element(selectedCategory).DescendantNodes().ElementAt(2).ToString() == selectedValueCategory 
+
+
+                         select new
+                         {
+                             BookId = (string)b.Element("id"),
+                             BookName = (string)b.Element("nazov"),
+                             StartAmount = startAmount,
+                             EndAmount = (int)w2.Element("aktualne_mnozstvo_na_sklade"),
+                             StartDate = start.ToString("yyyy-MM-dd"),
+                             EndDate = end.ToString("yyyy-MM-dd")
+                         };
+
+            if (sortOrder == "Ascending")
+            {
+                switch (sortField)
+                {
+                    case "id":
+                        result = result.OrderBy(r => r.BookId);
+                        break;
+                    case "nazov":
+                        result = result.OrderBy(r => r.BookName);
+                        break;
+                    
+                    default:
+                        break;
+                }
+            }
+            else if (sortOrder == "Descending")
+            {
+                switch (sortField)
+                {
+                    case  "id":
+                        result = result.OrderByDescending(r => r.BookId);
+                        break;
+                    case "nazov":
+                        result = result.OrderByDescending(r => r.BookName);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+           
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
+        }
+
+
     }
 }
 

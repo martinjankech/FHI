@@ -105,17 +105,17 @@ let array=[]
     return uniqueArray
   }
   
-//   async function createArrayFromNestedAttribute(parent,child) {
-// let array=[]
-//    await Getallbook().then((data) => {
+  async function createArrayFromNestedAttribute(parent,child) {
+ let array=[]
+   await Getallbook().then((data) => {
      
-//       for (values of data) {
-//         array.push(values[parent][child])
-//       }
-//     })
-//      const uniqueArray = [...new Set(array)];
-//     return uniqueArray
-//   }
+     for (values of data) {
+        array.push(values[parent][child])
+      }
+     })
+     const uniqueArray = [...new Set(array)];
+     return uniqueArray
+   }
   // do zadaneho inputu prida autonávrhy data ziska z poľa ktoré vytvorí funkcia ceateArrayFromOneAttribute  
   function autoCompleteInput(inputSelector, maxItem, sourceArray) {
     var selector = inputSelector;

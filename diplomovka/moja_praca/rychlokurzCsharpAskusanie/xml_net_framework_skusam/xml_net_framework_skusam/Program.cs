@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Common;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
@@ -85,9 +86,11 @@ namespace xml_net_framework_skusam
             //     join st in root.Descendants("book")
             //    on (int)el.Element("id_knihy") equals (int)st.Element("id")
             //     // where (int ) el.Element("id_knihy")==1 || (int)el.Element("id_knihy")==2
-            //     where DateTime.Parse(el.Element("datum").Value)>=datumZac && DateTime.Parse(el.Element("datum").Value)<=datumKon     
-            //     select new { nazov = st.Element("nazov"),
-            //     mnoztvo_sklad=el.Element("aktualne_mnozstvo_na_sklade")
+            //     where DateTime.Parse(el.Element("datum").Value) >= datumZac && DateTime.Parse(el.Element("datum").Value) <= datumKon
+            //     select new
+            //     {
+            //         nazov = st.Element("nazov"),
+            //         mnoztvo_sklad = el.Element("aktualne_mnozstvo_na_sklade")
             //     };
 
             //foreach (var item in transaktionById) { Console.WriteLine(item.nazov+":"+item.mnoztvo_sklad); }
@@ -104,8 +107,8 @@ namespace xml_net_framework_skusam
             //foreach (var item in actualWarehousebalance)
             //{ Console.WriteLine(item.id + " " + item.nazov + "" + item.celkovo_cena + " eur "); }
 
-            DateTime datumZac = DateTime.Parse("2020-01-08").Date;
-            DateTime datumKon = DateTime.Parse("2020-01-12").Date;
+            //DateTime datumZac = DateTime.Parse("2020-01-08").Date;
+            //DateTime datumKon = DateTime.Parse("2020-01-12").Date;
 
             //   var actualWarehousebalance =
             //from el in rootOrders.Descendants("transakcia")
@@ -135,64 +138,97 @@ namespace xml_net_framework_skusam
             //     Console.WriteLine(data.Key);
             //     foreach (var transaction in data) { Console.WriteLine(transaction.Element("mnozstvo")); }
             // }
-            var resultStartDate = rootOrders.Descendants("transakcia")
-               // zac datum ako hranica vyberie aj skorsie pre pripad zeby v dany den neprebehla transakcia pre dane id 
-               .Where(t => DateTime.Parse(t.Element("datum").Value) <= datumZac)
-               .GroupBy(t => new { t.Element("id_knihy").Value })
-               .Select(x => new
-               {
-
-                   // zisti poslednu transakciu(max v datumzac ale pripadne aj skorej) na zaklade idcka transakcie-da sa lebo idcka transakcii sa zvysuju podla poradia transakcii a tie vznikaju v case
-                   Firsttransaction = x.OrderByDescending(t => t.Element("id_transakcie").Value).FirstOrDefault()
 
 
-               }).Select(x => new {
-                   id = x.Firsttransaction.Element("id_knihy"),
-                   datum = x.Firsttransaction.Element("datum"),
-                   mnoztvo = x.Firsttransaction.Element("aktualne_mnozstvo_na_sklade")
-               });
-            Console.WriteLine("zaciatocne  pocty");
-            foreach (var data in resultStartDate)
-            { Console.WriteLine(data.id + " - " + data.datum + " - " + data.mnoztvo); }
+            //tu zacina funkcna metoda na zac a konecne mnoztvo podla datumu treba to spojit este s kategoriov teda dat tu len idcka knih podla vybranej kategorie
+            //    var resultStartDate = rootOrders.Descendants("transakcia")
+            //       // zac datum ako hranica vyberie aj skorsie pre pripad zeby v dany den neprebehla transakcia pre dane id 
+            //       .Where(t => DateTime.Parse(t.Element("datum").Value) <= datumZac)
+            //       .GroupBy(t => new { t.Element("id_knihy").Value })
+            //       .Select(x => new
+            //       {
 
-            var resultEndDate = rootOrders.Descendants("transakcia")
-                .Where(t => DateTime.Parse(t.Element("datum").Value) <= datumKon)
-                .GroupBy(t => new { t.Element("id_knihy").Value })
-                .Select(x => new
-                {
-
-                    // zisti poslednu transakciu na zaklade idcka transakcie-da sa lebo idcka transakcii sa zvysuju podla poradia transakcii a tie vznikaju v case
-                    Lasttransaction = x.OrderByDescending(t => t.Element("id_transakcie").Value).FirstOrDefault()
+            //           // zisti poslednu transakciu(max v datumzac ale pripadne aj skorej) na zaklade idcka transakcie-da sa lebo idcka transakcii sa zvysuju podla poradia transakcii a tie vznikaju v case
+            //           Firsttransaction = x.OrderByDescending(t => t.Element("id_transakcie").Value).FirstOrDefault()
 
 
-                }).Select(x => new
-                {
-                    id = x.Lasttransaction.Element("id_knihy"),
-                    datum = x.Lasttransaction.Element("datum"),
-                    mnoztvo = x.Lasttransaction.Element("aktualne_mnozstvo_na_sklade")
-                });
-            Console.WriteLine("konecne  pocty");
-            foreach (var data in resultEndDate)
-            { Console.WriteLine(data.id + " - " + data.datum + " - " + data.mnoztvo); }
+            //       }).Select(x => new
+            //       {
+            //           id = x.Firsttransaction.Element("id_knihy"),
+            //           datum = x.Firsttransaction.Element("datum"),
+            //           mnoztvo = x.Firsttransaction.Element("aktualne_mnozstvo_na_sklade")
+            //       });
+            //    Console.WriteLine("zaciatocne  pocty");
+            //    foreach (var data in resultStartDate)
+            //    { Console.WriteLine(data.id + " - " + data.datum + " - " + data.mnoztvo); }
 
-            
+            //    var resultEndDate = rootOrders.Descendants("transakcia")
+            //        .Where(t => DateTime.Parse(t.Element("datum").Value) <= datumKon)
+            //        .GroupBy(t => new { t.Element("id_knihy").Value })
+            //        .Select(x => new
+            //        {
 
-            var StartAndEndJoin = resultStartDate.Join(resultEndDate,
-               startId => startId.id.Value,
-               endId => endId.id.Value,
-               (startId, endId) => new
-               {
-                   id = startId.id,
-                   mnoztvoStart = startId.mnoztvo,
-                   mnoztvoEnd = endId.mnoztvo,
-               });
-            foreach (var data in StartAndEndJoin)
-            { Console.WriteLine(data.id + " - " + data.mnoztvoStart + " - " + data.mnoztvoEnd); }
+            //            // zisti poslednu transakciu na zaklade idcka transakcie-da sa lebo idcka transakcii sa zvysuju podla poradia transakcii a tie vznikaju v case
+            //            Lasttransaction = x.OrderByDescending(t => t.Element("id_transakcie").Value).FirstOrDefault()
 
+
+            //        }).Select(x => new
+            //        {
+            //            id = x.Lasttransaction.Element("id_knihy"),
+            //            datum = x.Lasttransaction.Element("datum"),
+            //            mnoztvo = x.Lasttransaction.Element("aktualne_mnozstvo_na_sklade")
+            //        });
+            //    Console.WriteLine("konecne  pocty");
+            //    foreach (var data in resultEndDate)
+            //    { Console.WriteLine(data.id + " - " + data.datum + " - " + data.mnoztvo); }
+
+
+
+            //    var StartAndEndJoin = resultStartDate.Join(resultEndDate,
+            //       startId => startId.id.Value,
+            //       endId => endId.id.Value,
+            //       (startId, endId) => new
+            //       {
+            //           id = startId.id,
+            //           mnoztvoStart = startId.mnoztvo,
+            //           mnoztvoEnd = endId.mnoztvo,
+            //       });
+            //    foreach (var data in StartAndEndJoin)
+            //    { Console.WriteLine(data.id.Value + " - " + data.mnoztvoStart.Value + " - " + data.mnoztvoEnd.Value); }
+
+            //}
+
+            var booksXml = XElement.Load(bookInfoPath);
+            var warehouseXml = XElement.Load(bookTransactionPath);
+            Console.WriteLine(booksXml.Element("books").);
+
+            //var selectedCategory = "Fantasy";
+            //DateTime startDate =  DateTime.Parse("2020-01-08").Date;
+            //DateTime endDate =  DateTime.Parse("2020-01-09").Date;
+          
+            ////DateTime datumKon = DateTime.Parse("2020-01-12").Date
+
+            //var result = from b in booksXml.Descendants("book")
+            //             join w1 in warehouseXml.Descendants("transakcia") on (string)b.Element("id") equals (string)w1.Element("id_knihy") into g
+            //             from w1 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - startDate).Ticks)).Take(1)
+            //             let startAmount = (int)w1.Element("aktualne_mnozstvo_na_sklade")
+            //             from w2 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - endDate).Ticks)).Take(1)
+            //             where (string)b.Element("kategoria") == selectedCategory
+            //             select new
+            //             {
+            //                 BookId = (string)b.Element("id"),
+            //                 BookName = (string)b.Element("nazov"),
+            //                 StartAmount = startAmount,
+            //                 EndAmount = (int)w2.Element("aktualne_mnozstvo_na_sklade"),
+            //                 StartDate = (DateTime)w1.Element("datum"),
+            //                 EndDate = (DateTime)w2.Element("datum")
+            //             };
+
+            //foreach (var r in result)
+            //{
+            //    Console.WriteLine("Book ID: {0}, Book Name: {1}, Start Amount: {2}, End Amount: {3}, Start Date: {4}, End Date: {5}", r.BookId, r.BookName, r.StartAmount, r.EndAmount, r.StartDate, r.EndDate);
+            //}
         }
-
-
     }
-
 }
-
+        
