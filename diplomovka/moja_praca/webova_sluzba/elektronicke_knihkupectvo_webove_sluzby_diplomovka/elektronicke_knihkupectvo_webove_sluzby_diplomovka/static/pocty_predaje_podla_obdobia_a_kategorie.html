@@ -35,52 +35,62 @@
 <body>
   <div id="navbar">
   </div>
+  <div style="display: none;" id="alert_error">
+    <div class="alert alert-danger" role="alert">
+      <span id="alert-text"></span>
+    </div>
+    <div style="display: none;" id="alert_success">
+      <div class="alert alert-success" role="alert">
+        <span id="alert-text"></span>
+      </div>
+    </div>
+  </div>
   <div class="container">
     <h1 class="mb-3 mt-5">Hľadaj počty kníh podľa: </h1>
-    <form class="col-12">
+    <form class="col-12" id="formAtributesDates" method="POST">
       <div class="form-row ">
         <div class="form-group col-md-6">
-          <label for="inputEmail4">Datum od</label>
-          <input type="date" class="form-control" id="inputEmail4" placeholder="Email">
+          <label for="startDate">Datum od</label>
+          <input type="date" class="form-control" id="startDate" placeholder="startdate">
         </div>
         <div class="form-group col-md-6">
-          <label for="inputPassword4">Datum do</label>
-          <input type="date" class="form-control" id="inputPassword4" placeholder="Password">
+          <label for="endDate">Datum do</label>
+          <input type="date" class="form-control" id="endDate" placeholder="enddate">
         </div>
       </div>
       <div class="form-row ">
         <div class="form-group col-md-6">
-          <label for="inputState">hľadať podľa atribútu</label>
-          <select id="atributesSelect" class="form-control">
+          <label for="atributeValue">hľadať podľa atribútu</label>
+          <select id="selectedAtribute" class="form-control">
             <option disabled selected value> zvoľte si možnosť prosím </option>
             <option value="autor">autor</option>
-            <option value="kategoria">kategoria</option>
-            <option value="vydavatelstvo">vydavatelstvo</option>
+            <option value="kategoria">kategória</option>
+            <option value="vydavatelstvo">vydavateľstvo</option>
             <option value="jazyk">jazyk</option>
-            <option value="vazba">vazba</option>
+            <option value="vazba">väzba</option>
 
           </select>
         </div>
         <div class="form-group col-md-6">
-          <label for="inputState">Zoradiť podľa atribútu</label>
-          <select id="inputState" class="form-control">
+          <label for="sortingValue">Zoradiť podľa atribútu</label>
+          <select id="sortField" class="form-control" name="sortField">
             <option disabled selected value> zvolte si možnosť prosím </option>
-            <option>názov</option>
-            <option>počet strán</option>
-            <option>rok vydania</option>
-            <option>cena</option>
-            <option>priemerné_hodnotenie</option>
+            <option value="nazov">názov</option>
+            <option value="pocet_stran">počet strán</option>
+            <option value="rok_vydania">rok vydania</option>
+            <option value="nakupna_cena">nákupná cena</option>
+            <option value="predajna_cena">predajná cena</option>
+            <option value="priemerne_hodnotenie">priemerné hodnotenie</option>
           </select>
 
           <div class="form-check mt-2">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1"
-              checked>
+            <input class="form-check-input" type="radio" name="sortOrder" id="descendingInput" value="Descending">
             <label class="form-check-label" for="exampleRadios1">
               Vzostupne
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+            <input class="form-check-input" type="radio" name="sortOrder" id="ascending_Input" value="Ascending">
             <label class="form-check-label" for="exampleRadios2">
               Zostupne
             </label>
@@ -88,22 +98,50 @@
         </div>
       </div>
       <h6>hodnota hľadaného atribútu </h6>
-      <input class="form-control col-10 mb-3" type="text" name="" id="vstup" placeholder="">
+      <input class="form-control col-10 mb-3" type="text" name="selectedValueAtribute" id="selectedValueAtribute"
+        placeholder="">
 
-      <button type="submit" class="btn btn-primary ">potvrdiť</button>
-
+      <button type="submit" id="btnGetData" class="btn btn-primary ">potvrdiť</button>
     </form>
 
-  </div>
-  <footer>
 
-  </footer>
+
+    <div class="container mt-5 ">
+      <div class=" mb-5 table-responsive">
+        <table id="bookData" class=" display nowrap ">
+          <thead>
+            <tr>
+
+              <th>id</th>
+              <th>nazov</th>
+              <th>pocet_stran</th>
+              <th>rok_vydania</th>
+              <th>predajna_cena</th>
+              <th>nakupna_cena</th>
+            </tr>
+          </thead>
+          <tfoot class="mb-5">
+            <tr>
+              <th>id</th>
+              <th>nazov</th>
+              <th>pocet_stran</th>
+              <th>rok_vydania</th>
+              <th>predajna_cena</th>
+              <th>nakupna_cena</th>
+            </tr>
+          </tfoot>
+        </table>
+
+      </div>
+      <footer>
+
+      </footer>
 </body>
 <script>
   $("#navbar").load("navbar.html")
   $("footer").load("footer.html")
-  $("#atributesSelect").on('change', function () {
-    $('#vstup').attr('placeholder', "zadajte hodnotu atributu " + $("select option:selected").val())
+  $("#selectedAtribute").on('change', function () {
+    $('#selectedValueAtribute').attr('placeholder', "zadajte hodnotu atributu " + $("select option:selected").val())
     switch ($("select option:selected").val()) {
       case "autor":
         createArrayFromNestedAttribute("autori", 'autor1').then(resolve => {
@@ -114,27 +152,60 @@
 
             console.log(final);
 
-            autoCompleteInput('#vstup', 5, final)
+            autoCompleteInput('#selectedValueAtribute', 5, final)
           })
         })
         break;
       case "kategoria":
-        createArrayFromOneAttribute1("kategoria").then(resolve => { autoCompleteInput('#vstup', 5, resolve); })
+        createArrayFromOneAttribute1("kategoria").then(resoslve => { autoCompleteInput('#selectedValueAtribute', 5, resolve); })
         break;
       case "vydavatelstvo":
-        createArrayFromOneAttribute1("vydavatelstvo").then(resolve => { autoCompleteInput('#vstup', 5, resolve) })
+        createArrayFromOneAttribute1("vydavatelstvo").then(resolve => { autoCompleteInput('#selectedValueAtribute', 5, resolve) })
         break;
       case "jazyk":
-        createArrayFromOneAttribute1("jazyk").then(resolve => { autoCompleteInput('#vstup', 5, resolve) })
+        createArrayFromOneAttribute1("jazyk").then(resolve => { autoCompleteInput('#selectedValueAtribute', 5, resolve) })
         break;
       case "vazba":
-        createArrayFromOneAttribute1("vazba").then(resolve => { autoCompleteInput('#vstup', 5, resolve) })
+        createArrayFromOneAttribute1("vazba").then(resolve => { autoCompleteInput('#selectedValueAtributep', 5, resolve) })
         break;
       default:
         alert("atribut nebol zadany spravne ")
     }
   })
   fixedFooter()
+</script>
+<script>
+
+  $(document).on('submit', "#formAtributesDates", function (event) {
+
+    var selectedAtributeValue = $("#selectedAtribute").val();
+    var selectedValueAtributeValue = $("#selectedValueAtribute").val();
+    var startDateValue = $("#startDate").val();
+    var endDateValue = $("#endDate").val();
+    var sortFieldValue = $("#sortField").val();
+    var sortOrderValue = $("input[name='sortOrder']:checked").val();
+
+    $.ajax({
+      url: "http://localhost:8045/book_services.asmx/Getbook",
+      method: "POST",
+      data: { selectedAtribute: selectedAtributeValue, selectedValueAtribute: selectedValueAtributeValue, startDate: startDateValue, endDate: endDateValue, sortField: sortFieldValue, sortOrder: sortOrderValue },
+      dataType: "json",
+      encode: true,
+      // 
+
+
+    }).done(function (data) {
+
+      alert("hura")
+      $("form")[0].reset();
+    }).fail(function (jqXHR, textStatus, errorThrown) { showAlertError(errorThrown) });
+    event.preventDefault();
+  })
+
+
+
+
+
 </script>
 
 </html>

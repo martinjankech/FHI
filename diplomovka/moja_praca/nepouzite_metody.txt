@@ -1,0 +1,24 @@
+[WebMethod]
+        public void GetListBooksBySelectedKategory(string category, string input) {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(fileBookInfo);
+            if (doc == null)
+            {
+                Context.Response.StatusCode = 500;
+                Context.Response.StatusDescription = "Dokument nemohol byt nacitany";
+                return;
+            }
+            // input musi byt string!
+            XmlNodeList Selectedbooks = doc.SelectNodes("Bookstore/books/book[" + category + "=\"" + input + "\"]");
+
+            int count = Selectedbooks.Count;
+
+            for (int i = 0; i < count; i++)
+
+            {
+                Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+                Context.Response.Write(JsonConvert.SerializeXmlNode(Selectedbooks.Item(i), Formatting.Indented));
+
+            }
+
+        }

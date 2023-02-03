@@ -47,7 +47,6 @@
             <th>autor2</th>
             <th>nazov</th>
             <th>kategoria</th>
-            <th>isbn</th>
             <th>jazyk</th>
             <th>pocet_stran</th>
             <th>vazba</th>
@@ -55,10 +54,9 @@
             <th>vydavatelstvo</th>
             <th>predajna_cena</th>
             <th>nakupna_cena</th>
-            <th>marza</th>
             <th>zisk_kus</th>
             <th>priemerne_hodnotenie</th>
-            <th>obsah</th>
+
             <!-- edit + delete ak bude  -->
             <!-- <th></th>
             <th></th> -->
@@ -72,7 +70,6 @@
             <th>autor2</th>
             <th>nazov</th>
             <th>kategoria</th>
-            <th>isbn</th>
             <th>jazyk</th>
             <th>pocet_stran</th>
             <th>vazba</th>
@@ -80,10 +77,9 @@
             <th>vydavatelstvo</th>
             <th>predajna_cena</th>
             <th>nakupna_cena</th>
-            <th>marza</th>
             <th>zisk_kus</th>
             <th>priemerne_hodnotenie</th>
-            <th>obsah</th>
+
             <!-- edit + delete ak bude  -->
             <!-- <th></th>
             <th></th> -->
@@ -127,6 +123,7 @@
 
   $(document).ready(function () {
     $('#example').DataTable({
+
       // defaultne sortovanie podla id 
       order: [[1, 'asc']],
       autoWidth: false,
@@ -139,6 +136,7 @@
       },
       dataType: "json",
       columns: [
+
 
         {
           data: "obrazok",
@@ -160,7 +158,6 @@
         },
         { data: 'nazov' },
         { data: 'kategoria' },
-        { data: 'isbn' },
         { data: 'jazyk' },
         { data: 'pocet_stran' },
         { data: 'vazba' },
@@ -168,10 +165,9 @@
         { data: 'vydavatelstvo' },
         { data: 'predajna_cena' },
         { data: 'nakupna_cena' },
-        { data: 'marza' },
         { data: 'zisk_kus' },
         { data: 'priemerne_hodnotenie' },
-        { data: 'obsah' },
+
         // { data: "", "defaultContent": "<button onclick='edititem();'>Edit</button>" },
         // {
         //   data: '',

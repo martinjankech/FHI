@@ -200,7 +200,9 @@ namespace xml_net_framework_skusam
 
             var booksXml = XElement.Load(bookInfoPath);
             var warehouseXml = XElement.Load(bookTransactionPath);
-            Console.WriteLine(booksXml.Element("books").);
+            Console.WriteLine(booksXml.Element("books").Element("book").Element("autori").Element("autor1").Value);
+              
+               
 
             //var selectedCategory = "Fantasy";
             //DateTime startDate =  DateTime.Parse("2020-01-08").Date;

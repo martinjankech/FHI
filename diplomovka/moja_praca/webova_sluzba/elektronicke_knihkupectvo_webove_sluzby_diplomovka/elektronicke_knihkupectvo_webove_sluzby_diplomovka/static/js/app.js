@@ -23,6 +23,7 @@
         console.log(parameterdata)
         var formData = {};
         formData[parameter] = $("#" + parameterdata).val().toLowerCase();
+        console.log(formData)
 
         $.ajax({
           url: url,
@@ -65,6 +66,7 @@
           $("#nakupna_cena").html(data.book.nakupna_cena)
           $("#marza").html(parseFloat(data.book.marza).toFixed(2) * 100 + "%")
           $("#zisk_kus").html(data.book.zisk_kus)
+          $("form")[0].reset();
         }).fail(function (jqXHR, textStatus, errorThrown) { showAlertError(errorThrown) });
         event.preventDefault();
       })
