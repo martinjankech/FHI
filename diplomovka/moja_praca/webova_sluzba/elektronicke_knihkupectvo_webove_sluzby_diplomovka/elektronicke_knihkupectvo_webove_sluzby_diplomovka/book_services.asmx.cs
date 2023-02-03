@@ -249,7 +249,7 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
                 string.IsNullOrEmpty(startDate) || string.IsNullOrEmpty(endDate) || string.IsNullOrEmpty(sortField) || string.IsNullOrEmpty(sortOrder))
             {
                 Context.Response.StatusCode = 400;
-                Context.Response.Write("Input Error: Please provide all the required input parameters");
+                Context.Response.Write("Prosím zadajte všetky vstupné parametre");
                 return;
             }
             
@@ -267,7 +267,7 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
                 && !sortField.Equals("predajna_cena")&& !sortField.Equals("nakupna_cena") && !sortField.Equals("priemerne_hodnotenie"))
             {
                 Context.Response.StatusCode = 400;
-                Context.Response.Write("Input Error: sortField must be either 'nazov' or 'pocet_stran''rok_vydania','predajna_cena''nakupna_cena','priemerne_hodnotenie'");
+                Context.Response.Write("Input Error: zoradovat možete podla tých atribútov 'nazov' 'pocet_stran''rok_vydania','predajna_cena''nakupna_cena','priemerne_hodnotenie'");
                 return;
             }
             // Try to parse the start and end dates
@@ -275,13 +275,13 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
             if (!DateTime.TryParse(startDate, out start) || !DateTime.TryParse(endDate, out end))
             {
                 Context.Response.StatusCode = 400;
-                Context.Response.Write("Input Error: startDate and endDate must be in a valid date format (e.g. 'yyyy-MM-dd')");
+                Context.Response.Write("Zadajte validný formát dútumu ( napr. 'yyyy-MM-dd')");
                 return;
             }
             if (start>end)
             {
                 Context.Response.StatusCode = 400;
-                Context.Response.Write("Zaciatocny datum nemoze byt vacsi ako konecny datum");
+                Context.Response.Write("Začiatočný dátum nemože byť neskorej ako konečný dátum");
                 return;
             }
             // Load XML files containing book information and book transaction information
@@ -373,7 +373,7 @@ namespace elektronicke_knihkupectvo_webove_sluzby_diplomovka
             if (result.Count() == 0)
             {
                 Context.Response.ContentType = "application/json";
-                Context.Response.Write("{\"Error\":\"No books found with the specified criteria.\"}");
+                Context.Response.Write("Žiadny záznam nespĺňa zadané kritériá");
             }
 
             Context.Response.ContentType = "application/json";

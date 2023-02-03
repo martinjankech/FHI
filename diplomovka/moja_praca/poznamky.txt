@@ -1,0 +1,1 @@
+405 je pravdepodobne sposobena ze potvrdis formular ale nezavolas metodu na servery chyba moze byt v samotnom potvedeni formularu alebo v ajax calle budeme updatovat 

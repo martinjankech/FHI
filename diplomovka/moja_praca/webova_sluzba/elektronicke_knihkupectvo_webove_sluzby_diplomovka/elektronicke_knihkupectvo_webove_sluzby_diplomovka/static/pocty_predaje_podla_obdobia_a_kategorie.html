@@ -28,7 +28,7 @@
   <script type="text/javascript" charset="utf8"
     src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
   <link rel="stylesheet" href="css/datatable.css">
-  <link rel="stylesheet" href="css/allbooks.css">
+
   <title>Document</title>
 </head>
 
@@ -39,12 +39,13 @@
     <div class="alert alert-danger" role="alert">
       <span id="alert-text"></span>
     </div>
-    <div style="display: none;" id="alert_success">
-      <div class="alert alert-success" role="alert">
-        <span id="alert-text"></span>
-      </div>
+  </div>
+  <div style="display: none;" id="alert_success">
+    <div class="alert alert-success" role="alert">
+      <span id="alert-text"></span>
     </div>
   </div>
+
   <div class="container">
     <h1 class="mb-3 mt-5">Hľadaj počty kníh podľa: </h1>
     <form class="col-12" id="formAtributesDates" method="POST">
@@ -98,44 +99,49 @@
         </div>
       </div>
       <h6>hodnota hľadaného atribútu </h6>
-      <input class="form-control col-10 mb-3" type="text" name="selectedValueAtribute" id="selectedValueAtribute"
+      <input class="form-control col-6 mb-3" type="text" name="selectedValueAtribute" id="selectedValueAtribute"
         placeholder="">
 
       <button type="submit" id="btnGetData" class="btn btn-primary ">potvrdiť</button>
     </form>
+  </div>
 
 
 
-    <div class="container mt-5 ">
-      <div class=" mb-5 table-responsive">
-        <table id="bookData" class=" display nowrap ">
-          <thead>
-            <tr>
+  <div class="container mt-5 ">
+    <div class=" mb-5 table-responsive">
+      <table style="display: none;" id="bookData" class=" mb-5  display nowrap ">
+        <thead>
+          <tr>
 
-              <th>id</th>
-              <th>nazov</th>
-              <th>pocet_stran</th>
-              <th>rok_vydania</th>
-              <th>predajna_cena</th>
-              <th>nakupna_cena</th>
-            </tr>
-          </thead>
-          <tfoot class="mb-5">
-            <tr>
-              <th>id</th>
-              <th>nazov</th>
-              <th>pocet_stran</th>
-              <th>rok_vydania</th>
-              <th>predajna_cena</th>
-              <th>nakupna_cena</th>
-            </tr>
-          </tfoot>
-        </table>
+            <th>id</th>
+            <th>nazov</th>
+            <th>datum_zaciatok</th>
+            <th>datum_koniec</th>
+            <th>pocet_zaciatok</th>
+            <th>pocet_koniec</th>
+          </tr>
+        </thead>
+        <tfoot class="mb-5">
+          <tr>
+            <th>id</th>
+            <th>nazov</th>
+            <th>datum_zaciatok</th>
+            <th>datum_koniec</th>
+            <th>pocet_zaciatok</th>
+            <th>pocet_koniec</th>
+          </tr>
+        </tfoot>
+      </table>
+      <br>
+      <br>
+      <br>
+    </div>
+  </div>
 
-      </div>
-      <footer>
+  <footer>
 
-      </footer>
+  </footer>
 </body>
 <script>
   $("#navbar").load("navbar.html")
@@ -157,7 +163,7 @@
         })
         break;
       case "kategoria":
-        createArrayFromOneAttribute1("kategoria").then(resoslve => { autoCompleteInput('#selectedValueAtribute', 5, resolve); })
+        createArrayFromOneAttribute1("kategoria").then(resolve => { autoCompleteInput('#selectedValueAtribute', 5, resolve) })
         break;
       case "vydavatelstvo":
         createArrayFromOneAttribute1("vydavatelstvo").then(resolve => { autoCompleteInput('#selectedValueAtribute', 5, resolve) })
@@ -166,7 +172,7 @@
         createArrayFromOneAttribute1("jazyk").then(resolve => { autoCompleteInput('#selectedValueAtribute', 5, resolve) })
         break;
       case "vazba":
-        createArrayFromOneAttribute1("vazba").then(resolve => { autoCompleteInput('#selectedValueAtributep', 5, resolve) })
+        createArrayFromOneAttribute1("vazba").then(resolve => { autoCompleteInput('#selectedValueAtribute', 5, resolve) })
         break;
       default:
         alert("atribut nebol zadany spravne ")
@@ -192,13 +198,24 @@
       dataType: "json",
       encode: true,
       // 
+    }).done(function (response) {
+      var data = response;
+      alert(data)
+      var table = $('#bookData').DataTable({
+        "data": data,
+        "columns": [
+          { data: "BookID" },
+          { data: "BookName" },
+          { data: "StartDate" },
+          { data: "EndDate" },
+          { data: "StartAmount" },
+          { data: "EndAmount" },
 
 
-    }).done(function (data) {
-
-      alert("hura")
-      $("form")[0].reset();
-    }).fail(function (jqXHR, textStatus, errorThrown) { showAlertError(errorThrown) });
+        ]
+      });
+      //$("form")[0].reset();
+    }).fail(function (jqXHR, textStatus, errorThrown) { showAlertError(jqXHR.responseText) });
     event.preventDefault();
   })
 

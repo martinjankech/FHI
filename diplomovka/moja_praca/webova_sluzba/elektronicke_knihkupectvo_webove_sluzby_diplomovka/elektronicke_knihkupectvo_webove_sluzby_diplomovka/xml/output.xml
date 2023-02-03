@@ -1294,3 +1294,12 @@ A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole
 
 </timestamp>
 </output>
+<output>
+
+	<book><id>4</id><nazov>Jediná kniha o jídle, kterou potřebujete</nazov><autori><autor1>Karolína Fourová</autor1><autor2>-</autor2></autori><kategoria>Kuchárky</kategoria><isbn>9788024271576</isbn><jazyk>cz</jazyk><pocet_stran>200</pocet_stran><vazba>pevná väzba</vazba><rok_vydania>2020</rok_vydania><vydavatelstvo>Esence</vydavatelstvo><predajna_cena>16</predajna_cena><nakupna_cena>8.36</nakupna_cena><marza>0.913875598086125</marza><zisk_kus>7.64</zisk_kus><obsah>Kniha Karolíny Fourové, odbornice na výživu a kvalitu potravin, vám pomůže pochopit základní principy stravování, představí jednotlivé složky výživy a jejich úkol v lidském organismu. Naučíte se správně nakupovat a dostanete odpověď na většinu otázek o jídle a potravinách, které vás kdy napadly. A abyste se v té zdravé stravě neztratili hned na začátku, najdete v knize i 40 autorčiných nejoblíbenějších receptů, které vám cestu usnadní.</obsah><priemerne_hodnotenie>3.8</priemerne_hodnotenie><obrazok>../img/4.jpg</obrazok></book>
+<timestamp>
+
+	2023-02-03-23-04-55
+
+</timestamp>
+</output>

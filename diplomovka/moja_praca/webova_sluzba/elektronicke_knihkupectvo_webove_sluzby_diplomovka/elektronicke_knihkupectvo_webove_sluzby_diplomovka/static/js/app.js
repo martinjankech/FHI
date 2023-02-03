@@ -14,7 +14,7 @@
       $("#alert_success").show()
       $("#alert-text").html(message)
       $("#alert_success").fadeTo(2000, 500).slideUp(500, function () {
-        $("#alert_success").slideUp(500);
+        $("#alert_success").slideUp(800);
       });
     }
 // odosle ajaxovy request na webovú službu  cesta na ktoru sa nachadzadza v  parametri url s parametrom a datami podľa dynamicky vygenerovaneho formulara na zaklade uživatelového výberu. Pri uspechu vloži html do vybraných html elementov 
