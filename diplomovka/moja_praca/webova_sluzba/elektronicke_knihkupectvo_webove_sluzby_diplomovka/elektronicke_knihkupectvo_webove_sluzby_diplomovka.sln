@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "elektronicke_knihkupectvo_webove_sluzby_diplomovka", "elektronicke_knihkupectvo_webove_sluzby_diplomovka\elektronicke_knihkupectvo_webove_sluzby_diplomovka.csproj", "{5B4EA99F-8DDA-4468-BEB9-9D1E7A723624}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "elektronicke_knihkupectvo_webove_sluzby_diplomovka", "elektronicke_knihkupectvo_webove_sluzby_diplomovka\elektronicke_knihkupectvo_webove_sluzby_diplomovka.csproj", "{D43287B3-58D9-4002-88BB-70E542A6FD69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5B4EA99F-8DDA-4468-BEB9-9D1E7A723624}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5B4EA99F-8DDA-4468-BEB9-9D1E7A723624}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5B4EA99F-8DDA-4468-BEB9-9D1E7A723624}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5B4EA99F-8DDA-4468-BEB9-9D1E7A723624}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D43287B3-58D9-4002-88BB-70E542A6FD69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D43287B3-58D9-4002-88BB-70E542A6FD69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D43287B3-58D9-4002-88BB-70E542A6FD69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D43287B3-58D9-4002-88BB-70E542A6FD69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

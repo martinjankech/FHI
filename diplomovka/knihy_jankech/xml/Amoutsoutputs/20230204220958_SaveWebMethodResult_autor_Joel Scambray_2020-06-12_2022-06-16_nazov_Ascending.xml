@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <Item>
+    <BookID>10</BookID>
+    <BookName>Hacking bez tajemství - Webové aplikace</BookName>
+    <BookNumPages>360</BookNumPages>
+    <BookYear>2003</BookYear>
+    <BookSellPrice>18.5</BookSellPrice>
+    <BookBuyPrice>11.89</BookBuyPrice>
+    <BookRating>5</BookRating>
+    <StartAmount>120</StartAmount>
+    <EndAmount>94</EndAmount>
+    <StartDate>2020-06-12</StartDate>
+    <EndDate>2022-06-16</EndDate>
+  </Item>
+</Root>

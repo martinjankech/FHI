@@ -1,0 +1,14 @@
+
+
+GetSortedBooksByCategoryAndDate
+// This method is a web service method used to get information about books from two xml files: fileBookInfo and fileBookTransactionInfo.
+// The method takes in several parameters including selectedCategory, selectedValueCategory, startDate, endDate, sortField, and sortOrder.
+// The method first loads the two xml files into variables booksXml and warehouseXml.
+// It then converts the startDate and endDate strings into DateTime objects for use in querying the xml data.
+// The method then performs a LINQ query to join the two xml files based on the book id and filters the results based on the selected category and value.
+// The query also calculates the start amount and end amount of each book in the warehouse during the specified date range.
+// The method then sorts the results based on the sortField and sortOrder parameters.
+// Finally, the method sets the response content type to "application/json" and writes the result as a JSON string.
+// Math.Abs is used to calculate the absolute value of the difference in ticks between the selected date range and the date in the xml file.
+// By using Math.Abs, we are able to find the nearest date in the xml file to the selected date range by comparing the absolute difference in ticks.
+// The smallest absolute difference in ticks indicates the closest date, which is then used in the query to retrieve the start amount and end amount of the book during the selected date range.

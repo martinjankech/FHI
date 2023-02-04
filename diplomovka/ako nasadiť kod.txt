@@ -1,0 +1,7 @@
+1. treba premeniť absolutne cesty k zatial 3 xml filom
+a k jednemu filu prazdemu 
+2. nasadiť na iis server  najpr povolit iis služby video: 
+https://www.google.com/search?q=how+to+enable+iis+servives+winows&oq=how+to+enable+iis+servives+winows&aqs=chrome..69i57.8193j0j9&sourceid=chrome&ie=UTF-8#fpstate=ive&vld=cid:d6667339,vid:afTe8wqQaag
+potom vytvorit stranku na localhoste dolezite je nastaviť spravny port aby mohli byt služby skonzumovane alebo zmeniť adresy v ajax kodoch 
+možno ešte sofistikovanejšie riešenie ale len ked bude čas 
+treba povoliť fily treba enable directory inak server vráti chybu 404

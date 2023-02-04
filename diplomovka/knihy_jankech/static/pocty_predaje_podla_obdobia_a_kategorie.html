@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/footer.css">
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+    integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+  <!-- jqury kniznica na obmedzenie maximalneho poctu poloziek v autocomplete  -->
+  <script src="js/jquery.ui.autocomplete.scroll.min.js"></script>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.css" rel="stylesheet" />
+  <script src="js/app.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+  <link rel="stylesheet" href="css/datatable.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="navbar">
+  </div>
+  <div style="display: none;" id="alert_error">
+    <div class="alert alert-danger" role="alert">
+      <span id="alert-text"></span>
+    </div>
+  </div>
+  <div style="display: none;" id="alert_success">
+    <div class="alert alert-success" role="alert">
+      <span id="alert-text"></span>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1 class="mb-3 mt-5">Hľadaj počty kníh podľa: </h1>
+    <form class="col-12" id="formAtributesDates" method="POST">
+      <div class="form-row ">
+        <div class="form-group col-md-6">
+          <label for="startDate">Datum od</label>
+          <input type="date" class="form-control" id="startDate" placeholder="startdate">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="endDate">Datum do</label>
+          <input type="date" class="form-control" id="endDate" placeholder="enddate">
+        </div>
+      </div>
+      <div class="form-row ">
+        <div class="form-group col-md-6">
+          <label for="atributeValue">hľadať podľa atribútu</label>
+          <select id="selectedAtribute" class="form-control">
+            <option disabled selected value> zvoľte si možnosť prosím </option>
+            <option value="autor">autor</option>
+            <option value="kategoria">kategória</option>
+            <option value="vydavatelstvo">vydavateľstvo</option>
+            <option value="jazyk">jazyk</option>
+            <option value="vazba">väzba</option>
+
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="sortingValue">Zoradiť podľa atribútu</label>
+          <select id="sortField" class="form-control" name="sortField">
+            <option disabled selected value> zvolte si možnosť prosím </option>
+            <option value="nazov">názov</option>
+            <option value="pocet_stran">počet strán</option>
+            <option value="rok_vydania">rok vydania</option>
+            <option value="nakupna_cena">nákupná cena</option>
+            <option value="predajna_cena">predajná cena</option>
+            <option value="priemerne_hodnotenie">priemerné hodnotenie</option>
+          </select>
+
+          <div class="form-check mt-2">
+            <input class="form-check-input" type="radio" name="sortOrder" id="descendingInput" value="Descending"
+              checked>
+            <label class="form-check-label" for="exampleRadios1">
+              Vzostupne
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="sortOrder" id="ascending_Input" value="Ascending">
+            <label class="form-check-label" for="exampleRadios2">
+              Zostupne
+            </label>
+          </div>
+        </div>
+      </div>
+      <h6>hodnota hľadaného atribútu </h6>
+      <input class="form-control col-6 mb-3" type="text" name="selectedValueAtribute" id="selectedValueAtribute"
+        placeholder="">
+
+      <button type="submit" id="btnGetData" class="btn btn-primary ">potvrdiť</button>
+    </form>
+  </div>
+
+
+
+
+  <div class="container mt-5 ">
+    <div style="display: none;" id="tableBook" class=" mb-5 table-responsive">
+      <h2 class="mb-4 mt-2"> Tabuľka údajov kníh podľa zadaných parametrov</h2>
+      <table id="bookData" class=" mb-5  display nowrap ">
+        <thead>
+          <tr>
+
+            <th>id</th>
+            <th>nazov</th>
+            <th>datum zaciatok</th>
+            <th>datum koniec</th>
+            <th>pocet zaciatok</th>
+            <th>pocet koniec</th>
+            <th>pocet stran</th>
+            <th>rok vydania</th>
+            <th>predajna cena</th>
+            <th>nakupna cena</th>
+            <th>priemerne hodnotenie</th>
+
+
+
+          </tr>
+        </thead>
+        <tfoot class="mb-5">
+          <tr>
+            <th>id</th>
+            <th>nazov</th>
+            <th>datum_zaciatok</th>
+            <th>datum_koniec</th>
+            <th>pocet_zaciatok</th>
+            <th>pocet_koniec</th>
+            <th>pocet stran</th>
+            <th>rok vydania</th>
+            <th>predajna cena</th>
+            <th>nakupna cena</th>
+            <th>priemerne hodnotenie</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+
+  <div style="display: none;" id="chart" class="container">
+    <h2 class="mb-4 mt-2">Graf počtov kníh podľa zadaného atribútu</h2>
+    <canvas id="myChart" class="col-10">
+    </canvas>
+  </div>
+
+
+
+
+  <footer>
+
+  </footer>
+</body>
+<script>
+  $("#navbar").load("navbar.html")
+  $("footer").load("footer.html")
+  $("#selectedAtribute").on('change', function () {
+    $('#selectedValueAtribute').attr('placeholder', "zadajte hodnotu atributu " + $("select option:selected").val())
+    switch ($("select option:selected").val()) {
+      case "autor":
+        createArrayFromNestedAttribute("autori", 'autor1').then(resolve => {
+          data1 = resolve;
+          createArrayFromNestedAttribute('autori', 'autor2').then(resolve => {
+            data2 = resolve;
+            let final = data2.concat(data1)
+
+            console.log(final);
+
+            autoCompleteInput('#selectedValueAtribute', 5, final)
+          })
+        })
+        break;
+      case "kategoria":
+        createArrayFromOneAttribute1("kategoria").then(resolve => { autoCompleteInput('#selectedValueAtribute', 5, resolve) })
+        break;
+      case "vydavatelstvo":
+        createArrayFromOneAttribute1("vydavatelstvo").then(resolve => { autoCompleteInput('#selectedValueAtribute', 5, resolve) })
+        break;
+      case "jazyk":
+        createArrayFromOneAttribute1("jazyk").then(resolve => { autoCompleteInput('#selectedValueAtribute', 5, resolve) })
+        break;
+      case "vazba":
+        createArrayFromOneAttribute1("vazba").then(resolve => { autoCompleteInput('#selectedValueAtribute', 5, resolve) })
+        break;
+      default:
+        alert("atribut nebol zadany spravne ")
+    }
+  })
+ // fixedFooter()
+</script>
+<script>
+  // Dôvod, prečo potrebujete deklarovať myChart ako globálnu premennú, je zabezpečiť, aby sa pri každej aktualizácii alebo zničení grafu odkazovalo na rovnakú inštanciu grafu. Ak myChart nie je deklarovaný ako globálna premenná, bude deklarovaný v rámci vykonanej funkcie a pri každom volaní funkcie bude inou premennou.To znamená, že ak sa graf aktualizuje, vytvorí sa nová inštancia grafu a priradí sa k novej premennej a predchádzajúca inštancia sa nezničí. V dôsledku toho sa na rovnaké plátno nakreslí viacero máp, čo spôsobí chybu „Plátno sa už používa. Pred opätovným použitím plátna s ID '0' je potrebné zničiť graf s ID '0'. Deklarovaním myChart ako globálnej premennej zaistíte, že bude prístupná v celom kóde a že sa dá konzistentne aktualizovať alebo zničiť, bez ohľadu na to, koľkokrát je volaná funkcia done.
+  var myChart = null;
+  $(document).on('submit', "#formAtributesDates", function (event) {
+
+    var selectedAtributeValue = $("#selectedAtribute").val();
+    var selectedValueAtributeValue = $("#selectedValueAtribute").val();
+    var startDateValue = $("#startDate").val();
+    var endDateValue = $("#endDate").val();
+    var sortFieldValue = $("#sortField").val();
+    var sortOrderValue = $("input[name='sortOrder']:checked").val();
+
+
+    $.ajax({
+      url: "http://localhost:8050/book_services.asmx/SortedBookDataByDateCategory",
+      method: "POST",
+      data: { selectedAtribute: selectedAtributeValue, selectedValueAtribute: selectedValueAtributeValue, startDate: startDateValue, endDate: endDateValue, sortField: sortFieldValue, sortOrder: sortOrderValue },
+      dataType: "json",
+      encode: true,
+      // 
+    }).done(function (response) {
+      var data = response;
+      // vyčistni a znici predoslu instanciu Datatable aby sa mohla vytvorit nova po resubminuti formulara 
+      $('#bookData').DataTable().clear();
+      $('#bookData').DataTable().destroy()
+
+      if (myChart) {
+        myChart.clear();
+        myChart.destroy();
+      }
+      console.log(myChart)
+
+      $('#tableBook').show()
+      $('html, body').animate({
+        scrollTop: $("#bookData").offset().top
+      }, 1000);
+      var table = $('#bookData').DataTable({
+        "ordering": false,
+        "data": data,
+        "columns": [
+          {
+            data: "BookID",
+          },
+          {
+            data: "BookName",
+            contentPadding: 'data'
+          },
+          { data: "StartDate" },
+          { data: "EndDate" },
+          { data: "StartAmount" },
+          { data: "EndAmount" },
+          { data: "BookNumPages" },
+          { data: "BookYear" },
+          { data: "BookSellPrice" },
+          { data: "BookBuyPrice" },
+          { data: "BookRating" },
+
+
+        ]
+      });
+      var bookNames = response.map(function (book) { return book.BookName });
+      var startAmounts = response.map(function (book) { return book.StartAmount });
+      var endAmounts = response.map(function (book) { return book.EndAmount });
+      $("#chart").show()
+      var ctx = document.getElementById('myChart').getContext('2d');
+      myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: bookNames, // Add labels for each entry here
+          datasets: [{
+            label: 'Začiatočné množstvo ',
+            data: startAmounts, // Add startAmount values for each entry here
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+          },
+          {
+            label: 'Konečné množstvo',
+            data: endAmounts, // Add endAmount values for each entry here
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+      //$("form")[0].reset();
+    }).fail(function (jqXHR, textStatus, errorThrown) { showAlertError(jqXHR.responseText) });
+    event.preventDefault();
+  })
+
+
+
+
+
+</script>
+
+</html>

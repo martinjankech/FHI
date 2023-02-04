@@ -1,0 +1,34 @@
+
+canvas detroying
+The reason why you need to declare myChart as a global variable is to ensure that the same instance of the chart is referenced every time it is updated or destroyed. If myChart is not declared as a global variable, it will be declared within the scope of the done function and will be a different variable every time the function is called.
+
+This means that if the chart is updated, a new instance of the chart will be created and assigned to a new variable, and the previous instance will not be destroyed. As a result, multiple charts will be drawn on the same canvas, which causes the error "Canvas is already in use. Chart with ID '0' must be destroyed before the canvas with ID 'myChart' can be reused."
+
+By declaring myChart as a global variable, you ensure that it is accessible throughout the code and can be updated or destroyed consistently, regardless of how many times the done function is called.
+
+
+
+he code is a script in JavaScript and JQuery that submits a form to retrieve book data based on certain criteria specified by the user.
+
+The script begins by declaring a global variable "myChart" which is set to null. This is done to ensure that when updating or destroying the chart, it refers to the same instance of the chart. If myChart is declared within the function, then each time the function is called, it will be a different variable, which means that if the graph is updated, a new instance of the chart will be created and assigned to a new variable and the previous instance will not be destroyed. As a result, multiple charts will be drawn on the same canvas, which will cause an error "The canvas is already in use. Before using canvas ID '0' again, the chart with ID '0' must be destroyed." By declaring myChart as a global variable, you ensure that it will be accessible throughout the code and that it can be consistently updated or destroyed, regardless of how many times the function is called.
+
+The script then sets up an event handler that listens for a "submit" event on the form with ID "#formAtributesDates". When the form is submitted, the function inside the event handler is executed.
+
+In the function, various values from the form are retrieved and stored in local variables:
+
+    selectedAtributeValue: the value of the select element with ID "selectedAtribute"
+    selectedValueAtributeValue: the value of the select element with ID "selectedValueAtribute"
+    startDateValue: the value of the input element with ID "startDate"
+    endDateValue: the value of the input element with ID "endDate"
+    sortFieldValue: the value of the select element with ID "sortField"
+    sortOrderValue: the value of the radio button element with name "sortOrder" that is checked
+
+The script then performs an AJAX request to the URL "http://localhost:8045/book_services.asmx/Getbook" using the "POST" method. The data to be sent along with the request includes the values from the form, which are passed as an object literal in the "data" property of the AJAX options object. The response is expected to be in JSON format, which is specified in the "dataType" property.
+
+Once the AJAX request is done, the response data is processed in the "done" function. The first step is to clear and destroy the previous instance of the DataTable, so a new DataTable can be created after the form is resubmitted.
+
+Next, the script checks if "myChart" is truthy, meaning it is not null or undefined. If it is truthy, the chart is destroyed by calling its "destroy" method. This is done because it is possible that a previous chart was created and we want to remove it before creating a new chart.
+
+The DataTable is then displayed and the page is scrolled to the table. The DataTable is created by passing an options object to the DataTable() method of the table element with ID "bookData". The options include properties for data, columns, and ordering.
+
+The data for the chart is extracted from the response data. The "map" function is used to extract the book names, start amounts, and end amounts into separate arrays, which are then used as the data for the chart. The chart is created using the Chart.js library and is specified to be a bar chart. The chart is created by passing an options object to the Chart() constructor

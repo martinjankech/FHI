@@ -1,0 +1,12 @@
+.footer {
+ position: absolute;
+ width: 100%;
+ background-color: #343a40;
+
+}
+
+.footer-par {
+ display: flex;
+ justify-content: center;
+ color: white;
+}
