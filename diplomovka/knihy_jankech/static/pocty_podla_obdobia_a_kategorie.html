@@ -236,7 +236,7 @@
 
 
     $.ajax({
-      url: "http://localhost:8050/book_services.asmx/SortedBookDataByDateCategory",
+      url: "http://localhost:8050/book_services.asmx/SortedBookAmoutsByDateAndCategory",
       method: "POST",
       data: { selectedAtribute: selectedAtributeValue, selectedValueAtribute: selectedValueAtributeValue, startDate: startDateValue, endDate: endDateValue, sortField: sortFieldValue, sortOrder: sortOrderValue },
       dataType: "json",
@@ -301,6 +301,62 @@
           {
             label: 'Konečné množstvo',
             data: endAmounts, // Add endAmount values for each entry here
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+      });
+      //$("form")[0].reset();
+    }).fail(function (jqXHR, textStatus, errorThrown) { showAlertError(jqXHR.responseText) });
+    event.preventDefault();
+    $.ajax({
+      url: "http://localhost:8050/book_services.asmx/AgregatedStatiscticsAmount",
+      method: "POST",
+      data: { selectedAtribute: selectedAtributeValue, selectedValueAtribute: selectedValueAtributeValue, startDate: startDateValue, endDate: endDateValue, },
+      dataType: "json",
+      encode: true,
+      // 
+    }).done(function (response) {
+      var data = response;
+      // vyčistni a znici predoslu instanciu Datatable aby sa mohla vytvorit nova po resubminuti formulara 
+
+
+      if (myChart) {
+        myChart.clear();
+        myChart.destroy();
+      }
+      var bookNames = response.map(function (book) { return book.BookName });
+      var startAmounts = response.map(function (book) { return book.StartAmount });
+      var endAmounts = response.map(function (book) { return book.EndAmount });
+      $("#chartAg").show()
+      var labels = ['MaxStartAmount', 'MinStartAmont', 'AvgStartAmont', 'MaxEndAmount', 'MinEndAmont', 'AvgEndAmont'];
+      var startData = [data.MaxStartAmount, data.MinStartAmont, data.AvgStartAmont, 0, 0, 0];
+      var endData = [0, 0, 0, data.MaxEndAmount, data.MinEndAmont, data.AvgEndAmont];
+
+      var ctx = document.getElementById('myChartAg').getContext('2d');
+      var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Začiatočné množstvo',
+            data: startData,
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+          }, {
+            label: 'Konečné množstvo',
+            data: endData,
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1

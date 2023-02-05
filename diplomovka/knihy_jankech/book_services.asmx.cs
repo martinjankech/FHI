@@ -647,16 +647,22 @@ namespace knihy_jankech
 
                 double TotalStartAmount = result.Sum(x => x.StartAmount);
                 double TotalEndAmount = result.Sum(x => x.EndAmount);
-                double MaxAmount = result.Max(x => x.StartAmount);
-                double MinAmont = result.Min(x => x.EndAmount);
-                double AvgAmont = result.Average(x => x.EndAmount);
+                double MaxStartAmount = result.Max(x => x.StartAmount);
+                double MinStartAmont = result.Min(x => x.StartAmount);
+                double MaxEndAmount = result.Max(x => x.EndAmount);
+                double MinEndAmont = result.Min(x => x.EndAmount);
+                double AvgStartAmont = result.Average(x => x.StartAmount);
+                double AvgEndAmont = result.Average(x => x.EndAmount);
                 var serializedResult = new
                 {
                     TotalStartAmount,
                     TotalEndAmount,
-                    MaxAmount,
-                    MinAmont,
-                    AvgAmont
+                    MaxStartAmount,
+                    MinStartAmont,
+                    MaxEndAmount,
+                    MinEndAmont,
+                    AvgStartAmont,
+                    AvgEndAmont,
                 };
 
                 if (result.Count() == 0)
@@ -687,17 +693,22 @@ namespace knihy_jankech
                              };
                 double TotalStartAmount = result.Sum(x => x.StartAmount);
                 double TotalEndAmount = result.Sum(x => x.EndAmount);
-                double MaxAmount = result.Max(x => x.StartAmount);
-                double MinAmont = result.Min(x => x.EndAmount);
-                double AvgAmont = result.Average(x => x.EndAmount);
+                double MaxStartAmount = result.Max(x => x.StartAmount);
+                double MinStartAmont = result.Min(x => x.StartAmount);
+                double MaxEndAmount = result.Max(x => x.EndAmount);
+                double MinEndAmont = result.Min(x => x.EndAmount);
+                double AvgStartAmont = result.Average(x => x.StartAmount);
+                double AvgEndAmont = result.Average(x => x.EndAmount);
                 var serializedResult = new
                 {
                     TotalStartAmount,
                     TotalEndAmount,
-                    MaxAmount,
-                    MinAmont,
-                    AvgAmont
-
+                    MaxStartAmount,
+                    MinStartAmont,
+                    MaxEndAmount,
+                    MinEndAmont,
+                    AvgStartAmont,
+                    AvgEndAmont,
                 };
                 if (result.Count() == 0)
                 {
