@@ -9,11 +9,13 @@ using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Web;
 using System.Web.Services;
+using System.Web.Services.Description;
 using System.Web.UI.WebControls;
 using System.Xml;
 using System.Xml.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using static System.Net.WebRequestMethods;
 using Formatting = Newtonsoft.Json.Formatting;
 
 namespace knihy_jankech
@@ -56,60 +58,72 @@ namespace knihy_jankech
         //    string utf8 = Encoding.UTF8.GetString(bytes);
         //    return utf8;
         //}
-
-        //zatial nedokoncena
-        //public void SavetoRootSingleSearchedBook(string Path, XmlNodeList data)
-        //{
-        //    XmlDocument doc = new XmlDocument();
-        //    doc.Load(Path);
-        //    XmlNode root = doc.DocumentElement;
-        //    var items = doc.GetElementsByTagName("testsuite");
-
-        //    for (int i = 0; i < data.Count; i++)
-        //    {// tu prenasame data medzi dvoma xml dokumentami preto musime pouzit metodu importNode
-        //        XmlNode newdata = doc.ImportNode(data.Item(i), true);
-        //        root.AppendChild(newdata);
-        //    }
-
-        //    doc.Save(Path);
-
-        //}
         public static String GetTimestamp(DateTime value)
         {
             return value.ToString("yyyy-MM-dd-HH-mm-ss");
         }
-        // zapise data o vsetkych hladaniach do jedneho suboru aj s casovou peciatkov 
         public void WriteToTheFileWithTimeStamp(string path, XmlNodeList data)
         {
-            StreamWriter sw = new StreamWriter(path, true, Encoding.UTF8);
-            string x_to_file = "";
-            int nodeListCount = data.Count;
-            int i = 0;
-            sw.Write("\n" + "<output>" + "\n\n");
+            // Create a new XML document
+            XmlDocument doc = new XmlDocument();
+            XmlElement root;
+            XmlElement output;
+            XmlElement timestamp;
 
-            while (i < nodeListCount)
+            // Check if the file exists
+            bool fileExists = System.IO.File.Exists(path);
+
+            // If the file does not exist, create a new root element
+            if (!fileExists)
             {
-                XmlNode book = data.Item(i);
-                //jednotlive hodnoty book elementov su zobrazene aj s prislusnymi znackami z .xml suboru
-                x_to_file = book.OuterXml;
-                sw.Write("\t" + x_to_file + "\n");
-                i++;
+                root = doc.CreateElement("root");
+                doc.AppendChild(root);
             }
-            sw.Write("<timestamp>" + "\n\n");
-            String timeStamp = GetTimestamp(DateTime.Now);
-            sw.Write("\t" + timeStamp + "\n");
-            sw.Write("\n</timestamp>");
-            sw.Write("\n</output>");
-            sw.Close();
+            // If the file exists, load the document and get the root element
+            else
+            {
+                doc.Load(path);
+                root = doc.DocumentElement;
+            }
+
+            // Loop through each node in the data
+            foreach (XmlNode node in data)
+            {
+                // Import the node into the document
+                XmlNode importedNode = doc.ImportNode(node, true);
+                // Create an "output" element
+                output = doc.CreateElement("output");
+                // Create a "timestamp" element
+                timestamp = doc.CreateElement("timestamp");
+                // Set the inner text of the timestamp element to the current date and time
+                timestamp.InnerText = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                // Append the imported node and the timestamp element to the output element
+                output.AppendChild(importedNode);
+                output.AppendChild(timestamp);
+                // Append the output element to the root element
+                root.AppendChild(output);
+            }
+
+            // Save the document to the specified file path
+            doc.Save(path);
         }
-        // ulozi IEnumerable objekt vysledok LINQ dopytu spolu s casovou peciatkov a hladanymi parametrami do noveho xml suboru 
-        public static void SaveWebMethodResult(IEnumerable<object> result, string methodName, string[] parameters, string path)
+
+        //This code writes an XML document to a file with a timestamp.If the file already exists, the code will load the file and add new elements to it, otherwise it will create a new XML document with a root element.The code loops through each node in the data, imports it into the document, creates an "output" element, creates a "timestamp" element with the current date and time, appends the imported node and the timestamp to the output element, and finally appends the
+
+        // ulozi IEnumerable alebo iny objekt vysledok LINQ dopytu spolu s casovou peciatkov a hladanymi parametrami do noveho xml suboru 
+        //dynamic je kľúčové slovo C#, ktoré umožňuje deklarovať premennú ako dynamický typ. Typ premennej sa rieši počas behu namiesto kompilácie. To znamená, že typ premennej sa môže dynamicky meniť na základe hodnoty, ku ktorej je priradená.
+        //Použitie dynamic v tejto metode je výhodné, pretože  umožňuje odovzdať akýkoľvek typ objektu metóde SaveWebMethodResult bez toho, aby sa muselo zadava5 presný typ.Vďaka tomu je metóda flexibilnejšia a všeobecnejšia, pretože dokáže spracovať objekty rôznych typov a uložiť ich do súboru XML.
+        // Keďže typ výsledku je dynamický, kód môže určiť typ objektu za behu a skontrolovať, či ide o IEnumerable<object>. Ak áno, kód prejde každú položku a pridá ju do súboru XML. Ak nie, kód ho pridá ako jednu položku.
+        //Použitím dynamických sa môžete vyhnúť nutnosti písať viacero metód na spracovanie rôznych typov objektov a namiesto toho napísať jednu metódu, ktorá zvládne všetky typy.
+        public static void SaveWebMethodResult(dynamic result, string methodName, string[] parameters, string path)
         {
+            // Check if the specified path exists, and create it if not
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
 
+            // Generate the file name based on the current time and method name
             string fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + methodName + "_";
             foreach (string param in parameters)
             {
@@ -117,21 +131,38 @@ namespace knihy_jankech
             }
             fileName = fileName.TrimEnd('_') + ".xml";
 
+            // Create the root element of the XML file
             XElement root = new XElement("Root");
-            foreach (var item in result)
+
+            // Check if the result is an IEnumerable<object>
+            if (result is IEnumerable<object>)
             {
-                XElement element = new XElement("Item");
-                foreach (var prop in item.GetType().GetProperties())
+                // If it is, loop through each item and add it to the XML file
+                foreach (var item in (IEnumerable<object>)result)
                 {
-                    element.Add(new XElement(prop.Name, prop.GetValue(item)));
+                    XElement element = new XElement("Item");
+                    foreach (var prop in item.GetType().GetProperties())
+                    {
+                        element.Add(new XElement(prop.Name, prop.GetValue(item)));
+                    }
+                    root.Add(element);
+                }
+            }
+            else
+            {
+                // If it's not an IEnumerable<object>, add it as a single item to the XML file
+                XElement element = new XElement("Item");
+                foreach (var prop in result.GetType().GetProperties())
+                {
+                    element.Add(new XElement(prop.Name, prop.GetValue(result)));
                 }
                 root.Add(element);
             }
 
+            // Save the XML file to the specified path
             string fullPath = Path.Combine(path, fileName);
             root.Save(fullPath);
         }
-
         [WebMethod]
         public void SinglebookDataById(string id)
         {
@@ -671,7 +702,7 @@ namespace knihy_jankech
                     Context.Response.Write("Žiadny záznam nespĺňa zadané kritériá");
 
                 };
-                SaveWebMethodResult(result, "SaveWebMethodResult", parameters, fileAmountFilterPath);
+                SaveWebMethodResult(serializedResult, "SaveWebMethodResult", parameters, fileAmountFilterPath);
                 Context.Response.ContentType = "application/json";
                 Context.Response.Write(JsonConvert.SerializeObject(serializedResult, Formatting.Indented));
             }

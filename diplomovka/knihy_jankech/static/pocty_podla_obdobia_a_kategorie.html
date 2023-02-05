@@ -47,7 +47,7 @@
     </div>
   </div>
 
-  <div class="container">
+  <div class="container col-8">
     <h1 class="mb-3 mt-5">Hľadaj počty kníh podľa: </h1>
     <form class="col-12" id="formAtributesDates" method="POST">
       <div class="form-row ">
@@ -112,7 +112,7 @@
 
 
 
-  <div class="container mt-5 ">
+  <div class="container col-8 mt-5 ">
     <div style="display: none;" id="tableBook" class=" mb-5 table-responsive">
       <h2 class="mb-4 mt-2"> Tabuľka údajov kníh podľa zadaných parametrov</h2>
       <table id="bookData" class=" mb-5  display nowrap ">
@@ -157,11 +157,19 @@
   <br>
   <br>
 
-  <div style="display: none;" id="chart" class="container">
+
+  <div style="display: none;" id="chart" class=" container col-8 ">
     <h2 class="mb-4 mt-2">Graf počtov kníh podľa zadaného atribútu</h2>
-    <canvas id="myChart" class="col-10">
+    <canvas id="myChart">
     </canvas>
   </div>
+  <div style="display: none;" id="chartAg" class="container col-8">
+    <h2 class="mb-4 mt-2">Graf počtov kníh podľa zadaného atribútu</h2>
+    <canvas id="myChartAg">
+    </canvas>
+  </div>
+
+
 
 
 
@@ -225,6 +233,8 @@
 <script>
   // Dôvod, prečo potrebujete deklarovať myChart ako globálnu premennú, je zabezpečiť, aby sa pri každej aktualizácii alebo zničení grafu odkazovalo na rovnakú inštanciu grafu. Ak myChart nie je deklarovaný ako globálna premenná, bude deklarovaný v rámci vykonanej funkcie a pri každom volaní funkcie bude inou premennou.To znamená, že ak sa graf aktualizuje, vytvorí sa nová inštancia grafu a priradí sa k novej premennej a predchádzajúca inštancia sa nezničí. V dôsledku toho sa na rovnaké plátno nakreslí viacero máp, čo spôsobí chybu „Plátno sa už používa. Pred opätovným použitím plátna s ID '0' je potrebné zničiť graf s ID '0'. Deklarovaním myChart ako globálnej premennej zaistíte, že bude prístupná v celom kóde a že sa dá konzistentne aktualizovať alebo zničiť, bez ohľadu na to, koľkokrát je volaná funkcia done.
   var myChart = null;
+  var myChartAg = null;
+
   $(document).on('submit', "#formAtributesDates", function (event) {
 
     var selectedAtributeValue = $("#selectedAtribute").val();
@@ -331,17 +341,17 @@
       // vyčistni a znici predoslu instanciu Datatable aby sa mohla vytvorit nova po resubminuti formulara 
 
 
-      if (myChart) {
+      if (myChartAg) {
         myChart.clear();
         myChart.destroy();
       }
-      var bookNames = response.map(function (book) { return book.BookName });
-      var startAmounts = response.map(function (book) { return book.StartAmount });
-      var endAmounts = response.map(function (book) { return book.EndAmount });
+      //var bookNames = response.map(function (book) { return book.BookName });
+      //var startAmounts = response.map(function (book) { return book.StartAmount });
+      //var endAmounts = response.map(function (book) { return book.EndAmount });
       $("#chartAg").show()
-      var labels = ['MaxStartAmount', 'MinStartAmont', 'AvgStartAmont', 'MaxEndAmount', 'MinEndAmont', 'AvgEndAmont'];
-      var startData = [data.MaxStartAmount, data.MinStartAmont, data.AvgStartAmont, 0, 0, 0];
-      var endData = [0, 0, 0, data.MaxEndAmount, data.MinEndAmont, data.AvgEndAmont];
+      var labels = ['TotalStartAmount', 'MaxStartAmount', 'MinStartAmont', 'TotalEndAmount', 'AvgStartAmont', 'MaxEndAmount', 'MinEndAmont', 'AvgEndAmont'];
+      var startData = [data.TotalStartAmount, data.MaxStartAmount, data.MinStartAmont, data.AvgStartAmont, 0, 0, 0, 0];
+      var endData = [0, 0, 0, 0, data.TotalEndAmount, data.MaxEndAmount, data.MinEndAmont, data.AvgEndAmont];
 
       var ctx = document.getElementById('myChartAg').getContext('2d');
       var myChart = new Chart(ctx, {
@@ -349,13 +359,13 @@
         data: {
           labels: labels,
           datasets: [{
-            label: 'Začiatočné množstvo',
+            label: 'Začiatočný dátum',
             data: startData,
             backgroundColor: 'rgba(255, 99, 132, 0.2)',
             borderColor: 'rgba(255, 99, 132, 1)',
             borderWidth: 1
           }, {
-            label: 'Konečné množstvo',
+            label: 'konečný dátum',
             data: endData,
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
             borderColor: 'rgba(54, 162, 235, 1)',
