@@ -270,51 +270,35 @@ namespace knihy_jankech
             Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
             Context.Response.Write(JsonConvert.SerializeXmlNode(AllBook.Item(0), Formatting.Indented));
         }
-        [WebMethod]
-        public void GetListBooksBySelectedKategory(string category, string input)
-        {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(fileBookInfo);
-            if (doc == null)
-            {
-                Context.Response.StatusCode = 500;
-                Context.Response.StatusDescription = "Dokument nemohol byt nacitany";
-                return;
-            }
-            // input musi byt string!
-            XmlNodeList Selectedbooks = doc.SelectNodes("Bookstore/books/book[" + category + "=\"" + input + "\"]");
-
-            int count = Selectedbooks.Count;
-
-            for (int i = 0; i < count; i++)
-
-            {
-                Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
-                Context.Response.Write(JsonConvert.SerializeXmlNode(Selectedbooks.Item(i), Formatting.Indented));
-
-            }
-
-        }
+       
 
         [WebMethod]
-        public void SortedBookDataByDateCategory(string selectedAtribute, string selectedValueAtribute, string startDate, string endDate, string sortField, string sortOrder)
+        public void SortedBookAmoutsByDateAndCategory(string selectedAtribute, string selectedValueAtribute, string startDate, string endDate, string sortField, string sortOrder)
         {
             string[] parameters = { selectedAtribute, selectedValueAtribute, startDate, endDate, sortField, sortOrder, };
-            //var parameters = new {
-            //    selectedAtribute = selectedAtribute,
-            //    selectedValueAtribute = selectedAtribute,
-            //    startDate = startDate,
-            //    endDate= endDate,
-            //    sortField= sortField,
-            //    sortOrder= sortOrder,
-            //};
-            // Skontroluje ci su vlozene vsetky parametre 
-            if (string.IsNullOrEmpty(selectedAtribute) || string.IsNullOrEmpty(selectedValueAtribute) ||
-                string.IsNullOrEmpty(startDate) || string.IsNullOrEmpty(endDate) || string.IsNullOrEmpty(sortField) || string.IsNullOrEmpty(sortOrder))
+            if (selectedAtribute != "vsetky")
             {
-                Context.Response.StatusCode = 400;
-                Context.Response.Write("Prosím zadajte všetky vstupné parametre");
-                return;
+                // Skontroluje ci su vlozene vsetky parametre 
+                if (string.IsNullOrEmpty(selectedAtribute) || string.IsNullOrEmpty(selectedValueAtribute) ||
+                    string.IsNullOrEmpty(startDate) || string.IsNullOrEmpty(endDate) || string.IsNullOrEmpty(sortField) || string.IsNullOrEmpty(sortOrder))
+                {
+                    Context.Response.StatusCode = 400;
+                    Context.Response.Write("Prosím zadajte všetky vstupné parametre");
+                    return;
+                }
+            }
+            else
+            {
+
+                if (string.IsNullOrEmpty(selectedAtribute) ||
+                       string.IsNullOrEmpty(startDate) || string.IsNullOrEmpty(endDate) || string.IsNullOrEmpty(sortField) || string.IsNullOrEmpty(sortOrder))
+                {
+                    Context.Response.StatusCode = 400;
+                    Context.Response.Write("Prosím zadajte všetky vstupné parametre");
+                    return;
+                }
+
+
             }
 
             // skontroluje ci su hodnoty s sortorder "Ascending" alebo "Descending "
@@ -355,98 +339,379 @@ namespace knihy_jankech
             DateTime startD = DateTime.Parse(startDate);
             DateTime endD = DateTime.Parse(endDate);
             // Use LINQ to join the information from the two XML files and filter the results based on selected category and selected value
-            var result = from b in booksXml.Descendants("book")
-                         join w1 in warehouseXml.Descendants("transakcia") on (string)b.Element("id") equals (string)w1.Element("id_knihy") into g
-                         from w1 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - startD).Ticks)).Take(1)
-                         let startAmount = (int)w1.Element("aktualne_mnozstvo_na_sklade")
+            if (selectedAtribute != "vsetky")
+            {
+                var result = from b in booksXml.Descendants("book")
+                             join w1 in warehouseXml.Descendants("transakcia") on (string)b.Element("id") equals (string)w1.Element("id_knihy") into g
+                             from w1 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - startD).Ticks)).Take(1)
+                             let startAmount = (int)w1.Element("aktualne_mnozstvo_na_sklade")
 
-                         from w2 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - endD).Ticks)).Take(1)
-                         where (string)b.Element(selectedAtribute) == selectedValueAtribute ||
-                         (selectedAtribute == "autor" && (string)b.Element("autori").Element("autor1") == selectedValueAtribute) ||
-                         (selectedAtribute == "autor" && (string)b.Element("autori").Element("autor2") == selectedValueAtribute)
+                             from w2 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - endD).Ticks)).Take(1)
+                             where (string)b.Element(selectedAtribute) == selectedValueAtribute ||
+                             (selectedAtribute == "autor" && (string)b.Element("autori").Element("autor1") == selectedValueAtribute) ||
+                             (selectedAtribute == "autor" && (string)b.Element("autori").Element("autor2") == selectedValueAtribute)
 
+
+
+                             select new
+                             {
+                                 BookID = (string)b.Element("id"),
+                                 BookName = (string)b.Element("nazov"),
+                                 BookNumPages = (int)b.Element("pocet_stran"),
+                                 BookYear = (int)b.Element("rok_vydania"),
+                                 BookSellPrice = (float)b.Element("predajna_cena"),
+                                 BookBuyPrice = (float)b.Element("nakupna_cena"),
+                                 BookRating = (float)b.Element("priemerne_hodnotenie"),
+                                 StartAmount = startAmount,
+                                 EndAmount = (int)w2.Element("aktualne_mnozstvo_na_sklade"),
+                                 StartDate = start.ToString("yyyy-MM-dd"),
+                                 EndDate = end.ToString("yyyy-MM-dd")
+                             };
+
+                if (sortOrder == "Ascending")
+                {
+                    switch (sortField)
+                    {
+                        case "nazov":
+                            result = result.OrderBy(r => r.BookName);
+                            break;
+                        case "pocet_stran":
+                            result = result.OrderBy(r => r.BookNumPages);
+                            break;
+                        case "rok_vydania":
+                            result = result.OrderBy(r => r.BookYear);
+                            break;
+                        case "predajna_cena":
+                            result = result.OrderBy(r => r.BookSellPrice);
+                            break;
+                        case "nakupna_cena":
+                            result = result.OrderBy(r => r.BookBuyPrice);
+                            break;
+                        case "priemerne_hodnotenie":
+                            result = result.OrderBy(r => r.BookRating);
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+                else if (sortOrder == "Descending")
+                {
+                    switch (sortField)
+                    {
+                        case "nazov":
+                            result = result.OrderByDescending(r => r.BookName);
+                            break;
+                        case "pocet_stran":
+                            result = result.OrderByDescending(r => r.BookNumPages);
+                            break;
+                        case "rok_vydania":
+                            result = result.OrderByDescending(r => r.BookYear);
+                            break;
+                        case "predajna_cena":
+                            result = result.OrderByDescending(r => r.BookSellPrice);
+                            break;
+                        case "nakupna_cena":
+                            result = result.OrderByDescending(r => r.BookBuyPrice);
+                            break;
+                        case "priemerne_hodnotenie":
+                            result = result.OrderByDescending(r => r.BookRating);
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+                double TotalStartAmount = result.Sum(x => x.StartAmount);
+                double TotalEndAmount = result.Sum(x => x.EndAmount);
+
+                if (result.Count() == 0)
+                {
+                    Context.Response.ContentType = "application/json";
+                    Context.Response.Write("Žiadny záznam nespĺňa zadané kritériá");
+
+                };
+                SaveWebMethodResult(result, "SaveWebMethodResult", parameters, fileAmountFilterPath);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
+            }
+            else
+            {
+
+                var result = from b in booksXml.Descendants("book")
+                             join w1 in warehouseXml.Descendants("transakcia") on (string)b.Element("id") equals (string)w1.Element("id_knihy") into g
+                             from w1 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - startD).Ticks)).Take(1)
+                             let startAmount = (int)w1.Element("aktualne_mnozstvo_na_sklade")
+
+                             from w2 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - endD).Ticks)).Take(1)
+
+
+
+
+                             select new
+                             {
+                                 BookID = (string)b.Element("id"),
+                                 BookName = (string)b.Element("nazov"),
+                                 BookNumPages = (int)b.Element("pocet_stran"),
+                                 BookYear = (int)b.Element("rok_vydania"),
+                                 BookSellPrice = (float)b.Element("predajna_cena"),
+                                 BookBuyPrice = (float)b.Element("nakupna_cena"),
+                                 BookRating = (float)b.Element("priemerne_hodnotenie"),
+                                 StartAmount = startAmount,
+                                 EndAmount = (int)w2.Element("aktualne_mnozstvo_na_sklade"),
+                                 StartDate = start.ToString("yyyy-MM-dd"),
+                                 EndDate = end.ToString("yyyy-MM-dd")
+                             };
+
+                if (sortOrder == "Ascending")
+                {
+                    switch (sortField)
+                    {
+                        case "nazov":
+                            result = result.OrderBy(r => r.BookName);
+                            break;
+                        case "pocet_stran":
+                            result = result.OrderBy(r => r.BookNumPages);
+                            break;
+                        case "rok_vydania":
+                            result = result.OrderBy(r => r.BookYear);
+                            break;
+                        case "predajna_cena":
+                            result = result.OrderBy(r => r.BookSellPrice);
+                            break;
+                        case "nakupna_cena":
+                            result = result.OrderBy(r => r.BookBuyPrice);
+                            break;
+                        case "priemerne_hodnotenie":
+                            result = result.OrderBy(r => r.BookRating);
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+                else if (sortOrder == "Descending")
+                {
+                    switch (sortField)
+                    {
+                        case "nazov":
+                            result = result.OrderByDescending(r => r.BookName);
+                            break;
+                        case "pocet_stran":
+                            result = result.OrderByDescending(r => r.BookNumPages);
+                            break;
+                        case "rok_vydania":
+                            result = result.OrderByDescending(r => r.BookYear);
+                            break;
+                        case "predajna_cena":
+                            result = result.OrderByDescending(r => r.BookSellPrice);
+                            break;
+                        case "nakupna_cena":
+                            result = result.OrderByDescending(r => r.BookBuyPrice);
+                            break;
+                        case "priemerne_hodnotenie":
+                            result = result.OrderByDescending(r => r.BookRating);
+                            break;
+
+                        default:
+                            break;
+                    }
+                   
+                }
+
+                if (result.Count() == 0)
+                {
+                    Context.Response.ContentType = "application/json";
+                    Context.Response.Write("Žiadny záznam nespĺňa zadané kritériá");
+
+                };
+                SaveWebMethodResult(result, "SaveWebMethodResult", parameters, fileAmountFilterPath);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
+            }
+
+
+
+        }
+        [WebMethod]
+        public string GetTotalSellOfBooks(string bookXmlFile, string transactionXmlFile, string startDate, string endDate, string category, string sortBy, string sortOrder)
+        {
+            XDocument bookData = XDocument.Load(bookXmlFile);
+            XDocument transactionData = XDocument.Load(transactionXmlFile);
+
+            var result = from b in bookData.Root.Elements("book")
+                         join t in transactionData.Root.Elements("transaction") on (int)b.Element("id") equals (int)t.Element("book_id")
+                         where t.Element("type").Value == "sell" &&
+                               DateTime.Parse(t.Element("date").Value) >= DateTime.Parse(startDate) &&
+                               DateTime.Parse(t.Element("date").Value) <= DateTime.Parse(endDate) &&
+                               b.Element("category").Value == category
                          select new
                          {
-                             BookID = (string)b.Element("id"),
-                             BookName = (string)b.Element("nazov"),
-                             BookNumPages = (int)b.Element("pocet_stran"),
-                             BookYear = (int)b.Element("rok_vydania"),
-                             BookSellPrice = (float)b.Element("predajna_cena"),
-                             BookBuyPrice = (float)b.Element("nakupna_cena"),
-                             BookRating = (float)b.Element("priemerne_hodnotenie"),
-                             StartAmount = startAmount,
-                             EndAmount = (int)w2.Element("aktualne_mnozstvo_na_sklade"),
-                             StartDate = start.ToString("yyyy-MM-dd"),
-                             EndDate = end.ToString("yyyy-MM-dd")
+                             BookId = (int)b.Element("id"),
+                             BookName = b.Element("name").Value,
+                             SellDate = DateTime.Parse(t.Element("date").Value),
+                             SellAmount = (double)t.Element("amount")
                          };
 
-            if (sortOrder == "Ascending")
+            switch (sortBy)
             {
-                switch (sortField)
-                {
-                    case "nazov":
-                        result = result.OrderBy(r => r.BookName);
-                        break;
-                    case "pocet_stran":
-                        result = result.OrderBy(r => r.BookNumPages);
-                        break;
-                    case "rok_vydania":
-                        result = result.OrderBy(r => r.BookYear);
-                        break;
-                    case "predajna_cena":
-                        result = result.OrderBy(r => r.BookSellPrice);
-                        break;
-                    case "nakupna_cena":
-                        result = result.OrderBy(r => r.BookBuyPrice);
-                        break;
-                    case "priemerne_hodnotenie":
-                        result = result.OrderBy(r => r.BookRating);
-                        break;
-
-                    default:
-                        break;
-                }
+                case "id":
+                    result = sortOrder == "ascending" ? result.OrderBy(x => x.BookId) : result.OrderByDescending(x => x.BookId);
+                    break;
+                case "name":
+                    result = sortOrder == "ascending" ? result.OrderBy(x => x.BookName) : result.OrderByDescending(x => x.BookName);
+                    break;
+                case "date":
+                    result = sortOrder == "ascending" ? result.OrderBy(x => x.SellDate) : result.OrderByDescending(x => x.SellDate);
+                    break;
+                case "amount":
+                    result = sortOrder == "ascending" ? result.OrderBy(x => x.SellAmount) : result.OrderByDescending(x => x.SellAmount);
+                    break;
             }
-            else if (sortOrder == "Descending")
-            {
-                switch (sortField)
-                {
-                    case "nazov":
-                        result = result.OrderByDescending(r => r.BookName);
-                        break;
-                    case "pocet_stran":
-                        result = result.OrderByDescending(r => r.BookNumPages);
-                        break;
-                    case "rok_vydania":
-                        result = result.OrderByDescending(r => r.BookYear);
-                        break;
-                    case "predajna_cena":
-                        result = result.OrderByDescending(r => r.BookSellPrice);
-                        break;
-                    case "nakupna_cena":
-                        result = result.OrderByDescending(r => r.BookBuyPrice);
-                        break;
-                    case "priemerne_hodnotenie":
-                        result = result.OrderByDescending(r => r.BookRating);
-                        break;
 
-                    default:
-                        break;
-                }
-            }
-            if (result.Count() == 0)
-            {
-                Context.Response.ContentType = "application/json";
-                Context.Response.Write("Žiadny záznam nespĺňa zadané kritériá");
-
-            };
-            SaveWebMethodResult(result, "SaveWebMethodResult", parameters, fileAmountFilterPath);
-            Context.Response.ContentType = "application/json";
-            Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
+            double totalSell = result.Sum(x => x.SellAmount);
+            return totalSell.ToString();
         }
+        [WebMethod]
+        public void AgregatedStatiscticsAmount(string selectedAtribute, string selectedValueAtribute, string startDate, string endDate)
+        {
+            string[] parameters = { selectedAtribute, selectedValueAtribute, startDate, endDate, };
+            if (selectedAtribute != "vsetky")
+            {
+                // Skontroluje ci su vlozene vsetky parametre 
+                if (string.IsNullOrEmpty(selectedAtribute) || string.IsNullOrEmpty(selectedValueAtribute) ||
+                    string.IsNullOrEmpty(startDate) || string.IsNullOrEmpty(endDate) )
+                {
+                    Context.Response.StatusCode = 400;
+                    Context.Response.Write("Prosím zadajte všetky vstupné parametre");
+                    return;
+                }
+            }
+            else
+            {
+
+                if (string.IsNullOrEmpty(selectedAtribute) ||
+                       string.IsNullOrEmpty(startDate) || string.IsNullOrEmpty(endDate)  )
+                {
+                    Context.Response.StatusCode = 400;
+                    Context.Response.Write("Prosím zadajte všetky vstupné parametre");
+                    return;
+                }
 
 
-    }
-};
+            }
+
+            // Try to parse the start and end dates
+            DateTime start, end;
+            if (!DateTime.TryParse(startDate, out start) || !DateTime.TryParse(endDate, out end))
+            {
+                Context.Response.StatusCode = 400;
+                Context.Response.Write("Zadajte validný formát dútumu ( napr. 'yyyy-MM-dd')");
+                return;
+            }
+            if (start > end)
+            {
+                Context.Response.StatusCode = 400;
+                Context.Response.Write("Začiatočný dátum nemože byť neskorej ako konečný dátum");
+                return;
+            }
+            // Load XML files containing book information and book transaction information
+            var booksXml = XElement.Load(fileBookInfo);
+            var warehouseXml = XElement.Load(fileBookTransactionInfo);
+            // Convert the start and end dates to DateTime format
+            DateTime startD = DateTime.Parse(startDate);
+            DateTime endD = DateTime.Parse(endDate);
+            // Use LINQ to join the information from the two XML files and filter the results based on selected category and selected value
+            if (selectedAtribute != "vsetky")
+            {
+                var result = from b in booksXml.Descendants("book")
+                             join w1 in warehouseXml.Descendants("transakcia") on (string)b.Element("id") equals (string)w1.Element("id_knihy") into g
+                             from w1 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - startD).Ticks)).Take(1)
+                             let startAmount = (int)w1.Element("aktualne_mnozstvo_na_sklade")
+
+                             from w2 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - endD).Ticks)).Take(1)
+                             where (string)b.Element(selectedAtribute) == selectedValueAtribute ||
+                             (selectedAtribute == "autor" && (string)b.Element("autori").Element("autor1") == selectedValueAtribute) ||
+                             (selectedAtribute == "autor" && (string)b.Element("autori").Element("autor2") == selectedValueAtribute)
+
+
+
+                             select new
+                             {
+                                 StartAmount = startAmount,
+                                 EndAmount = (int)w2.Element("aktualne_mnozstvo_na_sklade"),
+                                 StartDate = start.ToString("yyyy-MM-dd"),
+                                 EndDate = end.ToString("yyyy-MM-dd")
+                             };
+
+
+                double TotalStartAmount = result.Sum(x => x.StartAmount);
+                double TotalEndAmount = result.Sum(x => x.EndAmount);
+                double MaxAmount = result.Max(x => x.StartAmount);
+                double MinAmont = result.Min(x => x.EndAmount);
+                double AvgAmont = result.Average(x => x.EndAmount);
+                var serializedResult = new
+                {
+                    TotalStartAmount,
+                    TotalEndAmount,
+                    MaxAmount,
+                    MinAmont,
+                    AvgAmont
+                };
+
+                if (result.Count() == 0)
+                {
+                    Context.Response.ContentType = "application/json";
+                    Context.Response.Write("Žiadny záznam nespĺňa zadané kritériá");
+
+                };
+                SaveWebMethodResult(result, "SaveWebMethodResult", parameters, fileAmountFilterPath);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JsonConvert.SerializeObject(serializedResult, Formatting.Indented));
+            }
+            else
+            {
+
+                var result = from b in booksXml.Descendants("book")
+                             join w1 in warehouseXml.Descendants("transakcia") on (string)b.Element("id") equals (string)w1.Element("id_knihy") into g
+                             from w1 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - startD).Ticks)).Take(1)
+                             let startAmount = (int)w1.Element("aktualne_mnozstvo_na_sklade")
+
+                             from w2 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - endD).Ticks)).Take(1)
+                             select new
+                             {
+                                 StartAmount = startAmount,
+                                 EndAmount = (int)w2.Element("aktualne_mnozstvo_na_sklade"),
+                                 StartDate = start.ToString("yyyy-MM-dd"),
+                                 EndDate = end.ToString("yyyy-MM-dd")
+                             };
+                double TotalStartAmount = result.Sum(x => x.StartAmount);
+                double TotalEndAmount = result.Sum(x => x.EndAmount);
+                double MaxAmount = result.Max(x => x.StartAmount);
+                double MinAmont = result.Min(x => x.EndAmount);
+                double AvgAmont = result.Average(x => x.EndAmount);
+                var serializedResult = new
+                {
+                    TotalStartAmount,
+                    TotalEndAmount,
+                    MaxAmount,
+                    MinAmont,
+                    AvgAmont
+
+                };
+                if (result.Count() == 0)
+                {
+                    Context.Response.ContentType = "application/json";
+                    Context.Response.Write("Žiadny záznam nespĺňa zadané kritériá");
+
+                };
+                SaveWebMethodResult(result, "SaveWebMethodResult", parameters, fileAmountFilterPath);
+                Context.Response.ContentType = "application/json";
+                Context.Response.Write(JsonConvert.SerializeObject(serializedResult, Formatting.Indented));
+            }
+
+        }
+    };
+}
 
 
