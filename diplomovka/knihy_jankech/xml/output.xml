@@ -1,3 +1,4 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <root>
   <output>
     <book>
@@ -23,31 +24,31 @@ A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole
       <priemerne_hodnotenie>4.7</priemerne_hodnotenie>
       <obrazok>../img/1.jpg</obrazok>
     </book>
-    <timestamp>2023-02-05 13:59:45</timestamp>
+    <timestamp>2023-02-05 18:16:49</timestamp>
   </output>
   <output>
     <book>
-      <id>12</id>
-      <nazov>Smrť na druhom brehu</nazov>
+      <id>2</id>
+      <nazov>Harry Potter a Ohnivá čaša</nazov>
       <autori>
-        <autor1>Dominik Dán</autor1>
+        <autor1>J.K. Rowling</autor1>
         <autor2>-</autor2>
       </autori>
-      <kategoria>Detektívky</kategoria>
-      <isbn>9788055625935</isbn>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143866</isbn>
       <jazyk>sk</jazyk>
-      <pocet_stran>320</pocet_stran>
+      <pocet_stran>712</pocet_stran>
       <vazba>pevná väzba</vazba>
-      <rok_vydania>2016</rok_vydania>
-      <vydavatelstvo>Slovart</vydavatelstvo>
-      <predajna_cena>13.25</predajna_cena>
-      <nakupna_cena>7.69</nakupna_cena>
-      <marza>0.723016905071521</marza>
-      <zisk_kus>5.56</zisk_kus>
-      <obsah>Začiatky deväťdesiatych rokov boli hektickým obdobím nielen na oddelení vrážd, ale v celej spoločnosti. Čo sa dialo v Našom Meste automaticky registrovali aj detektívi, a nielen registrovali, aj riešili, vyšetrovali a vypočúvali. Zo zelenáča Richarda Krauza je samostatne pracujúci detektív a s parťákom Jozefom Fischerom zvaným Chosé riešia jeden prípad za druhým. Tento sa stal na jar 1994 ‒ na brehu rieky Morava na úrovni 4. kilometrovníka našli dvaja výrastkovia polozahrabanú, polorozpadnutú mŕtvolu muža. Nič zvláštne, pokojne mohla skončiť v krematóriu a na štátne trovy jej mohli podkúriť - to by ale nesmela mať uprostred čela pravidelný kruhový otvor s priemerom 9 mm. Stačil jeden pohľad a dvojici detektívov bolo hneď jasné, že ho nespôsobil vrták, ale olovo odliate do tvaru guľky. No z akej pištole bola vystrelená a čia ruka ju v tom momente držala, sa dozvedia až po dlhom vyšetrovaní, Chlapci z mord partie sa riadne zapotia, lebo nič nevedia ani o vrahovi, ani o obeti. Mŕtvy chlap nikomu nechýba. Nevedia ani to, že kruhový otvor uprostred čela sa onedlho stane symbolom vybavovania si účtov v podsvetí, ktoré sa práve začína formovať.</obsah>
-      <priemerne_hodnotenie>4.6</priemerne_hodnotenie>
-      <obrazok>../img/12.jpg</obrazok>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>16.11</predajna_cena>
+      <nakupna_cena>10.25</nakupna_cena>
+      <marza>0.571707317073171</marza>
+      <zisk_kus>5.86</zisk_kus>
+      <obsah>Harry Potter je znovu na prázdninách u otravných Dursleyovcov. Chce sa od nich odpútať, a tak sa zúčastní na Svetovom pohári v metlobale spolu s Hermionou, Ronom a Weasleyovcami. Okrem toho sa po sto rokoch na Rokforte pripravuje Trojčarodejnícky turnaj a majú sa na ňom zúčastniť dve ďalšie čarodejnícke školy. Harry aj naďalej túži byť obyčajným štrnásťročným čarodejníkom. Má však smolu, lebo nie je obyčajný - dokonca ani podľa čarodejníckych meradiel. V jeho prípade to môže mať smrteľné dôsledky...</obsah>
+      <priemerne_hodnotenie>4.5</priemerne_hodnotenie>
+      <obrazok>../img/2.jpg</obrazok>
     </book>
-    <timestamp>2023-02-05 13:59:53</timestamp>
+    <timestamp>2023-02-05 18:17:06</timestamp>
   </output>
 </root>
