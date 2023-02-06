@@ -20,7 +20,13 @@ namespace xml_net_framework_skusam
     internal class Program
     {
         static void Main(string[] args)
-        {
+        { string kategorie = "category";
+            DateTime datumZac = DateTime.Parse("2020-01-08").Date;
+            DateTime datumKon = DateTime.Parse("2020-01-12").Date;
+
+
+            Console.WriteLine(GetAggregatedData(kategorie, datumZac, datumKon));
+          
             //            XmlDocument doc = new XmlDocument();
             //            doc.Load("D:\\git_repositories\\FHI\\diplomovka\\moja_praca\\rychlokurzCsharpAskusanie\\xml_net_framework_skusam\\xml_net_framework_skusam\\books.xml");
             //            string json = JsonConvert.SerializeXmlNode(doc, Formatting.Indented) ;
@@ -201,13 +207,13 @@ namespace xml_net_framework_skusam
             var booksXml = XElement.Load(bookInfoPath);
             var warehouseXml = XElement.Load(bookTransactionPath);
             Console.WriteLine(booksXml.Element("books").Element("book").Element("autori").Element("autor1").Value);
-              
-               
+
+
 
             //var selectedCategory = "Fantasy";
             //DateTime startDate =  DateTime.Parse("2020-01-08").Date;
             //DateTime endDate =  DateTime.Parse("2020-01-09").Date;
-          
+
             ////DateTime datumKon = DateTime.Parse("2020-01-12").Date
 
             //var result = from b in booksXml.Descendants("book")
@@ -230,6 +236,85 @@ namespace xml_net_framework_skusam
             //{
             //    Console.WriteLine("Book ID: {0}, Book Name: {1}, Start Amount: {2}, End Amount: {3}, Start Date: {4}, End Date: {5}", r.BookId, r.BookName, r.StartAmount, r.EndAmount, r.StartDate, r.EndDate);
             //}
+            
+           string  GetAggregatedData(string topHierarchy, DateTime startDate, DateTime endDate)
+            {
+                XElement booksdata = XElement.Load("D:\\git_repozitare\\FHI\\diplomovka\\moja_praca\\webova_sluzba\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\xml\\book_transakcie_moje.xml");
+                XElement transactionsXml = XElement.Load("D:\\git_repozitare\\FHI\\diplomovka\\moja_praca\\webova_sluzba\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\elektronicke_knihkupectvo_webove_sluzby_diplomovka\\xml\\book_moje.xml");
+                var books = from book in booksdata.Elements("book")
+                            select new
+                            {
+                                Id = (int)book.Element("id"),
+                                Category = (string)book.Element("kategoria"),
+                                Language = (string)book.Element("jazyk"),
+                                Year = (int)book.Element("rok_vydania"),
+                                Binding = (string)book.Element("vazba"),
+                                Publisher = (string)book.Element("vydavatelstvo"),
+                                SalesPrice = (decimal)book.Element("predajna_cena")
+                            };
+
+                var transactions = from transaction in transactionsXml.Elements("transakcia")
+                                   where ((DateTime)transaction.Element("datum") >= startDate) && ((DateTime)transaction.Element("datum") <= endDate)
+                                   join book in books on (int)transaction.Element("id_knihy") equals book.Id
+                                   select new
+                                   {
+                                       Id = (int)transaction.Element("id_transakcie"),
+                                       BookId = (int)transaction.Element("id_knihy"),
+                                       Date = (DateTime)transaction.Element("datum"),
+                                       Type = (string)transaction.Element("typ_transakcie"),
+                                       Quantity = (int)transaction.Element("mnozstvo"),
+                                       UnitPrice = (decimal)transaction.Element("cena_za_jednotku"),
+                                       TotalPrice = (decimal)transaction.Element("celkovo_cena"),
+                                       Category = book.Category,
+                                       Language = book.Language,
+                                       Year = book.Year,
+                                       Binding = book.Binding,
+                                       Publisher = book.Publisher,
+                                       SalesPrice = book.SalesPrice
+                                   };
+
+                XElement result = new XElement("tophierarchy", new XAttribute("element", topHierarchy));
+                switch (topHierarchy)
+                {
+                    case "category":
+                        var categoryData = from t in transactions
+                                           group t by t.Category into g
+                                           select new
+                                           {
+                                               Category = g.Key,
+                                               TotalSellAmount = g.Sum(x => x.Quantity),
+                                               TotalRevenue = g.Sum(x => x.TotalPrice)
+                                           };
+                        foreach (var data in categoryData)
+                        {
+                            XElement category = new XElement("category", new XAttribute("name", data.Category),
+                                new XElement("totalsellamount", data.TotalSellAmount),
+                                new XElement("totalrevenue", data.TotalRevenue));
+                            var bookData = from t in transactions
+                                           where t.Category == data.Category
+                                           group t by t.BookId into g
+                                           select new
+                                           {
+                                               BookId = g.Key,
+                                               TotalSellAmount = g.Sum(x => x.Quantity),
+                                               TotalRevenue = g.Sum(x => x.TotalPrice)
+                                           };
+                            XElement books1 = new XElement("books");
+                            foreach (var book in bookData)
+                            {
+                                XElement bk = new XElement("book", new XAttribute("id", book.BookId),
+                                new XElement("totalsellamount", book.TotalSellAmount),
+                                new XElement("totalrevenue", book.TotalRevenue));
+                                books1.Add(bk);
+                            }
+                            category.Add(books);
+                            result.Add(category);
+                        }
+                        break;
+                    default: break;
+                }
+                return result.ToString();
+            }
         }
     }
 }

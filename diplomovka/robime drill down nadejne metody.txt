@@ -1,0 +1,69 @@
+funnguje ale len pre top kategoriu
+
+[WebMethod]
+        public void GetAggregatedDataSellByDateAndEachCategory(string kat, DateTime startDate, DateTime endDate)
+        {
+            // Load the books data from XML
+            XDocument booksData = XDocument.Load(fileBookInfo);
+            // Load the transactions data from XML
+            XDocument transactionsData = XDocument.Load(fileBookTransactionInfo);
+
+
+            // Join the data by book id
+            var aggregatedData = from book in booksData.Descendants("book")
+                                 join transaction in transactionsData.Descendants("transakcia")
+                                 on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
+                                 where (DateTime)transaction.Element("datum") >= startDate
+                                 && (DateTime)transaction.Element("datum") <= endDate
+                                 && transaction.Element("typ_transakcie").Value == "predaj"
+                                 group new { Book = book, Transaction = transaction } by book.Element(kat).Value into g
+                                 select new
+                                 {
+                                     Podkategoria = g.Key,
+                                     TotalQuantity =  g.Sum(x =>Math.Abs( (int)x.Transaction.Element("mnozstvo"))),
+                                     TotalRevenue = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")),
+                                    totalid = g.Sum(x => (int)x.Book.Element("id"))
+
+
+                                 };
+           
+
+            // Serialize the result to JSON using Newtonsoft.Json library
+           Context.Response.Write(JsonConvert.SerializeObject(aggregatedData, Formatting.Indented));
+        }
+
+funguje ale berie ale neagreguje rovnake id knih 
+[WebMethod]
+        public void GetAggregatedDataSellByDateAndEachCategory(string kat, DateTime startDate, DateTime endDate)
+        {
+            // Load the books data from XML
+            XDocument booksData = XDocument.Load(fileBookInfo);
+            // Load the transactions data from XML
+            XDocument transactionsData = XDocument.Load(fileBookTransactionInfo);
+
+
+            // Join the data by book id
+            var aggregatedData = from book in booksData.Descendants("book")
+                                 join transaction in transactionsData.Descendants("transakcia")
+                                 on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
+                                 where (DateTime)transaction.Element("datum") >= startDate
+                                 && (DateTime)transaction.Element("datum") <= endDate
+                                 && transaction.Element("typ_transakcie").Value == "predaj"
+                                 group new { Book = book, Transaction = transaction } by book.Element(kat).Value into g
+                                 select new
+                                 {
+                                     Podkategoria = g.Key,
+                                     TotalQuantity =  g.Sum(x =>Math.Abs( (int)x.Transaction.Element("mnozstvo"))),
+                                     TotalRevenue = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")),
+                                     book = g.Select(x => new {
+                                         id = x.Book.Element("id").Value,
+                                         nazov = x.Book.Element("nazov").Value,
+                                         TotalQuantity = Math.Abs((int)x.Transaction.Element("mnozstvo")),
+                                         TotalRevenue = (double)x.Transaction.Element("celkovo_cena")
+                                     })
+                                 };
+           
+
+            // Serialize the result to JSON using Newtonsoft.Json library
+           Context.Response.Write(JsonConvert.SerializeObject(aggregatedData, Formatting.Indented));
+        }
