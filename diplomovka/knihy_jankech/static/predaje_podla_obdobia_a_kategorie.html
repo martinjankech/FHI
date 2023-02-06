@@ -62,7 +62,7 @@
         </div>
         <div class="form-row ">
           <div class="form-group col-md-6">
-            <label for="atributeValue">hľadať podľa atribútu</label>
+            <label for="atributeValue">Agregovat podla kategórie</label>
             <select id="selectedAtribute" class="form-control">
               <option disabled selected value> zvoľte si možnosť prosím </option>
               <option value="autor">autor</option>
@@ -74,10 +74,6 @@
             </select>
           </div>
         </div>
-        <h6>hodnota hľadaného atribútu </h6>
-        <input class="form-control col-6 mb-3" type="text" name="selectedValueAtribute" id="selectedValueAtribute"
-          placeholder="">
-
         <button type="submit" id="btnGetData" class="btn btn-primary ">potvrdiť</button>
       </form>
     </div>
@@ -93,9 +89,7 @@
     </footer>
   </div>
 </body>
-
 <script>
-
   $("#navbar").load("navbar.html")
   $("footer").load("footer.html")
   $("#selectedAtribute").on('change', function () {
@@ -229,11 +223,6 @@
     }).fail(function (jqXHR, textStatus, errorThrown) { showAlertError(jqXHR.responseText) });
     event.preventDefault();
   })
-
-
-
-
-
 </script>
 
 </html>

@@ -659,45 +659,7 @@ namespace knihy_jankech
 
 
         }
-        [WebMethod]
-        public string GetTotalSellOfBooks(string bookXmlFile, string transactionXmlFile, string startDate, string endDate, string category, string sortBy, string sortOrder)
-        {
-            XDocument bookData = XDocument.Load(bookXmlFile);
-            XDocument transactionData = XDocument.Load(transactionXmlFile);
-
-            var result = from b in bookData.Root.Elements("book")
-                         join t in transactionData.Root.Elements("transaction") on (int)b.Element("id") equals (int)t.Element("book_id")
-                         where t.Element("type").Value == "sell" &&
-                               DateTime.Parse(t.Element("date").Value) >= DateTime.Parse(startDate) &&
-                               DateTime.Parse(t.Element("date").Value) <= DateTime.Parse(endDate) &&
-                               b.Element("category").Value == category
-                         select new
-                         {
-                             BookId = (int)b.Element("id"),
-                             BookName = b.Element("name").Value,
-                             SellDate = DateTime.Parse(t.Element("date").Value),
-                             SellAmount = (double)t.Element("amount")
-                         };
-
-            switch (sortBy)
-            {
-                case "id":
-                    result = sortOrder == "ascending" ? result.OrderBy(x => x.BookId) : result.OrderByDescending(x => x.BookId);
-                    break;
-                case "name":
-                    result = sortOrder == "ascending" ? result.OrderBy(x => x.BookName) : result.OrderByDescending(x => x.BookName);
-                    break;
-                case "date":
-                    result = sortOrder == "ascending" ? result.OrderBy(x => x.SellDate) : result.OrderByDescending(x => x.SellDate);
-                    break;
-                case "amount":
-                    result = sortOrder == "ascending" ? result.OrderBy(x => x.SellAmount) : result.OrderByDescending(x => x.SellAmount);
-                    break;
-            }
-
-            double totalSell = result.Sum(x => x.SellAmount);
-            return totalSell.ToString();
-        }
+        
         [WebMethod]
         public void AgregatedStatiscticsAmount(string selectedAtribute, string selectedValueAtribute, string startDate, string endDate)
         {
@@ -858,7 +820,7 @@ namespace knihy_jankech
             XDocument booksData = XDocument.Load(fileBookInfo);
             // Load the transactions data from XML
             XDocument transactionsData = XDocument.Load(fileBookTransactionInfo);
-            if (kat != "autori")
+            if (kat != "autor"|| kat!="autori")
             {
 
 
