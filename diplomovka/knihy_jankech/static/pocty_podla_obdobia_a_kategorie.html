@@ -101,7 +101,7 @@
           </div>
         </div>
       </div>
-      <h6>hodnota hľadaného atribútu </h6>
+      <h6 id="hideHeading">hodnota hľadaného atribútu </h6>
       <input class="form-control col-6 mb-3" type="text" name="selectedValueAtribute" id="selectedValueAtribute"
         placeholder="">
 
@@ -182,8 +182,10 @@
   $(document).ready(function () {
     $('#selectedAtribute').change(function () {
       if ($(this).val() == 'vsetky') {
+        $('#hideHeading').hide();
         $('#selectedValueAtribute').hide();
       } else {
+        $('#hideHeading').show();
         $('#selectedValueAtribute').show();
       }
     });

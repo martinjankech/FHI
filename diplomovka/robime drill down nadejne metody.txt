@@ -1,3 +1,66 @@
+len rozdeli autorov & ale inak na ostatne funguje 
+
+        [WebMethod]
+        public void GetAggregatedDataSellByDateAndEachCategory(string kat, DateTime startDate, DateTime endDate)
+        {
+            // Load the books data from XML
+            XDocument booksData = XDocument.Load(fileBookInfo);
+            // Load the transactions data from XML
+            XDocument transactionsData = XDocument.Load(fileBookTransactionInfo);
+
+            // Join the books data and transactions data on book id to get all information related to each transaction
+            var aggregatedData = from book in booksData.Descendants("book")
+                                 join transaction in transactionsData.Descendants("transakcia")
+                                 on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
+
+                                 // Filter the transactions to only those with a date within the specified range and of type "predaj"
+                                 where (DateTime)transaction.Element("datum") >= startDate
+                                 && (DateTime)transaction.Element("datum") <= endDate
+                                 && transaction.Element("typ_transakcie").Value == "predaj"
+
+                                 // Group the transactions by the specified category element value
+                                 group new { Book = book, Transaction = transaction } by kat == "autori" ? (book.Element("autori").Element("autor2").Value == "-" ? book.Element("autori").Element("autor1").Value : $"{book.Element("autori").Element("autor1").Value} & {book.Element("autori").Element("autor2").Value}") : book.Element(kat).Value into g
+                                 select new
+                                 {
+                                     // Store the category value as Podkategoria
+                                     Podkategoria = g.Key,
+
+                                     // Calculate the total quantity of books sold and total revenue for each category
+                                     TotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))),
+                                     TotalRevenue = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")),
+
+                                     // Group the books by their id to get aggregated data for books with the same id
+                                     Books = g.GroupBy(x => x.Book.Element("id").Value)
+                                         .Select(x => new {
+                                             Id = x.Key,
+                                             Name = x.First().Book.Element("nazov").Value,
+
+                                             // Calculate the total quantity sold and total revenue for each book
+                                             TotalQuantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))),
+                                             TotalRevenue = x.Sum(y => (double)y.Transaction.Element("celkovo_cena"))
+                                         }).ToList()
+                                 };
+
+            // Calculate the total quantity and total revenue for all books
+            var totalAggregatedData = new
+            {
+                TotalQuantity = aggregatedData.Sum(x => x.TotalQuantity),
+                TotalRevenue = aggregatedData.Sum(x => x.TotalRevenue)
+            };
+
+            // Combine the aggregated data and total aggregated data into a single object
+            var result = new
+            {
+                AggregatedData = aggregatedData,
+                TotalAggregatedData = totalAggregatedData
+            };
+
+            // Serialize the result to JSON using the Newtonsoft.Json library
+            Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+            Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
+        }
+
+
 funnguje ale len pre top kategoriu
 
 [WebMethod]
@@ -66,4 +129,64 @@ funguje ale berie ale neagreguje rovnake id knih
 
             // Serialize the result to JSON using Newtonsoft.Json library
            Context.Response.Write(JsonConvert.SerializeObject(aggregatedData, Formatting.Indented));
+        }
+
+[WebMethod] funguje na vsetko len nie na autorov lebo vnoreny element
+        public void GetAggregatedDataSellByDateAndEachCategory(string kat, DateTime startDate, DateTime endDate)
+        {
+            // Load the books data from XML
+            XDocument booksData = XDocument.Load(fileBookInfo);
+            // Load the transactions data from XML
+            XDocument transactionsData = XDocument.Load(fileBookTransactionInfo);
+
+            // Join the books data and transactions data on book id to get all information related to each transaction
+            var aggregatedData = from book in booksData.Descendants("book")
+                                 join transaction in transactionsData.Descendants("transakcia")
+                                 on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
+
+                                 // Filter the transactions to only those with a date within the specified range and of type "predaj"
+                                 where (DateTime)transaction.Element("datum") >= startDate
+                                 && (DateTime)transaction.Element("datum") <= endDate
+                                 && transaction.Element("typ_transakcie").Value == "predaj"
+
+                                 // Group the transactions by the specified category element value
+                                 group new { Book = book, Transaction = transaction } by book.Element(kat).Value into g
+                                 select new
+                                 {
+                                     // Store the category value as Podkategoria
+                                     Podkategoria = g.Key,
+
+                                     // Calculate the total quantity of books sold and total revenue for each category
+                                     TotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))),
+                                     TotalRevenue = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")),
+
+                                     // Group the books by their id to get aggregated data for books with the same id
+                                     Books = g.GroupBy(x => x.Book.Element("id").Value)
+                                         .Select(x => new {
+                                             Id = x.Key,
+                                             Name = x.First().Book.Element("nazov").Value,
+
+                                             // Calculate the total quantity sold and total revenue for each book
+                                             TotalQuantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))),
+                                             TotalRevenue = x.Sum(y => (double)y.Transaction.Element("celkovo_cena"))
+                                         }).ToList()
+                                 };
+
+            // Calculate the total quantity and total revenue for all books
+            var totalAggregatedData = new
+            {
+                TotalQuantity = aggregatedData.Sum(x => x.TotalQuantity),
+                TotalRevenue = aggregatedData.Sum(x => x.TotalRevenue)
+            };
+
+            // Combine the aggregated data and total aggregated data into a single object
+            var result = new
+            {
+                AggregatedData = aggregatedData,
+                TotalAggregatedData = totalAggregatedData
+            };
+
+            // Serialize the result to JSON using the Newtonsoft.Json library
+            Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+            Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
         }

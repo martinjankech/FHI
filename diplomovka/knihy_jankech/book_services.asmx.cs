@@ -852,180 +852,140 @@ namespace knihy_jankech
         // nemazat zatial najlesia uz ju len doplnit 
 
         [WebMethod]
-        public void GetAggregatedDataSellByDateAndEachCategory(string kat, DateTime startDate, DateTime endDate)
+        public void GetAggregatedDataSellByDateAndSelectedCategory(string kat, DateTime startDate, DateTime endDate)
         {
             // Load the books data from XML
             XDocument booksData = XDocument.Load(fileBookInfo);
             // Load the transactions data from XML
             XDocument transactionsData = XDocument.Load(fileBookTransactionInfo);
-
-            // Join the books data and transactions data on book id to get all information related to each transaction
-            var aggregatedData = from book in booksData.Descendants("book")
-                                 join transaction in transactionsData.Descendants("transakcia")
-                                 on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
-
-                                 // Filter the transactions to only those with a date within the specified range and of type "predaj"
-                                 where (DateTime)transaction.Element("datum") >= startDate
-                                 && (DateTime)transaction.Element("datum") <= endDate
-                                 && transaction.Element("typ_transakcie").Value == "predaj"
-
-                                 // Group the transactions by the specified category element value
-                                 group new { Book = book, Transaction = transaction } by book.Element(kat).Value into g
-                                 select new
-                                 {
-                                     // Store the category value as Podkategoria
-                                     Podkategoria = g.Key,
-
-                                     // Calculate the total quantity of books sold and total revenue for each category
-                                     TotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))),
-                                     TotalRevenue = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")),
-
-                                     // Group the books by their id to get aggregated data for books with the same id
-                                     Books = g.GroupBy(x => x.Book.Element("id").Value)
-                                         .Select(x => new {
-                                             Id = x.Key,
-                                             Name = x.First().Book.Element("nazov").Value,
-
-                                             // Calculate the total quantity sold and total revenue for each book
-                                             TotalQuantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))),
-                                             TotalRevenue = x.Sum(y => (double)y.Transaction.Element("celkovo_cena"))
-                                         }).ToList()
-                                 };
-
-            // Calculate the total quantity and total revenue for all books
-            var totalAggregatedData = new
+            if (kat != "autori")
             {
-                TotalQuantity = aggregatedData.Sum(x => x.TotalQuantity),
-                TotalRevenue = aggregatedData.Sum(x => x.TotalRevenue)
-            };
-
-            // Combine the aggregated data and total aggregated data into a single object
-            var result = new
-            {
-                AggregatedData = aggregatedData,
-                TotalAggregatedData = totalAggregatedData
-            };
-
-            // Serialize the result to JSON using the Newtonsoft.Json library
-            Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
-            Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
-        }
-        [WebMethod]
-        public string GetAggregatedData2(string selectedElement, string startDate, string endDate)
-        {
-            XDocument booksData = XDocument.Load(fileBookInfo);
-            XDocument transactionsData = XDocument.Load(fileBookTransactionInfo);
-
-            var result = from book in booksData.Descendants("book")
-                         join transaction in transactionsData.Descendants("transakcia")
-                            on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
-                         where ((DateTime)transaction.Element("datum") >= DateTime.Parse(startDate)) &&
-                               ((DateTime)transaction.Element("datum") <= DateTime.Parse(endDate))
-                         group transaction by (string)book.Element(selectedElement) into g
-                         select new
-                         {
-                             SelectedElement = g.Key,
-                             TotalSellAmount = g.Sum(x => (int)x.Element("mnozstvo")),
-                             TotalRevenue = g.Sum(x => (decimal)x.Element("celkovo_cena")),
-                             BookInfo = g.Select(b => b.Parent)
-                         };
-
-            XElement root = new XElement("tophierarchy");
-            root.Add(new XElement(selectedElement,
-                result.Select(x => new XElement("book",
-                    new XAttribute(selectedElement, x.SelectedElement),
-                    new XAttribute("totalsellamount", x.TotalSellAmount),
-                    new XAttribute("totalrevenue", x.TotalRevenue),
-                    x.BookInfo.Select(b => b.Elements().Where(e => e.Name != selectedElement))
-                ))));
-
-            return root.ToString();
-        }
 
 
-        
-            [WebMethod]
-            public void GetAggregatedData(string topHierarchy, DateTime startDate, DateTime endDate)
-            {
-                XElement booksXml = XElement.Load(fileBookInfo);
-                XElement transactionsXml = XElement.Load(fileBookTransactionInfo);
+                // Join the books data and transactions data on book id to get all information related to each transaction
+                var aggregatedData = from book in booksData.Descendants("book")
+                                     join transaction in transactionsData.Descendants("transakcia")
+                                     on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
 
-                var booksr = from book in booksXml.Elements("book")
-                            select new
-                            {
-                                Id = (int)book.Element("id"),
-                                Category = (string)book.Element("kategoria"),
-                                Language = (string)book.Element("jazyk"),
-                                Year = (int)book.Element("rok_vydania"),
-                                Binding = (string)book.Element("vazba"),
-                                Publisher = (string)book.Element("vydavatelstvo"),
-                                SalesPrice = (decimal)book.Element("predajna_cena")
-                            };
+                                     // Filter the transactions to only those with a date within the specified range and of type "predaj"
+                                     where (DateTime)transaction.Element("datum") >= startDate
+                                     && (DateTime)transaction.Element("datum") <= endDate
+                                     && transaction.Element("typ_transakcie").Value == "predaj"
 
-                var transactions = from transaction in transactionsXml.Elements("transakcia")
-                                   where ((DateTime)transaction.Element("datum") >= startDate) && ((DateTime)transaction.Element("datum") <= endDate)
-                                   join book in booksr on (int)transaction.Element("id_knihy") equals book.Id
-                                   select new
-                                   {
-                                       Id = (int)transaction.Element("id_transakcie"),
-                                       BookId = (int)transaction.Element("id_knihy"),
-                                       Date = (DateTime)transaction.Element("datum"),
-                                       Type = (string)transaction.Element("typ_transakcie"),
-                                       Quantity = (int)transaction.Element("mnozstvo"),
-                                       UnitPrice = (decimal)transaction.Element("cena_za_jednotku"),
-                                       TotalPrice = (decimal)transaction.Element("celkovo_cena"),
-                                       Category = book.Category,
-                                       Language = book.Language,
-                                       Year = book.Year,
-                                       Binding = book.Binding,
-                                       Publisher = book.Publisher,
-                                       SalesPrice = book.SalesPrice
-                                   };
+                                     // Group the transactions by the specified category element value
+                                     group new { Book = book, Transaction = transaction } by book.Element(kat).Value into g
+                                     select new
+                                     {
+                                         // Store the category value as Podkategoria
+                                         Podkategoria = g.Key,
 
-                XElement result = new XElement("tophierarchy", new XAttribute("element", topHierarchy));
-                switch (topHierarchy)
+                                         // Calculate the total quantity of books sold and total revenue for each category
+                                         TotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))),
+                                         TotalRevenue = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")),
+
+                                         // Group the books by their id to get aggregated data for books with the same id
+                                         Books = g.GroupBy(x => x.Book.Element("id").Value)
+                                             .Select(x => new
+                                             {
+                                                 Id = x.Key,
+                                                 Name = x.First().Book.Element("nazov").Value,
+
+                                                 // Calculate the total quantity sold and total revenue for each book
+                                                 TotalQuantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))),
+                                                 TotalRevenue = x.Sum(y => (double)y.Transaction.Element("celkovo_cena"))
+                                             }).ToList()
+                                     };
+                var totalAggregatedData = new
                 {
-                    case "category":
-                        var categoryData = from t in transactions
-                                           group t by t.Category into g
-                                           select new
-                                           {
-                                               Category = g.Key,
-                                               TotalSellAmount = g.Sum(x => x.Quantity),
-                                               TotalRevenue = g.Sum(x => x.TotalPrice)
-                                           };
-                        foreach (var data in categoryData)
-                        {
-                            XElement category = new XElement("category", new XAttribute("name", data.Category),
-                                new XElement("totalsellamount", data.TotalSellAmount),
-                                new XElement("totalrevenue", data.TotalRevenue));
-                            var bookData = from t in transactions
-                                           where t.Category == data.Category
-                                           group t by t.BookId into g
-                                           select new
-                                           {
-                                               BookId = g.Key,
-                                               TotalSellAmount = g.Sum(x => x.Quantity),
-                                               TotalRevenue = g.Sum(x => x.TotalPrice)
-                                           };
-                            XElement books = new XElement("books");
-                            foreach (var book in bookData)
-                            {
-                                XElement bk = new XElement("book", new XAttribute("id", book.BookId),
-                                new XElement("totalsellamount", book.TotalSellAmount),
-                                new XElement("totalrevenue", book.TotalRevenue));
-                                books.Add(bk);
-                            }
-                            category.Add(books);
-                            result.Add(category);
-                        }
-                        break;
-                    default: break;
-                }
-            Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
+                    TotalQuantity = aggregatedData.Sum(x => x.TotalQuantity),
+                    TotalRevenue = aggregatedData.Sum(x => x.TotalRevenue)
+                };
+             
+                // Combine the aggregated data and total aggregated data into a single object
+                var result = new
+
+                {
+                    AggregatedData = aggregatedData,
+                    TotalAggregatedData = totalAggregatedData
+                };
+
+                // Serialize the result to JSON using the Newtonsoft.Json library
+                Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+                Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
+            
         }
+            else {
+                var aggregatedData = from book in booksData.Descendants("book")
+                                     join transaction in transactionsData.Descendants("transakcia")
+                                     on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
+                                     where (DateTime)transaction.Element("datum") >= startDate
+                                     && (DateTime)transaction.Element("datum") <= endDate
+                                     && transaction.Element("typ_transakcie").Value == "predaj"
+                                     group new { Book = book, Transaction = transaction } by book.Element("autori").Element("autor1").Value into g
+                                     select new
+                                     {
+                                         // Store the author1 as Podkategoria
+                                         Podkategoria = g.Key,
+                                         TotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))),
+                                         TotalRevenue = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")),
+                                         Books = g.GroupBy(x => x.Book.Element("id").Value)
+                                             .Select(x => new {
+                                                 Id = x.Key,
+                                                 Quantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))),
+                                                 Revenue = x.Sum(y => (double)y.Transaction.Element("celkovo_cena"))
+                                             })
+                                     };
+                // Group by author2 - toto sluzi len na analyticke uceli to Totalneho poctu predananzch knih a totalneho prijmu sa to nezaratava ale
+                // aby sme mali prehlad o prijmi a predajoch knih aj podla autora dva a mohli to vyuzit pri drill down operacii 
+
+                
+                    var aggregatedData2 = from book in booksData.Descendants("book")
+                                          join transaction in transactionsData.Descendants("transakcia")
+                                          on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
+                                          where (DateTime)transaction.Element("datum") >= startDate
+                                          && (DateTime)transaction.Element("datum") <= endDate
+                                          && transaction.Element("typ_transakcie").Value == "predaj"
+                                          where book.Element("autori").Element("autor2").Value != "-"
+                                          group new { Book = book, Transaction = transaction } by book.Element("autori").Element("autor2").Value into g
+                                          select new
+                                          {
+                                              // Store the author2 as Podkategoria
+                                              Podkategoria = g.Key,
+                                              TotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))),
+                                              TotalRevenue = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")),
+                                              Books = g.GroupBy(x => x.Book.Element("id").Value)
+                                                  .Select(x => new {
+                                                      Id = x.Key,
+                                                      Quantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))),
+                                                      Revenue = x.Sum(y => (double)y.Transaction.Element("celkovo_cena"))
+                                                  })
+                                          };
+                
+                // Calculate the total quantity and total revenue for all books
+                var totalAggregatedData = new
+                {
+                    TotalQuantity = aggregatedData.Sum(x => x.TotalQuantity),
+                    TotalRevenue = aggregatedData.Sum(x => x.TotalRevenue)
+                };
+                var combinedData = aggregatedData.Concat(aggregatedData2);
+                // Combine the aggregated data and total aggregated data into a single object
+                var result = new
+
+                {
+                    AggregatedData = combinedData,
+                    TotalAggregatedData = totalAggregatedData
+                };
+
+                // Serialize the result to JSON using the Newtonsoft.Json library
+                Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+                Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
+            }
+
+           
         }
+       
     }
+}
 
 
 
