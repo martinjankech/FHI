@@ -1,0 +1,29 @@
+[WebService(Namespace = "http://tempuri.org/")]
+[WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
+[System.ComponentModel.ToolboxItem(false)]
+public class BookService : WebService
+{
+    [WebMethod]
+    public XElement GetAggregatedData(string selectedElement)
+    {
+        var booksXml = XElement.Load("Books.xml");
+        var transactionsXml = XElement.Load("Transactions.xml");
+
+        var query = from book in booksXml.Elements("book")
+                    join transaction in transactionsXml.Elements("transakcia")
+                    on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
+                    group new { book, transaction } by book.Element(selectedElement).Value into g
+                    select new XElement("tophierachy",
+                        new XAttribute(selectedElement, g.Key),
+                        new XElement("totalsellamout", g.Sum(x => (int)x.transaction.Element("mnozstvo"))),
+                        new XElement("totalrevenue", g.Sum(x => (decimal)x.transaction.Element("celkovo_cena"))),
+                        from b in g
+                        select new XElement("book",
+                            new XElement("id", (int)b.book.Element("id")),
+                            new XElement("nazov", (string)b.book.Element("nazov")),
+                            new XElement("totalsellamout", (int)b.transaction.Element("mnozstvo")),
+                            new XElement("totalrevenue", (decimal)b.transaction.Element("celkovo_cena"))));
+
+        return new XElement("root", query);
+    }
+}

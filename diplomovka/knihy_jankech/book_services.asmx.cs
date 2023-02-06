@@ -159,61 +159,66 @@ namespace knihy_jankech
                 Console.WriteLine("Nedovolený prístup: " + ex.Message);
             }
         }
-            //This code writes an XML document to a file with a timestamp.If the file already exists, the code will load the file and add new elements to it, otherwise it will create a new XML document with a root element.The code loops through each node in the data, imports it into the document, creates an "output" element, creates a "timestamp" element with the current date and time, appends the imported node and the timestamp to the output element, and finally appends the
+        //This code writes an XML document to a file with a timestamp.If the file already exists, the code will load the file and add new elements to it, otherwise it will create a new XML document with a root element.The code loops through each node in the data, imports it into the document, creates an "output" element, creates a "timestamp" element with the current date and time, appends the imported node and the timestamp to the output element, and finally appends the
 
-            // ulozi IEnumerable alebo iny objekt vysledok LINQ dopytu spolu s casovou peciatkov a hladanymi parametrami do noveho xml suboru 
-            //dynamic je kľúčové slovo C#, ktoré umožňuje deklarovať premennú ako dynamický typ. Typ premennej sa rieši počas behu namiesto kompilácie. To znamená, že typ premennej sa môže dynamicky meniť na základe hodnoty, ku ktorej je priradená.
-            //Použitie dynamic v tejto metode je výhodné, pretože  umožňuje odovzdať akýkoľvek typ objektu metóde SaveWebMethodResult bez toho, aby sa muselo zadava5 presný typ.Vďaka tomu je metóda flexibilnejšia a všeobecnejšia, pretože dokáže spracovať objekty rôznych typov a uložiť ich do súboru XML.
-            // Keďže typ výsledku je dynamický, kód môže určiť typ objektu za behu a skontrolovať, či ide o IEnumerable<object>. Ak áno, kód prejde každú položku a pridá ju do súboru XML. Ak nie, kód ho pridá ako jednu položku.
-            //Použitím dynamických sa môžete vyhnúť nutnosti písať viacero metód na spracovanie rôznych typov objektov a namiesto toho napísať jednu metódu, ktorá zvládne všetky typy.
-            public static void SaveWebMethodResult(dynamic result, string methodName, string[] parameters, string path)
-{
-    // Skontroluj, či špecifikovaná cesta existuje a vytvor ju, ak nie
-    if (!Directory.Exists(path))
-    {
-        Directory.CreateDirectory(path);
-    }
-
-    // Vygeneruj názov súboru na základe aktuálneho času a názvu metódy
-    string fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + methodName + "_";
-    foreach (string param in parameters)
-    {
-        fileName += param.ToString() + "_";
-    }
-    fileName = fileName.TrimEnd('_') + ".xml";
-
-    // Vytvor koreňový element XML súboru
-    XElement root = new XElement("Root");
-
-    // Skontroluj, či výsledok je IEnumerable<object>
-    if (result is IEnumerable<object>)
-    {
-        // Ak áno, prejdi cez každý prvok a pridaj ho do XML súboru
-        foreach (var item in (IEnumerable<object>)result)
+        // ulozi IEnumerable alebo iny objekt vysledok LINQ dopytu spolu s casovou peciatkov a hladanymi parametrami do noveho xml suboru 
+        //dynamic je kľúčové slovo C#, ktoré umožňuje deklarovať premennú ako dynamický typ. Typ premennej sa rieši počas behu namiesto kompilácie. To znamená, že typ premennej sa môže dynamicky meniť na základe hodnoty, ku ktorej je priradená.
+        //Použitie dynamic v tejto metode je výhodné, pretože  umožňuje odovzdať akýkoľvek typ objektu metóde SaveWebMethodResult bez toho, aby sa muselo zadava5 presný typ.Vďaka tomu je metóda flexibilnejšia a všeobecnejšia, pretože dokáže spracovať objekty rôznych typov a uložiť ich do súboru XML.
+        // Keďže typ výsledku je dynamický, kód môže určiť typ objektu za behu a skontrolovať, či ide o IEnumerable<object>. Ak áno, kód prejde každú položku a pridá ju do súboru XML. Ak nie, kód ho pridá ako jednu položku.
+        //Použitím dynamických sa môžete vyhnúť nutnosti písať viacero metód na spracovanie rôznych typov objektov a namiesto toho napísať jednu metódu, ktorá zvládne všetky typy.
+        public static void SaveWebMethodResult(dynamic result, string methodName, string[] parameters, string path)
         {
-            XElement element = new XElement("Item");
-            foreach (var prop in item.GetType().GetProperties())
+            // Skontroluj, či špecifikovaná cesta existuje a vytvor ju, ak nie
+            if (!Directory.Exists(path))
             {
-                element.Add(new XElement(prop.Name, prop.GetValue(item)));
+                Directory.CreateDirectory(path);
             }
-            root.Add(element);
-        }
-    }
-    else
-    {
-        // Ak nie je IEnumerable<object>, pridaj ho ako jediný prvok do XML súboru
-        XElement element = new XElement("Item");
-        foreach (var prop in result.GetType().GetProperties())
-        {
-            element.Add(new XElement(prop.Name, prop.GetValue(result)));
-        }
-        root.Add(element);
-    }
 
-    // Ulož XML súbor na špecifikovanú cestu
-    string fullPath = Path.Combine(path, fileName);
-    root.Save(fullPath);
-}
+            // Vygeneruj názov súboru na základe aktuálneho času a názvu metódy
+            string fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + methodName + "_";
+            foreach (string param in parameters)
+            {
+                fileName += param.ToString() + "_";
+            }
+            fileName = fileName.TrimEnd('_') + ".xml";
+
+            // Vytvor koreňový element XML súboru
+            XElement root = new XElement("Root");
+
+            // Skontroluj, či výsledok je IEnumerable<object>
+            if (result is IEnumerable<object>)
+            {
+                // Ak áno, prejdi cez každý prvok a pridaj ho do XML súboru
+                foreach (var item in (IEnumerable<object>)result)
+                {
+                    XElement element = new XElement("Item");
+                    foreach (var prop in item.GetType().GetProperties())
+                    {
+                        element.Add(new XElement(prop.Name, prop.GetValue(item)));
+                    }
+                    root.Add(element);
+                }
+            }
+            else
+            {
+                // Ak nie je IEnumerable<object>, pridaj ho ako jediný prvok do XML súboru
+                XElement element = new XElement("Item");
+                foreach (var prop in result.GetType().GetProperties())
+                {
+                    element.Add(new XElement(prop.Name, prop.GetValue(result)));
+                }
+                root.Add(element);
+            }
+
+            // Ulož XML súbor na špecifikovanú cestu
+            string fullPath = Path.Combine(path, fileName);
+            root.Save(fullPath);
+        }
+
+
+
+
+
         [WebMethod]
         public void SinglebookDataById(string id)
         {
@@ -295,7 +300,7 @@ namespace knihy_jankech
                     Context.Response.StatusCode = 500;
                     Context.Response.StatusDescription = "Chyba pri spracovávaní požiadavky";
                     throw new Exception("Záznam pre daný názov nebol nájdený");
-                   
+
                 }
                 // Zapísanie výsledku do súboru s časovým razítkom
                 WriteToTheFileWithTimeStamp(fileOutputSingleSearch, nodeListBook);
@@ -637,7 +642,7 @@ namespace knihy_jankech
                         default:
                             break;
                     }
-                   
+
                 }
 
                 if (result.Count() == 0)
@@ -701,7 +706,7 @@ namespace knihy_jankech
             {
                 // Skontroluje ci su vlozene vsetky parametre 
                 if (string.IsNullOrEmpty(selectedAtribute) || string.IsNullOrEmpty(selectedValueAtribute) ||
-                    string.IsNullOrEmpty(startDate) || string.IsNullOrEmpty(endDate) )
+                    string.IsNullOrEmpty(startDate) || string.IsNullOrEmpty(endDate))
                 {
                     Context.Response.StatusCode = 400;
                     Context.Response.Write("Prosím zadajte všetky vstupné parametre");
@@ -712,7 +717,7 @@ namespace knihy_jankech
             {
 
                 if (string.IsNullOrEmpty(selectedAtribute) ||
-                       string.IsNullOrEmpty(startDate) || string.IsNullOrEmpty(endDate)  )
+                       string.IsNullOrEmpty(startDate) || string.IsNullOrEmpty(endDate))
                 {
                     Context.Response.StatusCode = 400;
                     Context.Response.Write("Prosím zadajte všetky vstupné parametre");
@@ -843,7 +848,115 @@ namespace knihy_jankech
             }
 
         }
-    };
+
+
+
+        [WebMethod]
+        public string GetAggregatedDataSellByDateAndEachCategory(DateTime startDate, DateTime endDate)
+        {
+            // Load the books data from XML
+            XDocument booksData = XDocument.Load(fileBookInfo);
+            // Load the transactions data from XML
+            XDocument transactionsData = XDocument.Load(fileBookTransactionInfo);
+
+
+            // Join the data by book id
+            var aggregatedData = from book in booksData.Descendants("book")
+                                 join transaction in transactionsData.Descendants("transakcia")
+                                 on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
+                                 where (DateTime)transaction.Element("datum") >= startDate
+                                 && (DateTime)transaction.Element("datum") <= endDate
+                                 && transaction.Element("typ_transakcie").Value == "predaj"
+                                 group new { Book = book, Transaction = transaction } by book.Element("kategoria").Value into g
+                                 select new
+                                 {
+                                     Category = g.Key,
+                                     TotalQuantity = g.Sum(x => (int)x.Transaction.Element("mnozstvo")),
+                                     TotalRevenue = g.Sum(x => (double)x.Transaction.Element("celkovo_cena"))
+                                 };
+
+            // Serialize the result to JSON using Newtonsoft.Json library
+            var json = JsonConvert.SerializeObject(aggregatedData);
+
+            return json;
+        }
+
+
+
+        [WebMethod]
+        public string GetAggregatedData2(string selectedElement, string startDate, string endDate)
+        {
+            XDocument booksData = XDocument.Load(fileBookInfo);
+            XDocument transactionsData = XDocument.Load(fileBookTransactionInfo);
+
+            var result = from book in booksData.Descendants("book")
+                         join transaction in transactionsData.Descendants("transakcia")
+                            on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
+                         where ((DateTime)transaction.Element("datum") >= DateTime.Parse(startDate)) &&
+                               ((DateTime)transaction.Element("datum") <= DateTime.Parse(endDate))
+                         group transaction by (string)book.Element(selectedElement) into g
+                         select new
+                         {
+                             SelectedElement = g.Key,
+                             TotalSellAmount = g.Sum(x => (int)x.Element("mnozstvo")),
+                             TotalRevenue = g.Sum(x => (decimal)x.Element("celkovo_cena")),
+                             BookInfo = g.Select(b => b.Parent)
+                         };
+
+            XElement root = new XElement("tophierarchy");
+            root.Add(new XElement(selectedElement,
+                result.Select(x => new XElement("book",
+                    new XAttribute(selectedElement, x.SelectedElement),
+                    new XAttribute("totalsellamount", x.TotalSellAmount),
+                    new XAttribute("totalrevenue", x.TotalRevenue),
+                    x.BookInfo.Select(b => b.Elements().Where(e => e.Name != selectedElement))
+                ))));
+
+            return root.ToString();
+        }
+
+        [WebMethod]
+        public string GetAggregatedData3(string element, DateTime startDate, DateTime endDate)
+        {
+            // Load the two XML files into XDocument objects
+            XDocument booksXml = XDocument.Load(fileBookInfo);
+            XDocument transactionsXml = XDocument.Load(fileBookTransactionInfo);
+
+            // Use LINQ to query the data from the XML files
+            var books = from book in booksXml.Root.Elements("book")
+                        join transaction in transactionsXml.Root.Elements("transaction")
+                        on (int)book.Element("id") equals (int)transaction.Element("book_id")
+                        where (DateTime)transaction.Element("date") >= startDate
+                        && (DateTime)transaction.Element("date") <= endDate
+                        group transaction by book.Element(element).Value into g
+                        select new
+                        {
+                            Element = g.Key,
+                            Books = from b in g
+                                    group b by new
+                                    {
+                                        Id = (int)b.Element("book_id"),
+                                        Name = (string)b.Element("book_name"),
+                                    } into bookGroup
+                                    select new
+                                    {
+                                        Id = bookGroup.Key.Id,
+                                        Name = bookGroup.Key.Name,
+                                        Sales = bookGroup.Count(),
+                                    },
+                        };
+
+            // Return the result as a string
+            return books.ToString();
+        }
+       
+       
+      
+    }
+
 }
+
+    
+
 
 
