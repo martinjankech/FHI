@@ -29,6 +29,17 @@
     src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
   <link rel="stylesheet" href="css/datatable.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/data.js"></script>
+  <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+    integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/predaje.css">
 
   <title>Document</title>
 </head>
@@ -48,8 +59,8 @@
   </div>
   <div class="flex-wrapper">
     <div class="container">
-      <h1 class="mb-3 mt-5">Hľadaj počty kníh podľa: </h1>
-      <form class="col-12" id="formAtributesDates" method="POST">
+      <h1 class="mb-3 mt-5">Hľadaj údaje o predajoch kníh podľa: </h1>
+      <form class="col-12" id="formSellAtributesDates" method="POST">
         <div class="form-row ">
           <div class="form-group col-md-6">
             <label for="startDate">Datum od</label>
@@ -62,7 +73,7 @@
         </div>
         <div class="form-row ">
           <div class="form-group col-md-6">
-            <label for="atributeValue">Agregovat podla kategórie</label>
+            <label for="atributeValue">Hladať podla Atribútu</label>
             <select id="selectedAtribute" class="form-control">
               <option disabled selected value> zvoľte si možnosť prosím </option>
               <option value="autor">autor</option>
@@ -78,16 +89,40 @@
       </form>
     </div>
 
-    <div style="display: none;" id="chart" class="container">
-      <h2 class="mb-4 mt-2">Graf počtov kníh podľa zadaného atribútu</h2>
-      <canvas id="myChart" class="col-10">
-      </canvas>
+
+    <div class="container mt-5 mb-3">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card revenue-card">
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="fas fa-money-bill-wave"></i> Total Revenue
+              </h5>
+              <p class="card-text" id="revenue"></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card quantity-card">
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="fas fa-box"></i> Total Quantity
+              </h5>
+              <p class="card-text" id="quantity"></p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <div class="container-fluid col-10 mt-4 mb-4" id="container"></div>
 
     <footer>
 
     </footer>
   </div>
+
+
 </body>
 <script>
   $("#navbar").load("navbar.html")
@@ -128,101 +163,113 @@
 </script>
 <script>
 
-  $(document).on('submit', "#formAtributesDates", function (event) {
+  $(document).on('submit', "#formSellAtributesDates", function (event) {
 
-    var selectedAtributeValue = $("#selectedAtribute").val();
-    var selectedValueAtributeValue = $("#selectedValueAtribute").val();
-    var startDateValue = $("#startDate").val();
-    var endDateValue = $("#endDate").val();
-    var sortFieldValue = $("#sortField").val();
-    var sortOrderValue = $("input[name='sortOrder']:checked").val();
-
+    var atribute = $("#selectedAtribute").val();
+    var atributeText = $("#selectedAtribute option:selected").text();
+    var startDate = $("#startDate").val();
+    var endDate = $("#endDate").val();
 
     $.ajax({
-      url: "http://localhost:8050/book_services.asmx/SortedBookDataByDateCategory",
-      method: "POST",
-      data: { selectedAtribute: selectedAtributeValue, selectedValueAtribute: selectedValueAtributeValue, startDate: startDateValue, endDate: endDateValue, sortField: sortFieldValue, sortOrder: sortOrderValue },
+      type: "POST",
+      url: "http://localhost:8050/book_services.asmx/GetAggregatedDataSellByDateAndSelectedCategory",
+      data: {
+        atribute: atribute,
+        startDate: startDate,
+        endDate: endDate
+      },
+
       dataType: "json",
-      encode: true,
-      // 
-    }).done(function (response) {
-      var data = response;
-      // vyčistni a znici predoslu instanciu Datatable aby sa mohla vytvorit nova po resubminuti formulara 
-      $('#bookData').DataTable().clear();
-      $('#bookData').DataTable().destroy()
-
-      if (myChart) {
-        myChart.clear();
-        myChart.destroy();
-      }
-      console.log(myChart)
-
-      $('#tableBook').show()
-      $('html, body').animate({
-        scrollTop: $("#bookData").offset().top
-      }, 1000);
-      var table = $('#bookData').DataTable({
-        "ordering": false,
-        "data": data,
-        "columns": [
-          {
-            data: "BookID",
-          },
-          {
-            data: "BookName",
-            contentPadding: 'data'
-          },
-          { data: "StartDate" },
-          { data: "EndDate" },
-          { data: "StartAmount" },
-          { data: "EndAmount" },
-          { data: "BookNumPages" },
-          { data: "BookYear" },
-          { data: "BookSellPrice" },
-          { data: "BookBuyPrice" },
-          { data: "BookRating" },
+      success: function (response) {
+        try {
+          var data = response;
+          var podkategoriaData = [];
+          data.AggregatedData.forEach(function (podkategoria) {
+            podkategoriaData.push({
+              name: podkategoria.Podkategoria,
+              y: podkategoria.TotalRevenue,
+              drilldown: podkategoria.Podkategoria
+            });
+          });
+          console.log(podkategoriaData)
 
 
-        ]
-      });
-      var bookNames = response.map(function (book) { return book.BookName });
-      var startAmounts = response.map(function (book) { return book.StartAmount });
-      var endAmounts = response.map(function (book) { return book.EndAmount });
-      $("#chart").show()
-      var ctx = document.getElementById('myChart').getContext('2d');
-      myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: bookNames, // Add labels for each entry here
-          datasets: [{
-            label: 'Začiatočné množstvo ',
-            data: startAmounts, // Add startAmount values for each entry here
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            borderColor: 'rgba(255, 99, 132, 1)',
-            borderWidth: 1
-          },
-          {
-            label: 'Konečné množstvo',
-            data: endAmounts, // Add endAmount values for each entry here
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1
-          }]
-        },
-        options: {
-          scales: {
-            yAxes: [{
-              ticks: {
-                beginAtZero: true
+          var bookData = [];
+          data.AggregatedData.forEach(function (podkategoria) {
+            var books = [];
+            podkategoria.Books.forEach(function (book) {
+              books.push([book.Name, book.TotalRevenue]);
+            });
+
+            bookData.push({
+              name: podkategoria.Podkategoria,
+              id: podkategoria.Podkategoria,
+              data: books
+            });
+
+          });
+
+          let revenue = data.TotalAggregatedData.TotalRevenue;
+          let quantity = data.TotalAggregatedData.TotalQuantity;
+          document.getElementById("revenue").innerHTML = revenue;
+          document.getElementById("quantity").innerHTML = quantity;
+
+          // Create the chart
+          Highcharts.chart('container', {
+            chart: {
+              type: 'column'
+            },
+            title: {
+              text: "Príjmy podľa atribútu " + atributeText + " a jednotlivých kníh patriacich do atribútu"
+            },
+            xAxis: {
+              type: 'category'
+            },
+            yAxis: {
+              title: {
+                text: 'Total Revenue'
               }
-            }]
-          }
+            },
+            legend: {
+              enabled: false
+            },
+            plotOptions: {
+              series: {
+                borderWidth: 0,
+                dataLabels: {
+                  enabled: true,
+                  format: '${point.y:.2f}'
+                }
+              }
+            },
+            tooltip: {
+              headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+              pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>${point.y:.2f}</b><br/>'
+            },
+            series: [{
+              name: 'Podkategoria',
+              colorByPoint: true,
+              data: podkategoriaData
+            }],
+            drilldown: {
+              series: bookData
+            }
+          });
+        } catch (error) {
+          console.error(error);
+          alert("An error occurred: " + error.message);
         }
-      });
-      //$("form")[0].reset();
-    }).fail(function (jqXHR, textStatus, errorThrown) { showAlertError(jqXHR.responseText) });
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        alert(xhr.status + " " + thrownError);
+      }
+
+    });
     event.preventDefault();
-  })
+  });
+
+
+
 </script>
 
 </html>

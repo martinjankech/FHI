@@ -814,13 +814,13 @@ namespace knihy_jankech
         // nemazat zatial najlesia uz ju len doplnit 
 
         [WebMethod]
-        public void GetAggregatedDataSellByDateAndSelectedCategory(string kat, DateTime startDate, DateTime endDate)
+        public void GetAggregatedDataSellByDateAndSelectedCategory(string atribute, DateTime startDate, DateTime endDate)
         {
             // Load the books data from XML
             XDocument booksData = XDocument.Load(fileBookInfo);
             // Load the transactions data from XML
             XDocument transactionsData = XDocument.Load(fileBookTransactionInfo);
-            if (kat != "autor"|| kat!="autori")
+            if (atribute != "autor" && atribute!="autori")
             {
 
 
@@ -835,7 +835,7 @@ namespace knihy_jankech
                                      && transaction.Element("typ_transakcie").Value == "predaj"
 
                                      // Group the transactions by the specified category element value
-                                     group new { Book = book, Transaction = transaction } by book.Element(kat).Value into g
+                                     group new { Book = book, Transaction = transaction } by book.Element(atribute).Value into g
                                      select new
                                      {
                                          // Store the category value as Podkategoria
@@ -893,8 +893,9 @@ namespace knihy_jankech
                                          Books = g.GroupBy(x => x.Book.Element("id").Value)
                                              .Select(x => new {
                                                  Id = x.Key,
-                                                 Quantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))),
-                                                 Revenue = x.Sum(y => (double)y.Transaction.Element("celkovo_cena"))
+                                                 Name = x.First().Book.Element("nazov").Value,
+                                                 TotalQuantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))),
+                                                 TotalRevenue = x.Sum(y => (double)y.Transaction.Element("celkovo_cena"))
                                              })
                                      };
                 // Group by author2 - toto sluzi len na analyticke uceli to Totalneho poctu predananzch knih a totalneho prijmu sa to nezaratava ale
@@ -917,9 +918,11 @@ namespace knihy_jankech
                                               TotalRevenue = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")),
                                               Books = g.GroupBy(x => x.Book.Element("id").Value)
                                                   .Select(x => new {
+
                                                       Id = x.Key,
-                                                      Quantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))),
-                                                      Revenue = x.Sum(y => (double)y.Transaction.Element("celkovo_cena"))
+                                                      Name = x.First().Book.Element("nazov").Value,
+                                                      TotalQuantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))),
+                                                      TotalRevenue = x.Sum(y => (double)y.Transaction.Element("celkovo_cena"))
                                                   })
                                           };
                 

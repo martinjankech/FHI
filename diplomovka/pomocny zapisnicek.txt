@@ -1,0 +1,10 @@
+{
+  "TotalStartAmount": 711.0,
+  "TotalEndAmount": 198.0,
+  "MaxStartAmount": 187.0,
+  "MinStartAmont": 57.0,
+  "MaxEndAmount": 102.0,
+  "MinEndAmont": 1.0,
+  "AvgStartAmont": 142.2,
+  "AvgEndAmont": 39.6
+}

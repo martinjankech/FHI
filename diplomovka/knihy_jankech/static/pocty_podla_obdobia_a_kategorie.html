@@ -87,14 +87,14 @@
           </select>
 
           <div class="form-check mt-2">
-            <input class="form-check-input" type="radio" name="sortOrder" id="descendingInput" value="Descending"
+            <input class="form-check-input" type="radio" name="sortOrder" id="ascending_Input" value="Ascending"
               checked>
             <label class="form-check-label" for="exampleRadios1">
               Vzostupne
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="sortOrder" id="ascending_Input" value="Ascending">
+            <input class="form-check-input" type="radio" name="sortOrder" id="descendingInput" value="Descending">
             <label class="form-check-label" for="exampleRadios2">
               Zostupne
             </label>
@@ -344,19 +344,20 @@
 
 
       if (myChartAg) {
-        myChart.clear();
-        myChart.destroy();
+        myChartAg.clear();
+        myChartAg.destroy();
       }
+
       //var bookNames = response.map(function (book) { return book.BookName });
       //var startAmounts = response.map(function (book) { return book.StartAmount });
       //var endAmounts = response.map(function (book) { return book.EndAmount });
       $("#chartAg").show()
-      var labels = ['TotalStartAmount', 'MaxStartAmount', 'MinStartAmont', 'TotalEndAmount', 'AvgStartAmont', 'MaxEndAmount', 'MinEndAmont', 'AvgEndAmont'];
+      var labels = ['TotalStartAmount', 'MaxStartAmount', 'MinStartAmont', 'AvgStartAmont', 'TotalEndAmount', 'MaxEndAmount', 'MinEndAmont', 'AvgEndAmont'];
       var startData = [data.TotalStartAmount, data.MaxStartAmount, data.MinStartAmont, data.AvgStartAmont, 0, 0, 0, 0];
       var endData = [0, 0, 0, 0, data.TotalEndAmount, data.MaxEndAmount, data.MinEndAmont, data.AvgEndAmont];
 
-      var ctx = document.getElementById('myChartAg').getContext('2d');
-      var myChart = new Chart(ctx, {
+      var ctx1 = document.getElementById('myChartAg').getContext('2d');
+      myChartAg = new Chart(ctx1, {
         type: 'bar',
         data: {
           labels: labels,
@@ -388,11 +389,6 @@
     }).fail(function (jqXHR, textStatus, errorThrown) { showAlertError(jqXHR.responseText) });
     event.preventDefault();
   })
-
-
-
-
-
 </script>
 
 </html>

@@ -1,0 +1,22 @@
+
+.revenue-card {
+ background-color: #e6f7ff;
+}
+
+.quantity-card {
+ background-color: #f0f0f0;
+}
+
+.card-text,
+.card-title {
+ font-family: Arial, sans-serif;
+ font-size: 1.2em;
+ font-weight: bold;
+ color: #333;
+}
+
+.card-text {
+ font-size: 1.5em;
+ text-align: center;
+}
+

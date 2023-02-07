@@ -41,68 +41,70 @@
       </div>
     </div>
   </div>
-  <!-- <div w3-include-html="navbar.html"></div> -->
-  <div class="container ">
-    <!-- <form class="mt-5" method="POST"> -->
-    <h2 class="mt-4">Hľadať podľa :</h2>
-    <div class="form-check">
-      <input class="form-check-input1" type="radio" name="exampleRadios" id="id_checkbox" value="option1">
-      <label class="form-check-label" for="exampleRadios1">
-        Id knihy
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input2" type="radio" name="exampleRadios" id="name_checkbox" value="option2">
-      <label class="form-check-label" for="exampleRadios2">
-        Meno knihy
-      </label>
-    </div>
-    <div class="form-check">
-      <input class="form-check-input2" type="radio" name="exampleRadios" id="isbn_checkbox" value="option2">
-      <label class="form-check-label" for="exampleRadios2">
-        ISBN
-      </label>
-    </div>
-    <div id="input_place" class="col">
-    </div>
-    <div class="card mt-4 ">
-      <div class="card-body" id="move">
-        <h3 id="nazov_hore" class="card-title">Book Name</h3>
-        <h6 id="autori_hore" class="card-subtitle">Book Authors</h6>
-        <div class="row ">
-          <div class="col-lg-6 col-md-8 col-sm-12 col-12 ">
-            <div class=" img-responsive"><img id="obrazok" src="https://via.placeholder.com/430x600/00CED1/000000">
+  <div class="flex-wrapper">
+    <!-- <div w3-include-html="navbar.html"></div> -->
+    <div class="container ">
+      <!-- <form class="mt-5" method="POST"> -->
+      <h2 class="mt-4">Hľadať podľa :</h2>
+      <div class="form-check">
+        <input class="form-check-input1" type="radio" name="exampleRadios" id="id_checkbox" value="option1">
+        <label class="form-check-label" for="exampleRadios1">
+          Id knihy
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input2" type="radio" name="exampleRadios" id="name_checkbox" value="option2">
+        <label class="form-check-label" for="exampleRadios2">
+          Meno knihy
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input2" type="radio" name="exampleRadios" id="isbn_checkbox" value="option2">
+        <label class="form-check-label" for="exampleRadios2">
+          ISBN
+        </label>
+      </div>
+      <div id="input_place" class="col">
+      </div>
+      <div class="card mt-4 ">
+        <div class="card-body" id="move">
+          <h3 id="nazov_hore" class="card-title">Book Name</h3>
+          <h6 id="autori_hore" class="card-subtitle">Book Authors</h6>
+          <div class="row ">
+            <div class="col-lg-6 col-md-8 col-sm-12 col-12 ">
+              <div class=" img-responsive"><img id="obrazok" src="https://via.placeholder.com/430x600/00CED1/000000">
+              </div>
             </div>
-          </div>
-          <div class="col-lg-6 col-md-4 col-sm-12 col-12">
-            <h4 class="box-title ">Obsah knihy</h4>
-            <p id="obsah"></p>
-            <h2 id="cena_hl" class="mt-2">
-            </h2>
-            <h3 class="box-title mt-5">údaje o knihe</h3>
-            <ul class="list-unstyled">
-              <li><i class="fa fa-check text-success"></i>nazov: <span id="nazov"></span></li>
-              <li><i class="fa fa-check text-success"></i>autori: <span id="autori"></span></li>
-              <li><i class="fa fa-check text-success"></i>kategoria: <span id="kategoria"></span></li>
-              <li><i class="fa fa-check text-success"></i>isbn: <span id="isbn"></span></li>
-              <li><i class="fa fa-check text-success"></i>jazyk: <span id="jazyk"></span></li>
-              <li><i class="fa fa-check text-success"></i>pocet stran: <span id="pocet_stran"></span></li>
-              <li><i class="fa fa-check text-success"></i>rok vydania: <span id="rok_vydania"></span></li>
-              <li><i class="fa fa-check text-success"></i>vydavateľstvo: <span id="vydavatelstvo"></span>
-              </li>
-              <li><i class="fa fa-check text-success"></i>predajna cena: <span id="predajna_cena"></span>
-              </li>
-              <li><i class="fa fa-check text-success"></i>nakupna cena: <span id="nakupna_cena"></span></li>
-              <li><i class="fa fa-check text-success"></i>marza: <span id="marza"></span></li>
-              <li><i class="fa fa-check text-success"></i>zisk kus: <span id="zisk_kus"></span></li>
-            </ul>
+            <div class="col-lg-6 col-md-4 col-sm-12 col-12">
+              <h4 class="box-title ">Obsah knihy</h4>
+              <p id="obsah"></p>
+              <h2 id="cena_hl" class="mt-2">
+              </h2>
+              <h3 class="box-title mt-5">údaje o knihe</h3>
+              <ul class="list-unstyled">
+                <li><i class="fa fa-check text-success"></i>nazov: <span id="nazov"></span></li>
+                <li><i class="fa fa-check text-success"></i>autori: <span id="autori"></span></li>
+                <li><i class="fa fa-check text-success"></i>kategoria: <span id="kategoria"></span></li>
+                <li><i class="fa fa-check text-success"></i>isbn: <span id="isbn"></span></li>
+                <li><i class="fa fa-check text-success"></i>jazyk: <span id="jazyk"></span></li>
+                <li><i class="fa fa-check text-success"></i>pocet stran: <span id="pocet_stran"></span></li>
+                <li><i class="fa fa-check text-success"></i>rok vydania: <span id="rok_vydania"></span></li>
+                <li><i class="fa fa-check text-success"></i>vydavateľstvo: <span id="vydavatelstvo"></span>
+                </li>
+                <li><i class="fa fa-check text-success"></i>predajna cena: <span id="predajna_cena"></span>
+                </li>
+                <li><i class="fa fa-check text-success"></i>nakupna cena: <span id="nakupna_cena"></span></li>
+                <li><i class="fa fa-check text-success"></i>marza: <span id="marza"></span></li>
+                <li><i class="fa fa-check text-success"></i>zisk kus: <span id="zisk_kus"></span></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <footer>
+    </footer>
   </div>
-  <footer>
-  </footer>
 </body>
 
 <script>
@@ -180,7 +182,7 @@
   $(".card-body").hide();
   $("#navbar").load("navbar.html")
   $("footer").load("footer.html")
-  fixedFooter()
+  //fixedFooter()
 </script>
 
 </html>
