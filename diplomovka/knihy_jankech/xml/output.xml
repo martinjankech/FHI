@@ -554,4 +554,134 @@ A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole
     </book>
     <timestamp>2023-02-07 19:48:26</timestamp>
   </output>
+  <output>
+    <book>
+      <id>20</id>
+      <nazov>Ako si získavať priateľov a pôsobiť na ľudí</nazov>
+      <autori>
+        <autor1>Dale Carnegie</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Sebarozvoj</kategoria>
+      <isbn>9788055149134</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>256</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2016</rok_vydania>
+      <vydavatelstvo>Príroda,</vydavatelstvo>
+      <predajna_cena>10.05</predajna_cena>
+      <nakupna_cena>6.29</nakupna_cena>
+      <marza>0.597774244833069</marza>
+      <zisk_kus>3.76</zisk_kus>
+      <obsah>Dale Carnegie ponúka vo svojich knihách, ktoré sa stali svetovými bestsellermi, praktické návody, ktoré môžete začať používať hneď zajtra. Táto knižka hovorí o veľkom tajomstve správneho prístupu k ľuďom, ako urobiť dobrý dojem, viesť dialóg, ako si nenarobiť nepriateľov a získať si druhých na spoluprácu.</obsah>
+      <priemerne_hodnotenie>4.5</priemerne_hodnotenie>
+      <obrazok>../img/20.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-07 20:47:51</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>20</id>
+      <nazov>Ako si získavať priateľov a pôsobiť na ľudí</nazov>
+      <autori>
+        <autor1>Dale Carnegie</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Sebarozvoj</kategoria>
+      <isbn>9788055149134</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>256</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2016</rok_vydania>
+      <vydavatelstvo>Príroda,</vydavatelstvo>
+      <predajna_cena>10.05</predajna_cena>
+      <nakupna_cena>6.29</nakupna_cena>
+      <marza>0.597774244833069</marza>
+      <zisk_kus>3.76</zisk_kus>
+      <obsah>Dale Carnegie ponúka vo svojich knihách, ktoré sa stali svetovými bestsellermi, praktické návody, ktoré môžete začať používať hneď zajtra. Táto knižka hovorí o veľkom tajomstve správneho prístupu k ľuďom, ako urobiť dobrý dojem, viesť dialóg, ako si nenarobiť nepriateľov a získať si druhých na spoluprácu.</obsah>
+      <priemerne_hodnotenie>4.5</priemerne_hodnotenie>
+      <obrazok>../img/20.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-07 20:47:51</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>1</id>
+      <nazov>Harry Potter a Tajomná komnata</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143088</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>360</pocet_stran>
+      <vazba>brožovaná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>11.9</predajna_cena>
+      <nakupna_cena>8.25</nakupna_cena>
+      <marza>0.442424242424242</marza>
+      <zisk_kus>3.65</zisk_kus>
+      <obsah>Dursleyovci boli v to leto takí odporní, že Harry Potter sa už nevedel dočkať, kedy sa vráti do čarodejníckej školy. Jedného dňa sa v jeho izbe objaví čudné, zlomyseľné stvorenie. Volá sa Dobby a tvrdí, že ak sa Harry vráti na Rokfort, hrozí mu smrteľné nebezpečenstvo.
+A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole tajuplné a hrôzostrašné veci. Niekto, lepšie povedané niečo napáda rokfortských študentov a premieňa ich na kameň. Že by bol za tým Draco Malfoy, Harryho úhlavný nepriateľ? Alebo to má na svedomí ten, koho na Rokforte najviac upodozrievajú – samotný Harry Potter?</obsah>
+      <priemerne_hodnotenie>4.7</priemerne_hodnotenie>
+      <obrazok>../img/1.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-07 20:49:53</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>25</id>
+      <nazov>Malý princ</nazov>
+      <autori>
+        <autor1>Antoine De Saint-Exupéry</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>klasika</kategoria>
+      <isbn>9788010034666</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>253</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2019</rok_vydania>
+      <vydavatelstvo>Mladé letá</vydavatelstvo>
+      <predajna_cena>14.95</predajna_cena>
+      <nakupna_cena>6.65</nakupna_cena>
+      <marza>1.24812030075188</marza>
+      <zisk_kus>8.3</zisk_kus>
+      <obsah>Pôvabná knižka nielen pre deti, ale pre všetkých, ktorí chcú deťom porozumieť. Toto dielko dosiahlo svetový úspech a patrí do zlatého fondu svetovej literatúry. Jeho hodnota a krása nespočíva len v peknom rozprávkovom príbehu, ale hlavne v myšlienkach, ktoré ako vzácne kamienky vytvárajú obraz ľudských vlastností...
+
+Saint-Exupéry svoju knižku s čistým detským pohľadom na svet venoval najlepšiemu priateľovi. Veď všetci dospelí boli najprv deťmi. Ale máloktorý z nich sa na to pamätá.</obsah>
+      <priemerne_hodnotenie>4.8</priemerne_hodnotenie>
+      <obrazok>../img/25.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-07 20:50:03</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>25</id>
+      <nazov>Malý princ</nazov>
+      <autori>
+        <autor1>Antoine De Saint-Exupéry</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>klasika</kategoria>
+      <isbn>9788010034666</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>253</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2019</rok_vydania>
+      <vydavatelstvo>Mladé letá</vydavatelstvo>
+      <predajna_cena>14.95</predajna_cena>
+      <nakupna_cena>6.65</nakupna_cena>
+      <marza>1.24812030075188</marza>
+      <zisk_kus>8.3</zisk_kus>
+      <obsah>Pôvabná knižka nielen pre deti, ale pre všetkých, ktorí chcú deťom porozumieť. Toto dielko dosiahlo svetový úspech a patrí do zlatého fondu svetovej literatúry. Jeho hodnota a krása nespočíva len v peknom rozprávkovom príbehu, ale hlavne v myšlienkach, ktoré ako vzácne kamienky vytvárajú obraz ľudských vlastností...
+
+Saint-Exupéry svoju knižku s čistým detským pohľadom na svet venoval najlepšiemu priateľovi. Veď všetci dospelí boli najprv deťmi. Ale máloktorý z nich sa na to pamätá.</obsah>
+      <priemerne_hodnotenie>4.8</priemerne_hodnotenie>
+      <obrazok>../img/25.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-07 20:50:03</timestamp>
+  </output>
 </root>

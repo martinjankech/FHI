@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <Item>
+    <BookID>30</BookID>
+    <BookName>Víkendové varenie</BookName>
+    <BookNumPages>192</BookNumPages>
+    <BookYear>2014</BookYear>
+    <BookSellPrice>11.5</BookSellPrice>
+    <BookBuyPrice>4.36</BookBuyPrice>
+    <BookRating>3.9</BookRating>
+    <StartAmount>0</StartAmount>
+    <EndAmount>105</EndAmount>
+    <StartDate>2022-02-08</StartDate>
+    <EndDate>2023-02-11</EndDate>
+  </Item>
+  <Item>
+    <BookID>4</BookID>
+    <BookName>Jediná kniha o jídle, kterou potřebujete</BookName>
+    <BookNumPages>200</BookNumPages>
+    <BookYear>2020</BookYear>
+    <BookSellPrice>16</BookSellPrice>
+    <BookBuyPrice>8.36</BookBuyPrice>
+    <BookRating>3.8</BookRating>
+    <StartAmount>5</StartAmount>
+    <EndAmount>10</EndAmount>
+    <StartDate>2022-02-08</StartDate>
+    <EndDate>2023-02-11</EndDate>
+  </Item>
+</Root>

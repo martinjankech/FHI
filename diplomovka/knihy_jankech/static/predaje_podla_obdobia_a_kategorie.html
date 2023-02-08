@@ -63,11 +63,11 @@
       <form class="col-12" id="formSellAtributesDates" method="POST">
         <div class="form-row ">
           <div class="form-group col-md-6">
-            <label for="startDate">Datum od</label>
+            <label for="startDate">Dátum od</label>
             <input type="date" class="form-control" id="startDate" placeholder="startdate">
           </div>
           <div class="form-group col-md-6">
-            <label for="endDate">Datum do</label>
+            <label for="endDate">Dátum do</label>
             <input type="date" class="form-control" id="endDate" placeholder="enddate">
           </div>
         </div>
@@ -81,11 +81,37 @@
               <option value="vydavatelstvo">vydavateľstvo</option>
               <option value="jazyk">jazyk</option>
               <option value="vazba">väzba</option>
+              <option value="rok_vydania">rok vydania</option>
 
             </select>
+            <button type="submit" id="btnGetData" class="btn btn-primary mt-3">potvrdiť</button>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="sortingValue">Zoradiť podľa hodnoty</label>
+            <select id="sortField" class="form-control" name="sortField">
+              <option disabled selected value> zvolte si možnosť prosím </option>
+              <option value="nazov">názov atribútu</option>
+              <option value="hodnota">hodnota atribútu</option>
+
+
+            </select>
+
+            <div class="form-check mt-2">
+              <input class="form-check-input" type="radio" name="sortOrder" id="ascending_Input" value="ascending"
+                checked>
+              <label class="form-check-label" for="exampleRadios1">
+                Vzostupne
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="sortOrder" id="descendingInput" value="descending">
+              <label class="form-check-label" for="exampleRadios2">
+                Zostupne
+              </label>
+            </div>
           </div>
         </div>
-        <button type="submit" id="btnGetData" class="btn btn-primary ">potvrdiť</button>
+
       </form>
     </div>
 
@@ -115,7 +141,7 @@
       </div>
     </div>
 
-    <div class="container-fluid col-10 mt-4 mb-4" id="container"></div>
+    <div class="container-fluid col-10 mt-4 mb-5" id="container"></div>
 
     <footer>
 
@@ -127,39 +153,6 @@
 <script>
   $("#navbar").load("navbar.html")
   $("footer").load("footer.html")
-  $("#selectedAtribute").on('change', function () {
-    $('#selectedValueAtribute').attr('placeholder', "zadajte hodnotu atributu " + $("select option:selected").val())
-    switch ($("select option:selected").val()) {
-      case "autor":
-        createArrayFromNestedAttribute("autori", 'autor1').then(resolve => {
-          data1 = resolve;
-          createArrayFromNestedAttribute('autori', 'autor2').then(resolve => {
-            data2 = resolve;
-            let final = data2.concat(data1)
-
-            console.log(final);
-
-            autoCompleteInput('#selectedValueAtribute', 5, final)
-          })
-        })
-        break;
-      case "kategoria":
-        createArrayFromOneAttribute1("kategoria").then(resolve => { autoCompleteInput('#selectedValueAtribute', 5, resolve) })
-        break;
-      case "vydavatelstvo":
-        createArrayFromOneAttribute1("vydavatelstvo").then(resolve => { autoCompleteInput('#selectedValueAtribute', 5, resolve) })
-        break;
-      case "jazyk":
-        createArrayFromOneAttribute1("jazyk").then(resolve => { autoCompleteInput('#selectedValueAtribute', 5, resolve) })
-        break;
-      case "vazba":
-        createArrayFromOneAttribute1("vazba").then(resolve => { autoCompleteInput('#selectedValueAtribute', 5, resolve) })
-        break;
-      default:
-        alert("atribut nebol zadany spravne ")
-    }
-  })
-
 </script>
 <script>
 
@@ -169,14 +162,20 @@
     var atributeText = $("#selectedAtribute option:selected").text();
     var startDate = $("#startDate").val();
     var endDate = $("#endDate").val();
+    var sortingField = $("#sortField").val();
+    var sortOrderValue = $("input[name='sortOrder']:checked").val();
+
 
     $.ajax({
       type: "POST",
-      url: "http://localhost:8050/book_services.asmx/GetAggregatedDataSellByDateAndSelectedCategory",
+      url: "http://localhost:8050/book_services.asmx/SortedDrillDownByAtributeDataBetweenTwoDatesSell",
       data: {
         atribute: atribute,
         startDate: startDate,
-        endDate: endDate
+        endDate: endDate,
+        sortingField: sortingField,
+        sortingOrder: sortOrderValue,
+        optionalParameter: "revenue"
       },
 
       dataType: "json",
@@ -209,7 +208,7 @@
 
           });
 
-          let revenue = data.TotalAggregatedData.TotalRevenue;
+          let revenue = Math.round(data.TotalAggregatedData.TotalRevenue * 100) / 100;
           let quantity = data.TotalAggregatedData.TotalQuantity;
           document.getElementById("revenue").innerHTML = revenue;
           document.getElementById("quantity").innerHTML = quantity;
@@ -219,6 +218,10 @@
             chart: {
               type: 'column'
             },
+            credits: {
+              enabled: false
+            },
+
             title: {
               text: "Príjmy podľa atribútu " + atributeText + " a jednotlivých kníh patriacich do atribútu"
             },

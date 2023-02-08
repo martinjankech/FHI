@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <Item>
+    <TotalStartAmount>82</TotalStartAmount>
+    <TotalEndAmount>115</TotalEndAmount>
+    <MaxStartAmount>46</MaxStartAmount>
+    <MinStartAmont>36</MinStartAmont>
+    <MaxEndAmount>105</MaxEndAmount>
+    <MinEndAmont>10</MinEndAmont>
+    <AvgStartAmont>41</AvgStartAmont>
+    <AvgEndAmont>57.5</AvgEndAmont>
+  </Item>
+</Root>
