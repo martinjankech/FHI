@@ -116,31 +116,142 @@
     </div>
 
 
-    <div class="container mt-5 mb-3">
-      <div class="row">
-        <div class="col-md-6">
+    <div id="cards" class="container mt-5 mb-3">
+      <div class="row  ">
+        <div class="col-md-3 mb-3 pd-5 ">
           <div class="card revenue-card">
-            <div class="card-body">
+            <div class="card-body pb-5">
               <h5 class="card-title">
                 <i class="fas fa-money-bill-wave"></i> Total Revenue
               </h5>
-              <p class="card-text" id="revenue"></p>
+              <p class="card-text" id="totalRevenue"></p>
             </div>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3 mb-3 pd-5 ">
           <div class="card quantity-card">
-            <div class="card-body">
+            <div class="card-body pb-5">
               <h5 class="card-title">
                 <i class="fas fa-box"></i> Total Quantity
               </h5>
-              <p class="card-text" id="quantity"></p>
+              <p class="card-text" id="totalQuantity"></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3 pd-5 ">
+          <div class="card quantity-card">
+            <div class="card-body pb-5">
+              <h5 class="card-title">
+                <i class="fas fa-box"></i> Average Daily Total Revenue
+              </h5>
+              <p class="card-text" id="averageDailyRevenue"></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3 pd-5 ">
+          <div class="card quantity-card">
+            <div class="card-body pb-5">
+              <h5 class="card-title">
+                <i class="fas fa-box"></i> Average Daily Total Quantity
+              </h5>
+              <p class="card-text" id="averageDailyQuantity"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row  ">
+        <div class="col-md-3 mb-3 pd-5 ">
+          <div class="card revenue-card">
+            <div class="card-body pb-5">
+              <h5 class="card-title">
+                <i class="fas fa-money-bill-wave"></i> Max Revenue Podkategoria
+              </h5>
+              <p class="card-text" id="maxRevenuePodkategoria"></p>
+              <p class="card-text" id="nameMaxRevenuePodkategoria"></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3 pd-5 ">
+          <div class="card quantity-card">
+            <div class="card-body pb-5">
+              <h5 class="card-title">
+                <i class="fas fa-box"></i> Min Revenue Podkategoria
+              </h5>
+              <p class="card-text" id="minRevenuePodkategoria"></p>
+              <p class="card-text" id="nameMinRevenuePodkategoria"></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3 pd-5 ">
+          <div class="card quantity-card">
+            <div class="card-body pb-5">
+              <h5 class="card-title">
+                <i class="fas fa-box"></i> Max Quantity Podkategoria
+              </h5>
+              <p class="card-text" id="maxQuantityPodkategoria"></p>
+              <p class="card-text" id="nameMaxQuantityPodkategoria"></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3 pd-5 ">
+          <div class="card quantity-card">
+            <div class="card-body pb-5">
+              <h5 class="card-title">
+                <i class="fas fa-box"></i> Min Quantity Podkategoria
+              </h5>
+              <p class="card-text" id="minQuantityPodkategoria"></p>
+              <p class="card-text" id="nameMinQuantityPodkategoria"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row  ">
+        <div class="col-md-3 mb-3 pd-5 ">
+          <div class="card revenue-card">
+            <div class="card-body pb-5">
+              <h5 class="card-title">
+                <i class="fas fa-money-bill-wave"></i> Max Revenue Book
+              </h5>
+              <p class="card-text" id="maxRevenueBook"></p>
+              <p class="card-text" id="nameMaxRevenueBook"></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3 pd-5 ">
+          <div class="card quantity-card">
+            <div class="card-body pb-5">
+              <h5 class="card-title">
+                <i class="fas fa-box"></i> Min Revenue Book
+              </h5>
+              <p class="card-text" id="minRevenueBook"></p>
+              <p class="card-text" id="nameMinRevenueBook"></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3 pd-5 ">
+          <div class="card quantity-card">
+            <div class="card-body pb-5">
+              <h5 class="card-title">
+                <i class="fas fa-box"></i> Max Quantity Book
+              </h5>
+              <p class="card-text" id="maxQuantityBook"></p>
+              <p class="card-text" id="nameMaxQuantityBook"></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-3 pd-5 ">
+          <div class="card quantity-card">
+            <div class="card-body pb-5">
+              <h5 class="card-title">
+                <i class="fas fa-box"></i> Min Quantity Book
+              </h5>
+              <p class="card-text" id="minQuantityBook"></p>
+              <p class="card-text" id="nameMinQuantityBook"></p>
             </div>
           </div>
         </div>
       </div>
     </div>
-
     <div class="container-fluid col-10 mt-4 mb-5" id="container"></div>
 
     <footer>
@@ -212,6 +323,31 @@
           let quantity = data.TotalAggregatedData.TotalQuantity;
           document.getElementById("revenue").innerHTML = revenue;
           document.getElementById("quantity").innerHTML = quantity;
+          TotalQuantity = aggregatedData.Sum(x => x.TotalQuantity),
+            TotalRevenue = aggregatedData.Sum(x => x.TotalRevenue),
+            AverageTotalDailyQuantity
+          AverageTotalDailyRevenue
+          namePodkategoriaMaxRevenue
+          maxRevenuePodkategoria
+          namePodkategoriaMinRevenue
+          minRevenuePodkategoria
+          namePodkategoriaMaxQuantity
+          maxQuantityPodkategoria
+          namePodkategoriaMinQuantity
+          minQuantityPodkategoria
+          nameBookMaxRevenue
+          maxRevenueBook
+          nameBookMinRevenue
+          minRevenueBook
+          nameBookMaxQuantity
+          maxQuantityBook
+          nameBookMinQuantity
+          minQuantityBook
+
+
+
+
+
 
           // Create the chart
           Highcharts.chart('container', {
@@ -273,6 +409,25 @@
 
 
 
+</script>
+<script>
+  // Nastavenie výšky všetkých kariet na výšku najvyššej karty všetkých riadkov
+  $(document).ready(function () {
+    var tallestCard = 0; // Premenná pre najvyššiu kartu
+
+    // Prechádza všetky riadky
+    $('.row').each(function () {
+      // Prechádza všetky karty v danom riadku
+      $(this).find('.card').each(function () {
+        // Ak je výška tejto karty väčšia ako doteraz najvyššia karta
+        if ($(this).height() > tallestCard) {
+          tallestCard = $(this).height(); // Nastaví novú najvyššiu kartu
+        }
+      });
+    });
+    // Nastaví výšku všetkých kariet na výšku najvyššej karty
+    $('.card').height(tallestCard);
+  });
 </script>
 
 </html>
