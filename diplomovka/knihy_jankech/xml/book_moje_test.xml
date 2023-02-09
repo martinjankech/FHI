@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Bookstore xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <books>
     <book>
@@ -514,7 +514,7 @@ Ako sa hovorí, „cherchez la femme“ - za všetkým hľadaj ženu. Od opätov
 
 
 
-</obsah>
+      </obsah>
       <priemerne_hodnotenie>4.6</priemerne_hodnotenie>
       <obrazok>../img/23.jpg</obrazok>
     </book>
@@ -645,7 +645,7 @@ Saint-Exupéry svoju knižku s čistým detským pohľadom na svet venoval najle
       <rok_vydania>2012</rok_vydania>
       <vydavatelstvo>AKV - Ambulancia klinickej výživy</vydavatelstvo>
       <predajna_cena>24.99</predajna_cena>
-      <nakupna_cena>14,98</nakupna_cena>
+      <nakupna_cena>14.98</nakupna_cena>
       <marza>0.66822429906542</marza>
       <zisk_kus>10.01</zisk_kus>
       <obsah>Dr. Igor Bukovský po veľmi úspešnom uvedení svojho najväčšieho knižného projektu „Návod na prežitie pre bejby – Hneď to bude, Anjelik“ (2011) pripravil nové, doplnené vydanie svojho najznámejšieho bestselleru „Návod na prežitie pre muža“. Kniha vyšla prvýkrát v roku 2006 a doteraz sa na Slovensku predalo 45 tisíc kusov. Pozitívne zmenila životy tisíckam mužov a ich rodinám i okoliu.</obsah>
@@ -667,34 +667,13 @@ Saint-Exupéry svoju knižku s čistým detským pohľadom na svet venoval najle
       <rok_vydania>2014</rok_vydania>
       <vydavatelstvo>Georg</vydavatelstvo>
       <predajna_cena>11.5</predajna_cena>
-      <nakupna_cena>4,36</nakupna_cena>
+      <nakupna_cena>4.36</nakupna_cena>
       <marza>1.63761467889908</marza>
       <zisk_kus>7.14</zisk_kus>
       <obsah>V knihe nájdete overené recepty na rôzne jedlá z kotlíka, pahreby a grilu. Taktiež recepty na marinády a omáčky ku grilovaným jedlám, ale aj šaláty. Veríme, že pri listovaní v knihe si každý z Vás vyberie to, čo si bude často a rád pripravovať.</obsah>
       <priemerne_hodnotenie>3.9</priemerne_hodnotenie>
       <obrazok>../img/30.jpg</obrazok>
     </book>
+
   </books>
-  <book>
-    <id>31</id>
-    <nazov>test31</nazov>
-    <autori>
-      <autor1>autortest31</autor1>
-      <autor2>autortest31</autor2>
-    </autori>
-    <kategoria>autortest31</kategoria>
-    <isbn>autortest31</isbn>
-    <jazyk>autortest31</jazyk>
-    <pocet_stran>22</pocet_stran>
-    <vazba>autortest31</vazba>
-    <rok_vydania>2020</rok_vydania>
-    <vydavatelstvo>autortest31</vydavatelstvo>
-    <predajna_cena>202</predajna_cena>
-    <nakupna_cena>20</nakupna_cena>
-    <marza>20</marza>
-    <zisk_kus>20</zisk_kus>
-    <obsah>autortest31</obsah>
-    <priemerne_hodnotenie>5</priemerne_hodnotenie>
-    <obrazok>.31</obrazok>
-  </book>
 </Bookstore>

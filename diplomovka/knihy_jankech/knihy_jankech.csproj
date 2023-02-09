@@ -78,6 +78,7 @@
       <DependentUpon>book_services.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ImageData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

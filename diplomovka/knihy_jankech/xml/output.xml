@@ -840,4 +840,29 @@ Ako sa hovorí, „cherchez la femme“ - za všetkým hľadaj ženu. Od opätov
     </book>
     <timestamp>2023-02-09 03:07:08</timestamp>
   </output>
+  <output>
+    <book>
+      <id>31</id>
+      <nazov>nazov</nazov>
+      <autori>
+        <autor1>autor</autor1>
+        <autor2>autor1</autor2>
+      </autori>
+      <kategoria>klasika</kategoria>
+      <isbn>5564656546554</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>64</pocet_stran>
+      <vazba>pevna</vazba>
+      <rok_vydania>1997</rok_vydania>
+      <vydavatelstvo>ikar</vydavatelstvo>
+      <predajna_cena>5</predajna_cena>
+      <nakupna_cena>3</nakupna_cena>
+      <marza>40.0</marza>
+      <zisk_kus>2</zisk_kus>
+      <obsah>blablalbal</obsah>
+      <priemerne_hodnotenie>4</priemerne_hodnotenie>
+      <obrazok>../img/31.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-09 18:53:13</timestamp>
+  </output>
 </root>

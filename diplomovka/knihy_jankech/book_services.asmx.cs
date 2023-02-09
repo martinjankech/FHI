@@ -13,6 +13,8 @@ using System.Web.Services.Description;
 using System.Web.UI.WebControls;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Serialization;
+using knihy_jankech;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using static System.Net.Mime.MediaTypeNames;
@@ -21,6 +23,7 @@ using Formatting = Newtonsoft.Json.Formatting;
 
 namespace knihy_jankech
 {
+   
     /// <summary>
     /// Summary description for book_services
     /// </summary>
@@ -39,6 +42,7 @@ namespace knihy_jankech
         private String fileBookInfoTest = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\book_moje_test.xml ";
         private String fileBookTransactionInfoTest = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\book_transakcie_moje_test.xml ";
 
+       
 
         private XmlDocument LoadDocument(string filePath)
         {
@@ -217,117 +221,88 @@ namespace knihy_jankech
             string fullPath = Path.Combine(path, fileName);
             root.Save(fullPath);
         }
+        //[WebMethod]
+        //public void SaveImage()
+        //{
+        //    var request = HttpContext.Current.Request;
+        //    var postedFile = request.Files[0];
+
+        //    var imageData = new ImageData();
+        //    imageData.ImageName = Path.GetFileName(postedFile.FileName);
+        //    imageData.ImageBytes = new byte[postedFile.ContentLength];
+        //    postedFile.InputStream.Read(imageData.ImageBytes, 0, postedFile.ContentLength);
+
+        //    // Save the image to the file system
+        //    string filePath = Path.Combine(Server.MapPath("~/imgs"), imageData.ImageName);
+        //    System.IO.File.WriteAllBytes(filePath, imageData.ImageBytes);
+        //}
+
 
         [WebMethod]
-        public  string AddBook(string id, string nazov, string autor1, string autor2, string kategoria, string isbn, string jazyk, string pocet_stran, string vazba, string rok_vydania, string vydavatelstvo, string predajna_cena, string nakupna_cena, string marza, string zisk_kus, string obsah, string priemerne_hodnotenie, byte[] obrazok)
+        public void AddBook1()
         {
-            try
-            {
-               
-                
-                XmlDocument xmlDoc = new XmlDocument();
+            var request = HttpContext.Current.Request;
+            var postedFile = request.Files[0];
 
-                string xmlFilePath = HttpContext.Current.Server.MapPath(fileBookInfoTest);
-                xmlDoc.Load(xmlFilePath);
+            var bookData = new BookData();
+            
+            bookData.Nazov = request["nazov"];
+            bookData.Autor1 = request["autor1"];
+            bookData.Autor2 = request["autor2"];
+            bookData.Kategoria = request["kategoria"];
+            bookData.Isbn = request["isbn"];
+            bookData.Jazyk = request["jazyk"];
+            bookData.Pocet_stran = request["pocet_stran"];
+            bookData.Vazba = request["vazba"];
+            bookData.Rok_vydania = request["rok_vydania"];
+            bookData.Vydavatelstvo = request["vydavatelstvo"];
+            bookData.Predajna_cena = Convert.ToDecimal(request["predajna_cena"]);
+            bookData.Nakupna_cena = Convert.ToDecimal(request["nakupna_cena"]);   
+            bookData.Obsah = request["obsah"];
+            bookData.Priemerne_hodnotenie = request["priemerne_hodnotenie"];
+            bookData.ImageName = Path.GetFileName(postedFile.FileName);
+            bookData.ImageBytes = new byte[postedFile.ContentLength];
+            postedFile.InputStream.Read(bookData.ImageBytes, 0, postedFile.ContentLength);
 
-                XmlNode rootNode = xmlDoc.SelectSingleNode("books");
-                XmlElement newBook = xmlDoc.CreateElement("book");
+            // Load the existing XML file
+            string xmlFilePath = fileBookInfo;
+            XElement xmlDoc = XElement.Load(xmlFilePath);
+            var lastBookId = xmlDoc.Element("books").Elements("book").Max(x => (int?)x.Element("id")) ?? 0;
+            bookData.Id = (lastBookId + 1).ToString();
 
-                XmlElement bookId = xmlDoc.CreateElement("id");
-                bookId.InnerText = id;
-                newBook.AppendChild(bookId);
+            // Add the new book element to the XML file
 
-                XmlElement bookNazov = xmlDoc.CreateElement("nazov");
-                bookNazov.InnerText = nazov;
-                newBook.AppendChild(bookNazov);
-
-                XmlElement bookAutor1 = xmlDoc.CreateElement("autor1");
-                bookAutor1.InnerText = autor1;
-                newBook.AppendChild(bookAutor1);
-
-                XmlElement bookAutor2 = xmlDoc.CreateElement("autor2");
-                bookAutor2.InnerText = autor2;
-                newBook.AppendChild(bookAutor2);
-
-                XmlElement bookKategoria = xmlDoc.CreateElement("kategoria");
-                bookKategoria.InnerText = kategoria;
-                newBook.AppendChild(bookKategoria);
-
-                XmlElement bookIsbn = xmlDoc.CreateElement("isbn");
-                bookIsbn.InnerText = isbn;
-                newBook.AppendChild(bookIsbn);
-
-                XmlElement bookJazyk = xmlDoc.CreateElement("jazyk");
-                bookJazyk.InnerText = jazyk;
-                newBook.AppendChild(bookJazyk);
-
-                XmlElement bookPocetStran = xmlDoc.CreateElement("pocet_stran");
-                bookPocetStran.InnerText = pocet_stran;
-                newBook.AppendChild(bookPocetStran);
-
-                XmlElement bookVazba = xmlDoc.CreateElement("vazba");
-                bookVazba.InnerText = vazba;
-                newBook.AppendChild(bookVazba);
-
-                XmlElement bookRokVydania = xmlDoc.CreateElement("rok_vydania");
-                bookRokVydania.InnerText = rok_vydania;
-                newBook.AppendChild(bookRokVydania);
-
-                XmlElement bookVydavatelstvo = xmlDoc.CreateElement("vydavatelstvo");
-
-                bookVydavatelstvo.InnerText = vydavatelstvo;
-                newBook.AppendChild(bookVydavatelstvo);
-
-               
-
-                    XmlElement bookPredajnaCena = xmlDoc.CreateElement("predajna_cena");
-                bookPredajnaCena.InnerText = predajna_cena;
-                newBook.AppendChild(bookPredajnaCena);
-
-                XmlElement bookNakupnaCena = xmlDoc.CreateElement("nakupna_cena");
-                bookNakupnaCena.InnerText = nakupna_cena;
-                newBook.AppendChild(bookNakupnaCena);
-
-                XmlElement bookMarza = xmlDoc.CreateElement("marza");
-                bookMarza.InnerText = marza;
-                newBook.AppendChild(bookMarza);
-
-                XmlElement bookZiskKus = xmlDoc.CreateElement("zisk_kus");
-                bookZiskKus.InnerText = zisk_kus;
-                newBook.AppendChild(bookZiskKus);
-
-                XmlElement bookObsah = xmlDoc.CreateElement("obsah");
-                bookObsah.InnerText = obsah;
-                newBook.AppendChild(bookObsah);
-
-                XmlElement bookPriemerneHodnotenie = xmlDoc.CreateElement("priemerne_hodnotenie");
-                bookPriemerneHodnotenie.InnerText = priemerne_hodnotenie;
-                newBook.AppendChild(bookPriemerneHodnotenie);
-
-                string imageName = id + ".jpg";
-                string imagePath = HttpContext.Current.Server.MapPath("D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\imgs" + imageName);
-               System.IO.File.WriteAllBytes(imagePath, obrazok);
-
-                XmlElement bookObrazok = xmlDoc.CreateElement("obrazok");
-                bookObrazok.InnerText = imageName;
-                newBook.AppendChild(bookObrazok);
-
-                rootNode.AppendChild(newBook);
-                xmlDoc.Save(xmlFilePath);
-
-                return "Success";
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
+            XElement bookElement = new XElement("book",
+                new XElement("id", bookData.Id),
+                new XElement("nazov", bookData.Nazov),
+                 new XElement("autori",
+                    new XElement("autor1", bookData.Autor1),
+                    new XElement("autor2", bookData.Autor2)),
+                new XElement("kategoria", bookData.Kategoria),
+                new XElement("isbn", bookData.Isbn),
+                new XElement("jazyk", bookData.Jazyk),
+                new XElement("pocet_stran", bookData.Pocet_stran),
+                new XElement("vazba", bookData.Vazba),
+                new XElement("rok_vydania", bookData.Rok_vydania),
+                new XElement("vydavatelstvo", bookData.Vydavatelstvo),
+                new XElement("predajna_cena", bookData.Predajna_cena),
+                new XElement("nakupna_cena", bookData.Nakupna_cena),
+                new XElement("marza", (bookData.Predajna_cena - bookData.Nakupna_cena) / bookData.Predajna_cena * 100),
+        new XElement("zisk_kus", bookData.Predajna_cena - bookData.Nakupna_cena),
+        new XElement("obsah", bookData.Obsah),
+        new XElement("priemerne_hodnotenie", bookData.Priemerne_hodnotenie),
+        new XElement("obrazok", "../img/"+bookData.Id+".jpg"));
+       
+         
+            xmlDoc.Element("books").Add(bookElement);
+            xmlDoc.Save(xmlFilePath);
+            // Save the image to the file system
+            string imageFilePath = Path.Combine(Server.MapPath("~/img"), "../img/" + bookData.Id + ".jpg");
+            System.IO.File.WriteAllBytes(imageFilePath, bookData.ImageBytes);
         }
 
 
-
-
-
-            [WebMethod]
+        [WebMethod]
         public void UpdateBook(int id, string nazov, string autor1, string autor2, string kategoria,
        string isbn, string jazyk, int pocet_stran, string vazba, int rok_vydania,
        string vydavatelstvo, decimal predajna_cena, decimal nakupna_cena, decimal marza,

@@ -21,3 +21,98 @@ data: {
     //contentType: "multipart/form-data",
     //processData: false,
     dataType: "json",
+
+
+fungujuci import filu 
+
+ [WebMethod]
+        public void SaveImage()
+        {
+            var request = HttpContext.Current.Request;
+            var postedFile = request.Files[0];
+
+            var imageData = new ImageData();
+            imageData.ImageName = Path.GetFileName(postedFile.FileName);
+            imageData.ImageBytes = new byte[postedFile.ContentLength];
+            postedFile.InputStream.Read(imageData.ImageBytes, 0, postedFile.ContentLength);
+
+            // Save the image to the file system
+            string filePath = Path.Combine(Server.MapPath("~/imgs"), imageData.ImageName);
+            System.IO.File.WriteAllBytes(filePath, imageData.ImageBytes);
+        }
+
+ public class ImageData
+        {
+            public string ImageName { get; set; }
+            public byte[] ImageBytes { get; set; }
+        }
+
+<script>
+  $(document).ready(function () {
+   $("#bookForm").submit(function (event) {
+    event.preventDefault();
+
+    var imageInput = document.getElementById("obrazok");
+    var imageData = new FormData();
+    imageData.append("obrazok", imageInput.files[0]);
+
+    $.ajax({
+     type: "POST",
+     url: "http://localhost:8050/book_services.asmx/SaveImage",
+     //contentType: "application/json; charset=utf-8",
+     data: imageData,
+     processData: false,
+     contentType: false,
+     dataType: "json",
+     success: function (response) {
+      // handle success
+     },
+     error: function (response) {
+      // handle error
+     }
+    });
+   });
+  });
+ </script>
+
+
+[WebMethod]
+        public void AddBook1()
+        {
+            var request = HttpContext.Current.Request;
+            var postedFile = request.Files[0];
+
+            var bookData = new BookData();
+            bookData.Id = request["id"];
+            bookData.Nazov = request["nazov"];
+            bookData.Autor1 = request["autor1"];
+            bookData.Autor2 = request["autor2"];
+            bookData.Kategoria = request["kategoria"];
+            bookData.Isbn = request["isbn"];
+            bookData.Jazyk = request["jazyk"];
+            bookData.Pocet_stran = request["pocet_stran"];
+            bookData.Vazba = request["vazba"];
+            bookData.Rok_vydania = request["rok_vydania"];
+            bookData.Vydavatelstvo = request["vydavatelstvo"];
+            bookData.Predajna_cena = request["predajna_cena"];
+            bookData.Nakupna_cena = request["nakupna_cena"];
+            bookData.Marza = request["marza"];
+            bookData.Zisk_kus = request["zisk_kus"];
+            bookData.Obsah = request["obsah"];
+            bookData.Priemerne_hodnotenie = request["priemerne_hodnotenie"];
+            bookData.ImageName = Path.GetFileName(postedFile.FileName);
+            bookData.ImageBytes = new byte[postedFile.ContentLength];
+            postedFile.InputStream.Read(bookData.ImageBytes, 0, postedFile.ContentLength);
+
+            // Save the book data to the XML file
+            string xmlFilePath = Path.Combine(Server.MapPath("~/xmls"), bookData.Id + ".xml");
+            XmlSerializer serializer = new XmlSerializer(typeof(BookData));
+            using (StreamWriter writer = new StreamWriter(xmlFilePath))
+            {
+                serializer.Serialize(writer, bookData);
+            }
+
+            // Save the image to the file system
+            string imageFilePath = Path.Combine(Server.MapPath("~/imgs"), bookData.ImageName);
+            System.IO.File.WriteAllBytes(imageFilePath, bookData.ImageBytes);
+        }
