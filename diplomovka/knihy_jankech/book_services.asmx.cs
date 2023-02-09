@@ -36,6 +36,9 @@ namespace knihy_jankech
         public String fileOutputSingleSearch = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\output.xml";
         public String fileAmountFilterPath = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\Amoutsoutputs";
 
+        private String fileBookInfoTest = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\book_moje_test.xml ";
+        private String fileBookTransactionInfoTest = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\book_transakcie_moje_test.xml ";
+
 
         private XmlDocument LoadDocument(string filePath)
         {
@@ -215,9 +218,168 @@ namespace knihy_jankech
             root.Save(fullPath);
         }
 
+        [WebMethod]
+        public  string AddBook(string id, string nazov, string autor1, string autor2, string kategoria, string isbn, string jazyk, string pocet_stran, string vazba, string rok_vydania, string vydavatelstvo, string predajna_cena, string nakupna_cena, string marza, string zisk_kus, string obsah, string priemerne_hodnotenie, byte[] obrazok)
+        {
+            try
+            {
+               
+                
+                XmlDocument xmlDoc = new XmlDocument();
+
+                string xmlFilePath = HttpContext.Current.Server.MapPath(fileBookInfoTest);
+                xmlDoc.Load(xmlFilePath);
+
+                XmlNode rootNode = xmlDoc.SelectSingleNode("books");
+                XmlElement newBook = xmlDoc.CreateElement("book");
+
+                XmlElement bookId = xmlDoc.CreateElement("id");
+                bookId.InnerText = id;
+                newBook.AppendChild(bookId);
+
+                XmlElement bookNazov = xmlDoc.CreateElement("nazov");
+                bookNazov.InnerText = nazov;
+                newBook.AppendChild(bookNazov);
+
+                XmlElement bookAutor1 = xmlDoc.CreateElement("autor1");
+                bookAutor1.InnerText = autor1;
+                newBook.AppendChild(bookAutor1);
+
+                XmlElement bookAutor2 = xmlDoc.CreateElement("autor2");
+                bookAutor2.InnerText = autor2;
+                newBook.AppendChild(bookAutor2);
+
+                XmlElement bookKategoria = xmlDoc.CreateElement("kategoria");
+                bookKategoria.InnerText = kategoria;
+                newBook.AppendChild(bookKategoria);
+
+                XmlElement bookIsbn = xmlDoc.CreateElement("isbn");
+                bookIsbn.InnerText = isbn;
+                newBook.AppendChild(bookIsbn);
+
+                XmlElement bookJazyk = xmlDoc.CreateElement("jazyk");
+                bookJazyk.InnerText = jazyk;
+                newBook.AppendChild(bookJazyk);
+
+                XmlElement bookPocetStran = xmlDoc.CreateElement("pocet_stran");
+                bookPocetStran.InnerText = pocet_stran;
+                newBook.AppendChild(bookPocetStran);
+
+                XmlElement bookVazba = xmlDoc.CreateElement("vazba");
+                bookVazba.InnerText = vazba;
+                newBook.AppendChild(bookVazba);
+
+                XmlElement bookRokVydania = xmlDoc.CreateElement("rok_vydania");
+                bookRokVydania.InnerText = rok_vydania;
+                newBook.AppendChild(bookRokVydania);
+
+                XmlElement bookVydavatelstvo = xmlDoc.CreateElement("vydavatelstvo");
+
+                bookVydavatelstvo.InnerText = vydavatelstvo;
+                newBook.AppendChild(bookVydavatelstvo);
+
+               
+
+                    XmlElement bookPredajnaCena = xmlDoc.CreateElement("predajna_cena");
+                bookPredajnaCena.InnerText = predajna_cena;
+                newBook.AppendChild(bookPredajnaCena);
+
+                XmlElement bookNakupnaCena = xmlDoc.CreateElement("nakupna_cena");
+                bookNakupnaCena.InnerText = nakupna_cena;
+                newBook.AppendChild(bookNakupnaCena);
+
+                XmlElement bookMarza = xmlDoc.CreateElement("marza");
+                bookMarza.InnerText = marza;
+                newBook.AppendChild(bookMarza);
+
+                XmlElement bookZiskKus = xmlDoc.CreateElement("zisk_kus");
+                bookZiskKus.InnerText = zisk_kus;
+                newBook.AppendChild(bookZiskKus);
+
+                XmlElement bookObsah = xmlDoc.CreateElement("obsah");
+                bookObsah.InnerText = obsah;
+                newBook.AppendChild(bookObsah);
+
+                XmlElement bookPriemerneHodnotenie = xmlDoc.CreateElement("priemerne_hodnotenie");
+                bookPriemerneHodnotenie.InnerText = priemerne_hodnotenie;
+                newBook.AppendChild(bookPriemerneHodnotenie);
+
+                string imageName = id + ".jpg";
+                string imagePath = HttpContext.Current.Server.MapPath("D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\imgs" + imageName);
+               System.IO.File.WriteAllBytes(imagePath, obrazok);
+
+                XmlElement bookObrazok = xmlDoc.CreateElement("obrazok");
+                bookObrazok.InnerText = imageName;
+                newBook.AppendChild(bookObrazok);
+
+                rootNode.AppendChild(newBook);
+                xmlDoc.Save(xmlFilePath);
+
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
 
 
 
+
+
+            [WebMethod]
+        public void UpdateBook(int id, string nazov, string autor1, string autor2, string kategoria,
+       string isbn, string jazyk, int pocet_stran, string vazba, int rok_vydania,
+       string vydavatelstvo, decimal predajna_cena, decimal nakupna_cena, decimal marza,
+       decimal zisk_kus, string obsah, decimal priemerne_hodnotenie, string obrazok)
+        {
+            XDocument doc = XDocument.Load(fileBookInfoTest);
+            XElement root = doc.Root;
+
+            
+                XElement book = root.Elements("book").Where(x => x.Element("id").Value == id.ToString()).FirstOrDefault();
+
+            if (book != null)
+            {
+                book.SetElementValue("nazov", nazov);
+                book.Element("autori").SetElementValue("autor1", autor1);
+                book.Element("autori").SetElementValue("autor2", autor2);
+                book.SetElementValue("kategoria", kategoria);
+                book.SetElementValue("isbn", isbn);
+                book.SetElementValue("jazyk", jazyk);
+                book.SetElementValue("pocet_stran", pocet_stran);
+                book.SetElementValue("vazba", vazba);
+                book.SetElementValue("rok_vydania", rok_vydania);
+                book.SetElementValue("vydavatelstvo", vydavatelstvo);
+                book.SetElementValue("predajna_cena", predajna_cena);
+                book.SetElementValue("nakupna_cena", nakupna_cena);
+                book.SetElementValue("marza", marza);
+                book.SetElementValue("zisk_kus", zisk_kus);
+                book.SetElementValue("obsah", obsah);
+                book.SetElementValue("priemerne_hodnotenie", priemerne_hodnotenie);
+                book.SetElementValue("obrazok", obrazok);
+            }
+
+            doc.Save(fileBookInfoTest);
+            Context.Response.Write("Udaje o knihe boli aktualizovane");
+        }
+
+        [WebMethod]
+        public void DeleteBook(int id)
+        {
+            XDocument doc = XDocument.Load(fileBookInfoTest);
+            XElement root = doc.Root;
+
+            XElement book = root.Elements("book").Where(x => x.Element("id").Value == id.ToString()).FirstOrDefault();
+
+            if (book != null)
+            {
+                book.Remove();
+            }
+
+            doc.Save(fileBookInfoTest);
+            Context.Response.Write("Kniha bola znazana");
+        }
 
         [WebMethod]
         public void SinglebookDataById(string id)
@@ -1086,10 +1248,10 @@ namespace knihy_jankech
 
                 var totalAggregatedData = new
                 {
-                    TotalQuantity = aggregatedData.Sum(x => x.TotalQuantity),
-                    TotalRevenue = aggregatedData.Sum(x => x.TotalRevenue),
-                    AverageTotalDailyQuantity = aggregatedData.Sum(x=>x.TotalQuantity)/days,
-                    AverageTotalDailyRevenue = aggregatedData.Sum(x => x.TotalRevenue) / days,
+                    totalQuantity = aggregatedData.Sum(x => x.TotalQuantity),
+                    totalRevenue = aggregatedData.Sum(x => x.TotalRevenue),
+                    averageTotalDailyQuantity = aggregatedData.Sum(x=>x.TotalQuantity)/days,
+                    averageTotalDailyRevenue = aggregatedData.Sum(x => x.TotalRevenue) / days,
                     namePodkategoriaMaxRevenue=namePodkategoriaMaxRevenue,
                     maxRevenuePodkategoria=maxRevenuePodkategoria,
                     namePodkategoriaMinRevenue=namePodkategoriaMinRevenue,
@@ -1316,10 +1478,10 @@ namespace knihy_jankech
                 // Calculate the total quantity and total revenue for all books
                 var totalAggregatedData = new
                 {
-                    TotalQuantity = aggregatedData.Sum(x => x.TotalQuantity),
-                    TotalRevenue = aggregatedData.Sum(x => x.TotalRevenue),
-                    AverageTotalDailyQuantity = aggregatedData.Sum(x => x.TotalQuantity) / days,
-                    AverageTotalDailyRevenue = aggregatedData.Sum(x => x.TotalRevenue) / days,
+                    totalQuantity = aggregatedData.Sum(x => x.TotalQuantity),
+                    totalRevenue = aggregatedData.Sum(x => x.TotalRevenue),
+                    averageTotalDailyQuantity = aggregatedData.Sum(x => x.TotalQuantity) / days,
+                    averageTotalDailyRevenue = aggregatedData.Sum(x => x.TotalRevenue) / days,
                     namePodkategoriaMaxRevenue = namePodkategoriaMaxRevenue,
                     maxRevenuePodkategoria = maxRevenuePodkategoria,
                     namePodkategoriaMinRevenue = namePodkategoriaMinRevenue,

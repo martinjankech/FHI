@@ -9,13 +9,41 @@
 
 .card-text,
 .card-title {
+
  font-family: Arial, sans-serif;
- font-size: 1.2em;
+ font-size: 0.8em;
  font-weight: bold;
  color: #333;
+
+
 }
 
 .card-text {
- font-size: 1.5em;
+ font-size: 1.4em;
  text-align: center;
+ display: flex;
+ align-items: center;
+ 
 }
+.card-body {
+display: flex;
+ flex-direction: column;
+ align-items: center;
+
+}
+.card {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ height: 100%;
+}
+.fa-money-bill-wave,
+.fa-box {
+ font-size: 20px;
+}
+.card-body p{
+min-height: 15px;
+
+}
+
+

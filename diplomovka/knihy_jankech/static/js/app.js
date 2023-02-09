@@ -146,4 +146,25 @@ function fixedFooter(){
   });
  }
 
+
+  // Nastavenie výšky všetkých kariet na výšku najvyššej karty všetkých riadkov
+  function calculateCardBody(){
+  
+    var tallestCard = 0; // Premenná pre najvyššiu kartu
+
+    // Prechádza všetky riadky
+    $('.row').each(function () {
+      // Prechádza všetky karty v danom riadku
+      $(this).find('.card').each(function () {
+        // Ak je výška tejto karty väčšia ako doteraz najvyššia karta
+        if ($(this).height() > tallestCard) {
+          tallestCard = $(this).height(); // Nastaví novú najvyššiu kartu
+        }
+      });
+    });
+    // Nastaví výšku všetkých kariet na výšku najvyššej karty
+    $('.card').height(tallestCard);
+  };
+
+
  
