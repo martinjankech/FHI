@@ -36,77 +36,91 @@
  <div class="container mt-5">
   <h2>Book CRUD Operations</h2>
   <form id="bookForm">
-   <div class="form-group">
-    <label for="sel1">Select action:</label>
-    <select class="form-control" id="actionSelect">
-     <option value="add">Add</option>
-     <option value="update">Update</option>
-     <option value="delete">Delete</option>
-    </select>
+   <div class="row">
+    <div class="form-group col-3">
+     <label for="sel1">Select action:</label>
+     <select class="form-control" id="actionSelect">
+      <option value="add">Add</option>
+      <option value="update">Update</option>
+      <option value="delete">Delete</option>
+     </select>
+    </div>
+    <div class="form-group col-3 ">
+     <label for="ID">ID:</label>
+     <input type="text" id="id" name="id" class="form-control">
+    </div>
    </div>
+   <div class="row">
+    <div class="form-group col-3 ">
+     <label for="nazov">Nazov:</label>
+     <input type="text" id="nazov" name="nazov" class="form-control">
+    </div>
+    <div class="form-group col-3">
+     <label for="autor1">Autor 1:</label>
+     <input type="text" id="autor1" name="autor1" class="form-control">
+    </div>
+    <div class="form-group col-3">
+     <label for="autor2">Autor 2:</label>
+     <input type="text" id="autor2" name="autor2" class="form-control">
+    </div>
+    <div class="form-group col-3">
+     <label for="kategoria">Kategoria:</label>
+     <input type="text" id="kategoria" name="kategoria" class="form-control">
+    </div>
+   </div>
+   <div class="row">
+    <div class="form-group col-3">
+     <label for="isbn">ISBN:</label>
+     <input type="text" id="isbn" name="isbn" class="form-control">
+    </div>
+    <div class="form-group col-3">
+     <label for="jazyk">Jazyk:</label>
+     <input type="text" id="jazyk" name="jazyk" class="form-control">
+    </div>
+    <div class="form-group col-3">
+     <label for="pocet_stran">Pocet stran:</label>
+     <input type="text" id="pocet_stran" name="pocet_stran" class="form-control">
+    </div>
+    <div class="form-group col-3">
+     <label for="vazba">Vazba:</label>
+     <input type="text" id="vazba" name="vazba" class="form-control">
+    </div>
+   </div>
+   <div class="row">
+    <div class="form-group col-3">
+     <label for="rok_vydania">Rok vydania:</label>
+     <input type="text" id="rok_vydania" name="rok_vydania" class="form-control">
+    </div>
+    <div class="form-group col-3">
+     <label for="vydavatelstvo">Vydavatelstvo:</label>
+     <input type="text" id="vydavatelstvo" name="vydavatelstvo" class="form-control">
+    </div>
+    <div class="form-group col-3">
+     <label for="predajna_cena">Predajna cena:</label>
+     <input type="text" id="predajna_cena" name="predajna_cena" class="form-control">
+    </div>
+    <div class="form-group col-3">
+     <label for=" nakupna_cena">Nakupna cena</label>
+     <input id="nakupna_cena" name="nakupna_cena class=" class="form-control">
+    </div>
 
-   <div class="form-group">
-    <label for="nazov">Nazov:</label>
-    <input type="text" id="nazov" name="nazov" class="form-control">
    </div>
-   <div class="form-group">
-    <label for="autor1">Autor 1:</label>
-    <input type="text" id="autor1" name="autor1" class="form-control">
-   </div>
-   <div class="form-group">
-    <label for="autor2">Autor 2:</label>
-    <input type="text" id="autor2" name="autor2" class="form-control">
-   </div>
-   <div class="form-group">
-    <label for="kategoria">Kategoria:</label>
-    <input type="text" id="kategoria" name="kategoria" class="form-control">
-   </div>
-   <div class="form-group">
-    <label for="isbn">ISBN:</label>
-    <input type="text" id="isbn" name="isbn" class="form-control">
-   </div>
-   <div class="form-group">
-    <label for="jazyk">Jazyk:</label>
-    <input type="text" id="jazyk" name="jazyk" class="form-control">
-   </div>
-   <div class="form-group">
-    <label for="pocet_stran">Pocet stran:</label>
-    <input type="text" id="pocet_stran" name="pocet_stran" class="form-control">
-   </div>
-   <div class="form-group">
-    <label for="vazba">Vazba:</label>
-    <input type="text" id="vazba" name="vazba" class="form-control">
-   </div>
-   <div class="form-group">
-    <label for="rok_vydania">Rok vydania:</label>
-    <input type="text" id="rok_vydania" name="rok_vydania" class="form-control">
-   </div>
-   <div class="form-group">
-    <label for="vydavatelstvo">Vydavatelstvo:</label>
-    <input type="text" id="vydavatelstvo" name="vydavatelstvo" class="form-control">
-   </div>
-   <div class="form-group">
-    <label for="predajna_cena">Predajna cena:</label>
-    <input type="text" id="predajna_cena" name="predajna_cena" class="form-control">
-   </div>
-   <div class="form-group">
-    <label for=" nakupna_cena">Nakupna cena</label>
-    <input id="nakupna_cena" name="nakupna_cena class=" class="form-control">
-   </div>
-   <div class="form-group">
-    <label for=" priemerne_hodnotenie">Priemerne hodnotenie:</label>
-    <input id="priemerne_hodnotenie" name="priemerne_hodnotenie" class="form-control">
-   </div>
-   <div class="form-group">
-    <label for=" obrazok">Obrazok:</label>
-    <input type="file" id="obrazok" name="obrazok" class="form-control">
-   </div>
-   <div class="form-group">
-    <label for="obsah">Example textarea</label>
-    <textarea class="form-control" id="obsah" name="obsah" rows="3"></textarea>
-   </div>
+   <div class="row">
+    <div class="form-group col-3">
+     <label for=" priemerne_hodnotenie">Priemerne hodnotenie:</label>
+     <input id="priemerne_hodnotenie" name="priemerne_hodnotenie" class="form-control">
+    </div>
+    <div class="form-group col-3">
+     <label for=" obrazok">Obrazok:</label>
+     <input type="file" id="obrazok" name="obrazok" class="form-control">
+    </div>
+    <div class="form-group col-3">
+     <label for="obsah">Example textarea</label>
+     <textarea class="form-control" id="obsah" name="obsah" rows="5"></textarea>
+    </div>
 
-   <button type="submit" class="btn btn-primary">Submit</button>
+   </div>
+   <button type="submit" class="btn btn-primary ">Submit</button>
   </form>
  </div>
  <footer>
@@ -138,9 +152,26 @@
    formData.append("priemerne_hodnotenie", $("#priemerne_hodnotenie").val());
    formData.append("file", $("#obrazok")[0].files[0]);
 
+   $('#actionSelect').change(function () {
+    var selectedAction = $(this).val();
+    var ajaxUrl = '';
+
+    switch (selectedAction) {
+     case 'add':
+      ajaxUrl = 'http://localhost:8050/book_services.asmx/AddBook1';
+      break;
+     case 'update':
+      ajaxUrl = 'http://localhost:8050/book_services.asmx/AddBook1';
+      break;
+     case 'delete':
+      ajaxUrl = 'http://localhost:8050/book_services.asmx/AddBook1';
+      break;
+    }
+   })
+
    $.ajax({
     type: "POST",
-    url: "http://localhost:8050/book_services.asmx/AddBook1",
+    url: ajaxUrl,
     data: formData,
     contentType: false,
     processData: false,
@@ -152,8 +183,9 @@
     }
    });
   });
-  ;
-  ;
+
+
+
  </script>
 
 

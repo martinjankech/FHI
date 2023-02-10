@@ -239,7 +239,7 @@ namespace knihy_jankech
 
 
         [WebMethod]
-        public void AddBook1()
+        public void AddBook()
         {
             var request = HttpContext.Current.Request;
             var postedFile = request.Files[0];
@@ -301,7 +301,69 @@ namespace knihy_jankech
             System.IO.File.WriteAllBytes(imageFilePath, bookData.ImageBytes);
         }
 
+        [WebMethod]
+        public void UpdateBook1(string id)
+        {
+            var request = HttpContext.Current.Request;
+            var postedFile = request.Files[0];
 
+            var bookData = new BookData();
+
+            bookData.Id = id;
+            bookData.Nazov = request["nazov"];
+            bookData.Autor1 = request["autor1"];
+            bookData.Autor2 = request["autor2"];
+            bookData.Kategoria = request["kategoria"];
+            bookData.Isbn = request["isbn"];
+            bookData.Jazyk = request["jazyk"];
+            bookData.Pocet_stran = request["pocet_stran"];
+            bookData.Vazba = request["vazba"];
+            bookData.Rok_vydania = request["rok_vydania"];
+            bookData.Vydavatelstvo = request["vydavatelstvo"];
+            bookData.Predajna_cena = Convert.ToDecimal(request["predajna_cena"]);
+            bookData.Nakupna_cena = Convert.ToDecimal(request["nakupna_cena"]);
+            bookData.Obsah = request["obsah"];
+            bookData.Priemerne_hodnotenie = request["priemerne_hodnotenie"];
+
+            // Check if a new picture has been provided
+            if (postedFile.ContentLength > 0)
+            {
+                bookData.ImageName = Path.GetFileName(postedFile.FileName);
+                bookData.ImageBytes = new byte[postedFile.ContentLength];
+                postedFile.InputStream.Read(bookData.ImageBytes, 0, postedFile.ContentLength);
+            }
+
+            // Load the existing XML file
+            string xmlFilePath = fileBookInfo;
+            XElement xmlDoc = XElement.Load(xmlFilePath);
+
+            // Find the book element with the matching id and update its contents
+            var bookElement = xmlDoc.Element("books").Elements("book").FirstOrDefault(x => x.Element("id").Value == bookData.Id);
+            bookElement.SetElementValue("nazov", bookData.Nazov);
+            bookElement.Element("autori").SetElementValue("autor1", bookData.Autor1);
+            bookElement.Element("autori").SetElementValue("autor2", bookData.Autor2);
+            bookElement.SetElementValue("kategoria", bookData.Kategoria);
+            bookElement.SetElementValue("isbn", bookData.Isbn);
+            bookElement.SetElementValue("jazyk", bookData.Jazyk);
+            bookElement.SetElementValue("pocet_stran", bookData.Pocet_stran);
+            bookElement.SetElementValue("vazba", bookData.Vazba);
+            bookElement.SetElementValue("rok_vydania", bookData.Rok_vydania);
+            bookElement.SetElementValue("vydavatelstvo", bookData.Vydavatelstvo);
+            bookElement.SetElementValue("predajna_cena", bookData.Predajna_cena);
+            bookElement.SetElementValue("nakupna_cena", bookData.Nakupna_cena);
+            bookElement.SetElementValue("obsah", bookData.Obsah);
+            bookElement.SetElementValue("priemerne_hodnotenie", bookData.Priemerne_hodnotenie);
+
+
+           
+if (bookData.ImageBytes != null)
+            {
+                bookElement.SetElementValue("obrazok", Convert.ToBase64String(bookData.ImageBytes));
+            }
+
+            // Save the changes back to the XML file
+            xmlDoc.Save(xmlFilePath);
+        }
         [WebMethod]
         public void UpdateBook(int id, string nazov, string autor1, string autor2, string kategoria,
        string isbn, string jazyk, int pocet_stran, string vazba, int rok_vydania,

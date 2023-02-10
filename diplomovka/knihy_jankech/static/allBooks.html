@@ -37,7 +37,8 @@
   <div id="navbar">
   </div>
   <div class="flex-wrapper">
-    <div class="container mt-5 ">
+    <div class="container col-11 mt-5 ">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add</button>
       <div class=" mb-5 table-responsive">
         <table id="example" class=" display nowrap ">
           <thead>
@@ -49,18 +50,23 @@
               <th>nazov</th>
               <th>kategoria</th>
               <th>jazyk</th>
+              <th>isbn</th>
+
+
               <th>pocet_stran</th>
               <th>vazba</th>
               <th>rok_vydania</th>
               <th>vydavatelstvo</th>
               <th>predajna_cena</th>
               <th>nakupna_cena</th>
+              <th>marza</th>
               <th>zisk_kus</th>
               <th>priemerne_hodnotenie</th>
+              <th>obsah</th>
+              <th>update</th>
+              <th>delete</th>
 
-              <!-- edit + delete ak bude  -->
-              <!-- <th></th>
-            <th></th> -->
+
             </tr>
           </thead>
           <tfoot class="mb-5">
@@ -72,18 +78,20 @@
               <th>nazov</th>
               <th>kategoria</th>
               <th>jazyk</th>
+              <th>isbn</th>
               <th>pocet_stran</th>
               <th>vazba</th>
               <th>rok_vydania</th>
               <th>vydavatelstvo</th>
               <th>predajna_cena</th>
               <th>nakupna_cena</th>
+              <th>marza</th>
               <th>zisk_kus</th>
               <th>priemerne_hodnotenie</th>
+              <th>obsah</th>
+              <th>update</th>
+              <th>delete</th>
 
-              <!-- edit + delete ak bude  -->
-              <!-- <th></th>
-            <th></th> -->
             </tr>
           </tfoot>
         </table>
@@ -119,11 +127,293 @@
     </div>
   </div>
 </body>
+<!-- Add Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addModalLabel">Add Item</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </div>
+      <div class="modal-body">
+        <div class="modal-body">
+          <div style="display: none;" id="alert_container">
+            <div class="alert" role="alert">
+              <span id="alert-text"></span>
+            </div>
+          </div>
+        </div>
+
+        <form id="addBook">
+          <div class="row">
+            <div class="form-group col-3">
+              <label for="ID">ID:</label>
+              <input type="text" id="id" name="id" class="form-control">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-3">
+              <label for="nazov">Nazov:</label>
+              <input type="text" id="nazov" name="nazov" class="form-control">
+            </div>
+            <div class="form-group col-3">
+              <label for="autor1">Autor 1:</label>
+              <input type="text" id="autor1" name="autor1" class="form-control">
+            </div>
+            <div class="form-group col-3">
+              <label for="autor2">Autor 2:</label>
+              <input type="text" id="autor2" name="autor2" class="form-control">
+            </div>
+            <div class="form-group col-3">
+              <label for="kategoria">Kategoria:</label>
+              <input type="text" id="kategoria" name="kategoria" class="form-control">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-3">
+              <label for="isbn">ISBN:</label>
+              <input type="text" id="isbn" name="isbn" class="form-control">
+            </div>
+            <div class="form-group col-3">
+              <label for="jazyk">Jazyk:</label>
+              <input type="text" id="jazyk" name="jazyk" class="form-control">
+            </div>
+            <div class="form-group col-3">
+              <label for="pocet_stran">Pocet stran:</label>
+              <input type="text" id="pocet_stran" name="pocet_stran" class="form-control">
+            </div>
+            <div class="form-group col-3">
+              <label for="vazba">Vazba:</label>
+              <input type="text" id="vazba" name="vazba" class="form-control">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-3">
+              <label for="rok_vydania">Rok vydania:</label>
+              <input type="text" id="rok_vydania" name="rok_vydania" class="form-control">
+            </div>
+            <div class="form-group col-3">
+              <label for="vydavatelstvo">Vydavatelstvo:</label>
+              <input type="text" id="vydavatelstvo" name="vydavatelstvo" class="form-control">
+            </div>
+            <div class="form-group col-3">
+              <label for="predajna_cena">Predajna cena:</label>
+              <input type="text" id="predajna_cena" name="predajna_cena" class="form-control">
+            </div>
+            <div class="form-group col-3">
+              <label for=" nakupna_cena">Nakupna cena</label>
+              <input id="nakupna_cena" name="nakupna_cena class=" class="form-control">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-3">
+              <label for=" priemerne_hodnotenie">Priemerne hodnotenie:</label>
+              <input id="priemerne_hodnotenie" name="priemerne_hodnotenie" class="form-control">
+            </div>
+            <div class="form-group col-3">
+              <label for=" obrazok">Obrazok:</label>
+              <input type="file" id="obrazok" name="obrazok" class="form-control">
+            </div>
+            <div class="form-group col-3">
+              <label for="obsah">Example textarea</label>
+              <textarea class="form-control" id="obsah" name="obsah" rows="5"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Pridaj Knihu</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- Update Modal -->
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateModalLabel">Update Item</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body">
+          <form id="updateBookForm">
+            <div class="row">
+              <div class="form-group col-3">
+                <label for="ID">ID:</label>
+                <input type="text" id="update-id" name="id" class="form-control">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-3">
+                <label for="nazov">Nazov:</label>
+                <input type="text" id="update-nazov" name="nazov" class="form-control">
+              </div>
+              <div class="form-group col-3">
+                <label for="autor1">Autor 1:</label>
+                <input type="text" id="update-autor1" name="autor1" class="form-control">
+              </div>
+              <div class="form-group col-3">
+                <label for="autor2">Autor 2:</label>
+                <input type="text" id="update-autor2" name="autor2" class="form-control">
+              </div>
+              <div class="form-group col-3">
+                <label for="kategoria">Kategoria:</label>
+                <input type="text" id="update-kategoria" name="kategoria" class="form-control">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-3">
+                <label for="isbn">ISBN:</label>
+                <input type="text" id="update-isbn" name="isbn" class="form-control">
+              </div>
+              <div class="form-group col-3">
+                <label for="jazyk">Jazyk:</label>
+                <input type="text" id="update-jazyk" name="jazyk" class="form-control">
+              </div>
+              <div class="form-group col-3">
+                <label for="pocet_stran">Pocet stran:</label>
+                <input type="text" id="update-pocet_stran" name="pocet_stran" class="form-control">
+              </div>
+              <div class="form-group col-3">
+                <label for="vazba">Vazba:</label>
+                <input type="text" id="update-vazba" name="vazba" class="form-control">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-3">
+                <label for="rok_vydania">Rok vydania:</label>
+                <input type="text" id="update-rok_vydania" name="rok_vydania" class="form-control">
+              </div>
+              <div class="form-group col-3">
+                <label for="vydavatelstvo">Vydavatelstvo:</label>
+                <input type="text" id="update-vydavatelstvo" name="vydavatelstvo" class="form-control">
+              </div>
+              <div class="form-group col-3">
+                <label for="predajna_cena">Predajna cena:</label>
+                <input type="text" id="update-predajna_cena" name="predajna_cena" class="form-control">
+              </div>
+              <div class="form-group col-3">
+                <label for=" nakupna_cena">Nakupna cena</label>
+                <input id="update-nakupna_cena" name="nakupna_cena class=" class="form-control">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-3">
+                <label for=" priemerne_hodnotenie">Priemerne hodnotenie:</label>
+                <input id="priemerne_hodnotenie" name="priemerne_hodnotenie" class="form-control">
+              </div>
+              <div class="form-group col-3">
+                <label for=" obrazok">Obrazok:</label>
+                <input type="file" id="obrazok" name="obrazok" class="form-control">
+              </div>
+              <div class="form-group col-3">
+                <label for="obsah">Example textarea</label>
+                <textarea class="form-control" id="obsah" name="obsah" rows="5"></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Ulož Zmeny</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Delete Item</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Delete confirmation message here -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
 
 
   $(document).ready(function () {
     $('#example').DataTable({
+      columnDefs: [
+        {
+          targets: 3,
+          visible: false
+
+        },
+        {
+          targets: 6,
+          visible: false
+
+        },
+        {
+          targets: 7,
+          visible: false
+
+        },
+        {
+          targets: 8,
+          visible: false
+
+        },
+        {
+          targets: 9,
+          visible: false
+
+        },
+        {
+          targets: 13,
+          visible: false
+
+        },
+        {
+          targets: 14,
+          visible: false
+
+        },
+        {
+          targets: 15,
+          visible: false
+
+        },
+        {
+          targets: 16,
+          visible: false
+
+        },
+        {
+          targets: 17,
+          visible: false
+
+        },
+      ],
 
       // defaultne sortovanie podla id 
       order: [[1, 'asc']],
@@ -135,6 +425,7 @@
       },
       success: function (res) {
       },
+
       dataType: "json",
       columns: [
 
@@ -148,7 +439,9 @@
 
           }
         },
-        { data: 'id' },
+
+        { data: 'id', },
+
         {
           data: 'autori.autor1',
 
@@ -157,17 +450,34 @@
 
           data: 'autori.autor2',
         },
-        { data: 'nazov' },
+
+        { data: 'nazov', },
         { data: 'kategoria' },
         { data: 'jazyk' },
+        { data: 'isbn' },
         { data: 'pocet_stran' },
         { data: 'vazba' },
         { data: 'rok_vydania' },
         { data: 'vydavatelstvo' },
         { data: 'predajna_cena' },
         { data: 'nakupna_cena' },
+        { data: 'marza' },
         { data: 'zisk_kus' },
         { data: 'priemerne_hodnotenie' },
+        { data: 'obsah' },
+        {
+          data: null,
+          render: function (data, type, row) {
+            return `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModal" data-id="${row.id}" data-autor1="${row.autori.autor1}" data-autor2="${row.autori.autor2}" data-jazyk="${row.jazyk}"  data-pocet_stran="${row.pocet_stran}" data-nazov="${row.nazov}"  data-kategoria="${row.kategoria}"  data-isbn="${row.isbn}" data-vazba="${row.vazba}" data-rok_vydania="${row.rok_vydania}" data-vydavatelstvo="${row.vydavatelstvo}" data-predajna_cena="${row.predajna_cena}" data-nakupna_cena="${row.nakupna_cena}" data-marza="${row.marza}" data-zisk_kus="${row.zisk_kus}" data-priemerne_hodnotenie="${row.priemerne_hodnotenie}" data-obsah="${row.obsah}">Update</button>`
+          },
+        },
+        {
+          data: null,
+          render: function (data, type, row) {
+            return `<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="${row.id}">Delete</button>`;
+          }
+        }
+
 
         // { data: "", "defaultContent": "<button onclick='edititem();'>Edit</button>" },
         // {
@@ -278,6 +588,195 @@
   })
   $("#navbar").load("navbar.html")
   $("footer").load("footer.html")
+
+</script>
+<script>
+
+  $(document).on('submit', "#addBook", function (event) {
+    event.preventDefault();
+    var formData = new FormData();
+    formData.append("nazov", $("#nazov").val());
+    formData.append("autor1", $("#autor1").val());
+    formData.append("autor2", $("#autor2").val());
+    formData.append("kategoria", $("#kategoria").val());
+    formData.append("isbn", $("#isbn").val());
+    formData.append("jazyk", $("#jazyk").val());
+    formData.append("pocet_stran", $("#pocet_stran").val());
+    formData.append("vazba", $("#vazba").val());
+    formData.append("rok_vydania", $("#rok_vydania").val());
+    formData.append("vydavatelstvo", $("#vydavatelstvo").val());
+    formData.append("predajna_cena", $("#predajna_cena").val());
+    formData.append("nakupna_cena", $("#nakupna_cena").val());
+    formData.append("obsah", $("#obsah").val());
+    formData.append("priemerne_hodnotenie", $("#priemerne_hodnotenie").val());
+    formData.append("file", $("#obrazok")[0].files[0]);
+    var ajaxUrl = 'http://localhost:8050/book_services.asmx/AddBook1';
+
+    $.ajax({
+      type: "POST",
+      url: ajaxUrl,
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        showAlert("Kniha uspesne pridana", succes);
+        setTimeout(function () {
+          $('#addModal').modal('hide');
+        }, 3000);
+      },
+      error: function (xhr, status, error) {
+        alert("Error adding book: " + error);
+        showAlert("Nastala chyba:" + error, danger)
+      }
+    });
+  });
+  // update book ajax 
+  $(document).on('submit', "#updateBookForm", function (event) {
+    event.preventDefault();
+    var formData = new FormData();
+    formData.append("id", $("#id").val());
+    formData.append("nazov", $("#update-nazov").val());
+    formData.append("autor1", $("#autor1").val());
+    formData.append("autor2", $("#autor2").val());
+    formData.append("kategoria", $("#kategoria").val());
+    formData.append("isbn", $("#isbn").val());
+    formData.append("jazyk", $("#jazyk").val());
+    formData.append("pocet_stran", $("#pocet_stran").val());
+    formData.append("vazba", $("#vazba").val());
+    formData.append("rok_vydania", $("#rok_vydania").val());
+    formData.append("vydavatelstvo", $("#vydavatelstvo").val());
+    formData.append("predajna_cena", $("#predajna_cena").val());
+    formData.append("nakupna_cena", $("#nakupna_cena").val());
+    formData.append("obsah", $("#obsah").val());
+    formData.append("priemerne_hodnotenie", $("#priemerne_hodnotenie").val());
+    if ($("#obrazok")[0].files.length) {
+      formData.append("file", $("#obrazok")[0].files[0]);
+    }
+    var ajaxUrl = 'http://localhost:8050/book_services.asmx/UpdateBook1';
+
+    $.ajax({
+      type: "POST",
+      url: ajaxUrl,
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        showAlert("Kniha uspesne aktualizovana", succes);
+        setTimeout(function () {
+          $('#updateModal').modal('hide');
+        }, 3000);
+        $("#updateModalForm")[0].reset();
+      },
+      error: function (xhr, status, error) {
+        alert("Error updating book: " + error);
+        showAlert("Nastala chyba pri aktualizacii knihy:" + error, danger)
+      }
+    });
+  });
+  $(document).on('submit', "#deleteBookForm", function (event) {
+    event.preventDefault();
+    var formData = new FormData();
+    formData.append("nazov", $("#delete-nazov").val());
+    // ...
+    // Add the rest of the form data
+    var ajaxUrl = 'http://localhost:8050/book_services.asmx/DeleteBook1';
+
+    $.ajax({
+      type: "POST",
+      url: ajaxUrl,
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        alert("Book deleted successfully");
+      },
+      error: function (xhr, status, error) {
+        alert("Error deleting book: " + error);
+      }
+    });
+  });
+
+
+
+
+</script>
+
+<!-- <script>
+  $(document).ready(function () {
+    // 1. Create a click event for the update button in the table
+    $('table').on('click', '.btn-primary', function () {
+      // 2. Get the data from the row that was clicked on
+      var rowData = $(this).closest('tr').children('td').map(function () {
+        return $(this).text();
+      }).get();
+
+      // 3. Fill the form in the modal with the data from the row
+      $('#updateModalForm #id').val(rowData[1]);
+      $('#updateModalForm #autor1').val(rowData[2]);
+      $('#updateModalForm #autor2').val(rowData[3]);
+      $('#updateModalForm #nazov').val(rowData[4]);
+      $('#updateModalForm #kategoria').val(rowData[5]);
+      $('#updateModalForm #jazyk').val(rowData[6]);
+      $('#updateModalForm #isbn').val(rowData[7]);
+      $('#updateModalForm #pocet_stran').val(rowData[8]);
+      $('#updateModalForm #vazba').val(rowData[9]);
+      $('#updateModalForm #rok_vydania').val(rowData[10]);
+      $('#updateModalForm #vydavatelstvo').val(rowData[11]);
+      $('#updateModalForm #predajna_cena').val(rowData[12]);
+      $('#updateModalForm #nakupna_cena').val(rowData[13]);
+      $('#updateModalForm #priemerne_hodnotenie').val(rowData[16]);
+      $('#updateModalForm #obsah').val(rowData[17]);
+
+      // ...and so on for the rest of the form fields
+
+      // Show the modal
+      $('#updateModal').modal('show');
+    });
+  });
+
+
+</script> -->
+<script>$('#updateModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget);
+    var id = button.data('id');
+    var autor1 = button.data('autor1');
+    var autor2 = button.data('autor2');
+    var nazov = button.data('nazov');
+    var kategoria = button.data('kategoria');
+    var isbn = button.data('isbn');
+    var jazyk = button.data('jazyk');
+    var pocet_stran = button.data('pocet_stran');
+    var vazba = button.data('vazba');
+    var rok_vydania = button.data('rok_vydania');
+    var vydavatelstvo = button.data('vydavatelstvo');
+    var predajna_cena = button.data('predajna_cena');
+    var nakupna_cena = button.data('nakupna_cena');
+    var marza = button.data('marza');
+    var zisk_kus = button.data('zisk_kus');
+    var priemerne_hodnotenie = button.data('priemerne_hodnotenie');
+    var obsah = button.data('obsah');
+
+    var modal = $(this);
+    modal.find('.modal-body #update-id').val(id);
+    modal.find('.modal-body #update-kategoria').val(kategoria);
+    modal.find('.modal-body #update-isbn').val(isbn);
+    modal.find('.modal-body #update-nazov').val(nazov);
+    modal.find('.modal-body #update-autor1').val(autor1);
+    modal.find('.modal-body #update-autor2').val(autor2);
+    modal.find('.modal-body #update-jazyk').val(jazyk);
+    modal.find('.modal-body #update-pocet_stran').val(pocet_stran);
+    modal.find('.modal-body #update-vazba').val(vazba);
+    modal.find('.modal-body #update-rok_vydania').val(rok_vydania);
+    modal.find('.modal-body #update-vydavatelstvo').val(vydavatelstvo);
+    modal.find('.modal-body #update-predajna_cena').val(predajna_cena);
+    modal.find('.modal-body #update-nakupna_cena').val(nakupna_cena);
+    modal.find('.modal-body #update-marza').val(marza);
+    modal.find('.modal-body #update-zisk_kus').val(zisk_kus);
+    modal.find('.modal-body #update-priemerne_hodnotenie').val(priemerne_hodnotenie);
+    modal.find('.modal-body #update-obsah').val(obsah);
+  });
+</script>
+
 
 </script>
 

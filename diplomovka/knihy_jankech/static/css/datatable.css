@@ -2,3 +2,7 @@ table.dataTable tbody td {
  word-break: break-word;
  vertical-align: top;
 }
+
+.hidden {
+ display: none;
+}

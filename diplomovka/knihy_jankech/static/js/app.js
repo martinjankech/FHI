@@ -14,9 +14,24 @@
       $("#alert_success").show()
       $("#alert-text").html(message)
       $("#alert_success").fadeTo(2000, 500).slideUp(500, function () {
-        $("#alert_success").slideUp(800);
+        $("#alert_success").slideUp(500);
       });
     }
+
+    // Funkcia na zobrazenie alertu
+function showAlert(message, type) {
+  // Zobrazí hlavný div pre alert
+  $("#alert_container").show()
+  // Nastaví text v elemente pre zobrazovaný text
+  $("#alert-text").html(message)
+  // Odstráni predchádzajúce triedy pre alert a pridá novú triedu na základe parametra type
+  $("#alert_container .alert").removeClass("alert-danger alert-success").addClass(`alert-${type}`)
+  // Fade out a slide up efekt pre zobrazovaný div
+  $("#alert_container").fadeTo(2000, 500).slideUp(500, function () {
+    $("#alert_container").slideUp(500);
+  });
+}
+    
 // odosle ajaxovy request na webovú službu  cesta na ktoru sa nachadzadza v  parametri url s parametrom a datami podľa dynamicky vygenerovaneho formulara na zaklade uživatelového výberu. Pri uspechu vloži html do vybraných html elementov a posunie pohlad uzivatela na card s knihou
     function ajaxSingleBookForm(formid, url, parameter, parameterdata) {
       $(document).on('submit', formid, function (event) {
