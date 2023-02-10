@@ -969,4 +969,110 @@ A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole
     </book>
     <timestamp>2023-02-10 13:15:58</timestamp>
   </output>
+  <output>
+    <book>
+      <id>25</id>
+      <nazov>Malý princ</nazov>
+      <autori>
+        <autor1>Antoine De Saint-Exupéry</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Klasika</kategoria>
+      <isbn>9788010034666</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>253</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2019</rok_vydania>
+      <vydavatelstvo>Mladé letá</vydavatelstvo>
+      <predajna_cena>14.95</predajna_cena>
+      <nakupna_cena>6.65</nakupna_cena>
+      <marza>1.24812030075188</marza>
+      <zisk_kus>8.3</zisk_kus>
+      <obsah>Pôvabná knižka nielen pre deti, ale pre všetkých, ktorí chcú deťom porozumieť. Toto dielko dosiahlo svetový úspech a patrí do zlatého fondu svetovej literatúry. Jeho hodnota a krása nespočíva len v peknom rozprávkovom príbehu, ale hlavne v myšlienkach, ktoré ako vzácne kamienky vytvárajú obraz ľudských vlastností...
+
+Saint-Exupéry svoju knižku s čistým detským pohľadom na svet venoval najlepšiemu priateľovi. Veď všetci dospelí boli najprv deťmi. Ale máloktorý z nich sa na to pamätá.</obsah>
+      <priemerne_hodnotenie>4.8</priemerne_hodnotenie>
+      <obrazok>../img/25.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-10 18:18:17</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>25</id>
+      <nazov>Malý princ</nazov>
+      <autori>
+        <autor1>Antoine De Saint-Exupéry</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Klasika</kategoria>
+      <isbn>9788010034666</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>253</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2019</rok_vydania>
+      <vydavatelstvo>Mladé letá</vydavatelstvo>
+      <predajna_cena>14.95</predajna_cena>
+      <nakupna_cena>6.65</nakupna_cena>
+      <marza>1.24812030075188</marza>
+      <zisk_kus>8.3</zisk_kus>
+      <obsah>Pôvabná knižka nielen pre deti, ale pre všetkých, ktorí chcú deťom porozumieť. Toto dielko dosiahlo svetový úspech a patrí do zlatého fondu svetovej literatúry. Jeho hodnota a krása nespočíva len v peknom rozprávkovom príbehu, ale hlavne v myšlienkach, ktoré ako vzácne kamienky vytvárajú obraz ľudských vlastností...
+
+Saint-Exupéry svoju knižku s čistým detským pohľadom na svet venoval najlepšiemu priateľovi. Veď všetci dospelí boli najprv deťmi. Ale máloktorý z nich sa na to pamätá.</obsah>
+      <priemerne_hodnotenie>4.8</priemerne_hodnotenie>
+      <obrazok>../img/25.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-10 18:18:17</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>1</id>
+      <nazov>Harry Potter a Tajomná komnata</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143088</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>360</pocet_stran>
+      <vazba>brožovaná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>11.9</predajna_cena>
+      <nakupna_cena>8.25</nakupna_cena>
+      <marza>0.442424242424242</marza>
+      <zisk_kus>3.65</zisk_kus>
+      <obsah>Dursleyovci boli v to leto takí odporní, že Harry Potter sa už nevedel dočkať, kedy sa vráti do čarodejníckej školy. Jedného dňa sa v jeho izbe objaví čudné, zlomyseľné stvorenie. Volá sa Dobby a tvrdí, že ak sa Harry vráti na Rokfort, hrozí mu smrteľné nebezpečenstvo.
+A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole tajuplné a hrôzostrašné veci. Niekto, lepšie povedané niečo napáda rokfortských študentov a premieňa ich na kameň. Že by bol za tým Draco Malfoy, Harryho úhlavný nepriateľ? Alebo to má na svedomí ten, koho na Rokforte najviac upodozrievajú – samotný Harry Potter?</obsah>
+      <priemerne_hodnotenie>4.7</priemerne_hodnotenie>
+      <obrazok>../img/1.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-10 18:18:21</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>1</id>
+      <nazov>Harry Potter a Tajomná komnata</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143088</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>360</pocet_stran>
+      <vazba>brožovaná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>11.9</predajna_cena>
+      <nakupna_cena>8.25</nakupna_cena>
+      <marza>0.442424242424242</marza>
+      <zisk_kus>3.65</zisk_kus>
+      <obsah>Dursleyovci boli v to leto takí odporní, že Harry Potter sa už nevedel dočkať, kedy sa vráti do čarodejníckej školy. Jedného dňa sa v jeho izbe objaví čudné, zlomyseľné stvorenie. Volá sa Dobby a tvrdí, že ak sa Harry vráti na Rokfort, hrozí mu smrteľné nebezpečenstvo.
+A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole tajuplné a hrôzostrašné veci. Niekto, lepšie povedané niečo napáda rokfortských študentov a premieňa ich na kameň. Že by bol za tým Draco Malfoy, Harryho úhlavný nepriateľ? Alebo to má na svedomí ten, koho na Rokforte najviac upodozrievajú – samotný Harry Potter?</obsah>
+      <priemerne_hodnotenie>4.7</priemerne_hodnotenie>
+      <obrazok>../img/1.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-10 18:18:21</timestamp>
+  </output>
 </root>

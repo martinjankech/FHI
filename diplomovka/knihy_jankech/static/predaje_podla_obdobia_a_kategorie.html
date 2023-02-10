@@ -31,7 +31,6 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://code.highcharts.com/highcharts.js"></script>
-  <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/modules/data.js"></script>
   <script src="https://code.highcharts.com/modules/drilldown.js"></script>
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -251,6 +250,7 @@
         </div>
       </div>
       <div class="container-fluid col-10 mt-4 mb-5" id="containerQuantity"></div>
+
     </div>
 
 
@@ -299,75 +299,67 @@
       success: function (response) {
         try {
           var data = response;
-          var podkategoriaData = [];
+          var podkategoriaDataRevenue = [];
           data.AggregatedData.forEach(function (podkategoria) {
-            podkategoriaData.push({
+            podkategoriaDataRevenue.push({
               name: podkategoria.Podkategoria,
               y: podkategoria.TotalRevenue,
               drilldown: podkategoria.Podkategoria
             });
           });
-          console.log(podkategoriaData)
+          console.log(podkategoriaDataRevenue)
 
 
-          var bookData = [];
+          var bookDataRevenue = [];
           data.AggregatedData.forEach(function (podkategoria) {
-            var books = [];
+            var booksRevenue = [];
             podkategoria.Books.forEach(function (book) {
-              books.push([book.Name, book.TotalRevenue]);
+              booksRevenue.push([book.Name, book.TotalRevenue]);
             });
 
-            bookData.push({
+            bookDataRevenue.push({
               name: podkategoria.Podkategoria,
               id: podkategoria.Podkategoria,
-              data: books
+              data: booksRevenue
             });
 
           });
 
-          let totalQuantity = data.TotalAggregatedData.totalQuantity;
+
+
           let totalRevenue = Math.round(data.TotalAggregatedData.totalRevenue * 100) / 100;
-          let averageTotalDailyQuantity = Math.round(data.TotalAggregatedData.averageTotalDailyQuantity * 100) / 100;
           let averageTotalDailyRevenue = Math.round(data.TotalAggregatedData.averageTotalDailyRevenue * 100) / 100;
           let namePodkategoriaMaxRevenue = data.TotalAggregatedData.namePodkategoriaMaxRevenue;
           let maxRevenuePodkategoria = Math.round(data.TotalAggregatedData.maxRevenuePodkategoria * 100) / 100;
           let namePodkategoriaMinRevenue = data.TotalAggregatedData.namePodkategoriaMinRevenue;
           let minRevenuePodkategoria = Math.round(data.TotalAggregatedData.minRevenuePodkategoria * 100) / 100;
-          let namePodkategoriaMaxQuantity = data.TotalAggregatedData.namePodkategoriaMaxQuantity;
-          let maxQuantityPodkategoria = data.TotalAggregatedData.maxQuantityPodkategoria;
-          let namePodkategoriaMinQuantity = data.TotalAggregatedData.namePodkategoriaMinQuantity;
-          let minQuantityPodkategoria = data.TotalAggregatedData.minQuantityPodkategoria;
           let nameBookMaxRevenue = data.TotalAggregatedData.nameBookMaxRevenue;
           let maxRevenueBook = Math.round(data.TotalAggregatedData.maxRevenueBook * 100) / 100;
           let nameBookMinRevenue = data.TotalAggregatedData.nameBookMinRevenue;
           let minRevenueBook = Math.round(data.TotalAggregatedData.minRevenueBook * 100) / 100;
-          let nameBookMaxQuantity = data.TotalAggregatedData.nameBookMaxQuantity;
-          let maxQuantityBook = data.TotalAggregatedData.maxQuantityBook;
-          let nameBookMinQuantity = data.TotalAggregatedData.nameBookMinQuantity;
-          let minQuantityBook = data.TotalAggregatedData.minQuantityBook;
-
-          document.getElementById("totalQuantity").innerHTML = totalQuantity;
           document.getElementById("totalRevenue").innerHTML = totalRevenue;
-          document.getElementById("averageTotalDailyQuantity").innerHTML = averageTotalDailyQuantity;
           document.getElementById("averageTotalDailyRevenue").innerHTML = averageTotalDailyRevenue;
           document.getElementById("namePodkategoriaMaxRevenue").innerHTML = namePodkategoriaMaxRevenue;
           document.getElementById("maxRevenuePodkategoria").innerHTML = maxRevenuePodkategoria;
           document.getElementById("namePodkategoriaMinRevenue").innerHTML = namePodkategoriaMinRevenue;
           document.getElementById("minRevenuePodkategoria").innerHTML = minRevenuePodkategoria;
-          document.getElementById("namePodkategoriaMaxQuantity").innerHTML = namePodkategoriaMaxQuantity;
-          document.getElementById("maxQuantityPodkategoria").innerHTML = maxQuantityPodkategoria;
-          document.getElementById("namePodkategoriaMinQuantity").innerHTML = namePodkategoriaMinQuantity;
-          document.getElementById("minQuantityPodkategoria").innerHTML = minQuantityPodkategoria;
           document.getElementById("nameBookMaxRevenue").innerHTML = nameBookMaxRevenue;
           document.getElementById("maxRevenueBook").innerHTML = maxRevenueBook;
           document.getElementById("nameBookMinRevenue").innerHTML = nameBookMinRevenue;
           document.getElementById("minRevenueBook").innerHTML = minRevenueBook;
-          document.getElementById("nameBookMaxQuantity").innerHTML = nameBookMaxQuantity;
-          document.getElementById("maxQuantityBook").innerHTML = maxQuantityBook;
-          document.getElementById("nameBookMinQuantity").innerHTML = nameBookMinQuantity;
-          document.getElementById("minQuantityBook").innerHTML = minQuantityBook;
-          //calculateCardBody()
 
+
+
+
+
+
+
+
+
+
+
+
+          //calculateCardBody()
 
 
 
@@ -392,7 +384,7 @@
             },
             yAxis: {
               title: {
-                text: 'Total Revenue'
+                text: 'Totálny príjem'
               }
             },
             legend: {
@@ -403,27 +395,129 @@
                 borderWidth: 0,
                 dataLabels: {
                   enabled: true,
-                  format: '${point.y:.2f}'
+                  format: '{point.y:.2f}€'
                 }
               }
             },
             tooltip: {
               headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-              pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>${point.y:.2f}</b><br/>'
+              pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>€{point.y:.2f}</b><br/>'
             },
             series: [{
-              name: 'Vyššia hierarchia',
+              name: atributeText,
               colorByPoint: true,
-              data: podkategoriaData
+              data: podkategoriaDataRevenue
             }],
             drilldown: {
-              series: bookData
+              series: bookDataRevenue
             }
           });
         } catch (error) {
           console.error(error);
           alert("An error occurred: " + error.message);
         }
+        try {
+          var podkategoriaDataQuantity = [];
+          data.AggregatedData.forEach(function (podkategoria) {
+            podkategoriaDataQuantity.push({
+              name: podkategoria.Podkategoria,
+              y: podkategoria.TotalQuantity,
+              drilldown: podkategoria.Podkategoria
+            });
+          });
+          console.log(podkategoriaDataQuantity)
+
+
+          var bookDataQuantity = [];
+          data.AggregatedData.forEach(function (podkategoria) {
+            var booksQuantity = [];
+            podkategoria.Books.forEach(function (book) {
+              booksQuantity.push([book.Name, book.totalQuantity]);
+            });
+
+            bookDataQuantity.push({
+              name: podkategoria.Podkategoria,
+              id: podkategoria.Podkategoria,
+              data: booksQuantity
+            });
+
+          });
+          console.log(bookDataQuantity)
+
+          let totalQuantity = data.TotalAggregatedData.totalQuantity;
+          let averageTotalDailyQuantity = Math.round(data.TotalAggregatedData.averageTotalDailyQuantity * 100) / 100;
+          let namePodkategoriaMaxQuantity = data.TotalAggregatedData.namePodkategoriaMaxQuantity;
+          let maxQuantityPodkategoria = data.TotalAggregatedData.maxQuantityPodkategoria;
+          let namePodkategoriaMinQuantity = data.TotalAggregatedData.namePodkategoriaMinQuantity;
+          let minQuantityPodkategoria = data.TotalAggregatedData.minQuantityPodkategoria;
+          let nameBookMaxQuantity = data.TotalAggregatedData.nameBookMaxQuantity;
+          let maxQuantityBook = data.TotalAggregatedData.maxQuantityBook;
+          let nameBookMinQuantity = data.TotalAggregatedData.nameBookMinQuantity;
+          let minQuantityBook = data.TotalAggregatedData.minQuantityBook;
+          document.getElementById("totalQuantity").innerHTML = totalQuantity;
+          document.getElementById("averageTotalDailyQuantity").innerHTML = averageTotalDailyQuantity;
+          document.getElementById("namePodkategoriaMaxQuantity").innerHTML = namePodkategoriaMaxQuantity;
+          document.getElementById("maxQuantityPodkategoria").innerHTML = maxQuantityPodkategoria;
+          document.getElementById("namePodkategoriaMinQuantity").innerHTML = namePodkategoriaMinQuantity;
+          document.getElementById("minQuantityPodkategoria").innerHTML = minQuantityPodkategoria;
+          document.getElementById("nameBookMaxQuantity").innerHTML = nameBookMaxQuantity;
+          document.getElementById("maxQuantityBook").innerHTML = maxQuantityBook;
+          document.getElementById("nameBookMinQuantity").innerHTML = nameBookMinQuantity;
+          document.getElementById("minQuantityBook").innerHTML = minQuantityBook;
+          Highcharts.chart('containerQuantity', {
+            chart: {
+              type: 'column'
+            },
+            credits: {
+              enabled: false
+            },
+
+            title: {
+              text: "Počty predaných kníh podľa atribútu " + atributeText + " a jednotlivých kníh patriacich do atribútu"
+            },
+            xAxis: {
+              type: 'category'
+            },
+            yAxis: {
+              title: {
+                text: 'Totálne množstvo predaných kníh'
+              }
+            },
+            legend: {
+              enabled: false
+            },
+            plotOptions: {
+              series: {
+                borderWidth: 0,
+                dataLabels: {
+                  enabled: true,
+                  format: '{point.y:.2f} ks'
+                }
+              }
+            },
+            tooltip: {
+              headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+              pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f} ks </b><br/>'
+            },
+            series: [{
+              name: atributeText,
+              colorByPoint: true,
+              data: podkategoriaDataQuantity
+            }],
+            drilldown: {
+              series: bookDataQuantity
+            }
+          });
+        }
+
+
+
+        catch (error) {
+          console.error(error);
+          alert("An error occurred: " + error.message);
+        }
+
+
       },
       error: function (xhr, ajaxOptions, thrownError) {
         alert(xhr.status + " " + thrownError);
@@ -432,6 +526,8 @@
     });
     event.preventDefault();
   });
+
+
 
 
 
