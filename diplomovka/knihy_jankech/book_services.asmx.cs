@@ -378,61 +378,49 @@ namespace knihy_jankech
 
         }
 
-
-
         [WebMethod]
-        public void UpdateBook(int id, string nazov, string autor1, string autor2, string kategoria,
-       string isbn, string jazyk, int pocet_stran, string vazba, int rok_vydania,
-       string vydavatelstvo, decimal predajna_cena, decimal nakupna_cena, decimal marza,
-       decimal zisk_kus, string obsah, decimal priemerne_hodnotenie, string obrazok)
+        public string DeleteBook(string id)
         {
-            XDocument doc = XDocument.Load(fileBookInfoTest);
-            XElement root = doc.Root;
-
-            
-                XElement book = root.Elements("book").Where(x => x.Element("id").Value == id.ToString()).FirstOrDefault();
-
-            if (book != null)
+            try
             {
-                book.SetElementValue("nazov", nazov);
-                book.Element("autori").SetElementValue("autor1", autor1);
-                book.Element("autori").SetElementValue("autor2", autor2);
-                book.SetElementValue("kategoria", kategoria);
-                book.SetElementValue("isbn", isbn);
-                book.SetElementValue("jazyk", jazyk);
-                book.SetElementValue("pocet_stran", pocet_stran);
-                book.SetElementValue("vazba", vazba);
-                book.SetElementValue("rok_vydania", rok_vydania);
-                book.SetElementValue("vydavatelstvo", vydavatelstvo);
-                book.SetElementValue("predajna_cena", predajna_cena);
-                book.SetElementValue("nakupna_cena", nakupna_cena);
-                book.SetElementValue("marza", marza);
-                book.SetElementValue("zisk_kus", zisk_kus);
-                book.SetElementValue("obsah", obsah);
-                book.SetElementValue("priemerne_hodnotenie", priemerne_hodnotenie);
-                book.SetElementValue("obrazok", obrazok);
-            }
+                // Load the existing XML file
+                string xmlFilePath = fileBookInfo;
+                XElement xmlDoc = XElement.Load(xmlFilePath);
 
-            doc.Save(fileBookInfoTest);
-            Context.Response.Write("Udaje o knihe boli aktualizovane");
+       
+                            // Find the book with the specified id
+                            XElement bookToDelete = xmlDoc.Element("books").Elements("book").FirstOrDefault(x => x.Element("id").Value == id);
+
+                if (bookToDelete != null)
+                {
+                    // Remove the book element from the XML file
+                    bookToDelete.Remove();
+                    xmlDoc.Save(xmlFilePath);
+
+                    // Delete the image from the file system
+                    string imageFilePath = Path.Combine(Server.MapPath("~/img"), "../img/" + id + ".jpg");
+                    System.IO.File.Delete(imageFilePath);
+
+                    return "Success";
+                }
+                else
+                {
+                    return "Book not found";
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
         }
 
-        [WebMethod]
-        public void DeleteBook(int id)
-        {
-            XDocument doc = XDocument.Load(fileBookInfoTest);
-            XElement root = doc.Root;
 
-            XElement book = root.Elements("book").Where(x => x.Element("id").Value == id.ToString()).FirstOrDefault();
 
-            if (book != null)
-            {
-                book.Remove();
-            }
 
-            doc.Save(fileBookInfoTest);
-            Context.Response.Write("Kniha bola znazana");
-        }
+
+
+
+
 
         [WebMethod]
         public void SinglebookDataById(string id)
