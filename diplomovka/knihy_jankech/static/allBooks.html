@@ -40,7 +40,7 @@
     <div class="container col-11 mt-5 ">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add</button>
       <div class=" mb-5 table-responsive">
-        <table id="example" class=" display nowrap ">
+        <table id="bookTable" class=" display nowrap ">
           <thead>
             <tr>
               <th>foto</th>
@@ -101,9 +101,6 @@
     </footer>
   </div>
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
-  </button>
 
   <!-- Modal -->
   <div class="modal fade " id="bookmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -338,33 +335,14 @@
   </div>
 
 </div>
-</div>
-<!-- Delete Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteModalLabel">Delete Item</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <!-- Delete confirmation message here -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger">Delete</button>
-      </div>
-    </div>
-  </div>
-</div>
+
+
+
 <script>
 
 
   $(document).ready(function () {
-    $('#example').DataTable({
+    $('#bookTable').DataTable({
       columnDefs: [
         {
           targets: 3,
@@ -477,7 +455,7 @@
         {
           data: null,
           render: function (data, type, row) {
-            return `<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="${row.id}">Delete</button>`;
+            return `<button type="button" class=" deleteBook btn btn-danger"  data-id="${row.id}">Delete</button>`;
           }
         }
 
@@ -594,7 +572,7 @@
 
 </script>
 <script>
-
+  // add book
   $(document).on('submit', "#addBook", function (event) {
     event.preventDefault();
     var formData = new FormData();
@@ -613,7 +591,7 @@
     formData.append("obsah", $("#obsah").val());
     formData.append("priemerne_hodnotenie", $("#priemerne_hodnotenie").val());
     formData.append("file", $("#obrazok")[0].files[0]);
-    var ajaxUrl = 'http://localhost:8050/book_services.asmx/AddBook1';
+    var ajaxUrl = 'http://localhost:8050/book_services.asmx/AddBook';
 
     $.ajax({
       type: "POST",
@@ -622,14 +600,15 @@
       contentType: false,
       processData: false,
       success: function (response) {
-        showAlert("Kniha uspesne pridana", succes);
+        showAlert("Kniha uspesne pridana", "addModal", "success");
         setTimeout(function () {
           $('#addModal').modal('hide');
+          $('#bookTable').DataTable().ajax.reload(null, false);
         }, 3000);
       },
       error: function (xhr, status, error) {
-        alert("Error adding book: " + error);
-        showAlert("Nastala chyba:" + error, danger)
+
+        showAlert("Nastala chyba:" + error, "addModal", "danger")
       }
     });
   });
@@ -653,9 +632,14 @@
     formData.append("obsah", $("#update-obsah").val());
     formData.append("priemerne_hodnotenie", $("#update-priemerne_hodnotenie").val());
     if ($("#update-obrazok")[0].files.length) {
-      formData.append("file", $("#update-obrazok")[0].files[0]);
+      var file = $("#update-obrazok")[0].files[0];
+      var fileName = file.name.split(".")[0];
+      var fileExtension = file.name.split(".")[1];
+      var timestamp = new Date().getTime();
+      var newFileName = fileName + "_" + timestamp + "." + fileExtension;
+      formData.append("file", file, newFileName);
     }
-    var ajaxUrl = 'http://localhost:8050/book_services.asmx/UpdateBook1';
+    var ajaxUrl = 'http://localhost:8050/book_services.asmx/UpdateBook';
 
     $.ajax({
       type: "POST",
@@ -664,41 +648,42 @@
       contentType: false,
       processData: false,
       success: function (response) {
-        showAlert("Kniha uspesne aktualizovana", "succes");
+        showAlert("Kniha uspesne aktualizovana", "updateModal", "success");
         setTimeout(function () {
           $('#updateModal').modal('hide');
-        }, 3000);
+          setTimeout(function () {
+            $('#bookTable').DataTable().ajax.reload(null, false);
+          }, 1500);
+        }, 2000);
         $("#updateBookForm")[0].reset();
       },
       error: function (xhr, status, error) {
-        alert("Error updating book: " + error);
-        showAlert("Nastala chyba pri aktualizacii knihy:" + error, "danger")
+
+        showAlert("Nastala chyba pri aktualizacii knihy:" + error, "updateModal", "danger")
       }
     });
   });
-  $(document).on('submit', "#deleteBookForm", function (event) {
-    event.preventDefault();
-    var formData = new FormData();
-    formData.append("id", $("#delete-id").val());
-    // ...
-    // Add the rest of the form data
-    var ajaxUrl = 'http://localhost:8050/book_services.asmx/DeleteBook';
+  $(document).on('click', ".deleteBook", function (event) {
+    var id = $(this).data('id');
 
-    lua
+    if (confirm("Are you sure you want to delete the book?")) {
+      $.ajax({
+        type: "POST",
+        url: 'http://localhost:8050/book_services.asmx/DeleteBook',
+        data: { id: id },
+        success: function (response) {
+          showAlert("Kniha uspesne vymazana", "deleteModal", "success");
+          setTimeout(function () {
 
-    $.ajax({
-      type: "POST",
-      url: ajaxUrl,
-      data: formData,
-      contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-      success: function (response) {
-        alert("Book deleted successfully");
-      },
-      error: function (xhr, status, error) {
-        alert("Error deleting book: " + error);
-      }
-    });
+            $('#bookTable').DataTable().ajax.reload(null, false);
+          }, 1500);
 
+        },
+        error: function (xhr, status, error) {
+          showAlert("Nastala chyba: " + error, "deleteModal", "danger")
+        }
+      });
+    }
   });
 
 
@@ -739,7 +724,7 @@
     });
   });
 
-
+// naplenie update formularu datami z aktualneho row data su ziskane z buttonu 
 </script> -->
 <script>$('#updateModal').on('show.bs.modal', function (event) {
     var button = $(event.relatedTarget);

@@ -302,7 +302,7 @@ namespace knihy_jankech
         }
 
         [WebMethod]
-        public string UpdateBook1()
+        public string UpdateBook()
         {
             try
             {
