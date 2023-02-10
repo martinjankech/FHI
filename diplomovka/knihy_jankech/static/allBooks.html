@@ -139,13 +139,13 @@
 
       </div>
       <div class="modal-body">
-        <div class="modal-body">
-          <div style="display: none;" id="alert_container">
-            <div class="alert" role="alert">
-              <span id="alert-text"></span>
-            </div>
+
+        <div style="display: none;" id="alert_container">
+          <div class="alert" role="alert">
+            <span id="alert-text"></span>
           </div>
         </div>
+
 
         <form id="addBook">
           <div class="row">
@@ -230,10 +230,9 @@
         </form>
       </div>
     </div>
-
   </div>
 </div>
-</div>
+
 
 <!-- Update Modal -->
 <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
@@ -247,94 +246,98 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="modal-body">
-          <form id="updateBookForm">
-            <div class="row">
-              <div class="form-group col-3">
-                <label for="ID">ID:</label>
-                <input type="text" id="update-id" name="id" class="form-control">
-              </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-3">
-                <label for="nazov">Nazov:</label>
-                <input type="text" id="update-nazov" name="nazov" class="form-control">
-              </div>
-              <div class="form-group col-3">
-                <label for="autor1">Autor 1:</label>
-                <input type="text" id="update-autor1" name="autor1" class="form-control">
-              </div>
-              <div class="form-group col-3">
-                <label for="autor2">Autor 2:</label>
-                <input type="text" id="update-autor2" name="autor2" class="form-control">
-              </div>
-              <div class="form-group col-3">
-                <label for="kategoria">Kategoria:</label>
-                <input type="text" id="update-kategoria" name="kategoria" class="form-control">
-              </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-3">
-                <label for="isbn">ISBN:</label>
-                <input type="text" id="update-isbn" name="isbn" class="form-control">
-              </div>
-              <div class="form-group col-3">
-                <label for="jazyk">Jazyk:</label>
-                <input type="text" id="update-jazyk" name="jazyk" class="form-control">
-              </div>
-              <div class="form-group col-3">
-                <label for="pocet_stran">Pocet stran:</label>
-                <input type="text" id="update-pocet_stran" name="pocet_stran" class="form-control">
-              </div>
-              <div class="form-group col-3">
-                <label for="vazba">Vazba:</label>
-                <input type="text" id="update-vazba" name="vazba" class="form-control">
-              </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-3">
-                <label for="rok_vydania">Rok vydania:</label>
-                <input type="text" id="update-rok_vydania" name="rok_vydania" class="form-control">
-              </div>
-              <div class="form-group col-3">
-                <label for="vydavatelstvo">Vydavatelstvo:</label>
-                <input type="text" id="update-vydavatelstvo" name="vydavatelstvo" class="form-control">
-              </div>
-              <div class="form-group col-3">
-                <label for="predajna_cena">Predajna cena:</label>
-                <input type="text" id="update-predajna_cena" name="predajna_cena" class="form-control">
-              </div>
-              <div class="form-group col-3">
-                <label for=" nakupna_cena">Nakupna cena</label>
-                <input id="update-nakupna_cena" name="nakupna_cena class=" class="form-control">
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="form-group col-3">
-                <label for=" priemerne_hodnotenie">Priemerne hodnotenie:</label>
-                <input id="priemerne_hodnotenie" name="priemerne_hodnotenie" class="form-control">
-              </div>
-              <div class="form-group col-3">
-                <label for=" obrazok">Obrazok:</label>
-                <input type="file" id="obrazok" name="obrazok" class="form-control">
-              </div>
-              <div class="form-group col-3">
-                <label for="obsah">Example textarea</label>
-                <textarea class="form-control" id="obsah" name="obsah" rows="5"></textarea>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Ulož Zmeny</button>
-            </div>
-          </form>
+        <div style="display: none;" id="alert_container">
+          <div class="alert" role="alert">
+            <span id="alert-text"></span>
+          </div>
         </div>
-      </div>
+        <form id="updateBookForm">
+          <div class="row">
+            <div class="form-group col-3">
+              <label for="ID">ID:</label>
+              <input type="text" id="update-id" name="id" class="form-control">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-3">
+              <label for="nazov">Nazov:</label>
+              <input type="text" id="update-nazov" name="nazov" class="form-control">
+            </div>
+            <div class="form-group col-3">
+              <label for="autor1">Autor 1:</label>
+              <input type="text" id="update-autor1" name="autor1" class="form-control">
+            </div>
+            <div class="form-group col-3">
+              <label for="autor2">Autor 2:</label>
+              <input type="text" id="update-autor2" name="autor2" class="form-control">
+            </div>
+            <div class="form-group col-3">
+              <label for="kategoria">Kategoria:</label>
+              <input type="text" id="update-kategoria" name="kategoria" class="form-control">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-3">
+              <label for="isbn">ISBN:</label>
+              <input type="text" id="update-isbn" name="isbn" class="form-control">
+            </div>
+            <div class="form-group col-3">
+              <label for="jazyk">Jazyk:</label>
+              <input type="text" id="update-jazyk" name="jazyk" class="form-control">
+            </div>
+            <div class="form-group col-3">
+              <label for="pocet_stran">Pocet stran:</label>
+              <input type="text" id="update-pocet_stran" name="pocet_stran" class="form-control">
+            </div>
+            <div class="form-group col-3">
+              <label for="vazba">Vazba:</label>
+              <input type="text" id="update-vazba" name="vazba" class="form-control">
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-3">
+              <label for="rok_vydania">Rok vydania:</label>
+              <input type="text" id="update-rok_vydania" name="rok_vydania" class="form-control">
+            </div>
+            <div class="form-group col-3">
+              <label for="vydavatelstvo">Vydavatelstvo:</label>
+              <input type="text" id="update-vydavatelstvo" name="vydavatelstvo" class="form-control">
+            </div>
+            <div class="form-group col-3">
+              <label for="predajna_cena">Predajna cena:</label>
+              <input type="text" id="update-predajna_cena" name="predajna_cena" class="form-control">
+            </div>
+            <div class="form-group col-3">
+              <label for=" nakupna_cena">Nakupna cena</label>
+              <input id="update-nakupna_cena" name="nakupna_cena class=" class="form-control">
+            </div>
+          </div>
 
+          <div class="row">
+            <div class="form-group col-3">
+              <label for=" priemerne_hodnotenie">Priemerne hodnotenie:</label>
+              <input id="priemerne_hodnotenie" name="priemerne_hodnotenie" class="form-control">
+            </div>
+            <div class="form-group col-3">
+              <label for=" obrazok">Obrazok:</label>
+              <input type="file" id="update-obrazok" name="obrazok" class="form-control">
+            </div>
+            <div class="form-group col-3">
+              <label for="obsah">Example textarea</label>
+              <textarea class="form-control" id="update-obsah" name="obsah" rows="5"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Ulož Zmeny</button>
+          </div>
+        </form>
+      </div>
     </div>
 
   </div>
+
+</div>
 </div>
 <!-- Delete Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
@@ -634,23 +637,23 @@
   $(document).on('submit', "#updateBookForm", function (event) {
     event.preventDefault();
     var formData = new FormData();
-    formData.append("id", $("#id").val());
+    formData.append("id", $("#update-id").val());
     formData.append("nazov", $("#update-nazov").val());
-    formData.append("autor1", $("#autor1").val());
-    formData.append("autor2", $("#autor2").val());
-    formData.append("kategoria", $("#kategoria").val());
-    formData.append("isbn", $("#isbn").val());
-    formData.append("jazyk", $("#jazyk").val());
-    formData.append("pocet_stran", $("#pocet_stran").val());
-    formData.append("vazba", $("#vazba").val());
-    formData.append("rok_vydania", $("#rok_vydania").val());
-    formData.append("vydavatelstvo", $("#vydavatelstvo").val());
-    formData.append("predajna_cena", $("#predajna_cena").val());
-    formData.append("nakupna_cena", $("#nakupna_cena").val());
-    formData.append("obsah", $("#obsah").val());
-    formData.append("priemerne_hodnotenie", $("#priemerne_hodnotenie").val());
-    if ($("#obrazok")[0].files.length) {
-      formData.append("file", $("#obrazok")[0].files[0]);
+    formData.append("autor1", $("#update-autor1").val());
+    formData.append("autor2", $("#update-autor2").val());
+    formData.append("kategoria", $("#update-kategoria").val());
+    formData.append("isbn", $("#update-isbn").val());
+    formData.append("jazyk", $("#update-jazyk").val());
+    formData.append("pocet_stran", $("#update-pocet_stran").val());
+    formData.append("vazba", $("#update-vazba").val());
+    formData.append("rok_vydania", $("#update-rok_vydania").val());
+    formData.append("vydavatelstvo", $("#update-vydavatelstvo").val());
+    formData.append("predajna_cena", $("#update-predajna_cena").val());
+    formData.append("nakupna_cena", $("#update-nakupna_cena").val());
+    formData.append("obsah", $("#update-obsah").val());
+    formData.append("priemerne_hodnotenie", $("#update-priemerne_hodnotenie").val());
+    if ($("#update-obrazok")[0].files.length) {
+      formData.append("file", $("#update-obrazok")[0].files[0]);
     }
     var ajaxUrl = 'http://localhost:8050/book_services.asmx/UpdateBook1';
 
@@ -661,32 +664,33 @@
       contentType: false,
       processData: false,
       success: function (response) {
-        showAlert("Kniha uspesne aktualizovana", succes);
+        showAlert("Kniha uspesne aktualizovana", "succes");
         setTimeout(function () {
           $('#updateModal').modal('hide');
         }, 3000);
-        $("#updateModalForm")[0].reset();
+        $("#updateBookForm")[0].reset();
       },
       error: function (xhr, status, error) {
         alert("Error updating book: " + error);
-        showAlert("Nastala chyba pri aktualizacii knihy:" + error, danger)
+        showAlert("Nastala chyba pri aktualizacii knihy:" + error, "danger")
       }
     });
   });
   $(document).on('submit', "#deleteBookForm", function (event) {
     event.preventDefault();
     var formData = new FormData();
-    formData.append("nazov", $("#delete-nazov").val());
+    formData.append("id", $("#delete-id").val());
     // ...
     // Add the rest of the form data
-    var ajaxUrl = 'http://localhost:8050/book_services.asmx/DeleteBook1';
+    var ajaxUrl = 'http://localhost:8050/book_services.asmx/DeleteBook';
+
+    lua
 
     $.ajax({
       type: "POST",
       url: ajaxUrl,
       data: formData,
-      contentType: false,
-      processData: false,
+      contentType: "application/x-www-form-urlencoded; charset=UTF-8",
       success: function (response) {
         alert("Book deleted successfully");
       },
@@ -694,6 +698,7 @@
         alert("Error deleting book: " + error);
       }
     });
+
   });
 
 

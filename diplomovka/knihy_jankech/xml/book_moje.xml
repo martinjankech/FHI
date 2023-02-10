@@ -698,9 +698,9 @@ Saint-Exupéry svoju knižku s čistým detským pohľadom na svet venoval najle
     </book>
     <book>
       <id>32</id>
-      <nazov>undefined</nazov>
+      <nazov>martin</nazov>
       <autori>
-        <autor1>undefined</autor1>
+        <autor1>to dal</autor1>
         <autor2>4234</autor2>
       </autori>
       <kategoria>234</kategoria>
@@ -715,7 +715,7 @@ Saint-Exupéry svoju knižku s čistým detským pohľadom na svet venoval najle
       <marza>0</marza>
       <zisk_kus>0</zisk_kus>
       <obsah>234</obsah>
-      <priemerne_hodnotenie>234</priemerne_hodnotenie>
+      <priemerne_hodnotenie>undefined</priemerne_hodnotenie>
       <obrazok>../img/32.jpg</obrazok>
     </book>
     <book>
@@ -839,15 +839,15 @@ Saint-Exupéry svoju knižku s čistým detským pohľadom na svet venoval najle
       <isbn>4234233</isbn>
       <jazyk>ľšč</jazyk>
       <pocet_stran>34</pocet_stran>
-      <vazba>ľšč</vazba>
+      <vazba>ľšč56idetoaspobezobrazka</vazba>
       <rok_vydania>234</rok_vydania>
       <vydavatelstvo>234</vydavatelstvo>
-      <predajna_cena>8000</predajna_cena>
+      <predajna_cena>7000</predajna_cena>
       <nakupna_cena>342</nakupna_cena>
       <marza>95.72500</marza>
       <zisk_kus>7658</zisk_kus>
       <obsah>23434</obsah>
-      <priemerne_hodnotenie>234</priemerne_hodnotenie>
+      <priemerne_hodnotenie>undefined</priemerne_hodnotenie>
       <obrazok>../img/38.jpg</obrazok>
     </book>
   </books>
