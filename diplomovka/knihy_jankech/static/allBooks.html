@@ -38,59 +38,58 @@
   </div>
   <div class="flex-wrapper">
     <div class="container col-11 mt-5 ">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Add</button>
+      <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#addModal">Pridaj
+        Knihu</button>
       <div class=" mb-5 table-responsive">
         <table id="bookTable" class=" display nowrap ">
           <thead>
             <tr>
-              <th>foto</th>
-              <th>id</th>
-              <th>autor1</th>
-              <th>autor2</th>
-              <th>nazov</th>
-              <th>kategoria</th>
-              <th>jazyk</th>
-              <th>isbn</th>
-
-
-              <th>pocet_stran</th>
-              <th>vazba</th>
-              <th>rok_vydania</th>
-              <th>vydavatelstvo</th>
-              <th>predajna_cena</th>
-              <th>nakupna_cena</th>
-              <th>marza</th>
-              <th>zisk_kus</th>
-              <th>priemerne_hodnotenie</th>
-              <th>obsah</th>
-              <th>update</th>
-              <th>delete</th>
+              <th>Náhľad</th>
+              <th>ID</th>
+              <th>Autor1</th>
+              <th>Autor2</th>
+              <th>Nazov</th>
+              <th>Kategoria</th>
+              <th>Jazyk</th>
+              <th>ISBN</th>
+              <th>Počet strán</th>
+              <th>Vazba</th>
+              <th>Rok vydania</th>
+              <th>Vydavatelstvo</th>
+              <th>Predajna_cena</th>
+              <th>Nakupna_cena</th>
+              <th>Marža</th>
+              <th>Zisk kus</th>
+              <th>Priemerne hodnotenie</th>
+              <th>Obsah</th>
+              <th>Aktualizuj</th>
+              <th>Zmaž</th>
 
 
             </tr>
           </thead>
           <tfoot class="mb-5">
             <tr>
-              <th>foto</th>
-              <th>id</th>
-              <th>autor1</th>
-              <th>autor2</th>
-              <th>nazov</th>
-              <th>kategoria</th>
-              <th>jazyk</th>
-              <th>isbn</th>
-              <th>pocet_stran</th>
-              <th>vazba</th>
-              <th>rok_vydania</th>
-              <th>vydavatelstvo</th>
-              <th>predajna_cena</th>
-              <th>nakupna_cena</th>
-              <th>marza</th>
-              <th>zisk_kus</th>
-              <th>priemerne_hodnotenie</th>
-              <th>obsah</th>
-              <th>update</th>
-              <th>delete</th>
+              <th>Náhľad</th>
+              <th>ID</th>
+              <th>Autor1</th>
+              <th>Autor2</th>
+              <th>Nazov</th>
+              <th>Kategoria</th>
+              <th>Jazyk</th>
+              <th>ISBN</th>
+              <th>Počet strán</th>
+              <th>Vazba</th>
+              <th>Rok vydania</th>
+              <th>Vydavatelstvo</th>
+              <th>Predajna_cena</th>
+              <th>Nakupna_cena</th>
+              <th>Marža</th>
+              <th>Zisk kus</th>
+              <th>Priemerne hodnotenie</th>
+              <th>Obsah</th>
+              <th>Aktualizuj</th>
+              <th>Zmaž</th>
 
             </tr>
           </tfoot>
@@ -117,7 +116,7 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavrieť</button>
 
         </div>
       </div>
@@ -129,8 +128,8 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addModalLabel">Add Item</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title" id="addModalLabel">Pridaj knihu</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Zavrieť">
           <span aria-hidden="true">&times;</span>
         </button>
 
@@ -146,10 +145,6 @@
 
         <form id="addBook">
           <div class="row">
-            <div class="form-group col-3">
-              <label for="ID">ID:</label>
-              <input type="text" id="id" name="id" class="form-control">
-            </div>
           </div>
           <div class="row">
             <div class="form-group col-3">
@@ -216,13 +211,13 @@
               <input type="file" id="obrazok" name="obrazok" class="form-control">
             </div>
             <div class="form-group col-3">
-              <label for="obsah">Example textarea</label>
+              <label for="obsah">Obsah</label>
               <textarea class="form-control" id="obsah" name="obsah" rows="5"></textarea>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Pridaj Knihu</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavrieť</button>
+            <button type="submit" class="btn btn-primary">Pridaj knihu</button>
           </div>
         </form>
       </div>
@@ -237,7 +232,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="updateModalLabel">Update Item</h5>
+        <h5 class="modal-title" id="updateModalLabel">Aktualizácia údajov o knihe</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -249,12 +244,6 @@
           </div>
         </div>
         <form id="updateBookForm">
-          <div class="row">
-            <div class="form-group col-3">
-              <label for="ID">ID:</label>
-              <input type="text" id="update-id" name="id" class="form-control">
-            </div>
-          </div>
           <div class="row">
             <div class="form-group col-3">
               <label for="nazov">Nazov:</label>
@@ -313,20 +302,20 @@
           <div class="row">
             <div class="form-group col-3">
               <label for=" priemerne_hodnotenie">Priemerne hodnotenie:</label>
-              <input id="priemerne_hodnotenie" name="priemerne_hodnotenie" class="form-control">
+              <input id="update-priemerne_hodnotenie" name="priemerne_hodnotenie" class="form-control">
             </div>
             <div class="form-group col-3">
               <label for=" obrazok">Obrazok:</label>
               <input type="file" id="update-obrazok" name="obrazok" class="form-control">
             </div>
             <div class="form-group col-3">
-              <label for="obsah">Example textarea</label>
+              <label for="obsah">Obsah</label>
               <textarea class="form-control" id="update-obsah" name="obsah" rows="5"></textarea>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Ulož Zmeny</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavrieť</button>
+            <button type="submit" class="btn btn-primary">Ulož zmeny</button>
           </div>
         </form>
       </div>
@@ -343,6 +332,28 @@
 
   $(document).ready(function () {
     $('#bookTable').DataTable({
+      language: {
+        "processing": "Spracúvanie...",
+        "search": "Hľadať:",
+        "lengthMenu": "Zobraziť _MENU_ záznamov",
+        "info": "Zobrazujem _START_ až _END_ z _TOTAL_ záznamov",
+        "infoEmpty": "Zobrazujem 0 až 0 z 0 záznamov",
+        "infoFiltered": "(filtrované z _MAX_ celkových záznamov)",
+        "infoPostFix": "",
+        "loadingRecords": "Načítavanie...",
+        "zeroRecords": "Neboli nájdené žiadne vyhovujúce záznamy",
+        "emptyTable": "V tabuľke nie sú žiadne dáta",
+        "paginate": {
+          "first": "Prvá",
+          "previous": "Predchádzajúca",
+          "next": "Ďalšia",
+          "last": "Posledná"
+        },
+        "aria": {
+          "sortAscending": ": aktivujte na zoradenie stĺpca vzostupne",
+          "sortDescending": ": aktivujte na zoradenie stĺpca zostupne"
+        }
+      },
       columnDefs: [
         {
           targets: 3,
@@ -449,13 +460,13 @@
         {
           data: null,
           render: function (data, type, row) {
-            return `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModal" data-id="${row.id}" data-autor1="${row.autori.autor1}" data-autor2="${row.autori.autor2}" data-jazyk="${row.jazyk}"  data-pocet_stran="${row.pocet_stran}" data-nazov="${row.nazov}"  data-kategoria="${row.kategoria}"  data-isbn="${row.isbn}" data-vazba="${row.vazba}" data-rok_vydania="${row.rok_vydania}" data-vydavatelstvo="${row.vydavatelstvo}" data-predajna_cena="${row.predajna_cena}" data-nakupna_cena="${row.nakupna_cena}" data-marza="${row.marza}" data-zisk_kus="${row.zisk_kus}" data-priemerne_hodnotenie="${row.priemerne_hodnotenie}" data-obsah="${row.obsah}">Update</button>`
+            return `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModal" data-id="${row.id}" data-autor1="${row.autori.autor1}" data-autor2="${row.autori.autor2}" data-jazyk="${row.jazyk}"  data-pocet_stran="${row.pocet_stran}" data-nazov="${row.nazov}"  data-kategoria="${row.kategoria}"  data-isbn="${row.isbn}" data-vazba="${row.vazba}" data-rok_vydania="${row.rok_vydania}" data-vydavatelstvo="${row.vydavatelstvo}" data-predajna_cena="${row.predajna_cena}" data-nakupna_cena="${row.nakupna_cena}" data-marza="${row.marza}" data-zisk_kus="${row.zisk_kus}" data-priemerne_hodnotenie="${row.priemerne_hodnotenie}" data-obsah="${row.obsah}">Aktualizuj</button>`
           },
         },
         {
           data: null,
           render: function (data, type, row) {
-            return `<button type="button" class=" deleteBook btn btn-danger"  data-id="${row.id}">Delete</button>`;
+            return `<button type="button" class=" deleteBook btn btn-danger"  data-id="${row.id}">Vymaž</button>`;
           }
         }
 
@@ -666,7 +677,7 @@
   $(document).on('click', ".deleteBook", function (event) {
     var id = $(this).data('id');
 
-    if (confirm("Are you sure you want to delete the book?")) {
+    if (confirm("Ste si istý že chcete vymazať údaje o knihe? Operácia je nezvratná!!")) {
       $.ajax({
         type: "POST",
         url: 'http://localhost:8050/book_services.asmx/DeleteBook',

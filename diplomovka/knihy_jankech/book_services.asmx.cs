@@ -11,6 +11,7 @@ using System.Web;
 using System.Web.Services;
 using System.Web.Services.Description;
 using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
@@ -236,9 +237,21 @@ namespace knihy_jankech
         //    string filePath = Path.Combine(Server.MapPath("~/imgs"), imageData.ImageName);
         //    System.IO.File.WriteAllBytes(filePath, imageData.ImageBytes);
         //}
+        public void ValidateDate(string startDate, string endDate)
+        {
+            DateTime start, end;
+            if (!DateTime.TryParseExact(startDate, "yyyy-MM-dd", CultureInfo.InvariantCulture,
+                                        DateTimeStyles.None, out start) ||
+                !DateTime.TryParseExact(endDate, "yyyy-MM-dd", CultureInfo.InvariantCulture,
+                                        DateTimeStyles.None, out end))
+            {
+                Context.Response.StatusCode = 500;
+                Context.Response.Write("Invalid date format provided. Correct format is yyyy-MM-dd");
+                return;
+            }
+        }
 
-
-        [WebMethod]
+            [WebMethod]
         public void AddBook()
         {
             var request = HttpContext.Current.Request;
@@ -665,17 +678,16 @@ namespace knihy_jankech
             var booksXml = XElement.Load(fileBookInfo);
             var warehouseXml = XElement.Load(fileBookTransactionInfo);
             // Convert the start and end dates to DateTime format
-            DateTime startD = DateTime.Parse(startDate);
-            DateTime endD = DateTime.Parse(endDate);
+          
             // Use LINQ to join the information from the two XML files and filter the results based on selected category and selected value
             if (selectedAtribute != "vsetky")
             {
                 var result = from b in booksXml.Descendants("book")
                              join w1 in warehouseXml.Descendants("transakcia") on (string)b.Element("id") equals (string)w1.Element("id_knihy") into g
-                             from w1 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - startD).Ticks)).Take(1)
+                             from w1 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - start).Ticks)).Take(1)
                              let startAmount = (int)w1.Element("aktualne_mnozstvo_na_sklade")
 
-                             from w2 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - endD).Ticks)).Take(1)
+                             from w2 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - end).Ticks)).Take(1)
                              where (string)b.Element(selectedAtribute) == selectedValueAtribute ||
                              (selectedAtribute == "autor" && (string)b.Element("autori").Element("autor1") == selectedValueAtribute) ||
                              (selectedAtribute == "autor" && (string)b.Element("autori").Element("autor2") == selectedValueAtribute)
@@ -769,10 +781,10 @@ namespace knihy_jankech
 
                 var result = from b in booksXml.Descendants("book")
                              join w1 in warehouseXml.Descendants("transakcia") on (string)b.Element("id") equals (string)w1.Element("id_knihy") into g
-                             from w1 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - startD).Ticks)).Take(1)
+                             from w1 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - start).Ticks)).Take(1)
                              let startAmount = (int)w1.Element("aktualne_mnozstvo_na_sklade")
 
-                             from w2 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - endD).Ticks)).Take(1)
+                             from w2 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - end).Ticks)).Take(1)
 
 
 
@@ -910,17 +922,16 @@ namespace knihy_jankech
             var booksXml = XElement.Load(fileBookInfo);
             var warehouseXml = XElement.Load(fileBookTransactionInfo);
             // Convert the start and end dates to DateTime format
-            DateTime startD = DateTime.Parse(startDate);
-            DateTime endD = DateTime.Parse(endDate);
+           
             // Use LINQ to join the information from the two XML files and filter the results based on selected category and selected value
             if (selectedAtribute != "vsetky")
             {
                 var result = from b in booksXml.Descendants("book")
                              join w1 in warehouseXml.Descendants("transakcia") on (string)b.Element("id") equals (string)w1.Element("id_knihy") into g
-                             from w1 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - startD).Ticks)).Take(1)
+                             from w1 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - start).Ticks)).Take(1)
                              let startAmount = (int)w1.Element("aktualne_mnozstvo_na_sklade")
 
-                             from w2 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - endD).Ticks)).Take(1)
+                             from w2 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - end).Ticks)).Take(1)
                              where (string)b.Element(selectedAtribute) == selectedValueAtribute ||
                              (selectedAtribute == "autor" && (string)b.Element("autori").Element("autor1") == selectedValueAtribute) ||
                              (selectedAtribute == "autor" && (string)b.Element("autori").Element("autor2") == selectedValueAtribute)
@@ -971,10 +982,10 @@ namespace knihy_jankech
 
                 var result = from b in booksXml.Descendants("book")
                              join w1 in warehouseXml.Descendants("transakcia") on (string)b.Element("id") equals (string)w1.Element("id_knihy") into g
-                             from w1 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - startD).Ticks)).Take(1)
+                             from w1 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - start).Ticks)).Take(1)
                              let startAmount = (int)w1.Element("aktualne_mnozstvo_na_sklade")
 
-                             from w2 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - endD).Ticks)).Take(1)
+                             from w2 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - end).Ticks)).Take(1)
                              select new
                              {
                                  StartAmount = startAmount,
@@ -1155,13 +1166,49 @@ namespace knihy_jankech
 
         }
         [WebMethod]
-        public void SortedDrillDownByAtributeDataBetweenTwoDatesSell(string atribute, DateTime startDate, DateTime endDate, string sortingField = "", string sortingOrder = "", string optionalParameter = "")
+        public void SortedDrillDownByAtributeDataBetweenTwoDatesSell(string atribute, string startDate, string endDate, string sortingField = "", string sortingOrder = "", string optionalParameter = "")
         {
             // Load the books data from XML
             XDocument booksData = XDocument.Load(fileBookInfo);
             // Load the transactions data from XML
             XDocument transactionsData = XDocument.Load(fileBookTransactionInfo);
-            double days = (endDate - startDate).Days + 1;
+            DateTime start, end;
+            if (!DateTime.TryParse(startDate, out start) || !DateTime.TryParse(endDate, out end))
+            {
+                Context.Response.StatusCode = 400;
+                Context.Response.Write("Zadajte validný formát dútumu ( napr. 'yyyy-MM-dd')");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(atribute) || startDate == null || endDate == null || sortingOrder == null)
+            {
+                Context.Response.StatusCode = 500;
+                Context.Response.Write("Jedna alebo viacero vstupov nebolo vyplnených");
+                return;
+            }
+            if (start > end)
+            {
+                Context.Response.StatusCode = 500;
+                Context.Response.Write("Zaciatočný dátum nesmie byť vačší ako konečný");
+                
+              
+                return;
+            }
+
+            if (sortingOrder != "ascending" && sortingOrder != "descending")
+            {
+                Context.Response.StatusCode = 500;
+                Context.Response.Write("Sortovanie može byť iba zostupne alebo vzostupne");
+                
+            }
+
+            if (sortingField != "hodnota" && sortingField != "nazov")
+            {
+                Context.Response.StatusCode = 500;
+                Context.Response.Write("zoradovat sa može iba podľa názvu alebo hodnoty");
+              
+            }
+            double days = (end - start).Days + 1;
             if (atribute != "autor" && atribute != "autori")
             {
 
@@ -1171,8 +1218,8 @@ namespace knihy_jankech
                                      on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
 
                                      // Filter the transactions to only those with a date within the specified range and of type "predaj"
-                                     where (DateTime)transaction.Element("datum") >= startDate
-                                     && (DateTime)transaction.Element("datum") <= endDate
+                                     where (DateTime)transaction.Element("datum") >= start
+                                     && (DateTime)transaction.Element("datum") <= end
                                      && transaction.Element("typ_transakcie").Value == "predaj"
                                    
 
@@ -1332,8 +1379,8 @@ namespace knihy_jankech
                 var aggregatedData = from book in booksData.Descendants("book")
                                      join transaction in transactionsData.Descendants("transakcia")
                                      on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
-                                     where (DateTime)transaction.Element("datum") >= startDate
-                                     && (DateTime)transaction.Element("datum") <= endDate
+                                     where (DateTime)transaction.Element("datum") >= start
+                                     && (DateTime)transaction.Element("datum") <= end
                                      && transaction.Element("typ_transakcie").Value == "predaj"
                                      group new { Book = book, Transaction = transaction } by book.Element("autori").Element("autor1").Value into g
                                      select new
@@ -1362,8 +1409,8 @@ namespace knihy_jankech
                 var aggregatedData2 = from book in booksData.Descendants("book")
                                       join transaction in transactionsData.Descendants("transakcia")
                                       on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
-                                      where (DateTime)transaction.Element("datum") >= startDate
-                                      && (DateTime)transaction.Element("datum") <= endDate
+                                      where (DateTime)transaction.Element("datum") >= start
+                                      && (DateTime)transaction.Element("datum") <= end
                                       && transaction.Element("typ_transakcie").Value == "predaj"
                                       where book.Element("autori").Element("autor2").Value != "-"
                                       group new { Book = book, Transaction = transaction } by book.Element("autori").Element("autor2").Value into g
