@@ -696,5 +696,27 @@ Saint-Exupéry svoju knižku s čistým detským pohľadom na svet venoval najle
       <priemerne_hodnotenie>undefined</priemerne_hodnotenie>
       <obrazok>../img/31.jpg</obrazok>
     </book>
+    <book>
+      <id>32</id>
+      <nazov>324</nazov>
+      <autori>
+        <autor1>234</autor1>
+        <autor2>234</autor2>
+      </autori>
+      <kategoria>234</kategoria>
+      <isbn>234</isbn>
+      <jazyk>234</jazyk>
+      <pocet_stran>234</pocet_stran>
+      <vazba>234</vazba>
+      <rok_vydania>234</rok_vydania>
+      <vydavatelstvo>234</vydavatelstvo>
+      <predajna_cena>234</predajna_cena>
+      <nakupna_cena>234</nakupna_cena>
+      <marza>0</marza>
+      <zisk_kus>0</zisk_kus>
+      <obsah>234</obsah>
+      <priemerne_hodnotenie>24</priemerne_hodnotenie>
+      <obrazok>../img/32.jpg</obrazok>
+    </book>
   </books>
 </Bookstore>

@@ -245,6 +245,10 @@
         </div>
         <form id="updateBookForm">
           <div class="row">
+            <div style="display: none;" class="form-group col-3">
+              <label for="nazov">id:</label>
+              <input type="text" id="update-id" name="nazov" class="form-control">
+            </div>
             <div class="form-group col-3">
               <label for="nazov">Nazov:</label>
               <input type="text" id="update-nazov" name="nazov" class="form-control">
@@ -616,6 +620,8 @@
           $('#addModal').modal('hide');
           $('#bookTable').DataTable().ajax.reload(null, false);
         }, 3000);
+        $("#addBook")[0].reset();
+
       },
       error: function (xhr, status, error) {
 
