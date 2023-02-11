@@ -32,9 +32,9 @@
 //   });
 // }
 
-function showAlert(message, modalId, type) {
-    var alertContainer = "#" + modalId + " #alert_container";
-    var alertText = "#" + modalId + " #alert-text";
+function showAlert(message, Id, type) {
+    var alertContainer = "#" + Id + " #alert_container";
+    var alertText = "#" + Id + " #alert-text";
     var alertClass = ".alert alert-" + type;
 
     $(alertContainer).show();
@@ -102,7 +102,7 @@ function showAlert(message, modalId, type) {
         event.preventDefault();
       })
     }
-// asynchronne zavola službu ktora vrati všetky knihy asychnronne je kvoli tomu ze musime pockat kym server vrati hodnoty az potom mozme v casti done vratit data
+// asynchronne zavola službu ktora vrati všetky knihy asychnronne je kvoli tomu ze musime pockat kym server vrati hodnoty az potom mozme v casti done vratit data ak by to nebolo asychronne tak return by vratil udefined 
      async function Getallbook() {
       // await zabezpeci sychronny priebeh a caka kym nedostane promise 
       const result = await $.ajax({
