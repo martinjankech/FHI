@@ -56,7 +56,7 @@
 
   <div class="flex-wrapper">
     <div class="container">
-      <h1 class="mb-3 mt-5">Hľadaj údaje o predajoch kníh podľa: </h1>
+      <h1 class="mb-3 mt-5">Hľadaj údaje o výdavkoch spojených s nákupom kníh od dodávateľa: </h1>
       <form class="col-12" id="formSellAtributesDates" method="POST">
         <div class="form-row ">
           <div class="form-group col-md-6">
@@ -110,10 +110,10 @@
         </div>
 
       </form>
-      <!-- príjmy karty -->
+      <!-- náklady karty -->
     </div>
     <div id="cards" class="container  mt-5 mb-3">
-      <div style="display: none;" id="cards-revenue">
+      <div style="display: none;" id="cards-Revenue">
         <div class="row  ">
           <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
             <div class="card blue-card h-100">
@@ -207,7 +207,7 @@
             </div>
           </div>
           <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
-            <div class="card blue-card">
+            <div class="card Revenue-card">
               <div class="card-body pb-5 d-flex flex-column">
                 <h5 class="card-title">
                   <i class="fas fa-box"></i> Max množstvo pr.kníh atribút
@@ -295,14 +295,14 @@
 
     $.ajax({
       type: "POST",
-      url: "http://localhost:8050/book_services.asmx/SortedDrillDownByAtributeDataBetweenTwoDatesSell",
+      url: "http://localhost:8050/book_services.asmx/SortedDrillDownByAtributeDataBetweenTwoDatesRevenue",
       data: {
         atribute: atribute,
         startDate: startDate,
         endDate: endDate,
         sortingField: sortingField,
         sortingOrder: sortOrderValue,
-        optionalParameter: "revenue",
+        optionalParameter: "Revenue",
 
       },
       dataType: "json",
@@ -339,7 +339,7 @@
 
 
 
-          let totalRevenue = Math.round(data.TotalAggregatedData.totalRevenue * 100) / 100 + "€";
+          let totalRevenue = Math.round(data.TotalAggregatedData.totalC * 100) / 100 + "€";
           let averageTotalDailyRevenue = Math.round(data.TotalAggregatedData.averageTotalDailyRevenue * 100) / 100 + "€";
           let namePodkategoriaMaxRevenue = data.TotalAggregatedData.namePodkategoriaMaxRevenue;
           let maxRevenuePodkategoria = Math.round(data.TotalAggregatedData.maxRevenuePodkategoria * 100) / 100 + "€";
@@ -362,35 +362,10 @@
           $("#maxRevenueBook").text(maxRevenueBook);
           $("#nameBookMinRevenue").text(nameBookMinRevenue);
           $("#minRevenueBook").text(minRevenueBook);
-          $('#cards-revenue').show()
+          $('#cards-Revenue').show()
 
 
           Highcharts.chart('containerRevenue', {
-            lang: {
-
-              contextButtonTitle: 'Chart menu',
-              decimalPoint: ',',
-              downloadJPEG: 'Stiahnuť JPEG obrázok',
-              downloadPDF: 'Stiahnuť PDF dokument',
-              downloadPNG: 'Stiahnuť PNG obrázok',
-              downloadSVG: 'Stiahnuť SVG vektorový obrázok',
-              drillUpText: 'Späť do {series.name}',
-              loading: 'Načítava sa...',
-              months: ['Január', 'Február', 'Marec', 'Apríl', 'Máj', 'Jún', 'Júl', 'August', 'September', 'Október', 'November', 'December'],
-              noData: 'Žiadne dáta na zobrazenie',
-              numericSymbols: ['tis.', 'milión', 'mld.', 'bilión', 'bld.'],
-              printChart: 'Tlač',
-              resetZoom: 'Reset zoom',
-              resetZoomTitle: 'Reset zoom level 1:1',
-              shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'Máj', 'Jún', 'Júl', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'],
-              thousandsSep: ' ',
-              weekdays: ['Nedeľa', 'Pondelok', 'Utorok', 'Streda', 'Štvrtok', 'Piatok', 'Sobota'],
-              viewFullscreen: 'Zobraziť v plnom obraze',
-              downloadCSV: 'Stiahnuť CSV',
-              downloadXLS: 'Stiahnuť XLS',
-              viewDataTable: 'Zobraziť tabuľku dát'
-            },
-
             chart: {
               type: 'column'
             },
@@ -430,153 +405,113 @@
 
         } catch (error) {
           console.log("Error: " + error);
-        }
-      }).fail(function (jqXHR, textStatus, errorThrown) { showAlert(jqXHR.responseText, "alerts", "danger"); });
-    $.ajax({
-      type: "POST",
-      url: "http://localhost:8050/book_services.asmx/SortedDrillDownByAtributeDataBetweenTwoDatesSell",
-      data: {
-        atribute: atribute,
-        startDate: startDate,
-        endDate: endDate,
-        sortingField: sortingField,
-        sortingOrder: sortOrderValue,
-        optionalParameter: "quantity",
-
-      },
-      dataType: "json",
-
-    }).done(function (response) {
-      try {
-        var data = response;
-        var podkategoriaDataQuantity = [];
-        data.AggregatedData.forEach(function (podkategoria) {
-          podkategoriaDataQuantity.push({
-            name: podkategoria.Podkategoria,
-            y: podkategoria.TotalQuantity,
-            drilldown: podkategoria.Podkategoria
+        } try {
+          var podkategoriaDataQuantity = [];
+          data.AggregatedData.forEach(function (podkategoria) {
+            podkategoriaDataQuantity.push({
+              name: podkategoria.Podkategoria,
+              y: podkategoria.TotalQuantity,
+              drilldown: podkategoria.Podkategoria
+            });
           });
-        });
-        console.log(podkategoriaDataQuantity)
+          console.log(podkategoriaDataQuantity)
 
 
-        var bookDataQuantity = [];
-        data.AggregatedData.forEach(function (podkategoria) {
-          var booksQuantity = [];
-          podkategoria.Books.forEach(function (book) {
-            booksQuantity.push([book.Name, book.TotalQuantity]);
+          var bookDataQuantity = [];
+          data.AggregatedData.forEach(function (podkategoria) {
+            var booksQuantity = [];
+            podkategoria.Books.forEach(function (book) {
+              booksQuantity.push([book.Name, book.TotalQuantity]);
+            });
+
+            bookDataQuantity.push({
+              name: podkategoria.Podkategoria,
+              id: podkategoria.Podkategoria,
+              data: booksQuantity
+            });
+
           });
+          console.log(bookDataQuantity)
 
-          bookDataQuantity.push({
-            name: podkategoria.Podkategoria,
-            id: podkategoria.Podkategoria,
-            data: booksQuantity
-          });
+          let totalQuantity = data.TotalAggregatedData.totalQuantity + " ks";
+          let averageTotalDailyQuantity = Math.round(data.TotalAggregatedData.averageTotalDailyQuantity * 100) / 100 + " ks";
+          let namePodkategoriaMaxQuantity = data.TotalAggregatedData.namePodkategoriaMaxQuantity;
+          let maxQuantityPodkategoria = data.TotalAggregatedData.maxQuantityPodkategoria; +" ks";
+          let namePodkategoriaMinQuantity = data.TotalAggregatedData.namePodkategoriaMinQuantity;
+          let minQuantityPodkategoria = data.TotalAggregatedData.minQuantityPodkategoria + " ks";
+          let nameBookMaxQuantity = data.TotalAggregatedData.nameBookMaxQuantity;
+          let maxQuantityBook = data.TotalAggregatedData.maxQuantityBook + " ks";
+          let nameBookMinQuantity = data.TotalAggregatedData.nameBookMinQuantity;
+          let minQuantityBook = data.TotalAggregatedData.minQuantityBook + " ks";
+          document.getElementById("totalQuantity").innerHTML = totalQuantity;
+          document.getElementById("averageTotalDailyQuantity").innerHTML = averageTotalDailyQuantity;
+          document.getElementById("namePodkategoriaMaxQuantity").innerHTML = namePodkategoriaMaxQuantity;
+          document.getElementById("maxQuantityPodkategoria").innerHTML = maxQuantityPodkategoria;
+          document.getElementById("namePodkategoriaMinQuantity").innerHTML = namePodkategoriaMinQuantity;
+          document.getElementById("minQuantityPodkategoria").innerHTML = minQuantityPodkategoria;
+          document.getElementById("nameBookMaxQuantity").innerHTML = nameBookMaxQuantity;
+          document.getElementById("maxQuantityBook").innerHTML = maxQuantityBook;
+          document.getElementById("nameBookMinQuantity").innerHTML = nameBookMinQuantity;
+          document.getElementById("minQuantityBook").innerHTML = minQuantityBook;
+          $('#cards-quantity').show()
+          Highcharts.chart('containerQuantity', {
+            chart: {
+              type: 'column'
+            },
+            credits: {
+              enabled: false
+            },
 
-        });
-        console.log(bookDataQuantity)
-
-        let totalQuantity = data.TotalAggregatedData.totalQuantity + " ks";
-        let averageTotalDailyQuantity = Math.round(data.TotalAggregatedData.averageTotalDailyQuantity * 100) / 100 + " ks";
-        let namePodkategoriaMaxQuantity = data.TotalAggregatedData.namePodkategoriaMaxQuantity;
-        let maxQuantityPodkategoria = data.TotalAggregatedData.maxQuantityPodkategoria; +" ks";
-        let namePodkategoriaMinQuantity = data.TotalAggregatedData.namePodkategoriaMinQuantity;
-        let minQuantityPodkategoria = data.TotalAggregatedData.minQuantityPodkategoria + " ks";
-        let nameBookMaxQuantity = data.TotalAggregatedData.nameBookMaxQuantity;
-        let maxQuantityBook = data.TotalAggregatedData.maxQuantityBook + " ks";
-        let nameBookMinQuantity = data.TotalAggregatedData.nameBookMinQuantity;
-        let minQuantityBook = data.TotalAggregatedData.minQuantityBook + " ks";
-        document.getElementById("totalQuantity").innerHTML = totalQuantity;
-        document.getElementById("averageTotalDailyQuantity").innerHTML = averageTotalDailyQuantity;
-        document.getElementById("namePodkategoriaMaxQuantity").innerHTML = namePodkategoriaMaxQuantity;
-        document.getElementById("maxQuantityPodkategoria").innerHTML = maxQuantityPodkategoria;
-        document.getElementById("namePodkategoriaMinQuantity").innerHTML = namePodkategoriaMinQuantity;
-        document.getElementById("minQuantityPodkategoria").innerHTML = minQuantityPodkategoria;
-        document.getElementById("nameBookMaxQuantity").innerHTML = nameBookMaxQuantity;
-        document.getElementById("maxQuantityBook").innerHTML = maxQuantityBook;
-        document.getElementById("nameBookMinQuantity").innerHTML = nameBookMinQuantity;
-        document.getElementById("minQuantityBook").innerHTML = minQuantityBook;
-        $('#cards-quantity').show()
-        Highcharts.chart('containerQuantity', {
-          lang: {
-
-            contextButtonTitle: 'Chart menu',
-            decimalPoint: ',',
-            downloadJPEG: 'Stiahnuť JPEG obrázok',
-            downloadPDF: 'Stiahnuť PDF dokument',
-            downloadPNG: 'Stiahnuť PNG obrázok',
-            downloadSVG: 'Stiahnuť SVG vektorový obrázok',
-            drillUpText: 'Späť do {series.name}',
-            loading: 'Načítava sa...',
-            months: ['Január', 'Február', 'Marec', 'Apríl', 'Máj', 'Jún', 'Júl', 'August', 'September', 'Október', 'November', 'December'],
-            noData: 'Žiadne dáta na zobrazenie',
-            numericSymbols: ['tis.', 'milión', 'mld.', 'bilión', 'bld.'],
-            printChart: 'Tlač',
-            resetZoom: 'Reset zoom',
-            resetZoomTitle: 'Reset zoom level 1:1',
-            shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'Máj', 'Jún', 'Júl', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'],
-            thousandsSep: ' ',
-            weekdays: ['Nedeľa', 'Pondelok', 'Utorok', 'Streda', 'Štvrtok', 'Piatok', 'Sobota'],
-            viewFullscreen: 'Zobraziť v plnom obraze',
-            downloadCSV: 'Stiahnuť CSV',
-            downloadXLS: 'Stiahnuť XLS',
-            viewDataTable: 'Zobraziť tabuľku dát'
-          },
-
-          chart: {
-            type: 'column'
-          },
-          credits: {
-            enabled: false
-          },
-
-          title: {
-            text: "Počty predaných kníh podľa atribútu " + atributeText + " a jednotlivých kníh patriacich do atribútu"
-          },
-          xAxis: {
-            type: 'category'
-          },
-          yAxis: {
             title: {
-              text: 'Totálne množstvo predaných kníh'
-            }
-          },
-          legend: {
-            enabled: false
-          },
-          plotOptions: {
-            series: {
-              borderWidth: 0,
-              dataLabels: {
-                enabled: true,
-                format: '{point.y:.2f} ks'
+              text: "Počty predaných kníh podľa atribútu " + atributeText + " a jednotlivých kníh patriacich do atribútu"
+            },
+            xAxis: {
+              type: 'category'
+            },
+            yAxis: {
+              title: {
+                text: 'Totálne množstvo predaných kníh'
               }
+            },
+            legend: {
+              enabled: false
+            },
+            plotOptions: {
+              series: {
+                borderWidth: 0,
+                dataLabels: {
+                  enabled: true,
+                  format: '{point.y:.2f} ks'
+                }
+              }
+            },
+            tooltip: {
+              headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+              pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f} ks </b><br/>'
+            },
+            series: [{
+              name: atributeText,
+              colorByPoint: true,
+              data: podkategoriaDataQuantity
+            }],
+            drilldown: {
+              series: bookDataQuantity
             }
-          },
-          tooltip: {
-            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f} ks </b><br/>'
-          },
-          series: [{
-            name: atributeText,
-            colorByPoint: true,
-            data: podkategoriaDataQuantity
-          }],
-          drilldown: {
-            series: bookDataQuantity
-          }
-        });
-      }
-      catch (error) {
-        console.error(error);
-        alert("An error occurred: " + error.message);
-      }
-    }).fail(function (jqXHR, textStatus, errorThrown) { showAlert(jqXHR.responseText, "alerts", "danger"); });
+          });
+        }
+
+
+
+        catch (error) {
+          console.error(error);
+          alert("An error occurred: " + error.message);
+        }
+
+
+      }).fail(function (jqXHR, textStatus, errorThrown) { showAlert(jqXHR.responseText, "alerts", "danger"); });
 
     event.preventDefault();
-  })
-
-
+  });
 
 </script>
 
