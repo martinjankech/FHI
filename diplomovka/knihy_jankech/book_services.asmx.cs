@@ -1760,7 +1760,7 @@ namespace knihy_jankech
                     .ToList()
                     });
                 }
-                else if (sortingField == "hodnota" && optionalParameter == "revenue")
+                else if (sortingField == "hodnota" && optionalParameter == "cost")
                 {
                     aggregatedData = aggregatedData.OrderBy(x => x.TotalCost * (sortingOrder == "ascending" ? 1 : -1))
                     .ThenBy(x => x.Podkategoria)
