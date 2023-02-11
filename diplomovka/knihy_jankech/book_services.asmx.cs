@@ -1254,6 +1254,12 @@ namespace knihy_jankech
 
                                              }).ToList()
                                      };
+                if (!aggregatedData.Any())
+                {
+                    Context.Response.StatusCode = 500;
+                    Context.Response.Write("Neboli nájdené žiadne záznamy pre zadané kritériá");
+                    return;
+                }
 
                 // Sort the aggregated data based on the sortingField and sortingOrder parameters
                 if (sortingField == "nazov")
@@ -1402,6 +1408,12 @@ namespace knihy_jankech
                                                  AverageTotalRevenue = x.Sum(y => (double)y.Transaction.Element("celkovo_cena")) / days
                                              }).ToList()
                                      };
+                if (!aggregatedData.Any())
+                {
+                    Context.Response.StatusCode = 500;
+                    Context.Response.Write("Neboli nájdené žiadne záznamy pre zadané kritériá");
+                    return;
+                }
                 // Group by author2 - toto sluzi len na analyticke uceli to Totalneho poctu predananzch knih a totalneho prijmu sa to nezaratava ale
                 // aby sme mali prehlad o prijmi a predajoch knih aj podla autora dva a mohli to vyuzit pri drill down operacii 
 
@@ -1434,6 +1446,12 @@ namespace knihy_jankech
                                                   AverageTotalRevenue = x.Sum(y => (double)y.Transaction.Element("celkovo_cena")) / days
                                               }).ToList()
                                       };
+                if (!aggregatedData2.Any())
+                {
+                    Context.Response.StatusCode = 500;
+                    Context.Response.Write("Neboli nájdené žiadne záznamy pre zadané kritériá");
+                    return;
+                }
                 if (sortingField == "nazov")
                 {
                     aggregatedData = sortingOrder == "ascending"
@@ -1582,6 +1600,461 @@ namespace knihy_jankech
                     maxRevenueBook = maxRevenueBook,
                     nameBookMinRevenue = nameBookMinRevenue,
                     minRevenueBook = minRevenueBook,
+                    nameBookMaxQuantity = nameBookMaxQuantity,
+                    maxQuantityBook = maxQuantityBook,
+                    nameBookMinQuantity = nameBookMinQuantity,
+                    minQuantityBook = minQuantityBook,
+                };
+                var combinedData = aggregatedData.Concat(aggregatedData2);
+                // Combine the aggregated data and total aggregated data into a single object
+                var result = new
+
+                {
+                    AggregatedData = combinedData,
+                    TotalAggregatedData = totalAggregatedData
+                };
+
+                // Serialize the result to JSON using the Newtonsoft.Json library
+                Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+                Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
+            }
+        }
+
+        [WebMethod]
+        public void SortedDrillDownByAtributeDataBetweenTwoDatesCost(string atribute, string startDate, string endDate, string sortingField = "", string sortingOrder = "", string optionalParameter = "")
+        {
+            // Load the books data from XML
+            XDocument booksData = XDocument.Load(fileBookInfo);
+            // Load the transactions data from XML
+            XDocument transactionsData = XDocument.Load(fileBookTransactionInfo);
+            DateTime start, end;
+            if (!DateTime.TryParse(startDate, out start) || !DateTime.TryParse(endDate, out end))
+            {
+                Context.Response.StatusCode = 400;
+                Context.Response.Write("Zadajte validný formát dútumu ( napr. 'yyyy-MM-dd')");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(atribute) || startDate == null || endDate == null || sortingOrder == null)
+            {
+                Context.Response.StatusCode = 500;
+                Context.Response.Write("Jedna alebo viacero vstupov nebolo vyplnených");
+                return;
+            }
+            if (start > end)
+            {
+                Context.Response.StatusCode = 500;
+                Context.Response.Write("Zaciatočný dátum nesmie byť vačší ako konečný");
+
+
+                return;
+            }
+
+            if (sortingOrder != "ascending" && sortingOrder != "descending")
+            {
+                Context.Response.StatusCode = 500;
+                Context.Response.Write("Sortovanie može byť iba zostupne alebo vzostupne");
+
+            }
+
+            if (sortingField != "hodnota" && sortingField != "nazov")
+            {
+                Context.Response.StatusCode = 500;
+                Context.Response.Write("zoradovat sa može iba podľa názvu alebo hodnoty");
+
+            }
+            double days = (end - start).Days + 1;
+            if (atribute != "autor" && atribute != "autori")
+            {
+
+                // Join the books data and transactions data on book id to get all information related to each transaction
+                var aggregatedData = from book in booksData.Descendants("book")
+                                     join transaction in transactionsData.Descendants("transakcia")
+                                     on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
+
+                                     // Filter the transactions to only those with a date within the specified range and of type "predaj"
+                                     where (DateTime)transaction.Element("datum") >= start
+                                     && (DateTime)transaction.Element("datum") <= end
+                                     && transaction.Element("typ_transakcie").Value == "nákup"
+
+
+
+                                     // Group the transactions by the specified category element value
+                                     group new { Book = book, Transaction = transaction } by book.Element(atribute).Value into g
+                                     select new
+                                     {
+                                         // Store the category value as Podkategoria
+                                         Podkategoria = g.Key,
+
+
+                                         // Calculate the total quantity of books sold and total revenue for each category
+                                         TotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))),
+                                         TotalCost = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")),
+                                         AverageTotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))) / days,
+                                         AverageTotalCost = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")) / days,
+
+                                         // Group the books by their id to get aggregated data for books with the same id
+                                         Books = g.GroupBy(x => x.Book.Element("id").Value)
+                                             .Select(x => new
+                                             {
+                                                 Id = x.Key,
+                                                 Name = x.First().Book.Element("nazov").Value,
+
+                                                 // Calculate the total quantity sold and total revenue for each book
+                                                 TotalQuantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))),
+                                                 TotalCost = x.Sum(y => (double)y.Transaction.Element("celkovo_cena")),
+                                                 AverageTotalQuantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))) / days,
+                                                 AverageTotalCost = x.Sum(y => (double)y.Transaction.Element("celkovo_cena")) / days
+
+
+                                             }).ToList()
+                                     };
+                if (!aggregatedData.Any())
+                {
+                    Context.Response.StatusCode = 500;
+                    Context.Response.Write("Neboli nájdené žiadne záznamy pre zadané kritériá");
+                    return;
+                }
+
+                // Sort the aggregated data based on the sortingField and sortingOrder parameters
+                if (sortingField == "nazov")
+                {
+                    aggregatedData = sortingOrder == "ascending"
+                    ? aggregatedData.OrderBy(x => x.Podkategoria)
+                        .ThenBy(x => x.Books.OrderBy(y => y.Name))
+                        .Select(x => new
+                        {
+                            Podkategoria = x.Podkategoria,
+                            TotalQuantity = x.TotalQuantity,
+                            TotalCost = x.TotalCost,
+                            AverageTotalQuantity = x.AverageTotalQuantity,
+                            AverageTotalCost = x.AverageTotalCost,
+                            Books = x.Books.OrderBy(y => y.Name).ToList()
+
+                        })
+                    : aggregatedData.OrderByDescending(x => x.Podkategoria)
+                        .ThenBy(x => x.Books.OrderByDescending(y => y.Name))
+                        .Select(x => new
+                        {
+                            Podkategoria = x.Podkategoria,
+                            TotalQuantity = x.TotalQuantity,
+                            TotalCost = x.TotalCost,
+                            AverageTotalQuantity = x.AverageTotalQuantity,
+                            AverageTotalCost = x.AverageTotalCost,
+                            Books = x.Books.OrderByDescending(y => y.Name).ToList()
+                        });
+                }
+                else if (sortingField == "hodnota" && optionalParameter == "quantity")
+                {
+                    aggregatedData = aggregatedData.OrderBy(x => x.TotalQuantity * (sortingOrder == "ascending" ? 1 : -1))
+                    .ThenBy(x => x.Podkategoria)
+                    .Select(x => new
+                    {
+                        Podkategoria = x.Podkategoria,
+                        TotalQuantity = x.TotalQuantity,
+                        TotalCost = x.TotalCost,
+                        AverageTotalQuantity = x.AverageTotalQuantity,
+                        AverageTotalCost = x.AverageTotalCost,
+                        Books = x.Books.OrderBy(y => y.TotalQuantity * (sortingOrder == "ascending" ? 1 : -1))
+                    .ThenBy(y => y.Name)
+                    .ToList()
+                    });
+                }
+                else if (sortingField == "hodnota" && optionalParameter == "revenue")
+                {
+                    aggregatedData = aggregatedData.OrderBy(x => x.TotalCost * (sortingOrder == "ascending" ? 1 : -1))
+                    .ThenBy(x => x.Podkategoria)
+                    .Select(x => new
+                    {
+                        Podkategoria = x.Podkategoria,
+                        TotalQuantity = x.TotalQuantity,
+                        TotalCost = x.TotalCost,
+                        AverageTotalQuantity = x.AverageTotalQuantity,
+                        AverageTotalCost = x.AverageTotalCost,
+                        Books = x.Books.OrderBy(y => y.TotalCost * (sortingOrder == "ascending" ? 1 : -1))
+                    .ThenBy(y => y.Name)
+                    .ToList()
+                    });
+                }
+                var maxCostPodkategoria = aggregatedData.Max(x => x.TotalCost);
+                var minCostPodkategoria = aggregatedData.Min(x => x.TotalCost);
+                var maxQuantityPodkategoria = aggregatedData.Max(x => x.TotalQuantity);
+                var minQuantityPodkategoria = aggregatedData.Min(x => x.TotalQuantity);
+
+                var maxCostBook = aggregatedData.SelectMany(x => x.Books).Max(x => x.TotalCost);
+                var minCostBook = aggregatedData.SelectMany(x => x.Books).Min(x => x.TotalCost);
+                var maxQuantityBook = aggregatedData.SelectMany(x => x.Books).Max(x => x.TotalQuantity);
+                var minQuantityBook = aggregatedData.SelectMany(x => x.Books).Min(x => x.TotalQuantity);
+
+                var namePodkategoriaMaxCost = aggregatedData.Where(x => x.TotalCost == maxCostPodkategoria).First().Podkategoria;
+                var namePodkategoriaMinCost = aggregatedData.Where(x => x.TotalCost == minCostPodkategoria).First().Podkategoria;
+                var namePodkategoriaMaxQuantity = aggregatedData.Where(x => x.TotalQuantity == maxQuantityPodkategoria).First().Podkategoria;
+                var namePodkategoriaMinQuantity = aggregatedData.Where(x => x.TotalQuantity == minQuantityPodkategoria).First().Podkategoria;
+                var nameBookMaxCost = aggregatedData.SelectMany(x => x.Books).Where(x => x.TotalCost == maxCostBook).First().Name;
+                var nameBookMinCost = aggregatedData.SelectMany(x => x.Books).Where(x => x.TotalCost == minCostBook).First().Name;
+                var nameBookMaxQuantity = aggregatedData.SelectMany(x => x.Books).Where(x => x.TotalQuantity == maxQuantityBook).First().Name;
+                var nameBookMinQuantity = aggregatedData.SelectMany(x => x.Books).Where(x => x.TotalQuantity == minQuantityBook).First().Name;
+
+                var totalAggregatedData = new
+                {
+                    totalQuantity = aggregatedData.Sum(x => x.TotalQuantity),
+                    totalCost = aggregatedData.Sum(x => x.TotalCost),
+                    averageTotalDailyQuantity = aggregatedData.Sum(x => x.TotalQuantity) / days,
+                    averageTotalDailyCost = aggregatedData.Sum(x => x.TotalCost) / days,
+                    namePodkategoriaMaxCost = namePodkategoriaMaxCost,
+                    maxCostPodkategoria = maxCostPodkategoria,
+                    namePodkategoriaMinCost = namePodkategoriaMinCost,
+                    minCostPodkategoria = minCostPodkategoria,
+                    namePodkategoriaMaxQuantity = namePodkategoriaMaxQuantity,
+                    maxQuantityPodkategoria = maxQuantityPodkategoria,
+                    namePodkategoriaMinQuantity = namePodkategoriaMinQuantity,
+                    minQuantityPodkategoria = minQuantityPodkategoria,
+                    nameBookMaxCost = nameBookMaxCost,
+                    maxCostBook = maxCostBook,
+                    nameBookMinCost = nameBookMinCost,
+                    minCostBook = minCostBook,
+                    nameBookMaxQuantity = nameBookMaxQuantity,
+                    maxQuantityBook = maxQuantityBook,
+                    nameBookMinQuantity = nameBookMinQuantity,
+                    minQuantityBook = minQuantityBook,
+
+
+
+
+                };
+
+                // Combine the aggregated data and total aggregated data into a single object
+                var result = new
+
+                {
+                    AggregatedData = aggregatedData,
+                    TotalAggregatedData = totalAggregatedData
+                };
+
+                // Serialize the result to JSON using the Newtonsoft.Json library
+                Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+                Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
+            }
+            else
+            {
+                var aggregatedData = from book in booksData.Descendants("book")
+                                     join transaction in transactionsData.Descendants("transakcia")
+                                     on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
+                                     where (DateTime)transaction.Element("datum") >= start
+                                     && (DateTime)transaction.Element("datum") <= end
+                                     && transaction.Element("typ_transakcie").Value == "nákup"
+                                     group new { Book = book, Transaction = transaction } by book.Element("autori").Element("autor1").Value into g
+                                     select new
+                                     {
+                                         // Store the author1 as Podkategoria
+                                         Podkategoria = g.Key,
+                                         TotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))),
+                                         TotalCost = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")),
+                                         AverageTotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))) / days,
+                                         AverageTotalCost = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")) / days,
+                                         Books = g.GroupBy(x => x.Book.Element("id").Value)
+                                             .Select(x => new
+                                             {
+                                                 Id = x.Key,
+                                                 Name = x.First().Book.Element("nazov").Value,
+                                                 TotalQuantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))),
+                                                 TotalCost = x.Sum(y => (double)y.Transaction.Element("celkovo_cena")),
+                                                 AverageTotalQuantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))) / days,
+                                                 AverageTotalCost = x.Sum(y => (double)y.Transaction.Element("celkovo_cena")) / days
+                                             }).ToList()
+                                     };
+                if (!aggregatedData.Any())
+                {
+                    Context.Response.StatusCode = 500;
+                    Context.Response.Write("Neboli nájdené žiadne záznamy pre zadané kritériá");
+                    return;
+                }
+                // Group by author2 - toto sluzi len na analyticke uceli to Totalneho poctu predananzch knih a totalneho prijmu sa to nezaratava ale
+                // aby sme mali prehlad o prijmi a predajoch knih aj podla autora dva a mohli to vyuzit pri drill down operacii 
+
+
+                var aggregatedData2 = from book in booksData.Descendants("book")
+                                      join transaction in transactionsData.Descendants("transakcia")
+                                      on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
+                                      where (DateTime)transaction.Element("datum") >= start
+                                      && (DateTime)transaction.Element("datum") <= end
+                                      && transaction.Element("typ_transakcie").Value == "nákup"
+                                      where book.Element("autori").Element("autor2").Value != "-"
+                                      group new { Book = book, Transaction = transaction } by book.Element("autori").Element("autor2").Value into g
+                                      select new
+                                      {
+                                          // Store the author2 as Podkategoria
+                                          Podkategoria = g.Key,
+                                          TotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))),
+                                          TotalCost = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")),
+                                          AverageTotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))) / days,
+                                          AverageTotalCost = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")) / days,
+                                          Books = g.GroupBy(x => x.Book.Element("id").Value)
+                                              .Select(x => new
+                                              {
+
+                                                  Id = x.Key,
+                                                  Name = x.First().Book.Element("nazov").Value,
+                                                  TotalQuantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))),
+                                                  TotalCost = x.Sum(y => (double)y.Transaction.Element("celkovo_cena")),
+                                                  AverageTotalQuantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))) / days,
+                                                  AverageTotalCost = x.Sum(y => (double)y.Transaction.Element("celkovo_cena")) / days
+                                              }).ToList()
+                                      };
+                if (!aggregatedData2.Any())
+                {
+                    Context.Response.StatusCode = 500;
+                    Context.Response.Write("Neboli nájdené žiadne záznamy pre zadané kritériá");
+                    return;
+                }
+                if (sortingField == "nazov")
+                {
+                    aggregatedData = sortingOrder == "ascending"
+                    ? aggregatedData.OrderBy(x => x.Podkategoria)
+                        .ThenBy(x => x.Books.OrderBy(y => y.Name))
+                        .Select(x => new
+                        {
+                            Podkategoria = x.Podkategoria,
+                            TotalQuantity = x.TotalQuantity,
+                            TotalCost = x.TotalCost,
+                            AverageTotalQuantity = x.AverageTotalQuantity,
+                            AverageTotalCost = x.AverageTotalCost,
+                            Books = x.Books.OrderBy(y => y.Name).ToList()
+
+                        })
+                    : aggregatedData.OrderByDescending(x => x.Podkategoria)
+                        .ThenBy(x => x.Books.OrderByDescending(y => y.Name))
+                        .Select(x => new
+                        {
+                            Podkategoria = x.Podkategoria,
+                            TotalQuantity = x.TotalQuantity,
+                            TotalCost = x.TotalCost,
+                            AverageTotalQuantity = x.AverageTotalQuantity,
+                            AverageTotalCost = x.AverageTotalCost,
+                            Books = x.Books.OrderByDescending(y => y.Name).ToList()
+                        });
+                    aggregatedData2 = sortingOrder == "ascending"
+                   ? aggregatedData.OrderBy(x => x.Podkategoria)
+                       .ThenBy(x => x.Books.OrderBy(y => y.Name))
+                       .Select(x => new
+                       {
+                           Podkategoria = x.Podkategoria,
+                           TotalQuantity = x.TotalQuantity,
+                           TotalCost = x.TotalCost,
+                           AverageTotalQuantity = x.AverageTotalQuantity,
+                           AverageTotalCost = x.AverageTotalCost,
+                           Books = x.Books.OrderBy(y => y.Name).ToList()
+
+                       })
+                   : aggregatedData2.OrderByDescending(x => x.Podkategoria)
+                       .ThenBy(x => x.Books.OrderByDescending(y => y.Name))
+                       .Select(x => new
+                       {
+                           Podkategoria = x.Podkategoria,
+                           TotalQuantity = x.TotalQuantity,
+                           TotalCost = x.TotalCost,
+                           AverageTotalQuantity = x.AverageTotalQuantity,
+                           AverageTotalCost = x.AverageTotalCost,
+                           Books = x.Books.OrderByDescending(y => y.Name).ToList()
+                       });
+                }
+                else if (sortingField == "hodnota" && optionalParameter == "quantity")
+                {
+                    aggregatedData = aggregatedData.OrderBy(x => x.TotalQuantity * (sortingOrder == "ascending" ? 1 : -1))
+                    .ThenBy(x => x.Podkategoria)
+                    .Select(x => new
+                    {
+                        Podkategoria = x.Podkategoria,
+                        TotalQuantity = x.TotalQuantity,
+                        TotalCost = x.TotalCost,
+                        AverageTotalQuantity = x.AverageTotalQuantity,
+                        AverageTotalCost = x.AverageTotalCost,
+                        Books = x.Books.OrderBy(y => y.TotalQuantity * (sortingOrder == "ascending" ? 1 : -1))
+                    .ThenBy(y => y.Name)
+                    .ToList()
+                    });
+                    aggregatedData2 = aggregatedData.OrderBy(x => x.TotalQuantity * (sortingOrder == "ascending" ? 1 : -1))
+                    .ThenBy(x => x.Podkategoria)
+                    .Select(x => new
+                    {
+                        Podkategoria = x.Podkategoria,
+                        TotalQuantity = x.TotalQuantity,
+                        TotalCost = x.TotalCost,
+                        AverageTotalQuantity = x.AverageTotalQuantity,
+                        AverageTotalCost = x.AverageTotalCost,
+                        Books = x.Books.OrderBy(y => y.TotalQuantity * (sortingOrder == "ascending" ? 1 : -1))
+                    .ThenBy(y => y.Name)
+                    .ToList()
+                    });
+                }
+                else if (sortingField == "hodnota" && optionalParameter == "revenue")
+                {
+                    aggregatedData = aggregatedData.OrderBy(x => x.TotalCost * (sortingOrder == "ascending" ? 1 : -1))
+                    .ThenBy(x => x.Podkategoria)
+                    .Select(x => new
+                    {
+                        Podkategoria = x.Podkategoria,
+                        TotalQuantity = x.TotalQuantity,
+                        TotalCost = x.TotalCost,
+                        AverageTotalQuantity = x.AverageTotalQuantity,
+                        AverageTotalCost = x.AverageTotalCost,
+                        Books = x.Books.OrderBy(y => y.TotalCost * (sortingOrder == "ascending" ? 1 : -1))
+                    .ThenBy(y => y.Name)
+                    .ToList()
+                    });
+                    aggregatedData2 = aggregatedData.OrderBy(x => x.TotalCost * (sortingOrder == "ascending" ? 1 : -1))
+                   .ThenBy(x => x.Podkategoria)
+                   .Select(x => new
+                   {
+                       Podkategoria = x.Podkategoria,
+                       TotalQuantity = x.TotalQuantity,
+                       TotalCost = x.TotalCost,
+                       AverageTotalQuantity = x.AverageTotalQuantity,
+                       AverageTotalCost = x.AverageTotalCost,
+                       Books = x.Books.OrderBy(y => y.TotalCost * (sortingOrder == "ascending" ? 1 : -1))
+                   .ThenBy(y => y.Name)
+                   .ToList()
+                   });
+                }
+                var maxCostPodkategoria = aggregatedData.Max(x => x.TotalCost);
+                var minCostPodkategoria = aggregatedData.Min(x => x.TotalCost);
+                var maxQuantityPodkategoria = aggregatedData.Max(x => x.TotalQuantity);
+                var minQuantityPodkategoria = aggregatedData.Min(x => x.TotalQuantity);
+
+                var maxCostBook = aggregatedData.SelectMany(x => x.Books).Max(x => x.TotalCost);
+                var minCostBook = aggregatedData.SelectMany(x => x.Books).Min(x => x.TotalCost);
+                var maxQuantityBook = aggregatedData.SelectMany(x => x.Books).Max(x => x.TotalQuantity);
+                var minQuantityBook = aggregatedData.SelectMany(x => x.Books).Min(x => x.TotalQuantity);
+
+                var namePodkategoriaMaxCost = aggregatedData.Where(x => x.TotalCost == maxCostPodkategoria).First().Podkategoria;
+                var namePodkategoriaMinCost = aggregatedData.Where(x => x.TotalCost == minCostPodkategoria).First().Podkategoria;
+                var namePodkategoriaMaxQuantity = aggregatedData.Where(x => x.TotalQuantity == maxQuantityPodkategoria).First().Podkategoria;
+                var namePodkategoriaMinQuantity = aggregatedData.Where(x => x.TotalQuantity == minQuantityPodkategoria).First().Podkategoria;
+                var nameBookMaxCost = aggregatedData.SelectMany(x => x.Books).Where(x => x.TotalCost == maxCostBook).First().Name;
+                var nameBookMinCost = aggregatedData.SelectMany(x => x.Books).Where(x => x.TotalCost == minCostBook).First().Name;
+                var nameBookMaxQuantity = aggregatedData.SelectMany(x => x.Books).Where(x => x.TotalQuantity == maxQuantityBook).First().Name;
+                var nameBookMinQuantity = aggregatedData.SelectMany(x => x.Books).Where(x => x.TotalQuantity == minQuantityBook).First().Name;
+
+
+                // Calculate the total quantity and total revenue for all books
+                var totalAggregatedData = new
+                {
+                    totalQuantity = aggregatedData.Sum(x => x.TotalQuantity),
+                    totalCost = aggregatedData.Sum(x => x.TotalCost),
+                    averageTotalDailyQuantity = aggregatedData.Sum(x => x.TotalQuantity) / days,
+                    averageTotalDailyCost = aggregatedData.Sum(x => x.TotalCost) / days,
+                    namePodkategoriaMaxCost = namePodkategoriaMaxCost,
+                    maxCostPodkategoria = maxCostPodkategoria,
+                    namePodkategoriaMinCost = namePodkategoriaMinCost,
+                    minCostPodkategoria = minCostPodkategoria,
+                    namePodkategoriaMaxQuantity = namePodkategoriaMaxQuantity,
+                    maxQuantityPodkategoria = maxQuantityPodkategoria,
+                    namePodkategoriaMinQuantity = namePodkategoriaMinQuantity,
+                    minQuantityPodkategoria = minQuantityPodkategoria,
+                    nameBookMaxCost = nameBookMaxCost,
+                    maxCostBook = maxCostBook,
+                    nameBookMinCost = nameBookMinCost,
+                    minCostBook = minCostBook,
                     nameBookMaxQuantity = nameBookMaxQuantity,
                     maxQuantityBook = maxQuantityBook,
                     nameBookMinQuantity = nameBookMinQuantity,

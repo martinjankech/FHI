@@ -112,161 +112,171 @@
       </form>
       <!-- príjmy karty -->
     </div>
-    <div id="cards" class="container respo mt-5 mb-3">
-      <div class="row  ">
-        <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
-          <div class="card revenue-card h-100">
-            <div class="card-body pb-5 d-flex flex-column">
-              <h5 class="card-title">
-                <i class="fas fa-money-bill-wave"></i> Celkový príjem
-              </h5>
-              <p class="card-text mt-auto " id="totalRevenue"></p>
+    <div id="cards" class="container  mt-5 mb-3">
+      <div style="display: none;" id="cards-revenue">
+        <div class="row  ">
+          <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
+            <div class="card blue-card h-100">
+              <div class="card-body pb-5 d-flex flex-column">
+                <h5 class="card-title">
+                  <i class="fas fa-money-bill-wave"></i> Celkový príjem
+                </h5>
+                <p class="card-text mt-auto " id="totalRevenue"></p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
-          <div class="card quantity-card">
-            <div class="card-body pb-5 d-flex flex-column">
-              <h5 class="card-title">
-                <i class="fas fa-money-bill-wave"></i> Priemerný denný príjem
-              </h5>
-              <p class="card-text mt-auto" id="averageTotalDailyRevenue"></p>
+          <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
+            <div class="card grey-card">
+              <div class="card-body pb-5 d-flex flex-column">
+                <h5 class="card-title">
+                  <i class="fas fa-money-bill-wave"></i> Priemerný denný príjem
+                </h5>
+                <p class="card-text mt-auto" id="averageTotalDailyRevenue"></p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
-          <div class="card revenue-card">
-            <div class="card-body pb-5 d-flex flex-column">
-              <h5 class="card-title">
-                <i class="fas fa-money-bill-wave"></i> Max príjem atribútu
-              </h5>
-              <p class="card-text mt-auto" id="namePodkategoriaMaxRevenue"></p>
-              <p class="card-text mt-auto" id="maxRevenuePodkategoria"></p>
+          <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
+            <div class="card blue-card">
+              <div class="card-body pb-5 d-flex flex-column">
+                <h5 class="card-title">
+                  <i class="fas fa-money-bill-wave"></i> Max príjem atribútu
+                </h5>
+                <p class="card-text mt-auto" id="namePodkategoriaMaxRevenue"></p>
+                <p class="card-text mt-auto" id="maxRevenuePodkategoria"></p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
-          <div class="card quantity-card">
-            <div class="card-body pb-5 d-flex flex-column">
-              <h5 class="card-title">
-                <i class="fas fa-money-bill-wave"></i> Min príjem atribútu
-              </h5>
-              <p class="card-text mt-auto" id="namePodkategoriaMinRevenue"></p>
-              <p class="card-text mt-auto" id="minRevenuePodkategoria"></p>
+          <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
+            <div class="card grey-card">
+              <div class="card-body pb-5 d-flex flex-column">
+                <h5 class="card-title">
+                  <i class="fas fa-money-bill-wave"></i> Min príjem atribútu
+                </h5>
+                <p class="card-text mt-auto" id="namePodkategoriaMinRevenue"></p>
+                <p class="card-text mt-auto" id="minRevenuePodkategoria"></p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
-          <div class="card revenue-card">
-            <div class="card-body pb-5 d-flex flex-column">
-              <h5 class="card-title">
-                <i class="fas fa-money-bill-wave align-content-end"></i> Max príjem kniha
-              </h5>
-              <p class="card-text mt-auto" id="nameBookMaxRevenue"></p>
-              <p class="card-text mt-auto" id="maxRevenueBook"></p>
+          <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
+            <div class="card blue-card">
+              <div class="card-body pb-5 d-flex flex-column">
+                <h5 class="card-title">
+                  <i class="fas fa-money-bill-wave align-content-end"></i> Max príjem kniha
+                </h5>
+                <p class="card-text mt-auto" id="nameBookMaxRevenue"></p>
+                <p class="card-text mt-auto" id="maxRevenueBook"></p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
-          <div class="card quantity-card">
-            <div class="card-body pb-5 d-flex flex-column">
-              <h5 class="card-title">
-                <i class="fas fa-money-bill-wave"></i> Min príjem kniha
-              </h5>
-              <p class="card-text mt-auto" id="nameBookMinRevenue"></p>
-              <p class="card-text mt-auto" id="minRevenueBook"></p>
+          <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
+            <div class="card grey-card">
+              <div class="card-body pb-5 d-flex flex-column">
+                <h5 class="card-title">
+                  <i class="fas fa-money-bill-wave"></i> Min príjem kniha
+                </h5>
+                <p class="card-text mt-auto" id="nameBookMinRevenue"></p>
+                <p class="card-text mt-auto" id="minRevenueBook"></p>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <!-- počet-predaj karty -->
-      <div class="container-fluid col-10 mt-4 mb-5" id="containerRevenue"></div>
-      <div class="row  ">
-        <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
-          <div class="card quantity-card">
-            <div class="card-body pb-5 d-flex flex-column">
-              <h5 class="card-title">
-                <i class="fas fa-box"></i> Celkové množstvo predaných kníh
-              </h5>
-              <p class="card-text mt-auto " id="totalQuantity"></p>
+      <div class="container-fluid col-12 mt-4 mb-5" id="containerRevenue"> </div>
+      <div style="display: none;" class="mt-3" id="cards-quantity">
+        <div class="row  ">
+          <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
+            <div class="card blue-card">
+              <div class="card-body pb-5 d-flex flex-column">
+                <h5 class="card-title">
+                  <i class="fas fa-box"></i> Celkové množstvo predaných kníh
+                </h5>
+                <p class="card-text mt-auto " id="totalQuantity"></p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
-          <div class="card quantity-card">
-            <div class="card-body pb-5 d-flex flex-column">
-              <h5 class="card-title">
-                <i class="fas fa-box"></i> Priemerné denné množstvo predaných kníh
-              </h5>
-              <p class="card-text mt-auto" id="averageTotalDailyQuantity"></p>
+          <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
+            <div class="card grey-card">
+              <div class="card-body pb-5 d-flex flex-column">
+                <h5 class="card-title">
+                  <i class="fas fa-box"></i> Priemerné denné množstvo predaných kníh
+                </h5>
+                <p class="card-text mt-auto" id="averageTotalDailyQuantity"></p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
-          <div class="card quantity-card">
-            <div class="card-body pb-5 d-flex flex-column">
-              <h5 class="card-title">
-                <i class="fas fa-box"></i> Max množstvo pr.kníh atribút
-              </h5>
-              <p class="card-text mt-auto" id="namePodkategoriaMaxQuantity"></p>
-              <p class="card-text mt-auto" id="maxQuantityPodkategoria"></p>
+          <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
+            <div class="card revenue-card">
+              <div class="card-body pb-5 d-flex flex-column">
+                <h5 class="card-title">
+                  <i class="fas fa-box"></i> Max množstvo pr.kníh atribút
+                </h5>
+                <p class="card-text mt-auto" id="namePodkategoriaMaxQuantity"></p>
+                <p class="card-text mt-auto" id="maxQuantityPodkategoria"></p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
-          <div class="card quantity-card">
-            <div class="card-body pb-5 d-flex flex-column">
-              <h5 class="card-title">
-                <i class="fas fa-box"></i> Min množstvo pr.kníh atribút
-              </h5>
-              <p class="card-text mt-auto" id="namePodkategoriaMinQuantity"></p>
-              <p class="card-text mt-auto" id="minQuantityPodkategoria"></p>
+          <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
+            <div class="card grey-card">
+              <div class="card-body pb-5 d-flex flex-column">
+                <h5 class="card-title">
+                  <i class="fas fa-box"></i> Min množstvo pr.kníh atribút
+                </h5>
+                <p class="card-text mt-auto" id="namePodkategoriaMinQuantity"></p>
+                <p class="card-text mt-auto" id="minQuantityPodkategoria"></p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
-          <div class="card quantity-card">
-            <div class="card-body pb-5 d-flex flex-column">
-              <h5 class="card-title">
-                <i class="fas fa-box"></i> Max množstvo pr.kníh kniha
-              </h5>
-              <p class="card-text mt-auto" id="nameBookMaxQuantity"></p>
-              <p class="card-text mt-auto" id="maxQuantityBook"></p>
+          <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
+            <div class="card blue-card">
+              <div class="card-body pb-5 d-flex flex-column">
+                <h5 class="card-title">
+                  <i class="fas fa-box"></i> Max množstvo pr.kníh kniha
+                </h5>
+                <p class="card-text mt-auto" id="nameBookMaxQuantity"></p>
+                <p class="card-text mt-auto" id="maxQuantityBook"></p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
-          <div class="card quantity-card">
-            <div class="card-body pb-5 d-flex flex-column">
-              <h5 class="card-title">
-                <i class="fas fa-box"></i> Min množstvo pr.kníh kniha
-              </h5>
-              <p class="card-text mt-auto" id="nameBookMinQuantity"></p>
-              <p class="card-text mt-auto" id="minQuantityBook"></p>
+          <div class=" col-sm-6 col-md-4 col-lg-2 mb-3 pd-5 ">
+            <div class="card grey-card">
+              <div class="card-body pb-5 d-flex flex-column">
+                <h5 class="card-title">
+                  <i class="fas fa-box"></i> Min množstvo pr.kníh kniha
+                </h5>
+                <p class="card-text mt-auto" id="nameBookMinQuantity"></p>
+                <p class="card-text mt-auto" id="minQuantityBook"></p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="container-fluid col-10 mt-4 mb-5" id="containerQuantity"></div>
-
+      <div class="container-fluid col-12 mt-4 mb-5" id="containerQuantity"></div>
     </div>
 
 
 
 
-
-
-
-
-    <footer>
-
-    </footer>
   </div>
 
 
+
+
+
+
+
+
+  <footer>
+
+  </footer>
+
+
+
 </body>
+
+</html>
 <script>
   $("#navbar").load("navbar.html")
   $("footer").load("footer.html")
@@ -293,8 +303,9 @@
         sortingField: sortingField,
         sortingOrder: sortOrderValue,
         optionalParameter: "revenue",
-        dataType: "json",
+
       },
+      dataType: "json",
 
     })
       .done(function (response) {
@@ -351,20 +362,22 @@
           $("#maxRevenueBook").text(maxRevenueBook);
           $("#nameBookMinRevenue").text(nameBookMinRevenue);
           $("#minRevenueBook").text(minRevenueBook);
+          $('#cards-revenue').show()
 
-          Highcharts.chart('container', {
+
+          Highcharts.chart('containerRevenue', {
             chart: {
               type: 'column'
             },
             title: {
-              text: 'Total revenue per category for the selected period'
+              text: "Prijmy z predaných kníh podľa atribútu " + atributeText + " a jednotlivých kníh patriacich do atribútu"
             },
             xAxis: {
               type: 'category'
             },
             yAxis: {
               title: {
-                text: 'Total revenue'
+                text: 'Celkový príjem'
               }
             },
             legend: {
@@ -392,7 +405,108 @@
 
         } catch (error) {
           console.log("Error: " + error);
+        } try {
+          var podkategoriaDataQuantity = [];
+          data.AggregatedData.forEach(function (podkategoria) {
+            podkategoriaDataQuantity.push({
+              name: podkategoria.Podkategoria,
+              y: podkategoria.TotalQuantity,
+              drilldown: podkategoria.Podkategoria
+            });
+          });
+          console.log(podkategoriaDataQuantity)
+
+
+          var bookDataQuantity = [];
+          data.AggregatedData.forEach(function (podkategoria) {
+            var booksQuantity = [];
+            podkategoria.Books.forEach(function (book) {
+              booksQuantity.push([book.Name, book.TotalQuantity]);
+            });
+
+            bookDataQuantity.push({
+              name: podkategoria.Podkategoria,
+              id: podkategoria.Podkategoria,
+              data: booksQuantity
+            });
+
+          });
+          console.log(bookDataQuantity)
+
+          let totalQuantity = data.TotalAggregatedData.totalQuantity + " ks";
+          let averageTotalDailyQuantity = Math.round(data.TotalAggregatedData.averageTotalDailyQuantity * 100) / 100 + " ks";
+          let namePodkategoriaMaxQuantity = data.TotalAggregatedData.namePodkategoriaMaxQuantity;
+          let maxQuantityPodkategoria = data.TotalAggregatedData.maxQuantityPodkategoria; +" ks";
+          let namePodkategoriaMinQuantity = data.TotalAggregatedData.namePodkategoriaMinQuantity;
+          let minQuantityPodkategoria = data.TotalAggregatedData.minQuantityPodkategoria + " ks";
+          let nameBookMaxQuantity = data.TotalAggregatedData.nameBookMaxQuantity;
+          let maxQuantityBook = data.TotalAggregatedData.maxQuantityBook + " ks";
+          let nameBookMinQuantity = data.TotalAggregatedData.nameBookMinQuantity;
+          let minQuantityBook = data.TotalAggregatedData.minQuantityBook + " ks";
+          document.getElementById("totalQuantity").innerHTML = totalQuantity;
+          document.getElementById("averageTotalDailyQuantity").innerHTML = averageTotalDailyQuantity;
+          document.getElementById("namePodkategoriaMaxQuantity").innerHTML = namePodkategoriaMaxQuantity;
+          document.getElementById("maxQuantityPodkategoria").innerHTML = maxQuantityPodkategoria;
+          document.getElementById("namePodkategoriaMinQuantity").innerHTML = namePodkategoriaMinQuantity;
+          document.getElementById("minQuantityPodkategoria").innerHTML = minQuantityPodkategoria;
+          document.getElementById("nameBookMaxQuantity").innerHTML = nameBookMaxQuantity;
+          document.getElementById("maxQuantityBook").innerHTML = maxQuantityBook;
+          document.getElementById("nameBookMinQuantity").innerHTML = nameBookMinQuantity;
+          document.getElementById("minQuantityBook").innerHTML = minQuantityBook;
+          $('#cards-quantity').show()
+          Highcharts.chart('containerQuantity', {
+            chart: {
+              type: 'column'
+            },
+            credits: {
+              enabled: false
+            },
+
+            title: {
+              text: "Počty predaných kníh podľa atribútu " + atributeText + " a jednotlivých kníh patriacich do atribútu"
+            },
+            xAxis: {
+              type: 'category'
+            },
+            yAxis: {
+              title: {
+                text: 'Totálne množstvo predaných kníh'
+              }
+            },
+            legend: {
+              enabled: false
+            },
+            plotOptions: {
+              series: {
+                borderWidth: 0,
+                dataLabels: {
+                  enabled: true,
+                  format: '{point.y:.2f} ks'
+                }
+              }
+            },
+            tooltip: {
+              headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+              pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f} ks </b><br/>'
+            },
+            series: [{
+              name: atributeText,
+              colorByPoint: true,
+              data: podkategoriaDataQuantity
+            }],
+            drilldown: {
+              series: bookDataQuantity
+            }
+          });
         }
+
+
+
+        catch (error) {
+          console.error(error);
+          alert("An error occurred: " + error.message);
+        }
+
 
       }).fail(function (jqXHR, textStatus, errorThrown) { showAlert(jqXHR.responseText, "alerts", "danger"); });
 
@@ -403,7 +517,7 @@
 
 
 
-</script>
+
 <script>
  // calculateCardBody()
 </script>

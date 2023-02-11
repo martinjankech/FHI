@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <Item>
+    <BookID>14</BookID>
+    <BookName>Nemý svedok</BookName>
+    <BookNumPages>232</BookNumPages>
+    <BookYear>2020</BookYear>
+    <BookSellPrice>7.8</BookSellPrice>
+    <BookBuyPrice>5.68</BookBuyPrice>
+    <BookRating>4.8</BookRating>
+    <StartAmount>15</StartAmount>
+    <EndAmount>21</EndAmount>
+    <StartDate>2022-06-11</StartDate>
+    <EndDate>2023-02-17</EndDate>
+  </Item>
+  <Item>
+    <BookID>15</BookID>
+    <BookName>Veľká štvorka</BookName>
+    <BookNumPages>184</BookNumPages>
+    <BookYear>2019</BookYear>
+    <BookSellPrice>9.65</BookSellPrice>
+    <BookBuyPrice>4.5</BookBuyPrice>
+    <BookRating>4.1</BookRating>
+    <StartAmount>6</StartAmount>
+    <EndAmount>101</EndAmount>
+    <StartDate>2022-06-11</StartDate>
+    <EndDate>2023-02-17</EndDate>
+  </Item>
+</Root>
