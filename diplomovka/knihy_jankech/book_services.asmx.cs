@@ -41,7 +41,7 @@ namespace knihy_jankech
         public String fileAmountFilterPath = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\Amoutsoutputs";
 
         private String fileBookInfoTest = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\book_moje_test.xml ";
-        private String fileBookTransactionInfoTest = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\transaction.xml ";
+        private String fileBookTransactionInfoTest = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\book_transakcie_moje_test.xml ";
 
        
 
@@ -612,8 +612,120 @@ namespace knihy_jankech
             Context.Response.Write(JsonConvert.SerializeXmlNode(AllBook.Item(0), Formatting.Indented));
             // serializácia XML uzla ako JSON a odoslanie ako http odpoveď s formátovaním
         }
+        [WebMethod]
+        public void GetListAllTransactions()
+        {
+            XmlDocument doc = new XmlDocument();
+            try
+            {
+                doc.Load(fileBookTransactionInfo);
+            }
+            catch (FileNotFoundException)
+            {
+                Context.Response.StatusCode = 500;
+                Context.Response.StatusDescription = "File not found";
+                return;
+            }
+            catch (XmlException)
+            {
+                Context.Response.StatusCode = 500;
+                Context.Response.StatusDescription = "Error loading XML document";
+                return;
+            }
 
+            XmlNodeList AllTransactions = doc.SelectNodes("knihy_transakcie");
+            if (AllTransactions == null || AllTransactions.Item(0) == null)
+            {
+                Context.Response.StatusCode = 500;
+                Context.Response.StatusDescription = "Error processing data in document";
+                return;
+            }
 
+            XmlNode transactions = AllTransactions.Item(0);
+
+            XmlAttribute xsiAttribute = transactions.Attributes["xsi:http://www.w3.org/2001/XMLSchema-instance"];
+            if (xsiAttribute != null)
+                transactions.Attributes.Remove(xsiAttribute);
+
+            Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+            Context.Response.Write(JsonConvert.SerializeXmlNode(transactions, Formatting.Indented));
+        }
+        [WebMethod]
+        public void AddTransaction(string id, string id_knihy, string datum, string typ_transakcie, string mnozstvo, string cena_za_jednotku, string celkovo_cena, string aktualne_mnozstvo_na_sklade)
+        {
+            var transactionData = new TransactionData();
+            transactionData.Id_transakcie= id;
+            transactionData.Id_knihy = id_knihy;
+            transactionData.Datum = datum;
+            transactionData.Typ_transakcie = typ_transakcie;
+            transactionData.Mnozstvo = Convert.ToInt32( mnozstvo);
+            transactionData.Cena_za_jednotku = Convert.ToDouble(cena_za_jednotku);
+            transactionData.Celkovo_cena = Convert.ToDouble(celkovo_cena);
+            transactionData.Aktualne_mnozstvo_na_sklade = Convert.ToInt32(aktualne_mnozstvo_na_sklade);
+
+            // Load the existing XML file
+            string xmlFilePath = fileBookTransactionInfoTest;
+            XDocument xmlDoc = XDocument.Load(xmlFilePath);
+            var lastTransactionId = xmlDoc.Elements("knihy_transakcie").Elements("transakcia").Max(x => (int?)x.Element("id_transakcie")) ?? 0;
+            transactionData.Id_transakcie = (lastTransactionId + 1).ToString();
+
+            // Add the new transaction element to the XML file
+            XElement transactionElement = new XElement("transakcia",
+                new XElement("id_transakcie", transactionData.Id_transakcie),
+                new XElement("id_knihy", transactionData.Id_knihy),
+                new XElement("datum", transactionData.Datum),
+                new XElement("typ_transakcie", transactionData.Typ_transakcie),
+                new XElement("mnozstvo", transactionData.Mnozstvo),
+                new XElement("cena_za_jednotku", transactionData.Cena_za_jednotku),
+                new XElement("celkovo_cena", transactionData.Celkovo_cena),
+                new XElement("aktualne_mnozstvo_na_sklade", transactionData.Aktualne_mnozstvo_na_sklade));
+
+            xmlDoc.Element("knihy_transakcie").Add(transactionElement);
+            xmlDoc.Save(xmlFilePath);
+        }
+
+        [WebMethod]
+        public void UpdateTransaction(string id, string id_knihy, string datum, string typ_transakcie, string mnozstvo, string cena_za_jednotku, string celkovo_cena, string aktualne_mnozstvo_na_sklade)
+        {
+            // Load the existing XML file
+            string xmlFilePath = fileBookTransactionInfoTest;
+            XDocument xmlDoc = XDocument.Load(xmlFilePath);
+
+            // Find the transaction element to update by its id 
+       
+            var transactionElement = xmlDoc.Element("knihy_transakcie").Elements("transakcia").Where(x => x.Element("id_transakcie").Value == id).FirstOrDefault();
+            if (transactionElement != null)
+            {
+                transactionElement.SetElementValue("id_knihy", id_knihy);
+                transactionElement.SetElementValue("datum", datum);
+                transactionElement.SetElementValue("typ_transakcie", typ_transakcie);
+                transactionElement.SetElementValue("mnozstvo", mnozstvo);
+                transactionElement.SetElementValue("cena_za_jednotku", cena_za_jednotku);
+                transactionElement.SetElementValue("celkovo_cena", celkovo_cena);
+                transactionElement.SetElementValue("aktualne_mnozstvo_na_sklade", aktualne_mnozstvo_na_sklade);
+
+               
+                xmlDoc.Save(xmlFilePath);
+            }
+        }
+        
+
+[WebMethod]
+        public void DeleteTransaction(string id)
+        {
+            // Load the existing XML file
+            string xmlFilePath = fileBookTransactionInfoTest;
+            XDocument xmlDoc = XDocument.Load(xmlFilePath);
+
+            
+            // Find the transaction element to delete by its id
+            var transactionElement = xmlDoc.Element("knihy_transakcie").Elements("transakcia").Where(x => x.Element("id_transakcie").Value == id).FirstOrDefault();
+            if (transactionElement != null)
+            {
+                transactionElement.Remove();
+                xmlDoc.Save(xmlFilePath);
+            }
+        }
         [WebMethod]
         public void SortedBookAmoutsByDateAndCategory(string selectedAtribute, string selectedValueAtribute, string startDate, string endDate, string sortField, string sortOrder)
         {

@@ -27,4 +27,15 @@ namespace knihy_jankech
     public string ImageName { get; set; }
     public byte[] ImageBytes { get; set; }
 }
+    public class TransactionData
+    {
+        public string Id_transakcie { get; set; }
+        public string Id_knihy { get; set; }
+        public string Datum { get; set; }
+        public string Typ_transakcie { get; set; }
+        public int Mnozstvo { get; set; }
+        public double Cena_za_jednotku { get; set; }
+        public double Celkovo_cena { get; set; }
+        public int Aktualne_mnozstvo_na_sklade { get; set; }
+    }
 }
