@@ -252,8 +252,9 @@ namespace knihy_jankech
         }
 
             [WebMethod]
-        public void AddBook()
+        public string AddBook()
         {
+            try { 
             var request = HttpContext.Current.Request;
             var postedFile = request.Files[0];
 
@@ -312,6 +313,12 @@ namespace knihy_jankech
             // Save the image to the file system
             string imageFilePath = Path.Combine(Server.MapPath("~/img"), "../img/" + bookData.Id + ".jpg");
             System.IO.File.WriteAllBytes(imageFilePath, bookData.ImageBytes);
+                return "Kniha bola uspesne pridana.";
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
         }
 
         [WebMethod]
@@ -651,8 +658,9 @@ namespace knihy_jankech
             Context.Response.Write(JsonConvert.SerializeXmlNode(transactions, Formatting.Indented));
         }
         [WebMethod]
-        public void AddTransaction(string id, string id_knihy, string datum, string typ_transakcie, string mnozstvo, string cena_za_jednotku, string celkovo_cena, string aktualne_mnozstvo_na_sklade)
+        public string AddTransaction(string id, string id_knihy, string datum, string typ_transakcie, string mnozstvo, string cena_za_jednotku, string celkovo_cena, string aktualne_mnozstvo_na_sklade)
         {
+            try { 
             var transactionData = new TransactionData();
             transactionData.Id_transakcie= id;
             transactionData.Id_knihy = id_knihy;
@@ -682,48 +690,72 @@ namespace knihy_jankech
 
             xmlDoc.Element("knihy_transakcie").Add(transactionElement);
             xmlDoc.Save(xmlFilePath);
+            return "Book was successfully updated.";
         }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+}
 
         [WebMethod]
-        public void UpdateTransaction(string id, string id_knihy, string datum, string typ_transakcie, string mnozstvo, string cena_za_jednotku, string celkovo_cena, string aktualne_mnozstvo_na_sklade)
+        public string UpdateTransaction(string id, string id_knihy, string datum, string typ_transakcie, string mnozstvo, string cena_za_jednotku, string celkovo_cena, string aktualne_mnozstvo_na_sklade)
         {
-            // Load the existing XML file
-            string xmlFilePath = fileBookTransactionInfoTest;
-            XDocument xmlDoc = XDocument.Load(xmlFilePath);
-
-            // Find the transaction element to update by its id 
-       
-            var transactionElement = xmlDoc.Element("knihy_transakcie").Elements("transakcia").Where(x => x.Element("id_transakcie").Value == id).FirstOrDefault();
-            if (transactionElement != null)
+            try
             {
-                transactionElement.SetElementValue("id_knihy", id_knihy);
-                transactionElement.SetElementValue("datum", datum);
-                transactionElement.SetElementValue("typ_transakcie", typ_transakcie);
-                transactionElement.SetElementValue("mnozstvo", mnozstvo);
-                transactionElement.SetElementValue("cena_za_jednotku", cena_za_jednotku);
-                transactionElement.SetElementValue("celkovo_cena", celkovo_cena);
-                transactionElement.SetElementValue("aktualne_mnozstvo_na_sklade", aktualne_mnozstvo_na_sklade);
+                // Load the existing XML file
+                string xmlFilePath = fileBookTransactionInfoTest;
+                XDocument xmlDoc = XDocument.Load(xmlFilePath);
 
-               
+                // Find the transaction element to update by its id 
+
+                var transactionElement = xmlDoc.Element("knihy_transakcie").Elements("transakcia").Where(x => x.Element("id_transakcie").Value == id).FirstOrDefault();
+                if (transactionElement != null)
+                {
+                    transactionElement.SetElementValue("id_knihy", id_knihy);
+                    transactionElement.SetElementValue("datum", datum);
+                    transactionElement.SetElementValue("typ_transakcie", typ_transakcie);
+                    transactionElement.SetElementValue("mnozstvo", mnozstvo);
+                    transactionElement.SetElementValue("cena_za_jednotku", cena_za_jednotku);
+                    transactionElement.SetElementValue("celkovo_cena", celkovo_cena);
+                    transactionElement.SetElementValue("aktualne_mnozstvo_na_sklade", aktualne_mnozstvo_na_sklade);
+                }
+
                 xmlDoc.Save(xmlFilePath);
+                return "Transakcia bola uspesne aktualizovana";
+            }
+
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
             }
         }
         
+        
 
 [WebMethod]
-        public void DeleteTransaction(string id)
+        public string DeleteTransaction(string id)
         {
+            try { 
             // Load the existing XML file
             string xmlFilePath = fileBookTransactionInfoTest;
             XDocument xmlDoc = XDocument.Load(xmlFilePath);
 
             
             // Find the transaction element to delete by its id
-            var transactionElement = xmlDoc.Element("knihy_transakcie").Elements("transakcia").Where(x => x.Element("id_transakcie").Value == id).FirstOrDefault();
+            var transactionElement = xmlDoc.Element("knihy_transakcie").Elements("transa").Where(x => x.Element("id_transakcie").Value == id).FirstOrDefault();
             if (transactionElement != null)
             {
                 transactionElement.Remove();
                 xmlDoc.Save(xmlFilePath);
+                return "kniha bola zmazana";
+            }
+                else { return "Nenasla sa kniha so zadanym id"; }
+            }
+            
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
             }
         }
         [WebMethod]
