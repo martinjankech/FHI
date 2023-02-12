@@ -2086,9 +2086,15 @@ namespace knihy_jankech
                                    Amount = (int)transaction.Element("mnozstvo"),
                                    Price = (double)(transaction.Element("cena_za_jednotku"))
                                };
+            if (year==0)
+            {
+                Context.Response.StatusCode = 500;
+                Context.Response.Write("Prosím zvoľte si rok ");
+                return;
+            }
 
-           
-    if (quarter != 0 && month != 0)
+
+            if (quarter != 0 && month != 0)
             {
                 Context.Response.StatusCode = 500;
                 Context.Response.Write("štvrťrok a mesiac nemožu byť zvolené súčasne ");

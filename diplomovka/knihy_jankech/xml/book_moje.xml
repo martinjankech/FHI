@@ -674,5 +674,27 @@ Saint-Exupéry svoju knižku s čistým detským pohľadom na svet venoval najle
       <priemerne_hodnotenie>3.9</priemerne_hodnotenie>
       <obrazok>../img/30.jpg</obrazok>
     </book>
+    <book>
+      <id>31</id>
+      <nazov>PPM Lotysko Manager 12</nazov>
+      <autori>
+        <autor1>autora</autor1>
+        <autor2></autor2>
+      </autori>
+      <kategoria>kategoria</kategoria>
+      <isbn>2344564564</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>234</pocet_stran>
+      <vazba>pevna</vazba>
+      <rok_vydania>2000</rok_vydania>
+      <vydavatelstvo>ikar</vydavatelstvo>
+      <predajna_cena>20</predajna_cena>
+      <nakupna_cena>10</nakupna_cena>
+      <marza>50.0</marza>
+      <zisk_kus>10</zisk_kus>
+      <obsah>aasdasdasdasd</obsah>
+      <priemerne_hodnotenie>4</priemerne_hodnotenie>
+      <obrazok>../img/31.jpg</obrazok>
+    </book>
   </books>
 </Bookstore>
