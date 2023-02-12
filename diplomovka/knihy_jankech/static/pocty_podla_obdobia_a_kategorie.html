@@ -36,140 +36,137 @@
 <body>
   <div id="navbar">
   </div>
-  <div style="display: none;" id="alert_error">
-    <div class="alert alert-danger" role="alert">
-      <span id="alert-text"></span>
-    </div>
-  </div>
-  <div style="display: none;" id="alert_success">
-    <div class="alert alert-success" role="alert">
-      <span id="alert-text"></span>
-    </div>
-  </div>
-
-  <div class="container col-8">
-    <h1 class="mb-3 mt-5">Hľadaj počty kníh na sklade podľa: </h1>
-    <form class="col-12" id="formAtributesDates" method="POST">
-      <div class="form-row ">
-        <div class="form-group col-md-6">
-          <label for="startDate">Datum od</label>
-          <input type="date" class="form-control" id="startDate" placeholder="startdate">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="endDate">Datum do</label>
-          <input type="date" class="form-control" id="endDate" placeholder="enddate">
-        </div>
+  <div id="alerts">
+    <div style="display: none;" id="alert_container">
+      <div class="alert" role="alert">
+        <span id="alert-text"></span>
       </div>
-      <div class="form-row ">
-        <div class="form-group col-md-6">
-          <label for="atributeValue">hľadať podľa atribútu</label>
-          <select id="selectedAtribute" class="form-control">
-            <option disabled selected value> zvoľte si možnosť prosím </option>
-            <option value="vsetky">všetky knihy</option>
-            <option value="autor">autor</option>
-            <option value="kategoria">kategória</option>
-            <option value="vydavatelstvo">vydavateľstvo</option>
-            <option value="jazyk">jazyk</option>
-            <option value="vazba">väzba</option>
-
-          </select>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="sortingValue">Zoradiť podľa hodnoty</label>
-          <select id="sortField" class="form-control" name="sortField">
-            <option disabled selected value> zvolte si možnosť prosím </option>
-            <option value="nazov">názov</option>
-            <option value="pocet_stran">počet strán</option>
-            <option value="rok_vydania">rok vydania</option>
-            <option value="nakupna_cena">nákupná cena</option>
-            <option value="predajna_cena">predajná cena</option>
-            <option value="priemerne_hodnotenie">priemerné hodnotenie</option>
-          </select>
-
-          <div class="form-check mt-2">
-            <input class="form-check-input" type="radio" name="sortOrder" id="ascending_Input" value="ascending"
-              checked>
-            <label class="form-check-label" for="exampleRadios1">
-              Vzostupne
-            </label>
+    </div>
+  </div>
+  <div class="flex-wrapper">
+    <div class="container col-8">
+      <h1 class="mb-3 mt-5">Hľadaj počty kníh na sklade podľa: </h1>
+      <form class="col-12" id="formAtributesDates" method="POST">
+        <div class="form-row ">
+          <div class="form-group col-md-6">
+            <label for="startDate">Datum od</label>
+            <input type="date" class="form-control" id="startDate" placeholder="startdate">
           </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="sortOrder" id="descendingInput" value="descending">
-            <label class="form-check-label" for="exampleRadios2">
-              Zostupne
-            </label>
+          <div class="form-group col-md-6">
+            <label for="endDate">Datum do</label>
+            <input type="date" class="form-control" id="endDate" placeholder="enddate">
           </div>
         </div>
-      </div>
-      <h6 id="hideHeading">hodnota hľadaného atribútu </h6>
-      <input class="form-control col-6 mb-3" type="text" name="selectedValueAtribute" id="selectedValueAtribute"
-        placeholder="">
+        <div class="form-row ">
+          <div class="form-group col-md-6">
+            <label for="atributeValue">hľadať podľa atribútu</label>
+            <select id="selectedAtribute" class="form-control">
+              <option disabled selected value> zvoľte si možnosť prosím </option>
+              <option value="vsetky">všetky knihy</option>
+              <option value="autor">autor</option>
+              <option value="kategoria">kategória</option>
+              <option value="vydavatelstvo">vydavateľstvo</option>
+              <option value="jazyk">jazyk</option>
+              <option value="vazba">väzba</option>
 
-      <button type="submit" id="btnGetData" class="btn btn-primary ">potvrdiť</button>
-    </form>
-  </div>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="sortingValue">Zoradiť podľa hodnoty</label>
+            <select id="sortField" class="form-control" name="sortField">
+              <option disabled selected value> zvolte si možnosť prosím </option>
+              <option value="nazov">názov</option>
+              <option value="pocet_stran">počet strán</option>
+              <option value="rok_vydania">rok vydania</option>
+              <option value="nakupna_cena">nákupná cena</option>
+              <option value="predajna_cena">predajná cena</option>
+              <option value="priemerne_hodnotenie">priemerné hodnotenie</option>
+            </select>
 
+            <div class="form-check mt-2">
+              <input class="form-check-input" type="radio" name="sortOrder" id="ascending_Input" value="ascending"
+                checked>
+              <label class="form-check-label" for="exampleRadios1">
+                Vzostupne
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="sortOrder" id="descendingInput" value="descending">
+              <label class="form-check-label" for="exampleRadios2">
+                Zostupne
+              </label>
+            </div>
+          </div>
+        </div>
+        <h6 id="hideHeading">hodnota hľadaného atribútu </h6>
+        <input class="form-control col-6 mb-3" type="text" name="selectedValueAtribute" id="selectedValueAtribute"
+          placeholder="">
 
-
-
-  <div class="container col-8 mt-5 ">
-    <div style="display: none;" id="tableBook" class=" mb-5 table-responsive">
-      <h2 class="mb-4 mt-2"> Tabuľka údajov kníh podľa zadaných parametrov</h2>
-      <table id="bookData" class=" mb-5  display nowrap ">
-        <thead>
-          <tr>
-
-            <th>id</th>
-            <th>nazov</th>
-            <th>datum zaciatok</th>
-            <th>datum koniec</th>
-            <th>pocet zaciatok</th>
-            <th>pocet koniec</th>
-            <th>pocet stran</th>
-            <th>rok vydania</th>
-            <th>predajna cena</th>
-            <th>nakupna cena</th>
-            <th>priemerne hodnotenie</th>
-
-
-
-          </tr>
-        </thead>
-        <tfoot class="mb-5">
-          <tr>
-            <th>id</th>
-            <th>nazov</th>
-            <th>datum_zaciatok</th>
-            <th>datum_koniec</th>
-            <th>pocet_zaciatok</th>
-            <th>pocet_koniec</th>
-            <th>pocet stran</th>
-            <th>rok vydania</th>
-            <th>predajna cena</th>
-            <th>nakupna cena</th>
-            <th>priemerne hodnotenie</th>
-          </tr>
-        </tfoot>
-      </table>
+        <button type="submit" id="btnGetData" class="btn btn-primary ">potvrdiť</button>
+      </form>
     </div>
+
+
+
+
+    <div class="container col-8 mt-5 ">
+      <div style="display: none;" id="tableBook" class=" mb-5 table-responsive">
+        <h2 class="mb-4 mt-2"> Tabuľka údajov kníh podľa zadaných parametrov</h2>
+        <table id="bookData" class=" mb-5  display nowrap ">
+          <thead>
+            <tr>
+
+              <th>id</th>
+              <th>nazov</th>
+              <th>datum zaciatok</th>
+              <th>datum koniec</th>
+              <th>pocet zaciatok</th>
+              <th>pocet koniec</th>
+              <th>pocet stran</th>
+              <th>rok vydania</th>
+              <th>predajna cena</th>
+              <th>nakupna cena</th>
+              <th>priemerne hodnotenie</th>
+
+
+
+            </tr>
+          </thead>
+          <tfoot class="mb-5">
+            <tr>
+              <th>id</th>
+              <th>nazov</th>
+              <th>datum_zaciatok</th>
+              <th>datum_koniec</th>
+              <th>pocet_zaciatok</th>
+              <th>pocet_koniec</th>
+              <th>pocet stran</th>
+              <th>rok vydania</th>
+              <th>predajna cena</th>
+              <th>nakupna cena</th>
+              <th>priemerne hodnotenie</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+
+
+    <div style="display: none;" id="chart" class=" container col-8 ">
+      <h2 class="mb-4 mt-2">Graf počtov kníh podľa zadaného atribútu</h2>
+      <canvas id="myChart">
+      </canvas>
+    </div>
+    <div style="display: none;" id="chartAg" class="container col-8">
+      <h2 class="mb-4 mt-2">Graf počtov kníh podľa zadaného atribútu</h2>
+      <canvas id="myChartAg">
+      </canvas>
+    </div>
+
   </div>
-  <br>
-  <br>
-  <br>
-
-
-  <div style="display: none;" id="chart" class=" container col-8 ">
-    <h2 class="mb-4 mt-2">Graf počtov kníh podľa zadaného atribútu</h2>
-    <canvas id="myChart">
-    </canvas>
-  </div>
-  <div style="display: none;" id="chartAg" class="container col-8">
-    <h2 class="mb-4 mt-2">Graf počtov kníh podľa zadaného atribútu</h2>
-    <canvas id="myChartAg">
-    </canvas>
-  </div>
-
-
 
 
 
@@ -329,7 +326,7 @@
         }
       });
       //$("form")[0].reset();
-    }).fail(function (jqXHR, textStatus, errorThrown) { showAlertError(jqXHR.responseText) });
+    }).fail(function (jqXHR, textStatus, errorThrown) { showAlert(jqXHR.responseText, "alerts", "danger") });
     event.preventDefault();
     $.ajax({
       url: "http://localhost:8050/book_services.asmx/AgregatedStatiscticsAmount",
@@ -386,7 +383,7 @@
         }
       });
       //$("form")[0].reset();
-    }).fail(function (jqXHR, textStatus, errorThrown) { showAlertError(jqXHR.responseText) });
+    }).fail(function (jqXHR, textStatus, errorThrown) { showAlert(jqXHR.responseText, "alerts", "succes") });
     event.preventDefault();
   })
 </script>

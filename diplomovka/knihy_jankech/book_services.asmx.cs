@@ -36,12 +36,12 @@ namespace knihy_jankech
     public class book_services : System.Web.Services.WebService
     {
         private String fileBookInfo = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\book_moje.xml ";
-        private String fileBookTransactionInfo = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\book_transakcie_moje.xml ";
+        private String fileBookTransactionInfo = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\book_transakcie.xml ";
         public String fileOutputSingleSearch = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\output.xml";
         public String fileAmountFilterPath = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\Amoutsoutputs";
 
         private String fileBookInfoTest = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\book_moje_test.xml ";
-        private String fileBookTransactionInfoTest = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\book_transakcie_moje_test.xml ";
+        private String fileBookTransactionInfoTest = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\transaction.xml ";
 
        
 
@@ -2074,11 +2074,55 @@ namespace knihy_jankech
                 Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
             }
         }
+        [WebMethod]
+        public void CalculateRevenueCostProfit(int year, int quarter, int month)
+        {
+            XDocument xDoc = XDocument.Load(fileBookTransactionInfo);
+            var transactions = from transaction in xDoc.Descendants("transakcia")
+                               select new
+                               {
+                                   Date = DateTime.Parse(transaction.Element("datum").Value),
+                                   Type = transaction.Element("typ_transakcie").Value,
+                                   Amount = (int)transaction.Element("mnozstvo"),
+                                   Price = (double)(transaction.Element("cena_za_jednotku"))
+                               };
 
+           
+    if (quarter != 0 && month != 0)
+            {
+                Context.Response.StatusCode = 500;
+                Context.Response.Write("štvrťrok a mesiac nemožu byť zvolené súčasne ");
+                return;
+            }
+            else if (quarter != 0)
+            {
+                transactions = transactions.Where(t => t.Date.Year == year && (t.Date.Month - 1) / 3 + 1 == quarter);
+            }
+            else if (month != 0)
+            {
+                transactions = transactions.Where(t => t.Date.Year == year && t.Date.Month == month);
+            }
+            else
+            {
+                transactions = transactions.Where(t => t.Date.Year == year);
+            }
 
+            double totalRevenue = transactions.Where(t => t.Type == "predaj" && (t.Amount < 0))
+                                                   .Sum(t => Math.Abs(t.Amount) * t.Price);
 
+            double totalCost = transactions.Where(t => t.Type == "nákup" && t.Amount > 0)
+                                                .Sum(t => t.Amount * t.Price);
+
+            double profit = totalRevenue - totalCost;
+
+            var result = new { totalRevenue, totalCost, profit };
+            Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+            Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
+        }
     }
+
 }
+
 
 
 
