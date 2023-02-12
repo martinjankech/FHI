@@ -30,6 +30,7 @@
 
 </head>
 
+
 <body>
  <div id="navbar">
  </div>
@@ -75,10 +76,8 @@
   <footer>
   </footer>
  </div>
- <!-- Button trigger modal -->
 
-
- <!-- Add Modal -->
+ <!-- Add Modal  -->
  <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
    <div class="modal-content">
@@ -95,8 +94,7 @@
       </div>
      </div>
      <form id="addTransaction">
-      <div class="row">
-      </div>
+
       <div class="row">
        <div class="form-group col-3">
         <label for="id_knihy">id knihy</label>
@@ -128,20 +126,24 @@
         <label for="aktualne_mnozstvo_na_sklade">mnozstvo na sklade</label>
         <input type="text" id="aktualne_mnozstvo_na_sklade" name="aktualne_mnozstvo_na_sklade" class="form-control">
        </div>
+      </div>
 
-       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavrieť</button>
-        <button type="submit" class="btn btn-primary">Pridaj knihu</button>
-       </div>
+      <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavrieť</button>
+       <button type="submit" class="btn btn-primary">Pridaj knihu</button>
+      </div>
      </form>
     </div>
    </div>
   </div>
  </div>
 
+
+
+ <!-- Button trigger modal -->
  <!-- Update Modal -->
- <div class="modal fade" id="updateTransactionModal" tabindex="-1" role="dialog"
-  aria-labelledby="updateTransactionModalLabel" aria-hidden="true">
+ <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
    <div class="modal-content">
     <div class="modal-header">
@@ -193,10 +195,11 @@
         <input type="text" id="update-aktualne_mnozstvo_na_sklade" name="aktualne_mnozstvo_na_sklade"
          class="form-control">
        </div>
-       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavrieť</button>
-        <button type="submit" class="btn btn-primary">Ulož zmeny</button>
-       </div>
+      </div>
+      <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavrieť</button>
+       <button type="submit" class="btn btn-primary">Ulož zmeny</button>
+      </div>
      </form>
     </div>
    </div>
@@ -205,10 +208,16 @@
  </div>
 
 
+
  <script>
 
-  $("#navbar").load("navbar.html")
-  $("footer").load("footer.html")
+ </script>
+
+
+
+ <script>
+
+
   $(document).ready(function () {
    $('#transactionTable').DataTable({
     language: {
@@ -287,7 +296,7 @@
     // ],
 
     // defaultne sortovanie podla id 
-    order: [[1, 'asc']],
+    order: [[0, 'asc']],
     //autoWidth: false,
     ajax: {
      type: 'GET',
@@ -295,6 +304,7 @@
      dataSrc: 'knihy_transakcie.transakcia',
     },
     success: function (res) {
+
     },
 
     dataType: "json",
@@ -318,7 +328,7 @@
      {
       data: null,
       render: function (data, type, row) {
-       return `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateTransactionModal" data-id_transakcie="${row.id_transakcie}" data-id_knihy="${row.id_knihy}" data-datum="${row.datum}" data-typ_transakcie="${row.typ_transakcie}"  data-mnozstvo="${row.mnozstvo}" data-cena_za_jednotku="${row.cena_za_jednotku}"  data-celkovo_cena="${row.celkovo_cena}"  data-aktualne_mnozstvo_na_sklade="${row.aktualne_mnozstvo_na_sklade}">Aktualizuj</button>`
+       return `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModal" data-id_transakcie="${row.id_transakcie}" data-id_knihy="${row.id_knihy}" data-datum="${row.datum}" data-typ_transakcie="${row.typ_transakcie}"  data-mnozstvo="${row.mnozstvo}" data-cena_za_jednotku="${row.cena_za_jednotku}"  data-celkovo_cena="${row.celkovo_cena}"  data-aktualne_mnozstvo_na_sklade="${row.aktualne_mnozstvo_na_sklade}">Aktualizuj</button>`
       },
      },
      {
@@ -340,34 +350,41 @@
     ],
 
    });
-  });
+   $(document).ready(function () {
+    $('#updateModal').on("show.bs.modal", function (event) {
+     alert("hura")
+     var button = $(event.relatedTarget);
+     var id = button.data("id");
+     var id_knihy = button.data("id_knihy");
+     //var datum = button.data("datum");
+     var typ_transakcie = button.data("typ_transakcie");
+     var mnozstvo = button.data("mnozstvo");
+     var cena_za_jednotku = button.data("cena_za_jednotku");
+     var celkovo_cena = button.data("celkovo_cena");
+     var aktualne_mnozstvo_na_sklade = button.data("aktualne_mnozstvo_na_sklade");
+
+     var modal = $(this);
+     modal.find("#update-id_transakcie").val(id);
+     modal.find("#update-id_knihy").val(id_knihy);
+     // modal.find("#update-datum").val(datum);
+     modal.find("#update-typ_transakcie").val(typ_transakcie);
+     modal.find("#update-mnozstvo").val(mnozstvo);
+     modal.find("#update-cena_za_jednotku").val(cena_za_jednotku);
+     modal.find("#update-celkovo_cena").val(celkovo_cena);
+     modal.find("#update-aktualne_mnozstvo_na_sklade").val(aktualne_mnozstvo_na_sklade);
+    });
+   });
+  })
+
  </script>
+
  <script>
-  $('#updateModal').on('show.bs.modal', function (event) {
-   var button = $(event.relatedTarget);
-   var id_transakcie = button.data('id_transakcie');
-   var id_knihy = button.data('id_knihy');
-   var datum = button.data('datum');
-   var typ_transakcie = button.data('typ_transakcie');
-   var mnozstvo = button.data('mnozstvo');
-   var cena_za_jednotku = button.data('cena_za_jednotku');
-   var celkovo_cena = button.data('celkovo_cena');
-   var aktualne_mnozstvo_na_sklade = button.data('aktualne_mnozstvo_na_sklade');
-
-
-   var modal = $(this);
-   modal.find('.modal-body #update-id_transakcie').val(id_transakcie);
-
-   modal.find('.modal-body #update-id_knihy').val(id_knihy);
-   modal.find('.modal-body #update-datum').val(datum);
-   modal.find('.modal-body #update-typ_transakcie').val(typ_transakcie);
-   modal.find('.modal-body #update-mnozstvo').val(mnozstvo);
-   modal.find('.modal-body #update-cena_za_jednotku').val(cena_za_jednotku);
-   modal.find('.modal-body #update-celkovo_cena').val(celkovo_cena);
-   modal.find('.modal-body #update-aktualne_mnozstvo_na_sklade').val(aktualne_mnozstvo_na_sklade);
-
-  });
+  $("#navbar").load("navbar.html")
+  $("footer").load("footer.html")
  </script>
+
+
+
 </body>
 
 </html>

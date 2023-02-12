@@ -102,7 +102,7 @@
   <!-- Button trigger modal -->
 
   <!-- Modal -->
-  <div class="modal fade " id="bookmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  <div class="modal fade" id="bookmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
@@ -743,8 +743,12 @@
 
 // naplenie update formularu datami z aktualneho row data su ziskane z buttonu 
 </script> -->
+
+  </script>
   <script>$('#updateModal').on('show.bs.modal', function (event) {
+      alert("deje sa ")
       var button = $(event.relatedTarget);
+      console.log(button)
       var id = button.data('id');
       var autor1 = button.data('autor1');
       var autor2 = button.data('autor2');
@@ -785,7 +789,7 @@
   </script>
 
 
-  </script>
+
 </body>
 
 </html>
