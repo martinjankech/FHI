@@ -27,18 +27,24 @@
  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
  <link rel="stylesheet" href="css/datatable.css">
  <link rel="stylesheet" href="css/allbooks.css">
- <title>Vsetky knihy</title>
+ <title>CRUD transakcie</title>
 
 </head>
-
 
 <body>
  <div id="navbar">
  </div>
+ <div id="transaction-page-alert">
+  <div style="display: none;" id="alert_container">
+   <div class="alert" role="alert">
+    <span id="alert-text"></span>
+   </div>
+  </div>
+ </div>
  <div class="flex-wrapper">
   <div class="container col-11 mt-5 ">
-   <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#addModal">Pridaj
-    Knihu</button>
+   <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#addModal">Pridaj transakciu
+   </button>
    <div class=" mb-5 table-responsive">
     <table id="transactionTable" class=" display nowrap ">
      <thead>
@@ -94,6 +100,7 @@
        <span id="alert-text"></span>
       </div>
      </div>
+
      <form id="addTransaction">
 
       <div class="row">
@@ -131,7 +138,7 @@
 
       <div class="modal-footer">
        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavrieť</button>
-       <button type="submit" class="btn btn-primary">Pridaj knihu</button>
+       <button type="submit" class="btn btn-primary">Pridaj trasakciu</button>
       </div>
      </form>
     </div>
@@ -159,7 +166,8 @@
        <span id="alert-text"></span>
       </div>
      </div>
-     <form id="updateTransactionForm">
+
+     <form id="updateTransaction">
       <div class="row">
        <div style="display: none;" class="form-group col-3">
         <label for="id_transakcie">id transakcie:</label>
@@ -335,7 +343,7 @@
      {
       data: null,
       render: function (data, type, row) {
-       return `<button type="button" class=" deleteBook btn btn-danger"  data-id_transakcie="${row.id_transakcie}">Vymaž</button>`;
+       return `<button type="button" class=" deleteTransaction btn btn-danger"  data-id_transakcie="${row.id_transakcie}">Vymaž</button>`;
       }
      }
 
@@ -351,32 +359,122 @@
     ],
 
    });
-   $(document).ready(function () {
-    $('#updateModal').on("show.bs.modal", function (event) {
-     alert("hura")
-     var button = $(event.relatedTarget);
-     var id = button.data("id");
-     var id_knihy = button.data("id_knihy");
-     //var datum = button.data("datum");
-     var typ_transakcie = button.data("typ_transakcie");
-     var mnozstvo = button.data("mnozstvo");
-     var cena_za_jednotku = button.data("cena_za_jednotku");
-     var celkovo_cena = button.data("celkovo_cena");
-     var aktualne_mnozstvo_na_sklade = button.data("aktualne_mnozstvo_na_sklade");
 
-     var modal = $(this);
-     modal.find("#update-id_transakcie").val(id);
-     modal.find("#update-id_knihy").val(id_knihy);
-     // modal.find("#update-datum").val(datum);
-     modal.find("#update-typ_transakcie").val(typ_transakcie);
-     modal.find("#update-mnozstvo").val(mnozstvo);
-     modal.find("#update-cena_za_jednotku").val(cena_za_jednotku);
-     modal.find("#update-celkovo_cena").val(celkovo_cena);
-     modal.find("#update-aktualne_mnozstvo_na_sklade").val(aktualne_mnozstvo_na_sklade);
-    });
-   });
   })
 
+ </script>
+ <script>
+  // add transaction
+  $(document).on('submit', "#addTransaction", function (event) {
+   event.preventDefault()
+   //var id = $("#id_transakcie").val();
+   var id_knihy = $("#id_knihy").val();
+   var datum = $("#datum").val();
+   var typ_transakcie = $("#typ_transakcie").val();
+   var mnozstvo = $("#mnozstvo").val();
+   var cena_za_jednotku = $("#cena_za_jednotku").val();
+   var celkovo_cena = $("#celkovo_cena").val();
+   var aktualne_mnozstvo_na_sklade = $("#aktualne_mnozstvo_na_sklade").val();
+
+   $.ajax({
+    type: "POST",
+    url: "http://localhost:8050/book_services.asmx/AddTransaction",
+    data: {
+
+     id_knihy: id_knihy,
+     datum: datum,
+     typ_transakcie: typ_transakcie,
+     mnozstvo: mnozstvo,
+     cena_za_jednotku: cena_za_jednotku,
+     celkovo_cena: celkovo_cena,
+     aktualne_mnozstvo_na_sklade: aktualne_mnozstvo_na_sklade
+    },
+
+
+    success: function (response) {
+     showAlert("Transakcia uspesne pridana", "addModal", "success");
+
+     setTimeout(function () {
+      $('#addModal').modal('hide');
+      setTimeout(function () {
+       $('#transactionTable').DataTable().ajax.reload(null, false);
+      }, 1500);
+     }, 2000);
+     $("#addTransaction")[0].reset();
+    },
+    error: function (xhr, status, error) {
+
+     showAlert("Nastala chyba pri pridavani transakcie:" + error, "addModal", "danger")
+    }
+   });
+  });
+  // update transaction 
+  $(document).on('submit', "#updateTransaction", function (event) {
+   event.preventDefault()
+   var id_transakcie = $("#update-id_transakcie").val();
+   console.log(id_transakcie)
+   var id_knihy = $("#update-id_knihy").val();
+   var datum = $("#update-datum").val();
+   var typ_transakcie = $("#update-typ_transakcie").val();
+   var mnozstvo = $("#update-mnozstvo").val();
+   var cena_za_jednotku = $("#update-cena_za_jednotku").val();
+   var celkovo_cena = $("#update-celkovo_cena").val();
+   var aktualne_mnozstvo_na_sklade = $("#update-aktualne_mnozstvo_na_sklade").val();
+
+   $.ajax({
+    type: "POST",
+    url: "http://localhost:8050/book_services.asmx/UpdateTransaction",
+    data: {
+     id_transakcie: id_transakcie,
+     id_knihy: id_knihy,
+     datum: datum,
+     typ_transakcie: typ_transakcie,
+     mnozstvo: mnozstvo,
+     cena_za_jednotku: cena_za_jednotku,
+     celkovo_cena: celkovo_cena,
+     aktualne_mnozstvo_na_sklade: aktualne_mnozstvo_na_sklade
+    },
+
+
+    success: function (response) {
+     showAlert("Kniha uspesne aktualizovana", "updateModal", "success");
+     setTimeout(function () {
+      $('#updateModal').modal('hide');
+      setTimeout(function () {
+       $('#transactionTable').DataTable().ajax.reload(null, false);
+      }, 1500);
+     }, 2000);
+     $("#updateTransaction")[0].reset();
+    },
+    error: function (xhr, status, error) {
+
+     showAlert("Nastala chyba pri aktualizacii knihy:" + error, "updateModal", "danger")
+    }
+   });
+  });
+  $(document).on('click', ".deleteTransaction", function (event) {
+   var id_transakcie = $(this).data('id_transakcie');
+
+   if (confirm("Ste si istý že chcete vymazať údaje o transakcii? Operácia je nezvratná!!")) {
+    $.ajax({
+     type: "POST",
+     url: 'http://localhost:8050/book_services.asmx/DeleteTransaction',
+     data: { id_transakcie: id_transakcie },
+     success: function (response) {
+
+      showAlert("Transakcia uspesne vymazana", "transaction-page-alert", "success");
+      setTimeout(function () {
+
+       $('#transactionTable').DataTable().ajax.reload(null, false);
+      }, 1500);
+
+     },
+     error: function (xhr, status, error) {
+      showAlert("Nastala chyba: " + error, "transaction-page-alert", "danger")
+     }
+    });
+   }
+  });
  </script>
 
  <script>
@@ -384,7 +482,32 @@
   $("footer").load("footer.html")
  </script>
 
+ <script>
+  $(document).ready(function () {
+   $('#updateModal').on("show.bs.modal", function (event) {
+    alert("hura")
+    var button = $(event.relatedTarget);
+    var id_transakcie = button.data("id_transakcie");
+    var id_knihy = button.data("id_knihy");
+    var datum = button.data("datum");
+    var typ_transakcie = button.data("typ_transakcie");
+    var mnozstvo = button.data("mnozstvo");
+    var cena_za_jednotku = button.data("cena_za_jednotku");
+    var celkovo_cena = button.data("celkovo_cena");
+    var aktualne_mnozstvo_na_sklade = button.data("aktualne_mnozstvo_na_sklade");
 
+    var modal = $(this);
+    modal.find("#update-id_transakcie").val(id_transakcie);
+    modal.find("#update-id_knihy").val(id_knihy);
+    modal.find("#update-datum").val(datum);
+    modal.find("#update-typ_transakcie").val(typ_transakcie);
+    modal.find("#update-mnozstvo").val(mnozstvo);
+    modal.find("#update-cena_za_jednotku").val(cena_za_jednotku);
+    modal.find("#update-celkovo_cena").val(celkovo_cena);
+    modal.find("#update-aktualne_mnozstvo_na_sklade").val(aktualne_mnozstvo_na_sklade);
+   });
+  });
+ </script>
 
 </body>
 

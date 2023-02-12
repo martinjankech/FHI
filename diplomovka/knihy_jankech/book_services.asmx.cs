@@ -252,7 +252,7 @@ namespace knihy_jankech
         }
 
             [WebMethod]
-        public string AddBook()
+        public void AddBook()
         {
             try { 
             var request = HttpContext.Current.Request;
@@ -313,16 +313,17 @@ namespace knihy_jankech
             // Save the image to the file system
             string imageFilePath = Path.Combine(Server.MapPath("~/img"), "../img/" + bookData.Id + ".jpg");
             System.IO.File.WriteAllBytes(imageFilePath, bookData.ImageBytes);
-                return "Kniha bola uspesne pridana.";
+                Context.Response.Write("kniha uspesne pridana");
             }
             catch (Exception ex)
             {
-                return "Error: " + ex.Message;
+               
+                Context.Response.Write("Error: " + ex.Message);
             }
         }
 
         [WebMethod]
-        public string UpdateBook()
+        public void UpdateBook()
         {
             try
             {
@@ -361,7 +362,8 @@ namespace knihy_jankech
 
                 if (bookElement == null)
                 {
-                    return "Error: Book with specified ID was not found.";
+                    Context.Response.StatusCode = 500;
+                    Context.Response.Write("kniha zo zadanym id sa nenasla");
                 }
 
                 bookElement.SetElementValue("nazov", bookData.Nazov);
@@ -389,17 +391,17 @@ namespace knihy_jankech
 
                 xmlDoc.Save(xmlFilePath);
 
-                return "Book was successfully updated.";
+                Context.Response.Write("kniha bola uspesne aktualizovana");
             }
             catch (Exception ex)
             {
-                return "Error: " + ex.Message;
+                Context.Response.Write("Error: " + ex.Message);
             }
 
         }
 
         [WebMethod]
-        public string DeleteBook(string id)
+        public void DeleteBook(string id)
         {
             try
             {
@@ -421,16 +423,17 @@ namespace knihy_jankech
                     string imageFilePath = Path.Combine(Server.MapPath("~/img"), "../img/" + id + ".jpg");
                     System.IO.File.Delete(imageFilePath);
 
-                    return "Success";
+                    Context.Response.Write("kniha uspesne zmazana");
                 }
                 else
                 {
-                    return "Book not found";
+                    Context.Response.StatusCode = 500;
+                    Context.Response.Write("kniha so zadanym id nebola najdena");
                 }
             }
             catch (Exception ex)
             {
-                return "Error: " + ex.Message;
+                Context.Response.Write("Error: " + ex.Message);
             }
         }
 
@@ -559,7 +562,7 @@ namespace knihy_jankech
             {
                 Context.Response.StatusCode = 400;
                 Context.Response.StatusDescription = "Nezadali ste hodnotu mena isbn";
-                Context.Response.Write("Nezadali ste ID");
+                Context.Response.Write("Nezadali ste isbn");
                 return;
             }
             //Vyber vsetkych knih v dokumente
@@ -625,7 +628,7 @@ namespace knihy_jankech
             XmlDocument doc = new XmlDocument();
             try
             {
-                doc.Load(fileBookTransactionInfo);
+                doc.Load(fileBookTransactionInfoTest);
             }
             catch (FileNotFoundException)
             {
@@ -658,11 +661,25 @@ namespace knihy_jankech
             Context.Response.Write(JsonConvert.SerializeXmlNode(transactions, Formatting.Indented));
         }
         [WebMethod]
-        public string AddTransaction(string id, string id_knihy, string datum, string typ_transakcie, string mnozstvo, string cena_za_jednotku, string celkovo_cena, string aktualne_mnozstvo_na_sklade)
+        public void AddTransaction( string id_knihy, string datum, string typ_transakcie, string mnozstvo, string cena_za_jednotku, string celkovo_cena, string aktualne_mnozstvo_na_sklade)
         {
-            try { 
-            var transactionData = new TransactionData();
-            transactionData.Id_transakcie= id;
+            
+            try {
+                if (string.IsNullOrEmpty(id_knihy) ||
+            string.IsNullOrEmpty(datum) ||
+            string.IsNullOrEmpty(typ_transakcie) ||
+            string.IsNullOrEmpty(mnozstvo) ||
+            string.IsNullOrEmpty(cena_za_jednotku) ||
+            string.IsNullOrEmpty(celkovo_cena) ||
+            string.IsNullOrEmpty(aktualne_mnozstvo_na_sklade))
+                {
+                    Context.Response.StatusCode = 500;
+                    Context.Response.StatusDescription = "Nezadali ste vsetky vstupne parametre";
+                    return;
+                }
+
+                var transactionData = new TransactionData();
+            //transactionData.Id_transakcie= id;
             transactionData.Id_knihy = id_knihy;
             transactionData.Datum = datum;
             transactionData.Typ_transakcie = typ_transakcie;
@@ -690,16 +707,20 @@ namespace knihy_jankech
 
             xmlDoc.Element("knihy_transakcie").Add(transactionElement);
             xmlDoc.Save(xmlFilePath);
-            return "Book was successfully updated.";
-        }
+            Context.Response.Write("transakcia uspesne pridana");
+
+            }
             catch (Exception ex)
             {
-                return "Error: " + ex.Message;
+                
+                Context.Response.StatusCode = 500;
+                Context.Response.Write("Error: " + ex.Message);
+                return;
             }
 }
 
         [WebMethod]
-        public string UpdateTransaction(string id, string id_knihy, string datum, string typ_transakcie, string mnozstvo, string cena_za_jednotku, string celkovo_cena, string aktualne_mnozstvo_na_sklade)
+        public string UpdateTransaction(string id_transakcie, string id_knihy, string datum, string typ_transakcie, string mnozstvo, string cena_za_jednotku, string celkovo_cena, string aktualne_mnozstvo_na_sklade)
         {
             try
             {
@@ -709,7 +730,7 @@ namespace knihy_jankech
 
                 // Find the transaction element to update by its id 
 
-                var transactionElement = xmlDoc.Element("knihy_transakcie").Elements("transakcia").Where(x => x.Element("id_transakcie").Value == id).FirstOrDefault();
+                var transactionElement = xmlDoc.Element("knihy_transakcie").Elements("transakcia").Where(x => x.Element("id_transakcie").Value == id_transakcie).FirstOrDefault();
                 if (transactionElement != null)
                 {
                     transactionElement.SetElementValue("id_knihy", id_knihy);
@@ -734,7 +755,7 @@ namespace knihy_jankech
         
 
 [WebMethod]
-        public string DeleteTransaction(string id)
+        public string DeleteTransaction(string id_transakcie)
         {
             try { 
             // Load the existing XML file
@@ -743,7 +764,7 @@ namespace knihy_jankech
 
             
             // Find the transaction element to delete by its id
-            var transactionElement = xmlDoc.Element("knihy_transakcie").Elements("transa").Where(x => x.Element("id_transakcie").Value == id).FirstOrDefault();
+            var transactionElement = xmlDoc.Element("knihy_transakcie").Elements("transakcia").Where(x => x.Element("id_transakcie").Value == id_transakcie).FirstOrDefault();
             if (transactionElement != null)
             {
                 transactionElement.Remove();

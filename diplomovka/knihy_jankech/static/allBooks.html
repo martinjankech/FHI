@@ -36,6 +36,14 @@
 <body>
   <div id="navbar">
   </div>
+  <div id="book-page-alert">
+    <div style="display: none;" id="alert_container">
+      <div class="alert" role="alert">
+        <span id="alert-text"></span>
+      </div>
+    </div>
+  </div>
+
   <div class="flex-wrapper">
     <div class="container col-11 mt-5 ">
       <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#addModal">Pridaj
@@ -247,7 +255,7 @@
             <div class="row">
               <div style="display: none;" class="form-group col-3">
                 <label for="nazov">id:</label>
-                <input type="text" id="update-id" name="nazov" class="form-control">
+                <input type="text" id="update-id" name="id" class="form-control">
               </div>
               <div class="form-group col-3">
                 <label for="nazov">Nazov:</label>
@@ -689,7 +697,7 @@
           url: 'http://localhost:8050/book_services.asmx/DeleteBook',
           data: { id: id },
           success: function (response) {
-            showAlert("Kniha uspesne vymazana", "deleteModal", "success");
+            showAlert("Kniha uspesne vymazana", "book-page-alert", "success");
             setTimeout(function () {
 
               $('#bookTable').DataTable().ajax.reload(null, false);
@@ -697,7 +705,7 @@
 
           },
           error: function (xhr, status, error) {
-            showAlert("Nastala chyba: " + error, "deleteModal", "danger")
+            showAlert("Nastala chyba: " + error, "book-page-alert", "danger")
           }
         });
       }
