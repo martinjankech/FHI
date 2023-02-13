@@ -1302,4 +1302,105 @@ A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole
     </book>
     <timestamp>2023-02-13 10:37:16</timestamp>
   </output>
+  <output>
+    <book>
+      <id>4</id>
+      <nazov>Jediná kniha o jídle, kterou potřebujete</nazov>
+      <autori>
+        <autor1>Karolína Fourová</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Kuchárky</kategoria>
+      <isbn>9788024271576</isbn>
+      <jazyk>cz</jazyk>
+      <pocet_stran>200</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2020</rok_vydania>
+      <vydavatelstvo>Esence</vydavatelstvo>
+      <predajna_cena>16</predajna_cena>
+      <nakupna_cena>8.36</nakupna_cena>
+      <marza>0.913875598086125</marza>
+      <zisk_kus>7.64</zisk_kus>
+      <obsah>Kniha Karolíny Fourové, odbornice na výživu a kvalitu potravin, vám pomůže pochopit základní principy stravování, představí jednotlivé složky výživy a jejich úkol v lidském organismu. Naučíte se správně nakupovat a dostanete odpověď na většinu otázek o jídle a potravinách, které vás kdy napadly. A abyste se v té zdravé stravě neztratili hned na začátku, najdete v knize i 40 autorčiných nejoblíbenějších receptů, které vám cestu usnadní.</obsah>
+      <priemerne_hodnotenie>3.8</priemerne_hodnotenie>
+      <obrazok>../img/4.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-13 20:36:14</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>4</id>
+      <nazov>Jediná kniha o jídle, kterou potřebujete</nazov>
+      <autori>
+        <autor1>Karolína Fourová</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Kuchárky</kategoria>
+      <isbn>9788024271576</isbn>
+      <jazyk>cz</jazyk>
+      <pocet_stran>200</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2020</rok_vydania>
+      <vydavatelstvo>Esence</vydavatelstvo>
+      <predajna_cena>16</predajna_cena>
+      <nakupna_cena>8.36</nakupna_cena>
+      <marza>0.913875598086125</marza>
+      <zisk_kus>7.64</zisk_kus>
+      <obsah>Kniha Karolíny Fourové, odbornice na výživu a kvalitu potravin, vám pomůže pochopit základní principy stravování, představí jednotlivé složky výživy a jejich úkol v lidském organismu. Naučíte se správně nakupovat a dostanete odpověď na většinu otázek o jídle a potravinách, které vás kdy napadly. A abyste se v té zdravé stravě neztratili hned na začátku, najdete v knize i 40 autorčiných nejoblíbenějších receptů, které vám cestu usnadní.</obsah>
+      <priemerne_hodnotenie>3.8</priemerne_hodnotenie>
+      <obrazok>../img/4.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-13 20:36:14</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>1</id>
+      <nazov>Harry Potter a Tajomná komnata</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143088</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>360</pocet_stran>
+      <vazba>brožovaná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>11.9</predajna_cena>
+      <nakupna_cena>8.25</nakupna_cena>
+      <marza>0.442424242424242</marza>
+      <zisk_kus>3.65</zisk_kus>
+      <obsah>Dursleyovci boli v to leto takí odporní, že Harry Potter sa už nevedel dočkať, kedy sa vráti do čarodejníckej školy. Jedného dňa sa v jeho izbe objaví čudné, zlomyseľné stvorenie. Volá sa Dobby a tvrdí, že ak sa Harry vráti na Rokfort, hrozí mu smrteľné nebezpečenstvo.
+A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole tajuplné a hrôzostrašné veci. Niekto, lepšie povedané niečo napáda rokfortských študentov a premieňa ich na kameň. Že by bol za tým Draco Malfoy, Harryho úhlavný nepriateľ? Alebo to má na svedomí ten, koho na Rokforte najviac upodozrievajú – samotný Harry Potter?</obsah>
+      <priemerne_hodnotenie>4.7</priemerne_hodnotenie>
+      <obrazok>../img/1.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-13 23:08:26</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>31</id>
+      <nazov>1123</nazov>
+      <autori>
+        <autor1>123123</autor1>
+        <autor2>123123</autor2>
+      </autori>
+      <kategoria>123123</kategoria>
+      <isbn>123</isbn>
+      <jazyk>1312</jazyk>
+      <pocet_stran>3123</pocet_stran>
+      <vazba>12313</vazba>
+      <rok_vydania>123123</rok_vydania>
+      <vydavatelstvo>1231</vydavatelstvo>
+      <predajna_cena>23123</predajna_cena>
+      <nakupna_cena>123</nakupna_cena>
+      <marza>99.46806210266833888336288544</marza>
+      <zisk_kus>23000</zisk_kus>
+      <obsah>123123</obsah>
+      <priemerne_hodnotenie>123</priemerne_hodnotenie>
+      <obrazok>../img/31.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-13 23:16:23</timestamp>
+  </output>
 </root>

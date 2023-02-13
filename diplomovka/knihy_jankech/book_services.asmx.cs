@@ -34,18 +34,19 @@ namespace knihy_jankech
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     [System.Web.Script.Services.ScriptService]
     public class book_services : System.Web.Services.WebService
-    {
+    {// tieto cesty treba nastaviť 
         private String fileBookInfo = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\book_moje.xml ";
         private String fileBookTransactionInfo = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\book_transakcie.xml ";
         public String fileOutputSingleSearch = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\output.xml";
         public String fileAmountFilterPath = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\Amoutsoutputs";
 
-        private String fileBookInfoTest = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\book_moje_test.xml ";
-        private String fileBookTransactionInfoTest = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\book_transakcie_moje_test.xml ";
+        //private String fileBookInfoTest = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\book_moje_test.xml ";
+        //private String fileBookTransactionInfoTest = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\book_transakcie_moje_test.xml ";
 
-       
 
-        private XmlDocument LoadDocument(string filePath)
+        // newebové metódy
+        // 3 metoty na nacitanie xmldocumentu xdocumentu(pouzivaný pri linq nacita celý dokument ) a xelementu(tiež linq ale konkretny element  )
+        private XmlDocument LoadXmlDocument(string filePath)
         {
             // Vytvorenie nového objektu XmlDocument
             XmlDocument doc = new XmlDocument();
@@ -77,29 +78,91 @@ namespace knihy_jankech
                 Context.Response.StatusCode = 500;
                 Context.Response.StatusDescription = "Chyba pri načítaní dokumentu.";
                 Context.Response.Write("Chyba pri načítaní dokumentu: " + ex.Message);
-                // Výnimka bude zaznamenaná pre budúce účely ladenia
-                Console.WriteLine(ex.ToString());
                 return null;
             }
         }
-        //public string DecodeFromUtf8(string utf8_String)
-        //{
-        //    byte[] bytes = Encoding.Default.GetBytes(utf8_String);
-        //    string utf8 = Encoding.UTF8.GetString(bytes);
-        //    return utf8;
-        //}
+
+        private XElement LoadXElement(string filePath)
+        {
+            try
+            {
+                // Načítanie XML elementu zo zadaného súboru
+                XElement element = XElement.Load(filePath);
+                return element;
+            }
+            catch (FileNotFoundException ex)
+            {
+                // Ak sa nevie nájsť zadaný súbor, nastaví sa status kód na 404 a vráti sa popisná chybová správa
+                Context.Response.StatusCode = 404;
+                Context.Response.StatusDescription = "Zadaný súbor sa nenašiel.";
+                Context.Response.Write("Zadaný súbor sa nenašiel: " + ex.Message);
+                return null;
+            }
+            catch (XmlException ex)
+            {
+                // Ak sa vyskytne chyba pri parsovaní XML elementu, nastaví sa status kód na 400 a vráti sa popisná chybová správa
+                Context.Response.StatusCode = 400;
+                Context.Response.StatusDescription = "Chyba pri parsovaní XML elementu.";
+                Context.Response.Write("Chyba pri parsovaní XML elementu: " + ex.Message);
+                return null;
+            }
+            catch (Exception ex)
+            {
+                // Ak sa vyskytne akákoľvek iná chyba pri načítaní elementu, nastaví sa status kód na 500 a vráti sa popisná chybová správa
+                Context.Response.StatusCode = 500;
+                Context.Response.StatusDescription = "Chyba pri načítaní elementu.";
+                Context.Response.Write("Chyba pri načítaní elementu: " + ex.Message);
+                return null;
+            }
+        }
+        private XDocument LoadXDocument(string filePath)
+        {
+            try
+            {
+                // Načítanie XML dokumentu zo zadaného súboru
+                XDocument document = XDocument.Load(filePath);
+                return document;
+            }
+            catch (FileNotFoundException ex)
+            {
+                // Ak sa nevie nájsť zadaný súbor, nastaví sa status kód na 404 a vráti sa popisná chybová správa
+                Context.Response.StatusCode = 404;
+                Context.Response.StatusDescription = "Zadaný súbor sa nenašiel.";
+                Context.Response.Write("Zadaný súbor sa nenašiel: " + ex.Message);
+                return null;
+            }
+            catch (XmlException ex)
+            {
+                // Ak sa vyskytne chyba pri parsovaní XML dokumentu, nastaví sa status kód na 400 a vráti sa popisná chybová správa
+                Context.Response.StatusCode = 400;
+                Context.Response.StatusDescription = "Chyba pri parsovaní XML dokumentu.";
+                Context.Response.Write("Chyba pri parsovaní XML dokumentu: " + ex.Message);
+                return null;
+            }
+            catch (Exception ex)
+            {
+                // Ak sa vyskytne akákoľvek iná chyba pri načítaní dokumentu, nastaví sa status kód na 500 a vráti sa popisná chybová správa
+                Context.Response.StatusCode = 500;
+                Context.Response.StatusDescription = "Chyba pri načítaní dokumentu.";
+                Context.Response.Write("Chyba pri načítaní dokumentu: " + ex.Message);
+                return null;
+            }
+        }
+
+
         public static string CreateTimestamp()
         {
             // Formátovať aktuálny dátum a čas pomocou vzoru "yyyy-MM-dd HH:mm:ss"
             return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }
-        // Táto funckia zapíše dokument XML do súboru s časovou značkou.Ak súbor už existuje,
+         // metóda na zápis do jedného súboru (cesta k súboru je parameter) s časovou pečiatkov
+        // Táto funkcia zapíše dokument XML do súboru s časovou značkou.Ak súbor už existuje,
         // kód ho načíta a pridá doň nové prvky, inak vytvorí nový dokument XML s koreňovým prvkom.
-        // Kód prechádza v cykle každý uzol v údajoch, importuje ho do dokumentu, vytvorí prvok "output" (výstup), vytvorí prvok "timestamp" (časová pečiatka) s aktuálnym dátumom a časom,
-        // pripojí importovaný uzol a časovú pečiatku k výstupnému prvku a nakoniec pripojí výstupný prvok ku koreňovému prvku.Nakoniec sa dokument uloží do zadanej cesty k súboru.
+        // Kód prechádza v cykle každý uzol v údajoch, importuje ho do dokumentu, vytvorí element "output" (výstup), vytvorí element "timestamp" (časová pečiatka) s aktuálnym dátumom a časom,
+        // pripojí importovaný uzol a časovú pečiatku k elementu output a  nakoniec pripojí výstupný prvok ku koreňovému prvku.Nakoniec sa dokument uloží do zadanej cesty k súboru.
 
-        // metóda na zápis do súboru s časovým údajom
-        // Funkcia na zápis do súboru s časovou pečiatkou
+        // metóda na zápis do súboru s časovou pečiatkov
+      
         public void WriteToTheFileWithTimeStamp(string path, XmlNodeList data)
         {
             try
@@ -123,7 +186,7 @@ namespace knihy_jankech
                 else
                 {
                     // Načítanie existujúceho súboru
-                    doc.Load(path);
+                    doc = LoadXmlDocument(path);
                     root = doc.DocumentElement;
                 }
 
@@ -167,9 +230,9 @@ namespace knihy_jankech
                 Console.WriteLine("Nedovolený prístup: " + ex.Message);
             }
         }
-        //This code writes an XML document to a file with a timestamp.If the file already exists, the code will load the file and add new elements to it, otherwise it will create a new XML document with a root element.The code loops through each node in the data, imports it into the document, creates an "output" element, creates a "timestamp" element with the current date and time, appends the imported node and the timestamp to the output element, and finally appends the
 
-        // ulozi IEnumerable alebo iny objekt vysledok LINQ dopytu spolu s casovou peciatkov a hladanymi parametrami do noveho xml suboru 
+
+        // ulozi IEnumerable alebo iny objekt vysledok LINQ dopytu spolu s casovou peciatkov a hladanymi parametrami do noveho xml suboru (na rozdiel od metody WriteToTheFileWithTimeStamp ktora vklada všetko do jedného súboru )
         //dynamic je kľúčové slovo C#, ktoré umožňuje deklarovať premennú ako dynamický typ. Typ premennej sa rieši počas behu namiesto kompilácie. To znamená, že typ premennej sa môže dynamicky meniť na základe hodnoty, ku ktorej je priradená.
         //Použitie dynamic v tejto metode je výhodné, pretože  umožňuje odovzdať akýkoľvek typ objektu metóde SaveWebMethodResult bez toho, aby sa muselo zadava5 presný typ.Vďaka tomu je metóda flexibilnejšia a všeobecnejšia, pretože dokáže spracovať objekty rôznych typov a uložiť ich do súboru XML.
         // Keďže typ výsledku je dynamický, kód môže určiť typ objektu za behu a skontrolovať, či ide o IEnumerable<object>. Ak áno, kód prejde každú položku a pridá ju do súboru XML. Ak nie, kód ho pridá ako jednu položku.
@@ -222,21 +285,7 @@ namespace knihy_jankech
             string fullPath = Path.Combine(path, fileName);
             root.Save(fullPath);
         }
-        //[WebMethod]
-        //public void SaveImage()
-        //{
-        //    var request = HttpContext.Current.Request;
-        //    var postedFile = request.Files[0];
-
-        //    var imageData = new ImageData();
-        //    imageData.ImageName = Path.GetFileName(postedFile.FileName);
-        //    imageData.ImageBytes = new byte[postedFile.ContentLength];
-        //    postedFile.InputStream.Read(imageData.ImageBytes, 0, postedFile.ContentLength);
-
-        //    // Save the image to the file system
-        //    string filePath = Path.Combine(Server.MapPath("~/imgs"), imageData.ImageName);
-        //    System.IO.File.WriteAllBytes(filePath, imageData.ImageBytes);
-        //}
+       
         public void ValidateDate(string startDate, string endDate)
         {
             DateTime start, end;
@@ -428,7 +477,7 @@ namespace knihy_jankech
 
             // Load the existing XML file
             string xmlFilePath = fileBookInfo;
-            XElement xmlDoc = XElement.Load(xmlFilePath);
+            XElement xmlDoc = LoadXElement(xmlFilePath);
             var lastBookId = xmlDoc.Element("books").Elements("book").Max(x => (int?)x.Element("id")) ?? 0;
             bookData.Id = (lastBookId + 1).ToString();
 
@@ -504,7 +553,7 @@ namespace knihy_jankech
                 }
 
                 string xmlFilePath = fileBookInfo;
-                XElement xmlDoc = XElement.Load(xmlFilePath);
+                XElement xmlDoc = LoadXElement(xmlFilePath);
 
                 var bookElement = xmlDoc.Element("books").Elements("book").FirstOrDefault(x => x.Element("id").Value == bookData.Id);
 
@@ -556,7 +605,7 @@ namespace knihy_jankech
             {
                 // Load the existing XML file
                 string xmlFilePath = fileBookInfo;
-                XElement xmlDoc = XElement.Load(xmlFilePath);
+                XElement xmlDoc = LoadXElement(xmlFilePath);
 
        
                             // Find the book with the specified id
@@ -600,7 +649,7 @@ namespace knihy_jankech
             try
             {
                 // Nacitanie dokumentu zo suboru
-                XmlDocument doc = LoadDocument(fileBookInfo);
+                XmlDocument doc = LoadXmlDocument(fileBookInfo);
                 if (doc == null)
                 {
                     // Nastavenie status kodu na 500 a popisu chyby ako "Dokument nemohol byt nacitany" v pripade, ze dokument sa neda nacitat
@@ -613,11 +662,11 @@ namespace knihy_jankech
                     // Nastavenie status kodu na 400 a popisu chyby ako "Nezadali ste hodnotu id" v pripade, ze nie je zadane id
                     Context.Response.StatusCode = 400;
                     Context.Response.StatusDescription = "Nezadali ste hodnotu id";
-                    Context.Response.Write("Nezadali ste ID");
+                    Context.Response.Write("Nezadali ste ID knihy");
                     return;
                 }
 
-                // Vyhladanie jednej knihy podla zadaneho id
+                // Vyhladanie jednej knihy podla zadaneho id Xpath ukazka kde je vhodny pre svoju jednoduchosť
                 XmlNodeList singleBookById = doc.SelectNodes("Bookstore/books/book[id=" + id + "]");
                 if (singleBookById.Item(0) == null)
                 {
@@ -649,7 +698,7 @@ namespace knihy_jankech
             try
             {
                 // Načítanie XML dokumentu
-                XmlDocument doc = LoadDocument(fileBookInfo);
+                XmlDocument doc = LoadXmlDocument(fileBookInfo);
                 // Ak sa dokument nedá načítať, nastaví sa stavový kód na 500 a opíše sa chyba
                 if (doc == null)
                 {
@@ -662,12 +711,12 @@ namespace knihy_jankech
                 {
                     Context.Response.StatusCode = 400;
                     Context.Response.StatusDescription = "Nezadali ste hodnotu mena knihy";
-                    Context.Response.Write("Nezadali ste ID");
+                    Context.Response.Write("Nezadali ste nazov knihy");
                     return;
                 }
                 // Prevod názvu knihy na malé písmená
                 name = name.ToLower();
-                // Vyhľadanie záznamu o knihe s daným názvom
+                // Vyhľadanie záznamu o knihe s daným názvom Xpathu ukazka kde je vhodny pre svoju jednoduchosť
                 XmlNodeList nodeListBook = doc.SelectNodes("Bookstore/books/book[translate(nazov,'ABCDEFGHIJKLMNOPQRSTUVWXYZÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞŸŽŠŒ','abcdefghijklmnopqrstuvwxyzàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþÿžšœ') = \"" + name + "\"]");
                 // Ak sa záznam nenašiel, vyhodí sa výnimka a nastaví sa stavový kód na 500
                 if (nodeListBook == null || nodeListBook.Count == 0)
@@ -698,7 +747,7 @@ namespace knihy_jankech
         public void SinglebookDataByIsbn(string isbn)
         {
             //Nacitanie XML dokumentu z cesty ulozenej v premennej fileBookInfo
-            XmlDocument doc = LoadDocument(fileBookInfo);
+            XmlDocument doc = LoadXmlDocument(fileBookInfo);
             //Ak sa dokument nenacital, nastav status code na 500 a ukonci funkciu
             if (doc == null)
             {
@@ -714,7 +763,7 @@ namespace knihy_jankech
                 Context.Response.Write("Nezadali ste isbn");
                 return;
             }
-            //Vyber vsetkych knih v dokumente
+            //Vyber vsetkych knih v dokumente Xpathu ukazka kde je vhodny pre svoju jednoduchosť
             XmlNodeList AllBook = doc.SelectNodes("Bookstore/books/book");
             //Pocet knih v dokumente
             int allBookCount = AllBook.Count;
@@ -740,25 +789,8 @@ namespace knihy_jankech
         [WebMethod] // označenie pre volanie cez webový protokol
         public void GetListAllBooks() // verejná funkcia na získanie zoznamu kníh
         {
-            XmlDocument doc = new XmlDocument(); // vytvorenie XML dokumentu
-            try
-            {
-                doc.Load(fileBookInfo); // načítanie súboru s informáciami o knihách
-            }
-            catch (FileNotFoundException) // v prípade, že súbor nebol nájdený
-            {
-                Context.Response.StatusCode = 500; // nastavenie chybového kódu na 500
-                Context.Response.StatusDescription = "Súbor nebol nájdený"; // popis chyby
-                return; // ukončenie funkcie
-            }
-            catch (XmlException) // v prípade chyby pri načítaní XML dokumentu
-            {
-                Context.Response.StatusCode = 500; // nastavenie chybového kódu na 500
-                Context.Response.StatusDescription = "Chyba pri načítaní XML dokumentu"; // popis chyby
-                return; // ukončenie funkcie
-            }
-
-            XmlNodeList AllBook = doc.SelectNodes("Bookstore/books"); // získanie zoznamu všetkých kníh
+            XmlDocument doc = LoadXmlDocument(fileBookInfo); ; // vytvorenie  a nacitanie XML dokumentu
+            XmlNodeList AllBook = doc.SelectNodes("Bookstore/books"); // získanie zoznamu všetkých kníh pomocou Xpathu ukazka kde je vhodny pre svoju jednoduchosť 
             if (AllBook == null || AllBook.Item(0) == null) // v prípade, že zoznam je prázdny alebo neexistuje
             {
                 Context.Response.StatusCode = 500; // nastavenie chybového kódu na 500
@@ -774,29 +806,12 @@ namespace knihy_jankech
         [WebMethod]
         public void GetListAllTransactions()
         {
-            XmlDocument doc = new XmlDocument();
-            try
-            {
-                doc.Load(fileBookTransactionInfoTest);
-            }
-            catch (FileNotFoundException)
-            {
-                Context.Response.StatusCode = 500;
-                Context.Response.StatusDescription = "File not found";
-                return;
-            }
-            catch (XmlException)
-            {
-                Context.Response.StatusCode = 500;
-                Context.Response.StatusDescription = "Error loading XML document";
-                return;
-            }
-
+            XmlDocument doc = LoadXmlDocument(fileBookTransactionInfo);
             XmlNodeList AllTransactions = doc.SelectNodes("knihy_transakcie");
             if (AllTransactions == null || AllTransactions.Item(0) == null)
             {
                 Context.Response.StatusCode = 500;
-                Context.Response.StatusDescription = "Error processing data in document";
+                Context.Response.StatusDescription = "Chyba spracovania dokumentu";
                 return;
             }
 
@@ -838,8 +853,8 @@ namespace knihy_jankech
             transactionData.Aktualne_mnozstvo_na_sklade = Convert.ToInt32(aktualne_mnozstvo_na_sklade);
 
             // Load the existing XML file
-            string xmlFilePath = fileBookTransactionInfoTest;
-            XDocument xmlDoc = XDocument.Load(xmlFilePath);
+            string xmlFilePath = fileBookTransactionInfo;
+                XDocument xmlDoc = LoadXDocument(xmlFilePath);
             var lastTransactionId = xmlDoc.Elements("knihy_transakcie").Elements("transakcia").Max(x => (int?)x.Element("id_transakcie")) ?? 0;
             transactionData.Id_transakcie = (lastTransactionId + 1).ToString();
 
@@ -874,8 +889,8 @@ namespace knihy_jankech
             try
             {
                 // Load the existing XML file
-                string xmlFilePath = fileBookTransactionInfoTest;
-                XDocument xmlDoc = XDocument.Load(xmlFilePath);
+                string xmlFilePath = fileBookTransactionInfo;
+                XDocument xmlDoc = LoadXDocument(xmlFilePath);
 
                 // Find the transaction element to update by its id 
 
@@ -915,12 +930,12 @@ namespace knihy_jankech
         {
             try { 
             // Load the existing XML file
-            string xmlFilePath = fileBookTransactionInfoTest;
-            XDocument xmlDoc = XDocument.Load(xmlFilePath);
+            string xmlFilePath = fileBookTransactionInfo;
+            XDocument xmlDoc = LoadXDocument(xmlFilePath);
 
-            
-            // Find the transaction element to delete by its id
-            var transactionElement = xmlDoc.Element("knihy_transakcie").Elements("transakcia").Where(x => x.Element("id_transakcie").Value == id_transakcie).FirstOrDefault();
+
+                // Find the transaction element to delete by its id
+                var transactionElement = xmlDoc.Element("knihy_transakcie").Elements("transakcia").Where(x => x.Element("id_transakcie").Value == id_transakcie).FirstOrDefault();
                 if (transactionElement == null)
                 {
                     Context.Response.StatusCode = 500;
@@ -1003,8 +1018,8 @@ namespace knihy_jankech
                 return;
             }
             // Load XML files containing book information and book transaction information
-            var booksXml = XElement.Load(fileBookInfo);
-            var warehouseXml = XElement.Load(fileBookTransactionInfo);
+            var booksXml = LoadXElement(fileBookInfo);
+            var warehouseXml = LoadXElement(fileBookTransactionInfo);
             // Convert the start and end dates to DateTime format
           
             // Use LINQ to join the information from the two XML files and filter the results based on selected category and selected value
@@ -1231,7 +1246,6 @@ namespace knihy_jankech
 
 
             }
-
             // Try to parse the start and end dates
             DateTime start, end;
             if (!DateTime.TryParse(startDate, out start) || !DateTime.TryParse(endDate, out end))
@@ -1247,10 +1261,10 @@ namespace knihy_jankech
                 return;
             }
             // Load XML files containing book information and book transaction information
-            var booksXml = XElement.Load(fileBookInfo);
-            var warehouseXml = XElement.Load(fileBookTransactionInfo);
+            var booksXml = LoadXElement(fileBookInfo);
+            var warehouseXml = LoadXElement(fileBookTransactionInfo);
             // Convert the start and end dates to DateTime format
-           
+
             // Use LINQ to join the information from the two XML files and filter the results based on selected category and selected value
             if (selectedAtribute != "vsetky")
             {
@@ -1359,9 +1373,9 @@ namespace knihy_jankech
         public void GetAggregatedDataSellByDateAndSelectedCategory(string atribute, DateTime startDate, DateTime endDate)
         {
             // Load the books data from XML
-            XDocument booksData = XDocument.Load(fileBookInfo);
+            XDocument booksData = LoadXDocument(fileBookInfo);
             // Load the transactions data from XML
-            XDocument transactionsData = XDocument.Load(fileBookTransactionInfo);
+            XDocument transactionsData = LoadXDocument(fileBookTransactionInfo);
             if (atribute != "autor" && atribute != "autori")
             {
 
@@ -1497,9 +1511,9 @@ namespace knihy_jankech
         public void SortedDrillDownByAtributeDataBetweenTwoDatesSell(string atribute, string startDate, string endDate, string sortingField = "", string sortingOrder = "", string optionalParameter = "")
         {
             // Load the books data from XML
-            XDocument booksData = XDocument.Load(fileBookInfo);
+            XDocument booksData = LoadXDocument(fileBookInfo);
             // Load the transactions data from XML
-            XDocument transactionsData = XDocument.Load(fileBookTransactionInfo);
+            XDocument transactionsData = LoadXDocument(fileBookTransactionInfo);
             DateTime start, end;
             if (!DateTime.TryParse(startDate, out start) || !DateTime.TryParse(endDate, out end))
             {
@@ -1952,9 +1966,9 @@ namespace knihy_jankech
         public void SortedDrillDownByAtributeDataBetweenTwoDatesCost(string atribute, string startDate, string endDate, string sortingField = "", string sortingOrder = "", string optionalParameter = "")
         {
             // Load the books data from XML
-            XDocument booksData = XDocument.Load(fileBookInfo);
+            XDocument booksData = LoadXDocument(fileBookInfo);
             // Load the transactions data from XML
-            XDocument transactionsData = XDocument.Load(fileBookTransactionInfo);
+            XDocument transactionsData = LoadXDocument(fileBookTransactionInfo);
             DateTime start, end;
             if (!DateTime.TryParse(startDate, out start) || !DateTime.TryParse(endDate, out end))
             {
@@ -2405,7 +2419,7 @@ namespace knihy_jankech
         [WebMethod]
         public void CalculateRevenueCostProfit(int year, int quarter, int month)
         {
-            XDocument xDoc = XDocument.Load(fileBookTransactionInfo);
+            XDocument xDoc = LoadXDocument(fileBookTransactionInfo);
             var transactions = from transaction in xDoc.Descendants("transakcia")
                                select new
                                {

@@ -98,7 +98,7 @@ function showAlert(message, Id, type) {
           $("#zisk_kus").html(data.book.zisk_kus)
           $("form")[0].reset();
          
-        }).fail(function (jqXHR, textStatus, errorThrown) { showAlertError(errorThrown) });
+        }).fail(function (jqXHR, textStatus, errorThrown) { showAlert(jqXHR.responseText, "alerts", "danger") });
         event.preventDefault();
       })
     }

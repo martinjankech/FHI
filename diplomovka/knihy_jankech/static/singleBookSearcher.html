@@ -31,12 +31,9 @@
   <div id="navbar">
 
   </div>
-  <div style="display: none;" id="alert_error">
-    <div class="alert alert-danger" role="alert">
-      <span id="alert-text"></span>
-    </div>
-    <div style="display: none;" id="alert_success">
-      <div class="alert alert-success" role="alert">
+  <div id="alerts">
+    <div style="display: none;" id="alert_container">
+      <div class="alert" role="alert">
         <span id="alert-text"></span>
       </div>
     </div>
@@ -55,7 +52,7 @@
       <div class="form-check">
         <input class="form-check-input2" type="radio" name="exampleRadios" id="name_checkbox" value="option2">
         <label class="form-check-label" for="exampleRadios2">
-          Meno knihy
+          Nazov knihy
         </label>
       </div>
       <div class="form-check">
@@ -116,7 +113,7 @@
           " <div class=\"form-row mt-1\">" +
 
           " <label for=\"inputEmail\">ID knihy</label>" +
-          "<input type=\"text\" class=\"form-control \" id=\"id_input\" placeholder=\"Book ID\" name=\"id\">" +
+          "<input type=\"text\" class=\"form-control \" id=\"id_input\" placeholder=\"ID knihy\" name=\"id\">" +
           " </div>" +
           " </div>" +
           " <button type=\"submit\" class=\"btn btn-primary  mt-2\">Najdi Knihu</button>" +
