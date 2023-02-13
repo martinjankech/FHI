@@ -256,11 +256,159 @@ namespace knihy_jankech
         {
             try { 
             var request = HttpContext.Current.Request;
-            var postedFile = request.Files[0];
+
 
             var bookData = new BookData();
-            
-            bookData.Nazov = request["nazov"];
+                if (string.IsNullOrEmpty(request["nazov"]))
+                {
+                    Context.Response.StatusCode = 500;
+                    Context.Response.Write("Zadajte parameter nazov");
+                    return;
+                }
+                else
+                {
+                    bookData.Nazov = request["nazov"];
+                }
+                if (string.IsNullOrEmpty(request["autor1"]))
+                {
+                    Context.Response.StatusCode = 500;
+                    Context.Response.Write("Zadajte parameter autor1");
+                    return;
+                }
+                else
+                {
+                    bookData.Autor1 = request["autor1"];
+                }
+                if (string.IsNullOrEmpty(request["autor2"]))
+                {
+                    Context.Response.StatusCode = 500;
+                    Context.Response.Write("Zadajte parameter autor2");
+                    return;
+                }
+                else
+                {
+                    bookData.Autor2 = request["autor2"];
+                }
+                if (string.IsNullOrEmpty(request["kategoria"]))
+                {
+                    Context.Response.StatusCode = 500;
+                    Context.Response.Write("Zadajte parameter kategoria");
+                    return;
+                }
+                else
+                {
+                    bookData.Kategoria = request["kategoria"];
+                }
+                if (string.IsNullOrEmpty(request["isbn"]))
+                {
+                    Context.Response.StatusCode = 500;
+                    Context.Response.Write("Zadajte parameter isbn");
+                    return;
+                }
+                else
+                {
+                    bookData.Isbn = request["isbn"];
+                }
+                if (string.IsNullOrEmpty(request["jazyk"]))
+                {
+                    Context.Response.StatusCode = 500;
+                    Context.Response.Write("Zadajte parameter jazyk");
+                    return;
+                }
+                else
+                {
+                    bookData.Jazyk = request["jazyk"];
+                }
+                if (string.IsNullOrEmpty(request["pocet_stran"]))
+                {
+                    Context.Response.StatusCode = 500;
+                    Context.Response.Write("Zadajte parameter pocet stran");
+                    return;
+                }
+                else
+                {
+                    bookData.Pocet_stran = request["pocet_stran"];
+                }
+                if (string.IsNullOrEmpty(request["vazba"]))
+                {
+                    Context.Response.StatusCode = 500;
+                    Context.Response.Write("Zadajte parameter vazba");
+                    return;
+                }
+                else
+                {
+                    bookData.Vazba = request["vazba"];
+                }
+                if (string.IsNullOrEmpty(request["rok_vydania"]))
+                {
+                    Context.Response.StatusCode = 500;
+                    Context.Response.Write("Zadajte parameter rok vydania");
+                    return;
+                }
+                else
+                {
+                    bookData.Rok_vydania = request["rok_vydania"];
+                }
+                if (string.IsNullOrEmpty(request["vydavatelstvo"]))
+                {
+                    Context.Response.StatusCode = 500;
+                    Context.Response.Write("Zadajte parameter vydavatelstvo");
+                    return;
+                }
+                else
+                {
+                    bookData.Vydavatelstvo = request["vydavatelstvo"];
+                }
+                if (string.IsNullOrEmpty(request["predajna_cena"]))
+                {
+                    Context.Response.StatusCode = 500;
+                    Context.Response.Write("Zadajte parameter predajna_cena");
+                    return;
+                }
+                else
+                {
+                    bookData.Predajna_cena = decimal.Parse(request["predajna_cena"]);
+                }
+                if (string.IsNullOrEmpty(request["nakupna_cena"]))
+                {
+                    Context.Response.StatusCode = 500;
+                    Context.Response.Write("Zadajte parameter nakupna cena");
+                    return;
+                }
+                else
+                {
+                    bookData.Nakupna_cena = decimal.Parse(request["nakupna_cena"]);
+                }
+                if (string.IsNullOrEmpty(request["obsah"]))
+                {
+                    Context.Response.StatusCode = 500;
+                    Context.Response.Write("Zadajte parameter obsah ");
+                    return;
+                }
+                else
+                {
+                    bookData.Obsah = request["obsah"];
+                }
+                if (string.IsNullOrEmpty(request["priemerne_hodnotenie"]))
+                {
+                    Context.Response.StatusCode = 500;
+                    Context.Response.Write("Zadajte parameter priemerne hodnotenie ");
+                    return;
+                }
+                else
+                {
+                    bookData.Priemerne_hodnotenie = request["priemerne_hodnotenie"];
+                }
+                if (request.Files.Count == 0)
+                {
+                    Context.Response.StatusCode = 500;
+                    Context.Response.Write("Vlozte obrazok knihy pozadovana velkost formatu je 430*600px");
+                    return;
+                }
+
+                var postedFile = request.Files[0];
+
+                bookData.Nazov = request["nazov"];
             bookData.Autor1 = request["autor1"];
             bookData.Autor2 = request["autor2"];
             bookData.Kategoria = request["kategoria"];
@@ -317,7 +465,7 @@ namespace knihy_jankech
             }
             catch (Exception ex)
             {
-               
+                Context.Response.StatusCode = 500;
                 Context.Response.Write("Error: " + ex.Message);
             }
         }
@@ -395,6 +543,7 @@ namespace knihy_jankech
             }
             catch (Exception ex)
             {
+                Context.Response.StatusCode = 500;
                 Context.Response.Write("Error: " + ex.Message);
             }
 
@@ -720,7 +869,7 @@ namespace knihy_jankech
 }
 
         [WebMethod]
-        public string UpdateTransaction(string id_transakcie, string id_knihy, string datum, string typ_transakcie, string mnozstvo, string cena_za_jednotku, string celkovo_cena, string aktualne_mnozstvo_na_sklade)
+        public void UpdateTransaction(string id_transakcie, string id_knihy, string datum, string typ_transakcie, string mnozstvo, string cena_za_jednotku, string celkovo_cena, string aktualne_mnozstvo_na_sklade)
         {
             try
             {
@@ -731,7 +880,12 @@ namespace knihy_jankech
                 // Find the transaction element to update by its id 
 
                 var transactionElement = xmlDoc.Element("knihy_transakcie").Elements("transakcia").Where(x => x.Element("id_transakcie").Value == id_transakcie).FirstOrDefault();
-                if (transactionElement != null)
+                if (transactionElement == null)
+                {
+                    Context.Response.StatusCode = 500;
+                    Context.Response.Write("kniha zo zadanym id sa nenasla");
+                }
+               else
                 {
                     transactionElement.SetElementValue("id_knihy", id_knihy);
                     transactionElement.SetElementValue("datum", datum);
@@ -743,19 +897,21 @@ namespace knihy_jankech
                 }
 
                 xmlDoc.Save(xmlFilePath);
-                return "Transakcia bola uspesne aktualizovana";
+                Context.Response.Write("Transakcia bola uspesne aktualizovana");
+             
             }
 
             catch (Exception ex)
             {
-                return "Error: " + ex.Message;
+                Context.Response.StatusCode = 500;
+                Context.Response.Write("Error: " + ex.Message);
             }
         }
         
         
 
 [WebMethod]
-        public string DeleteTransaction(string id_transakcie)
+        public void DeleteTransaction(string id_transakcie)
         {
             try { 
             // Load the existing XML file
@@ -765,18 +921,25 @@ namespace knihy_jankech
             
             // Find the transaction element to delete by its id
             var transactionElement = xmlDoc.Element("knihy_transakcie").Elements("transakcia").Where(x => x.Element("id_transakcie").Value == id_transakcie).FirstOrDefault();
-            if (transactionElement != null)
+                if (transactionElement == null)
+                {
+                    Context.Response.StatusCode = 500;
+                    Context.Response.Write("kniha zo zadanym id sa nenasla");
+                }
+
+               else
             {
                 transactionElement.Remove();
                 xmlDoc.Save(xmlFilePath);
-                return "kniha bola zmazana";
+                
             }
-                else { return "Nenasla sa kniha so zadanym id"; }
+                
             }
             
             catch (Exception ex)
-            {
-                return "Error: " + ex.Message;
+            { Context.Response.StatusCode = 500;
+               Context.Response.Write("Error: " + ex.Message);
+                
             }
         }
         [WebMethod]

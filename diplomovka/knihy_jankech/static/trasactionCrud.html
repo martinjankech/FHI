@@ -2,512 +2,497 @@
 <html lang="en">
 
 <head>
- <meta charset="UTF-8">
- <meta http-equiv="X-UA-Compatible" content="IE=edge">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
-  crossorigin="anonymous"></script>
- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
-  integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
-  integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
-  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
- <link rel="stylesheet" href="css/footer.css">
- <!-- davaj pozor na kniznice niektore su v konflikte a potom moze sposobit neobvykle spravanie kodu ako napr tato kniznica nefungova bs.modal.show -->
- <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
- <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
-  integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
- <!-- jqury kniznica na obmedzenie maximalneho poctu poloziek v autocomplete  -->
- <script src="js/jquery.ui.autocomplete.scroll.min.js"></script>
- <link href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.css" rel="stylesheet" />
- <script src="js/app.js"></script>
- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
- <link rel="stylesheet" href="css/datatable.css">
- <link rel="stylesheet" href="css/allbooks.css">
- <title>CRUD transakcie</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/footer.css">
+  <!-- davaj pozor na kniznice niektore su v konflikte a potom moze sposobit neobvykle spravanie kodu ako napr tato kniznica nefungova bs.modal.show -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+    integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+  <!-- jqury kniznica na obmedzenie maximalneho poctu poloziek v autocomplete  -->
+  <script src="js/jquery.ui.autocomplete.scroll.min.js"></script>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.css" rel="stylesheet" />
+  <script src="js/app.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+  <link rel="stylesheet" href="css/datatable.css">
+  <link rel="stylesheet" href="css/allbooks.css">
+  <title>CRUD transakcie</title>
 
 </head>
 
 <body>
- <div id="navbar">
- </div>
- <div id="transaction-page-alert">
-  <div style="display: none;" id="alert_container">
-   <div class="alert" role="alert">
-    <span id="alert-text"></span>
-   </div>
+  <div id="navbar">
   </div>
- </div>
- <div class="flex-wrapper">
-  <div class="container col-11 mt-5 ">
-   <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#addModal">Pridaj transakciu
-   </button>
-   <div class=" mb-5 table-responsive">
-    <table id="transactionTable" class=" display nowrap ">
-     <thead>
-      <tr>
-       <th>id_transakcie</th>
-       <th>id_knihy</th>
-       <th>datum</th>
-       <th>typ_transakcie</th>
-       <th>množstvo</th>
-       <th>cena za jednotku</th>
-       <th>celkovo cena</th>
-       <th>aktualne mnozstvo na sklade</th>
-       <th>Aktualizuj</th>
-       <th>Zmaž</th>
-
-
-      </tr>
-     </thead>
-     <tfoot class="mb-5">
-      <tr>
-       <th>id_transakcie</th>
-       <th>id_knihy</th>
-       <th>datum</th>
-       <th>typ_transakcie</th>
-       <th>množstvo</th>
-       <th>cena za jednotku</th>
-       <th>celkovo cena</th>
-       <th>aktualne mnozstvo na sklade</th>
-       <th>Aktualizuj</th>
-       <th>Zmaž</th>
-      </tr>
-     </tfoot>
-    </table>
-   </div>
-  </div>
-  <footer>
-  </footer>
- </div>
-
- <!-- Add Modal  -->
- <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-   <div class="modal-content">
-    <div class="modal-header">
-     <h5 class="modal-title" id="addModalLabel">Pridaj transakciu</h5>
-     <button type="button" class="close" data-dismiss="modal" aria-label="Zavrieť">
-      <span aria-hidden="true">&times;</span>
-     </button>
-    </div>
-    <div class="modal-body">
-     <div style="display: none;" id="alert_container">
+  <div id="transaction-page-alert">
+    <div style="display: none;" id="alert_container">
       <div class="alert" role="alert">
-       <span id="alert-text"></span>
+        <span id="alert-text"></span>
       </div>
-     </div>
-
-     <form id="addTransaction">
-
-      <div class="row">
-       <div class="form-group col-3">
-        <label for="id_knihy">id knihy</label>
-        <input type="text" id="id_knihy" name="id_knihy" class="form-control">
-       </div>
-       <div class="form-group col-3">
-        <label for="datum">dátum</label>
-        <input type="date" id="datum" name="datum" class="form-control">
-       </div>
-       <div class="form-group col-3">
-        <label for="typ_transakcie">typ transakcie</label>
-        <input type="text" id="typ_transakcie" name="typ_transakcie" class="form-control">
-       </div>
-       <div class="form-group col-3">
-        <label for="mnozstvo">množstvo</label>
-        <input type="text" id="mnozstvo" name="mnozstvo" class="form-control">
-       </div>
-      </div>
-      <div class="row">
-       <div class="form-group col-3">
-        <label for="cena_za_jednotku">cena za jednotku</label>
-        <input type="text" id="cena_za_jednotku" name="cena_za_jednotku" class="form-control">
-       </div>
-       <div class="form-group col-3">
-        <label for="celkovo_cena">celkovo cena</label>
-        <input type="text" id="celkovo_cena" name="celkovo_cena" class="form-control">
-       </div>
-       <div class="form-group col-3">
-        <label for="aktualne_mnozstvo_na_sklade">mnozstvo na sklade</label>
-        <input type="text" id="aktualne_mnozstvo_na_sklade" name="aktualne_mnozstvo_na_sklade" class="form-control">
-       </div>
-      </div>
-
-      <div class="modal-footer">
-       <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavrieť</button>
-       <button type="submit" class="btn btn-primary">Pridaj trasakciu</button>
-      </div>
-     </form>
     </div>
-   </div>
   </div>
- </div>
+  <div class="flex-wrapper">
+    <div class="container col-11 mt-5 ">
+      <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#addModal">Pridaj transakciu
+      </button>
+      <div class=" mb-5 table-responsive">
+        <table id="transactionTable" class=" display nowrap ">
+          <thead>
+            <tr>
+              <th>id_transakcie</th>
+              <th>id_knihy</th>
+              <th>datum</th>
+              <th>typ_transakcie</th>
+              <th>množstvo</th>
+              <th>cena za jednotku</th>
+              <th>celkovo cena</th>
+              <th>aktualne mnozstvo na sklade</th>
+              <th>Aktualizuj</th>
+              <th>Zmaž</th>
 
 
-
- <!-- Button trigger modal -->
- <!-- Update Modal -->
- <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-   <div class="modal-content">
-    <div class="modal-header">
-     <h5 class="modal-title" id="updateModalLabel">Aktualizácia údajov o knihe</h5>
-     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-     </button>
+            </tr>
+          </thead>
+          <tfoot class="mb-5">
+            <tr>
+              <th>id_transakcie</th>
+              <th>id_knihy</th>
+              <th>datum</th>
+              <th>typ_transakcie</th>
+              <th>množstvo</th>
+              <th>cena za jednotku</th>
+              <th>celkovo cena</th>
+              <th>aktualne mnozstvo na sklade</th>
+              <th>Aktualizuj</th>
+              <th>Zmaž</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
     </div>
-    <div class="modal-body">
-     <div style="display: none;" id="alert_container">
-      <div class="alert" role="alert">
-       <span id="alert-text"></span>
-      </div>
-     </div>
-
-     <form id="updateTransaction">
-      <div class="row">
-       <div style="display: none;" class="form-group col-3">
-        <label for="id_transakcie">id transakcie:</label>
-        <input type="text" id="update-id_transakcie" name="id_transakcie" class="form-control">
-       </div>
-       <div class="form-group col-3">
-        <label for="id_knihy">id knihy:</label>
-        <input type="text" id="update-id_knihy" name="id_knihy" class="form-control">
-       </div>
-       <div class="form-group col-3">
-        <label for="datum">dátum</label>
-        <input type="date" id="update-datum" name="datum" class="form-control">
-       </div>
-       <div class="form-group col-3">
-        <label for="typ_transakcie">typ transakcie :</label>
-        <input type="text" id="update-typ_transakcie" name="typ_transakcie" class="form-control">
-       </div>
-       <div class="form-group col-3">
-        <label for="mnozstvo">množstvo</label>
-        <input type="text" id="update-mnozstvo" name="mnozstvo" class="form-control">
-       </div>
-      </div>
-      <div class="row">
-       <div class="form-group col-3">
-        <label for="cena_za_jednotku">cena za jednotku</label>
-        <input type="text" id="update-cena_za_jednotku" name="cena_za_jednotku" class="form-control">
-       </div>
-       <div class="form-group col-3">
-        <label for="celkovo_cena">celkovo cena</label>
-        <input type="text" id="update-celkovo_cena" name="celkovo_cena" class="form-control">
-       </div>
-       <div class="form-group col-3">
-        <label for="aktualne_mnozstvo_na_sklade">aktuálne množstvo na sklade</label>
-        <input type="text" id="update-aktualne_mnozstvo_na_sklade" name="aktualne_mnozstvo_na_sklade"
-         class="form-control">
-       </div>
-      </div>
-      <div class="modal-footer">
-       <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavrieť</button>
-       <button type="submit" class="btn btn-primary">Ulož zmeny</button>
-      </div>
-     </form>
-    </div>
-   </div>
-
+    <footer>
+    </footer>
   </div>
- </div>
+
+  <!-- Add Modal  -->
+  <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addModalLabel">Pridaj transakciu</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Zavrieť">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div style="display: none;" id="alert_container">
+            <div class="alert" role="alert">
+              <span id="alert-text"></span>
+            </div>
+          </div>
+
+          <form id="addTransaction">
+
+            <div class="row">
+              <div class="form-group col-3">
+                <label for="id_knihy">id knihy</label>
+                <input type="text" id="id_knihy" name="id_knihy" class="form-control">
+              </div>
+              <div class="form-group col-3">
+                <label for="datum">dátum</label>
+                <input type="date" id="datum" name="datum" class="form-control">
+              </div>
+              <div class="form-group col-3">
+                <label for="typ_transakcie">typ transakcie</label>
+                <input type="text" id="typ_transakcie" name="typ_transakcie" class="form-control">
+              </div>
+              <div class="form-group col-3">
+                <label for="mnozstvo">množstvo</label>
+                <input type="text" id="mnozstvo" name="mnozstvo" class="form-control">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-3">
+                <label for="cena_za_jednotku">cena za jednotku</label>
+                <input type="text" id="cena_za_jednotku" name="cena_za_jednotku" class="form-control">
+              </div>
+              <div class="form-group col-3">
+                <label for="celkovo_cena">celkovo cena</label>
+                <input type="text" id="celkovo_cena" name="celkovo_cena" class="form-control">
+              </div>
+              <div class="form-group col-3">
+                <label for="aktualne_mnozstvo_na_sklade">mnozstvo na sklade</label>
+                <input type="text" id="aktualne_mnozstvo_na_sklade" name="aktualne_mnozstvo_na_sklade"
+                  class="form-control">
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavrieť</button>
+              <button type="submit" class="btn btn-primary">Pridaj trasakciu</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
- <script>
+  <!-- Button trigger modal -->
+  <!-- Update Modal -->
+  <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateModalLabel">Aktualizácia údajov o knihe</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div style="display: none;" id="alert_container">
+            <div class="alert" role="alert">
+              <span id="alert-text"></span>
+            </div>
+          </div>
 
- </script>
+          <form id="updateTransaction">
+            <div class="row">
+              <div style="display: none;" class="form-group col-3">
+                <label for="id_transakcie">id transakcie:</label>
+                <input type="text" id="update-id_transakcie" name="id_transakcie" class="form-control">
+              </div>
+              <div class="form-group col-3">
+                <label for="id_knihy">id knihy:</label>
+                <input type="text" id="update-id_knihy" name="id_knihy" class="form-control">
+              </div>
+              <div class="form-group col-3">
+                <label for="datum">dátum</label>
+                <input type="date" id="update-datum" name="datum" class="form-control">
+              </div>
+              <div class="form-group col-3">
+                <label for="typ_transakcie">typ transakcie :</label>
+                <input type="text" id="update-typ_transakcie" name="typ_transakcie" class="form-control">
+              </div>
+              <div class="form-group col-3">
+                <label for="mnozstvo">množstvo</label>
+                <input type="text" id="update-mnozstvo" name="mnozstvo" class="form-control">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-3">
+                <label for="cena_za_jednotku">cena za jednotku</label>
+                <input type="text" id="update-cena_za_jednotku" name="cena_za_jednotku" class="form-control">
+              </div>
+              <div class="form-group col-3">
+                <label for="celkovo_cena">celkovo cena</label>
+                <input type="text" id="update-celkovo_cena" name="celkovo_cena" class="form-control">
+              </div>
+              <div class="form-group col-3">
+                <label for="aktualne_mnozstvo_na_sklade">aktuálne množstvo na sklade</label>
+                <input type="text" id="update-aktualne_mnozstvo_na_sklade" name="aktualne_mnozstvo_na_sklade"
+                  class="form-control">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavrieť</button>
+              <button type="submit" class="btn btn-primary">Ulož zmeny</button>
+            </div>
+          </form>
+        </div>
+      </div>
 
-
-
- <script>
-
-
-  $(document).ready(function () {
-   $('#transactionTable').DataTable({
-    language: {
-     "processing": "Spracúvanie...",
-     "search": "Hľadať:",
-     "lengthMenu": "Zobraziť _MENU_ záznamov",
-     "info": "Zobrazujem _START_ až _END_ z _TOTAL_ záznamov",
-     "infoEmpty": "Zobrazujem 0 až 0 z 0 záznamov",
-     "infoFiltered": "(filtrované z _MAX_ celkových záznamov)",
-     "infoPostFix": "",
-     "loadingRecords": "Načítavanie...",
-     "zeroRecords": "Neboli nájdené žiadne vyhovujúce záznamy",
-     "emptyTable": "V tabuľke nie sú žiadne dáta",
-     "paginate": {
-      "first": "Prvá",
-      "previous": "Predchádzajúca",
-      "next": "Ďalšia",
-      "last": "Posledná"
-     },
-     "aria": {
-      "sortAscending": ": aktivujte na zoradenie stĺpca vzostupne",
-      "sortDescending": ": aktivujte na zoradenie stĺpca zostupne"
-     }
-    },
-    // columnDefs: [
-    //  {
-    //   targets: 3,
-    //   visible: false
-
-    //  },
-    //  {
-    //   targets: 6,
-    //   visible: false
-
-    //  },
-    //  {
-    //   targets: 7,
-    //   visible: false
-
-    //  },
-    //  {
-    //   targets: 8,
-    //   visible: false
-
-    //  },
-    //  {
-    //   targets: 9,
-    //   visible: false
-
-    //  },
-    //  {
-    //   targets: 13,
-    //   visible: false
-
-    //  },
-    //  {
-    //   targets: 14,
-    //   visible: false
-
-    //  },
-    //  {
-    //   targets: 15,
-    //   visible: false
-
-    //  },
-    //  {
-    //   targets: 16,
-    //   visible: false
-
-    //  },
-    //  {
-    //   targets: 17,
-    //   visible: false
-
-    //  },
-    // ],
-
-    // defaultne sortovanie podla id 
-    order: [[0, 'asc']],
-    //autoWidth: false,
-    ajax: {
-     type: 'GET',
-     url: 'http://localhost:8050/book_services.asmx/GetListAllTransactions',
-     dataSrc: 'knihy_transakcie.transakcia',
-    },
-    success: function (res) {
-
-    },
-
-    dataType: "json",
-    columns: [
+    </div>
+  </div>
 
 
 
-     { data: 'id_transakcie', },
-     {
-      data: 'id_knihy',
-     },
-     {
-      data: 'datum',
-     },
-     { data: 'typ_transakcie', },
-     { data: 'mnozstvo' },
-     { data: 'cena_za_jednotku' },
-     { data: 'celkovo_cena' },
-     { data: 'aktualne_mnozstvo_na_sklade' },
+  <script>
 
-     {
-      data: null,
-      render: function (data, type, row) {
-       return `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModal" data-id_transakcie="${row.id_transakcie}" data-id_knihy="${row.id_knihy}" data-datum="${row.datum}" data-typ_transakcie="${row.typ_transakcie}"  data-mnozstvo="${row.mnozstvo}" data-cena_za_jednotku="${row.cena_za_jednotku}"  data-celkovo_cena="${row.celkovo_cena}"  data-aktualne_mnozstvo_na_sklade="${row.aktualne_mnozstvo_na_sklade}">Aktualizuj</button>`
-      },
-     },
-     {
-      data: null,
-      render: function (data, type, row) {
-       return `<button type="button" class=" deleteTransaction btn btn-danger"  data-id_transakcie="${row.id_transakcie}">Vymaž</button>`;
-      }
-     }
+  </script>
 
 
-     // { data: "", "defaultContent": "<button onclick='edititem();'>Edit</button>" },
-     // {
-     //   data: '',
-     //   render: (data, type, row) => {
-     //  return `< a href = 'link_to_edit/${row.id}' > update</a >`;
-     //   }
-     // }
 
-    ],
-
-   });
-
-  })
-
- </script>
- <script>
-  // add transaction
-  $(document).on('submit', "#addTransaction", function (event) {
-   event.preventDefault()
-   //var id = $("#id_transakcie").val();
-   var id_knihy = $("#id_knihy").val();
-   var datum = $("#datum").val();
-   var typ_transakcie = $("#typ_transakcie").val();
-   var mnozstvo = $("#mnozstvo").val();
-   var cena_za_jednotku = $("#cena_za_jednotku").val();
-   var celkovo_cena = $("#celkovo_cena").val();
-   var aktualne_mnozstvo_na_sklade = $("#aktualne_mnozstvo_na_sklade").val();
-
-   $.ajax({
-    type: "POST",
-    url: "http://localhost:8050/book_services.asmx/AddTransaction",
-    data: {
-
-     id_knihy: id_knihy,
-     datum: datum,
-     typ_transakcie: typ_transakcie,
-     mnozstvo: mnozstvo,
-     cena_za_jednotku: cena_za_jednotku,
-     celkovo_cena: celkovo_cena,
-     aktualne_mnozstvo_na_sklade: aktualne_mnozstvo_na_sklade
-    },
+  <script>
 
 
-    success: function (response) {
-     showAlert("Transakcia uspesne pridana", "addModal", "success");
+    $(document).ready(function () {
+      $('#transactionTable').DataTable({
+        language: {
+          "processing": "Spracúvanie...",
+          "search": "Hľadať:",
+          "lengthMenu": "Zobraziť _MENU_ záznamov",
+          "info": "Zobrazujem _START_ až _END_ z _TOTAL_ záznamov",
+          "infoEmpty": "Zobrazujem 0 až 0 z 0 záznamov",
+          "infoFiltered": "(filtrované z _MAX_ celkových záznamov)",
+          "infoPostFix": "",
+          "loadingRecords": "Načítavanie...",
+          "zeroRecords": "Neboli nájdené žiadne vyhovujúce záznamy",
+          "emptyTable": "V tabuľke nie sú žiadne dáta",
+          "paginate": {
+            "first": "Prvá",
+            "previous": "Predchádzajúca",
+            "next": "Ďalšia",
+            "last": "Posledná"
+          },
+          "aria": {
+            "sortAscending": ": aktivujte na zoradenie stĺpca vzostupne",
+            "sortDescending": ": aktivujte na zoradenie stĺpca zostupne"
+          }
+        },
+        // columnDefs: [
+        //  {
+        //   targets: 3,
+        //   visible: false
 
-     setTimeout(function () {
-      $('#addModal').modal('hide');
-      setTimeout(function () {
-       $('#transactionTable').DataTable().ajax.reload(null, false);
-      }, 1500);
-     }, 2000);
-     $("#addTransaction")[0].reset();
-    },
-    error: function (xhr, status, error) {
+        //  },
+        //  {
+        //   targets: 6,
+        //   visible: false
 
-     showAlert("Nastala chyba pri pridavani transakcie:" + error, "addModal", "danger")
-    }
-   });
-  });
-  // update transaction 
-  $(document).on('submit', "#updateTransaction", function (event) {
-   event.preventDefault()
-   var id_transakcie = $("#update-id_transakcie").val();
-   console.log(id_transakcie)
-   var id_knihy = $("#update-id_knihy").val();
-   var datum = $("#update-datum").val();
-   var typ_transakcie = $("#update-typ_transakcie").val();
-   var mnozstvo = $("#update-mnozstvo").val();
-   var cena_za_jednotku = $("#update-cena_za_jednotku").val();
-   var celkovo_cena = $("#update-celkovo_cena").val();
-   var aktualne_mnozstvo_na_sklade = $("#update-aktualne_mnozstvo_na_sklade").val();
+        //  },
+        //  {
+        //   targets: 7,
+        //   visible: false
 
-   $.ajax({
-    type: "POST",
-    url: "http://localhost:8050/book_services.asmx/UpdateTransaction",
-    data: {
-     id_transakcie: id_transakcie,
-     id_knihy: id_knihy,
-     datum: datum,
-     typ_transakcie: typ_transakcie,
-     mnozstvo: mnozstvo,
-     cena_za_jednotku: cena_za_jednotku,
-     celkovo_cena: celkovo_cena,
-     aktualne_mnozstvo_na_sklade: aktualne_mnozstvo_na_sklade
-    },
+        //  },
+        //  {
+        //   targets: 8,
+        //   visible: false
+
+        //  },
+        //  {
+        //   targets: 9,
+        //   visible: false
+
+        //  },
+        //  {
+        //   targets: 13,
+        //   visible: false
+
+        //  },
+        //  {
+        //   targets: 14,
+        //   visible: false
+
+        //  },
+        //  {
+        //   targets: 15,
+        //   visible: false
+
+        //  },
+        //  {
+        //   targets: 16,
+        //   visible: false
+
+        //  },
+        //  {
+        //   targets: 17,
+        //   visible: false
+
+        //  },
+        // ],
+
+        // defaultne sortovanie podla id 
+        order: [[0, 'asc']],
+        //autoWidth: false,
+        ajax: {
+          type: 'GET',
+          url: 'http://localhost:8050/book_services.asmx/GetListAllTransactions',
+          dataSrc: 'knihy_transakcie.transakcia',
+        },
+        success: function (res) {
+
+        },
+
+        dataType: "json",
+        columns: [
 
 
-    success: function (response) {
-     showAlert("Kniha uspesne aktualizovana", "updateModal", "success");
-     setTimeout(function () {
-      $('#updateModal').modal('hide');
-      setTimeout(function () {
-       $('#transactionTable').DataTable().ajax.reload(null, false);
-      }, 1500);
-     }, 2000);
-     $("#updateTransaction")[0].reset();
-    },
-    error: function (xhr, status, error) {
 
-     showAlert("Nastala chyba pri aktualizacii knihy:" + error, "updateModal", "danger")
-    }
-   });
-  });
-  $(document).on('click', ".deleteTransaction", function (event) {
-   var id_transakcie = $(this).data('id_transakcie');
+          { data: 'id_transakcie', },
+          {
+            data: 'id_knihy',
+          },
+          {
+            data: 'datum',
+          },
+          { data: 'typ_transakcie', },
+          { data: 'mnozstvo' },
+          { data: 'cena_za_jednotku' },
+          { data: 'celkovo_cena' },
+          { data: 'aktualne_mnozstvo_na_sklade' },
 
-   if (confirm("Ste si istý že chcete vymazať údaje o transakcii? Operácia je nezvratná!!")) {
-    $.ajax({
-     type: "POST",
-     url: 'http://localhost:8050/book_services.asmx/DeleteTransaction',
-     data: { id_transakcie: id_transakcie },
-     success: function (response) {
+          {
+            data: null,
+            render: function (data, type, row) {
+              return `<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModal" data-id_transakcie="${row.id_transakcie}" data-id_knihy="${row.id_knihy}" data-datum="${row.datum}" data-typ_transakcie="${row.typ_transakcie}"  data-mnozstvo="${row.mnozstvo}" data-cena_za_jednotku="${row.cena_za_jednotku}"  data-celkovo_cena="${row.celkovo_cena}"  data-aktualne_mnozstvo_na_sklade="${row.aktualne_mnozstvo_na_sklade}">Aktualizuj</button>`
+            },
+          },
+          {
+            data: null,
+            render: function (data, type, row) {
+              return `<button type="button" class=" deleteTransaction btn btn-danger"  data-id_transakcie="${row.id_transakcie}">Vymaž</button>`;
+            }
+          }
+        ],
 
-      showAlert("Transakcia uspesne vymazana", "transaction-page-alert", "success");
-      setTimeout(function () {
+      });
 
-       $('#transactionTable').DataTable().ajax.reload(null, false);
-      }, 1500);
+    })
 
-     },
-     error: function (xhr, status, error) {
-      showAlert("Nastala chyba: " + error, "transaction-page-alert", "danger")
-     }
+  </script>
+  <script>
+    // add transaction
+    $(document).on('submit', "#addTransaction", function (event) {
+      event.preventDefault()
+      //var id = $("#id_transakcie").val();
+      var id_knihy = $("#id_knihy").val();
+      var datum = $("#datum").val();
+      var typ_transakcie = $("#typ_transakcie").val();
+      var mnozstvo = $("#mnozstvo").val();
+      var cena_za_jednotku = $("#cena_za_jednotku").val();
+      var celkovo_cena = $("#celkovo_cena").val();
+      var aktualne_mnozstvo_na_sklade = $("#aktualne_mnozstvo_na_sklade").val();
+
+      $.ajax({
+        type: "POST",
+        url: "http://localhost:8050/book_services.asmx/AddTransaction",
+        data: {
+
+          id_knihy: id_knihy,
+          datum: datum,
+          typ_transakcie: typ_transakcie,
+          mnozstvo: mnozstvo,
+          cena_za_jednotku: cena_za_jednotku,
+          celkovo_cena: celkovo_cena,
+          aktualne_mnozstvo_na_sklade: aktualne_mnozstvo_na_sklade
+        }
+      })
+        .done(function (response) {
+          showAlert("Transakcia uspesne pridana", "addModal", "success");
+
+          setTimeout(function () {
+            $('#addModal').modal('hide');
+            setTimeout(function () {
+              $('#transactionTable').DataTable().ajax.reload(null, false);
+            }, 1500);
+          }, 2000);
+          $("#addTransaction")[0].reset();
+        })
+        .fail(function (xhr, status, error) {
+          showAlert("Nastala chyba pri pridavani transakcie: " + error, "addModal", "danger");
+        });
     });
-   }
-  });
- </script>
+    // update transaction 
+    $(document).on('submit', "#updateTransaction", function (event) {
+      event.preventDefault()
+      var id_transakcie = $("#update-id_transakcie").val();
+      console.log(id_transakcie)
+      var id_knihy = $("#update-id_knihy").val();
+      var datum = $("#update-datum").val();
+      var typ_transakcie = $("#update-typ_transakcie").val();
+      var mnozstvo = $("#update-mnozstvo").val();
+      var cena_za_jednotku = $("#update-cena_za_jednotku").val();
+      var celkovo_cena = $("#update-celkovo_cena").val();
+      var aktualne_mnozstvo_na_sklade = $("#update-aktualne_mnozstvo_na_sklade").val();
 
- <script>
-  $("#navbar").load("navbar.html")
-  $("footer").load("footer.html")
- </script>
+      $.ajax({
+        type: "POST",
+        url: "http://localhost:8050/book_services.asmx/UpdateTransaction",
+        data: {
+          id_transakcie: id_transakcie,
+          id_knihy: id_knihy,
+          datum: datum,
+          typ_transakcie: typ_transakcie,
+          mnozstvo: mnozstvo,
+          cena_za_jednotku: cena_za_jednotku,
+          celkovo_cena: celkovo_cena,
+          aktualne_mnozstvo_na_sklade: aktualne_mnozstvo_na_sklade
+        }
+      })
+        .done(function (response) {
+          showAlert("Transakcia uspesne aktualizovana", "updateModal", "success");
+          setTimeout(function () {
+            $('#updateModal').modal('hide');
+            setTimeout(function () {
+              $('#transactionTable').DataTable().ajax.reload(null, false);
+            }, 1500);
+          }, 2000);
+          $("#updateTransaction")[0].reset();
+        })
+        .fail(function (xhr, status, error) {
+          showAlert("Nastala chyba pri aktualizacii knihy:" + error, "updateModal", "danger")
+        });
+    });
+    $(document).on('click', ".deleteTransaction", function (event) {
+      var id_transakcie = $(this).data('id_transakcie');
 
- <script>
-  $(document).ready(function () {
-   $('#updateModal').on("show.bs.modal", function (event) {
-    alert("hura")
-    var button = $(event.relatedTarget);
-    var id_transakcie = button.data("id_transakcie");
-    var id_knihy = button.data("id_knihy");
-    var datum = button.data("datum");
-    var typ_transakcie = button.data("typ_transakcie");
-    var mnozstvo = button.data("mnozstvo");
-    var cena_za_jednotku = button.data("cena_za_jednotku");
-    var celkovo_cena = button.data("celkovo_cena");
-    var aktualne_mnozstvo_na_sklade = button.data("aktualne_mnozstvo_na_sklade");
+      if (confirm("Ste si istý že chcete vymazať údaje o transakcii? Operácia je nezvratná!!")) {
+        $.ajax({
+          type: "POST",
+          url: 'http://localhost:8050/book_services.asmx/DeleteTransaction',
+          data: { id_transakcie: id_transakcie }
+        })
+          .done(function (response) {
+            showAlert("Transakcia uspesne vymazana", "transaction-page-alert", "success");
+            setTimeout(function () {
+              $('#transactionTable').DataTable().ajax.reload(null, false);
+            }, 1500);
+          })
+          .fail(function (xhr, status, error) {
+            showAlert("Nastala chyba: " + error, "transaction-page-alert", "danger")
+          });
+      }
+    });
+  </script>
 
-    var modal = $(this);
-    modal.find("#update-id_transakcie").val(id_transakcie);
-    modal.find("#update-id_knihy").val(id_knihy);
-    modal.find("#update-datum").val(datum);
-    modal.find("#update-typ_transakcie").val(typ_transakcie);
-    modal.find("#update-mnozstvo").val(mnozstvo);
-    modal.find("#update-cena_za_jednotku").val(cena_za_jednotku);
-    modal.find("#update-celkovo_cena").val(celkovo_cena);
-    modal.find("#update-aktualne_mnozstvo_na_sklade").val(aktualne_mnozstvo_na_sklade);
-   });
-  });
- </script>
+  <script>
+    $("#navbar").load("navbar.html")
+    $("footer").load("footer.html")
+  </script>
+
+  <script>
+    $(document).ready(function () {
+      $('#updateModal').on("show.bs.modal", function (event) {
+
+        var button = $(event.relatedTarget);
+        var id_transakcie = button.data("id_transakcie");
+        var id_knihy = button.data("id_knihy");
+        var datum = button.data("datum");
+        var typ_transakcie = button.data("typ_transakcie");
+        var mnozstvo = button.data("mnozstvo");
+        var cena_za_jednotku = button.data("cena_za_jednotku");
+        var celkovo_cena = button.data("celkovo_cena");
+        var aktualne_mnozstvo_na_sklade = button.data("aktualne_mnozstvo_na_sklade");
+
+        var modal = $(this);
+        modal.find("#update-id_transakcie").val(id_transakcie);
+        modal.find("#update-id_knihy").val(id_knihy);
+        modal.find("#update-datum").val(datum);
+        modal.find("#update-typ_transakcie").val(typ_transakcie);
+        modal.find("#update-mnozstvo").val(mnozstvo);
+        modal.find("#update-cena_za_jednotku").val(cena_za_jednotku);
+        modal.find("#update-celkovo_cena").val(celkovo_cena);
+        modal.find("#update-aktualne_mnozstvo_na_sklade").val(aktualne_mnozstvo_na_sklade);
+      });
+    });
+  </script>
 
 </body>
 

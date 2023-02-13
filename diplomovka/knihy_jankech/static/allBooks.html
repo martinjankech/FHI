@@ -622,21 +622,18 @@
         data: formData,
         contentType: false,
         processData: false,
-        success: function (response) {
-          showAlert("Kniha uspesne pridana", "addModal", "success");
-          setTimeout(function () {
-            $('#addModal').modal('hide');
-            $('#bookTable').DataTable().ajax.reload(null, false);
-          }, 3000);
-          $("#addBook")[0].reset();
-
-        },
-        error: function (xhr, status, error) {
-
-          showAlert("Nastala chyba:" + error, "addModal", "danger")
-        }
-      });
-    });
+      }).done(function (response) {
+        showAlert("Kniha uspesne pridana", "addModal", "success");
+        setTimeout(function () {
+          $('#addModal').modal('hide');
+          $('#bookTable').DataTable().ajax.reload(null, false);
+        }, 3000);
+        $("#addBook")[0].reset();
+      })
+        .fail(function (xhr, status, error) {
+          showAlert("Nastala chyba:" + xhr.responseText, "addModal", "danger");
+        });
+    })
     // update book ajax 
     $(document).on('submit', "#updateBookForm", function (event) {
       event.preventDefault();
@@ -672,7 +669,8 @@
         data: formData,
         contentType: false,
         processData: false,
-        success: function (response) {
+      })
+        .done(function (response) {
           showAlert("Kniha uspesne aktualizovana", "updateModal", "success");
           setTimeout(function () {
             $('#updateModal').modal('hide');
@@ -681,12 +679,10 @@
             }, 1500);
           }, 2000);
           $("#updateBookForm")[0].reset();
-        },
-        error: function (xhr, status, error) {
-
-          showAlert("Nastala chyba pri aktualizacii knihy:" + error, "updateModal", "danger")
-        }
-      });
+        })
+        .fail(function (xhr, status, error) {
+          showAlert("Nastala chyba pri aktualizacii knihy:" + xhr.responseText, "updateModal", "danger");
+        });
     });
     $(document).on('click', ".deleteBook", function (event) {
       var id = $(this).data('id');
@@ -696,64 +692,26 @@
           type: "POST",
           url: 'http://localhost:8050/book_services.asmx/DeleteBook',
           data: { id: id },
-          success: function (response) {
+        })
+          .done(function (response) {
             showAlert("Kniha uspesne vymazana", "book-page-alert", "success");
             setTimeout(function () {
-
               $('#bookTable').DataTable().ajax.reload(null, false);
             }, 1500);
-
-          },
-          error: function (xhr, status, error) {
-            showAlert("Nastala chyba: " + error, "book-page-alert", "danger")
-          }
-        });
+          })
+          .fail(function (xhr, status, error) {
+            showAlert("Nastala chyba: " + xhr.responseText, "book-page-alert", "danger");
+          });
       }
     });
-
-
-
+  </script>
 
   </script>
 
-  <!-- <script>
-  $(document).ready(function () {
-    // 1. Create a click event for the update button in the table
-    $('table').on('click', '.btn-primary', function () {
-      // 2. Get the data from the row that was clicked on
-      var rowData = $(this).closest('tr').children('td').map(function () {
-        return $(this).text();
-      }).get();
-
-      // 3. Fill the form in the modal with the data from the row
-      $('#updateModalForm #id').val(rowData[1]);
-      $('#updateModalForm #autor1').val(rowData[2]);
-      $('#updateModalForm #autor2').val(rowData[3]);
-      $('#updateModalForm #nazov').val(rowData[4]);
-      $('#updateModalForm #kategoria').val(rowData[5]);
-      $('#updateModalForm #jazyk').val(rowData[6]);
-      $('#updateModalForm #isbn').val(rowData[7]);
-      $('#updateModalForm #pocet_stran').val(rowData[8]);
-      $('#updateModalForm #vazba').val(rowData[9]);
-      $('#updateModalForm #rok_vydania').val(rowData[10]);
-      $('#updateModalForm #vydavatelstvo').val(rowData[11]);
-      $('#updateModalForm #predajna_cena').val(rowData[12]);
-      $('#updateModalForm #nakupna_cena').val(rowData[13]);
-      $('#updateModalForm #priemerne_hodnotenie').val(rowData[16]);
-      $('#updateModalForm #obsah').val(rowData[17]);
-
-      // ...and so on for the rest of the form fields
-
-      // Show the modal
-      $('#updateModal').modal('show');
-    });
-  });
-
-// naplenie update formularu datami z aktualneho row data su ziskane z buttonu 
-</script> -->
-
   </script>
-  <script>$('#updateModal').on('show.bs.modal', function (event) {
+  <script>
+    //naplenie update formularu datami z aktualneho row data su ziskane z buttonu
+    $('#updateModal').on('show.bs.modal', function (event) {
       alert("deje sa ")
       var button = $(event.relatedTarget);
       console.log(button)

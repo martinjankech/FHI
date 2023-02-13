@@ -1125,4 +1125,181 @@ A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole
     </book>
     <timestamp>2023-02-11 12:11:20</timestamp>
   </output>
+  <output>
+    <book>
+      <id>4</id>
+      <nazov>Jediná kniha o jídle, kterou potřebujete</nazov>
+      <autori>
+        <autor1>Karolína Fourová</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Kuchárky</kategoria>
+      <isbn>9788024271576</isbn>
+      <jazyk>cz</jazyk>
+      <pocet_stran>200</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2020</rok_vydania>
+      <vydavatelstvo>Esence</vydavatelstvo>
+      <predajna_cena>16</predajna_cena>
+      <nakupna_cena>8.36</nakupna_cena>
+      <marza>0.913875598086125</marza>
+      <zisk_kus>7.64</zisk_kus>
+      <obsah>Kniha Karolíny Fourové, odbornice na výživu a kvalitu potravin, vám pomůže pochopit základní principy stravování, představí jednotlivé složky výživy a jejich úkol v lidském organismu. Naučíte se správně nakupovat a dostanete odpověď na většinu otázek o jídle a potravinách, které vás kdy napadly. A abyste se v té zdravé stravě neztratili hned na začátku, najdete v knize i 40 autorčiných nejoblíbenějších receptů, které vám cestu usnadní.</obsah>
+      <priemerne_hodnotenie>3.8</priemerne_hodnotenie>
+      <obrazok>../img/4.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-13 10:32:21</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>4</id>
+      <nazov>Jediná kniha o jídle, kterou potřebujete</nazov>
+      <autori>
+        <autor1>Karolína Fourová</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Kuchárky</kategoria>
+      <isbn>9788024271576</isbn>
+      <jazyk>cz</jazyk>
+      <pocet_stran>200</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2020</rok_vydania>
+      <vydavatelstvo>Esence</vydavatelstvo>
+      <predajna_cena>16</predajna_cena>
+      <nakupna_cena>8.36</nakupna_cena>
+      <marza>0.913875598086125</marza>
+      <zisk_kus>7.64</zisk_kus>
+      <obsah>Kniha Karolíny Fourové, odbornice na výživu a kvalitu potravin, vám pomůže pochopit základní principy stravování, představí jednotlivé složky výživy a jejich úkol v lidském organismu. Naučíte se správně nakupovat a dostanete odpověď na většinu otázek o jídle a potravinách, které vás kdy napadly. A abyste se v té zdravé stravě neztratili hned na začátku, najdete v knize i 40 autorčiných nejoblíbenějších receptů, které vám cestu usnadní.</obsah>
+      <priemerne_hodnotenie>3.8</priemerne_hodnotenie>
+      <obrazok>../img/4.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-13 10:32:21</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>1</id>
+      <nazov>Harry Potter a Tajomná komnata</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143088</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>360</pocet_stran>
+      <vazba>brožovaná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>11.9</predajna_cena>
+      <nakupna_cena>8.25</nakupna_cena>
+      <marza>0.442424242424242</marza>
+      <zisk_kus>3.65</zisk_kus>
+      <obsah>Dursleyovci boli v to leto takí odporní, že Harry Potter sa už nevedel dočkať, kedy sa vráti do čarodejníckej školy. Jedného dňa sa v jeho izbe objaví čudné, zlomyseľné stvorenie. Volá sa Dobby a tvrdí, že ak sa Harry vráti na Rokfort, hrozí mu smrteľné nebezpečenstvo.
+A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole tajuplné a hrôzostrašné veci. Niekto, lepšie povedané niečo napáda rokfortských študentov a premieňa ich na kameň. Že by bol za tým Draco Malfoy, Harryho úhlavný nepriateľ? Alebo to má na svedomí ten, koho na Rokforte najviac upodozrievajú – samotný Harry Potter?</obsah>
+      <priemerne_hodnotenie>4.7</priemerne_hodnotenie>
+      <obrazok>../img/1.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-13 10:33:45</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>1</id>
+      <nazov>Harry Potter a Tajomná komnata</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143088</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>360</pocet_stran>
+      <vazba>brožovaná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>11.9</predajna_cena>
+      <nakupna_cena>8.25</nakupna_cena>
+      <marza>0.442424242424242</marza>
+      <zisk_kus>3.65</zisk_kus>
+      <obsah>Dursleyovci boli v to leto takí odporní, že Harry Potter sa už nevedel dočkať, kedy sa vráti do čarodejníckej školy. Jedného dňa sa v jeho izbe objaví čudné, zlomyseľné stvorenie. Volá sa Dobby a tvrdí, že ak sa Harry vráti na Rokfort, hrozí mu smrteľné nebezpečenstvo.
+A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole tajuplné a hrôzostrašné veci. Niekto, lepšie povedané niečo napáda rokfortských študentov a premieňa ich na kameň. Že by bol za tým Draco Malfoy, Harryho úhlavný nepriateľ? Alebo to má na svedomí ten, koho na Rokforte najviac upodozrievajú – samotný Harry Potter?</obsah>
+      <priemerne_hodnotenie>4.7</priemerne_hodnotenie>
+      <obrazok>../img/1.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-13 10:33:45</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>3</id>
+      <nazov>Jednoduché účtovníctvo pre neziskovky</nazov>
+      <autori>
+        <autor1>Jaroslava Lukačovičová</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Biznis a manažment</kategoria>
+      <isbn>9788097029142</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>165</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2022</rok_vydania>
+      <vydavatelstvo>Sauno</vydavatelstvo>
+      <predajna_cena>9.64</predajna_cena>
+      <nakupna_cena>6.24</nakupna_cena>
+      <marza>0.544871794871795</marza>
+      <zisk_kus>3.4</zisk_kus>
+      <obsah>Ďalšia publikácia autorky zavedie čitateľov do sveta, ktorý by mal byť jednoduchý, ale podľa jej názoru a skúsenosti svet jednoduchého účtovníctva neziskových účtovných jednotiek až taký jednoduchý nie je.</obsah>
+      <priemerne_hodnotenie>4.4</priemerne_hodnotenie>
+      <obrazok>../img/3.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-13 10:37:07</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>3</id>
+      <nazov>Jednoduché účtovníctvo pre neziskovky</nazov>
+      <autori>
+        <autor1>Jaroslava Lukačovičová</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Biznis a manažment</kategoria>
+      <isbn>9788097029142</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>165</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2022</rok_vydania>
+      <vydavatelstvo>Sauno</vydavatelstvo>
+      <predajna_cena>9.64</predajna_cena>
+      <nakupna_cena>6.24</nakupna_cena>
+      <marza>0.544871794871795</marza>
+      <zisk_kus>3.4</zisk_kus>
+      <obsah>Ďalšia publikácia autorky zavedie čitateľov do sveta, ktorý by mal byť jednoduchý, ale podľa jej názoru a skúsenosti svet jednoduchého účtovníctva neziskových účtovných jednotiek až taký jednoduchý nie je.</obsah>
+      <priemerne_hodnotenie>4.4</priemerne_hodnotenie>
+      <obrazok>../img/3.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-13 10:37:07</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>2</id>
+      <nazov>Harry Potter a Ohnivá čaša</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143866</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>712</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>16.11</predajna_cena>
+      <nakupna_cena>10.25</nakupna_cena>
+      <marza>0.571707317073171</marza>
+      <zisk_kus>5.86</zisk_kus>
+      <obsah>Harry Potter je znovu na prázdninách u otravných Dursleyovcov. Chce sa od nich odpútať, a tak sa zúčastní na Svetovom pohári v metlobale spolu s Hermionou, Ronom a Weasleyovcami. Okrem toho sa po sto rokoch na Rokforte pripravuje Trojčarodejnícky turnaj a majú sa na ňom zúčastniť dve ďalšie čarodejnícke školy. Harry aj naďalej túži byť obyčajným štrnásťročným čarodejníkom. Má však smolu, lebo nie je obyčajný - dokonca ani podľa čarodejníckych meradiel. V jeho prípade to môže mať smrteľné dôsledky...</obsah>
+      <priemerne_hodnotenie>4.5</priemerne_hodnotenie>
+      <obrazok>../img/2.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-13 10:37:16</timestamp>
+  </output>
 </root>
