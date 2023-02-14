@@ -17,3 +17,194 @@
         }
       })
     });
+
+
+// nemazat len doplnit
+[WebMethod]
+        public void GetAggregatedDataSellByDateAndSelectedCategory(string atribute, DateTime startDate, DateTime endDate)
+        {
+            // Load the books data from XML
+            XDocument booksData = LoadXDocument(fileBookInfo);
+            // Load the transactions data from XML
+            XDocument transactionsData = LoadXDocument(fileBookTransactionInfo);
+            if (atribute != "autor" && atribute != "autori")
+            {
+
+
+                // Join the books data and transactions data on book id to get all information related to each transaction
+                var aggregatedData = from book in booksData.Descendants("book")
+                                     join transaction in transactionsData.Descendants("transakcia")
+                                     on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
+
+                                     // Filter the transactions to only those with a date within the specified range and of type "predaj"
+                                     where (DateTime)transaction.Element("datum") >= startDate
+                                     && (DateTime)transaction.Element("datum") <= endDate
+                                     && transaction.Element("typ_transakcie").Value == "predaj"
+
+                                     // Group the transactions by the specified category element value
+                                     group new { Book = book, Transaction = transaction } by book.Element(atribute).Value into g
+                                     select new
+                                     {
+                                         // Store the category value as Podkategoria
+                                         Podkategoria = g.Key,
+
+                                         // Calculate the total quantity of books sold and total revenue for each category
+                                         TotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))),
+                                         TotalRevenue = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")),
+
+                                         // Group the books by their id to get aggregated data for books with the same id
+                                         Books = g.GroupBy(x => x.Book.Element("id").Value)
+                                             .Select(x => new
+                                             {
+                                                 Id = x.Key,
+                                                 Name = x.First().Book.Element("nazov").Value,
+
+                                                 // Calculate the total quantity sold and total revenue for each book
+                                                 TotalQuantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))),
+                                                 TotalRevenue = x.Sum(y => (double)y.Transaction.Element("celkovo_cena"))
+                                             }).ToList()
+                                     };
+                var totalAggregatedData = new
+                {
+                    TotalQuantity = aggregatedData.Sum(x => x.TotalQuantity),
+                    TotalRevenue = aggregatedData.Sum(x => x.TotalRevenue)
+                };
+
+                // Combine the aggregated data and total aggregated data into a single object
+                var result = new
+
+                {
+                    AggregatedData = aggregatedData,
+                    TotalAggregatedData = totalAggregatedData
+                };
+
+                // Serialize the result to JSON using the Newtonsoft.Json library
+                Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+                Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
+
+            }
+            else
+            {
+                var aggregatedData = from book in booksData.Descendants("book")
+                                     join transaction in transactionsData.Descendants("transakcia")
+                                     on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
+                                     where (DateTime)transaction.Element("datum") >= startDate
+                                     && (DateTime)transaction.Element("datum") <= endDate
+                                     && transaction.Element("typ_transakcie").Value == "predaj"
+                                     group new { Book = book, Transaction = transaction } by book.Element("autori").Element("autor1").Value into g
+                                     select new
+                                     {
+                                         // Store the author1 as Podkategoria
+                                         Podkategoria = g.Key,
+                                         TotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))),
+                                         TotalRevenue = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")),
+                                         Books = g.GroupBy(x => x.Book.Element("id").Value)
+                                             .Select(x => new
+                                             {
+                                                 Id = x.Key,
+                                                 Name = x.First().Book.Element("nazov").Value,
+                                                 TotalQuantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))),
+                                                 TotalRevenue = x.Sum(y => (double)y.Transaction.Element("celkovo_cena"))
+                                             })
+                                     };
+                // Group by author2 - toto sluzi len na analyticke uceli to Totalneho poctu predananzch knih a totalneho prijmu sa to nezaratava ale
+                // aby sme mali prehlad o prijmi a predajoch knih aj podla autora dva a mohli to vyuzit pri drill down operacii 
+
+
+                var aggregatedData2 = from book in booksData.Descendants("book")
+                                      join transaction in transactionsData.Descendants("transakcia")
+                                      on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
+                                      where (DateTime)transaction.Element("datum") >= startDate
+                                      && (DateTime)transaction.Element("datum") <= endDate
+                                      && transaction.Element("typ_transakcie").Value == "predaj"
+                                      where book.Element("autori").Element("autor2").Value != "-"
+                                      group new { Book = book, Transaction = transaction } by book.Element("autori").Element("autor2").Value into g
+                                      select new
+                                      {
+                                          // Store the author2 as Podkategoria
+                                          Podkategoria = g.Key,
+                                          TotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))),
+                                          TotalRevenue = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")),
+                                          Books = g.GroupBy(x => x.Book.Element("id").Value)
+                                              .Select(x => new
+                                              {
+
+                                                  Id = x.Key,
+                                                  Name = x.First().Book.Element("nazov").Value,
+                                                  TotalQuantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))),
+                                                  TotalRevenue = x.Sum(y => (double)y.Transaction.Element("celkovo_cena"))
+                                              })
+                                      };
+
+                // Calculate the total quantity and total revenue for all books
+                var totalAggregatedData = new
+                {
+                    TotalQuantity = aggregatedData.Sum(x => x.TotalQuantity),
+                    TotalRevenue = aggregatedData.Sum(x => x.TotalRevenue)
+                };
+                var combinedData = aggregatedData.Concat(aggregatedData2);
+                // Combine the aggregated data and total aggregated data into a single object
+                var result = new
+
+                {
+                    AggregatedData = combinedData,
+                    TotalAggregatedData = totalAggregatedData
+                };
+
+                // Serialize the result to JSON using the Newtonsoft.Json library
+                Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+                Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
+            }
+
+
+        }
+
+
+public static void SaveWebMethodResult(dynamic result, string methodName, string[] parameters, string path)
+        {
+            // Skontroluj, či špecifikovaná cesta existuje a vytvor ju, ak nie
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            // Vygeneruj názov súboru na základe aktuálneho času a názvu metódy
+            string fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + methodName + "_";
+            foreach (string param in parameters)
+            {
+                fileName += param.ToString() + "_";
+            }
+            fileName = fileName.TrimEnd('_') + ".xml";
+
+            // Vytvor koreňový element XML súboru
+            XElement root = new XElement("Root");
+
+            // Skontroluj, či výsledok je IEnumerable<object>
+            if (result is IEnumerable<object>)
+            {
+                // Ak áno, prejdi cez každý prvok a pridaj ho do XML súboru
+                foreach (var item in (IEnumerable<object>)result)
+                {
+                    XElement element = new XElement("Item");
+                    foreach (var prop in item.GetType().GetProperties())
+                    {
+                        element.Add(new XElement(prop.Name, prop.GetValue(item)));
+                    }
+                    root.Add(element);
+                }
+            }
+            else
+            {
+                // Ak nie je IEnumerable<object>, pridaj ho ako jediný prvok do XML súboru
+                XElement element = new XElement("Item");
+                foreach (var prop in result.GetType().GetProperties())
+                {
+                    element.Add(new XElement(prop.Name, prop.GetValue(result)));
+                }
+                root.Add(element);
+            }
+
+            // Ulož XML súbor na špecifikovanú cestu
+            string fullPath = Path.Combine(path, fileName);
+            root.Save(fullPath);
+        }

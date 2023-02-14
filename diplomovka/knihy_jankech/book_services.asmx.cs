@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Runtime.Remoting.Contexts;
+using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Services;
@@ -24,7 +25,7 @@ using Formatting = Newtonsoft.Json.Formatting;
 
 namespace knihy_jankech
 {
-   
+
     /// <summary>
     /// Summary description for book_services
     /// </summary>
@@ -155,14 +156,14 @@ namespace knihy_jankech
             // Formátovať aktuálny dátum a čas pomocou vzoru "yyyy-MM-dd HH:mm:ss"
             return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }
-         // metóda na zápis do jedného súboru (cesta k súboru je parameter) s časovou pečiatkov
+        // metóda na zápis do jedného súboru (cesta k súboru je parameter) s časovou pečiatkov
         // Táto funkcia zapíše dokument XML do súboru s časovou značkou.Ak súbor už existuje,
         // kód ho načíta a pridá doň nové prvky, inak vytvorí nový dokument XML s koreňovým prvkom.
         // Kód prechádza v cykle každý uzol v údajoch, importuje ho do dokumentu, vytvorí element "output" (výstup), vytvorí element "timestamp" (časová pečiatka) s aktuálnym dátumom a časom,
         // pripojí importovaný uzol a časovú pečiatku k elementu output a  nakoniec pripojí výstupný prvok ku koreňovému prvku.Nakoniec sa dokument uloží do zadanej cesty k súboru.
 
         // metóda na zápis do súboru s časovou pečiatkov
-      
+
         public void WriteToTheFileWithTimeStamp(string path, XmlNodeList data)
         {
             try
@@ -239,75 +240,68 @@ namespace knihy_jankech
         //Použitím dynamických sa môžete vyhnúť nutnosti písať viacero metód na spracovanie rôznych typov objektov a namiesto toho napísať jednu metódu, ktorá zvládne všetky typy.
         public static void SaveWebMethodResult(dynamic result, string methodName, string[] parameters, string path)
         {
-            // Skontroluj, či špecifikovaná cesta existuje a vytvor ju, ak nie
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
 
-            // Vygeneruj názov súboru na základe aktuálneho času a názvu metódy
-            string fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + methodName + "_";
-            foreach (string param in parameters)
-            {
-                fileName += param.ToString() + "_";
-            }
-            fileName = fileName.TrimEnd('_') + ".xml";
-
-            // Vytvor koreňový element XML súboru
+            string fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + methodName + "_" + string.Join("_", parameters) + ".xml";
             XElement root = new XElement("Root");
 
-            // Skontroluj, či výsledok je IEnumerable<object>
-            if (result is IEnumerable<object>)
+            void AddToXml(XElement parent, object obj)
             {
-                // Ak áno, prejdi cez každý prvok a pridaj ho do XML súboru
-                foreach (var item in (IEnumerable<object>)result)
+                var element = new XElement("Item");
+
+                foreach (var prop in obj.GetType().GetProperties())
                 {
-                    XElement element = new XElement("Item");
-                    foreach (var prop in item.GetType().GetProperties())
+                    var value = prop.GetValue(obj);
+                    if (value != null)
                     {
-                        element.Add(new XElement(prop.Name, prop.GetValue(item)));
+                        if (prop.PropertyType.IsPrimitive || prop.PropertyType == typeof(string))
+                        {
+                            element.Add(new XElement(prop.Name, value));
+                        }
+                        else if (value is IEnumerable enumerable1 && !(value is string))
+                        {
+                            foreach (var item in enumerable1)
+                            {
+                                AddToXml(element, item);
+                            }
+                        }
+                        else
+                        {
+                            AddToXml(element, value);
+                        }
                     }
-                    root.Add(element);
+                }
+                parent.Add(element);
+            }
+
+            if (result is IEnumerable enumerable && !(result is string))
+            {
+                foreach (var item in enumerable)
+                {
+                    AddToXml(root, item);
                 }
             }
             else
             {
-                // Ak nie je IEnumerable<object>, pridaj ho ako jediný prvok do XML súboru
-                XElement element = new XElement("Item");
-                foreach (var prop in result.GetType().GetProperties())
-                {
-                    element.Add(new XElement(prop.Name, prop.GetValue(result)));
-                }
-                root.Add(element);
+                AddToXml(root, result);
             }
 
-            // Ulož XML súbor na špecifikovanú cestu
             string fullPath = Path.Combine(path, fileName);
             root.Save(fullPath);
         }
-       
-        public void ValidateDate(string startDate, string endDate)
-        {
-            DateTime start, end;
-            if (!DateTime.TryParseExact(startDate, "yyyy-MM-dd", CultureInfo.InvariantCulture,
-                                        DateTimeStyles.None, out start) ||
-                !DateTime.TryParseExact(endDate, "yyyy-MM-dd", CultureInfo.InvariantCulture,
-                                        DateTimeStyles.None, out end))
-            {
-                Context.Response.StatusCode = 500;
-                Context.Response.Write("Invalid date format provided. Correct format is yyyy-MM-dd");
-                return;
-            }
-        }
 
-            [WebMethod]
+        [WebMethod]
         public void AddBook()
         {
-            try { 
-            var request = HttpContext.Current.Request;
+            try
+            {
+                var request = HttpContext.Current.Request;
 
 
-            var bookData = new BookData();
+                var bookData = new BookData();
                 if (string.IsNullOrEmpty(request["nazov"]))
                 {
                     Context.Response.StatusCode = 500;
@@ -458,58 +452,58 @@ namespace knihy_jankech
                 var postedFile = request.Files[0];
 
                 bookData.Nazov = request["nazov"];
-            bookData.Autor1 = request["autor1"];
-            bookData.Autor2 = request["autor2"];
-            bookData.Kategoria = request["kategoria"];
-            bookData.Isbn = request["isbn"];
-            bookData.Jazyk = request["jazyk"];
-            bookData.Pocet_stran = request["pocet_stran"];
-            bookData.Vazba = request["vazba"];
-            bookData.Rok_vydania = request["rok_vydania"];
-            bookData.Vydavatelstvo = request["vydavatelstvo"];
-            bookData.Predajna_cena = Convert.ToDecimal(request["predajna_cena"]);
-            bookData.Nakupna_cena = Convert.ToDecimal(request["nakupna_cena"]);   
-            bookData.Obsah = request["obsah"];
-            bookData.Priemerne_hodnotenie = request["priemerne_hodnotenie"];
-            bookData.ImageName = Path.GetFileName(postedFile.FileName);
-            bookData.ImageBytes = new byte[postedFile.ContentLength];
-            postedFile.InputStream.Read(bookData.ImageBytes, 0, postedFile.ContentLength);
+                bookData.Autor1 = request["autor1"];
+                bookData.Autor2 = request["autor2"];
+                bookData.Kategoria = request["kategoria"];
+                bookData.Isbn = request["isbn"];
+                bookData.Jazyk = request["jazyk"];
+                bookData.Pocet_stran = request["pocet_stran"];
+                bookData.Vazba = request["vazba"];
+                bookData.Rok_vydania = request["rok_vydania"];
+                bookData.Vydavatelstvo = request["vydavatelstvo"];
+                bookData.Predajna_cena = Convert.ToDecimal(request["predajna_cena"]);
+                bookData.Nakupna_cena = Convert.ToDecimal(request["nakupna_cena"]);
+                bookData.Obsah = request["obsah"];
+                bookData.Priemerne_hodnotenie = request["priemerne_hodnotenie"];
+                bookData.ImageName = Path.GetFileName(postedFile.FileName);
+                bookData.ImageBytes = new byte[postedFile.ContentLength];
+                postedFile.InputStream.Read(bookData.ImageBytes, 0, postedFile.ContentLength);
 
-            // Load the existing XML file
-            string xmlFilePath = fileBookInfo;
-            XElement xmlDoc = LoadXElement(xmlFilePath);
-            var lastBookId = xmlDoc.Element("books").Elements("book").Max(x => (int?)x.Element("id")) ?? 0;
-            bookData.Id = (lastBookId + 1).ToString();
+                // Load the existing XML file
+                string xmlFilePath = fileBookInfo;
+                XElement xmlDoc = LoadXElement(xmlFilePath);
+                var lastBookId = xmlDoc.Element("books").Elements("book").Max(x => (int?)x.Element("id")) ?? 0;
+                bookData.Id = (lastBookId + 1).ToString();
 
-            // Add the new book element to the XML file
+                // Add the new book element to the XML file
 
-            XElement bookElement = new XElement("book",
-                new XElement("id", bookData.Id),
-                new XElement("nazov", bookData.Nazov),
-                 new XElement("autori",
-                    new XElement("autor1", bookData.Autor1),
-                    new XElement("autor2", bookData.Autor2)),
-                new XElement("kategoria", bookData.Kategoria),
-                new XElement("isbn", bookData.Isbn),
-                new XElement("jazyk", bookData.Jazyk),
-                new XElement("pocet_stran", bookData.Pocet_stran),
-                new XElement("vazba", bookData.Vazba),
-                new XElement("rok_vydania", bookData.Rok_vydania),
-                new XElement("vydavatelstvo", bookData.Vydavatelstvo),
-                new XElement("predajna_cena", bookData.Predajna_cena),
-                new XElement("nakupna_cena", bookData.Nakupna_cena),
-                new XElement("marza", (bookData.Predajna_cena - bookData.Nakupna_cena) / bookData.Predajna_cena * 100),
-        new XElement("zisk_kus", bookData.Predajna_cena - bookData.Nakupna_cena),
-        new XElement("obsah", bookData.Obsah),
-        new XElement("priemerne_hodnotenie", bookData.Priemerne_hodnotenie),
-        new XElement("obrazok", "../img/"+bookData.Id+".jpg"));
-       
-         
-            xmlDoc.Element("books").Add(bookElement);
-            xmlDoc.Save(xmlFilePath);
-            // Save the image to the file system
-            string imageFilePath = Path.Combine(Server.MapPath("~/img"), "../img/" + bookData.Id + ".jpg");
-            System.IO.File.WriteAllBytes(imageFilePath, bookData.ImageBytes);
+                XElement bookElement = new XElement("book",
+                    new XElement("id", bookData.Id),
+                    new XElement("nazov", bookData.Nazov),
+                     new XElement("autori",
+                        new XElement("autor1", bookData.Autor1),
+                        new XElement("autor2", bookData.Autor2)),
+                    new XElement("kategoria", bookData.Kategoria),
+                    new XElement("isbn", bookData.Isbn),
+                    new XElement("jazyk", bookData.Jazyk),
+                    new XElement("pocet_stran", bookData.Pocet_stran),
+                    new XElement("vazba", bookData.Vazba),
+                    new XElement("rok_vydania", bookData.Rok_vydania),
+                    new XElement("vydavatelstvo", bookData.Vydavatelstvo),
+                    new XElement("predajna_cena", bookData.Predajna_cena),
+                    new XElement("nakupna_cena", bookData.Nakupna_cena),
+                    new XElement("marza", (bookData.Predajna_cena - bookData.Nakupna_cena) / bookData.Predajna_cena * 100),
+            new XElement("zisk_kus", bookData.Predajna_cena - bookData.Nakupna_cena),
+            new XElement("obsah", bookData.Obsah),
+            new XElement("priemerne_hodnotenie", bookData.Priemerne_hodnotenie),
+            new XElement("obrazok", "../img/" + bookData.Id + ".jpg"));
+
+
+                xmlDoc.Element("books").Add(bookElement);
+                xmlDoc.Save(xmlFilePath);
+                // Save the image to the file system
+                string imageFilePath = Path.Combine(Server.MapPath("~/img"), "../img/" + bookData.Id + ".jpg");
+                System.IO.File.WriteAllBytes(imageFilePath, bookData.ImageBytes);
                 Context.Response.Write("kniha uspesne pridana");
             }
             catch (Exception ex)
@@ -578,9 +572,9 @@ namespace knihy_jankech
                 bookElement.SetElementValue("obsah", bookData.Obsah);
                 bookElement.SetElementValue("priemerne_hodnotenie", bookData.Priemerne_hodnotenie);
 
-             
-        
-    if (bookData.ImageBytes != null && bookData.ImageBytes.Length > 0)
+
+
+                if (bookData.ImageBytes != null && bookData.ImageBytes.Length > 0)
                 {
                     string imageFilePath = Path.Combine(HttpContext.Current.Server.MapPath("~/img"), "../img/" + bookData.Id + ".jpg");
                     System.IO.File.WriteAllBytes(imageFilePath, bookData.ImageBytes);
@@ -607,9 +601,9 @@ namespace knihy_jankech
                 string xmlFilePath = fileBookInfo;
                 XElement xmlDoc = LoadXElement(xmlFilePath);
 
-       
-                            // Find the book with the specified id
-                            XElement bookToDelete = xmlDoc.Element("books").Elements("book").FirstOrDefault(x => x.Element("id").Value == id);
+
+                // Find the book with the specified id
+                XElement bookToDelete = xmlDoc.Element("books").Elements("book").FirstOrDefault(x => x.Element("id").Value == id);
 
                 if (bookToDelete != null)
                 {
@@ -825,10 +819,11 @@ namespace knihy_jankech
             Context.Response.Write(JsonConvert.SerializeXmlNode(transactions, Formatting.Indented));
         }
         [WebMethod]
-        public void AddTransaction( string id_knihy, string datum, string typ_transakcie, string mnozstvo, string cena_za_jednotku, string celkovo_cena, string aktualne_mnozstvo_na_sklade)
+        public void AddTransaction(string id_knihy, string datum, string typ_transakcie, string mnozstvo, string cena_za_jednotku, string celkovo_cena, string aktualne_mnozstvo_na_sklade)
         {
-            
-            try {
+
+            try
+            {
                 if (string.IsNullOrEmpty(id_knihy) ||
             string.IsNullOrEmpty(datum) ||
             string.IsNullOrEmpty(typ_transakcie) ||
@@ -843,45 +838,45 @@ namespace knihy_jankech
                 }
 
                 var transactionData = new TransactionData();
-            //transactionData.Id_transakcie= id;
-            transactionData.Id_knihy = id_knihy;
-            transactionData.Datum = datum;
-            transactionData.Typ_transakcie = typ_transakcie;
-            transactionData.Mnozstvo = Convert.ToInt32( mnozstvo);
-            transactionData.Cena_za_jednotku = Convert.ToDouble(cena_za_jednotku);
-            transactionData.Celkovo_cena = Convert.ToDouble(celkovo_cena);
-            transactionData.Aktualne_mnozstvo_na_sklade = Convert.ToInt32(aktualne_mnozstvo_na_sklade);
+                //transactionData.Id_transakcie= id;
+                transactionData.Id_knihy = id_knihy;
+                transactionData.Datum = datum;
+                transactionData.Typ_transakcie = typ_transakcie;
+                transactionData.Mnozstvo = Convert.ToInt32(mnozstvo);
+                transactionData.Cena_za_jednotku = Convert.ToDouble(cena_za_jednotku);
+                transactionData.Celkovo_cena = Convert.ToDouble(celkovo_cena);
+                transactionData.Aktualne_mnozstvo_na_sklade = Convert.ToInt32(aktualne_mnozstvo_na_sklade);
 
-            // Load the existing XML file
-            string xmlFilePath = fileBookTransactionInfo;
+                // Load the existing XML file
+                string xmlFilePath = fileBookTransactionInfo;
                 XDocument xmlDoc = LoadXDocument(xmlFilePath);
-            var lastTransactionId = xmlDoc.Elements("knihy_transakcie").Elements("transakcia").Max(x => (int?)x.Element("id_transakcie")) ?? 0;
-            transactionData.Id_transakcie = (lastTransactionId + 1).ToString();
+                var lastTransactionId = xmlDoc.Elements("knihy_transakcie").Elements("transakcia").Max(x => (int?)x.Element("id_transakcie")) ?? 0;
+                transactionData.Id_transakcie = (lastTransactionId + 1).ToString();
 
-            // Add the new transaction element to the XML file
-            XElement transactionElement = new XElement("transakcia",
-                new XElement("id_transakcie", transactionData.Id_transakcie),
-                new XElement("id_knihy", transactionData.Id_knihy),
-                new XElement("datum", transactionData.Datum),
-                new XElement("typ_transakcie", transactionData.Typ_transakcie),
-                new XElement("mnozstvo", transactionData.Mnozstvo),
-                new XElement("cena_za_jednotku", transactionData.Cena_za_jednotku),
-                new XElement("celkovo_cena", transactionData.Celkovo_cena),
-                new XElement("aktualne_mnozstvo_na_sklade", transactionData.Aktualne_mnozstvo_na_sklade));
+                // Add the new transaction element to the XML file
+                XElement transactionElement = new XElement("transakcia",
+                    new XElement("id_transakcie", transactionData.Id_transakcie),
+                    new XElement("id_knihy", transactionData.Id_knihy),
+                    new XElement("datum", transactionData.Datum),
+                    new XElement("typ_transakcie", transactionData.Typ_transakcie),
+                    new XElement("mnozstvo", transactionData.Mnozstvo),
+                    new XElement("cena_za_jednotku", transactionData.Cena_za_jednotku),
+                    new XElement("celkovo_cena", transactionData.Celkovo_cena),
+                    new XElement("aktualne_mnozstvo_na_sklade", transactionData.Aktualne_mnozstvo_na_sklade));
 
-            xmlDoc.Element("knihy_transakcie").Add(transactionElement);
-            xmlDoc.Save(xmlFilePath);
-            Context.Response.Write("transakcia uspesne pridana");
+                xmlDoc.Element("knihy_transakcie").Add(transactionElement);
+                xmlDoc.Save(xmlFilePath);
+                Context.Response.Write("transakcia uspesne pridana");
 
             }
             catch (Exception ex)
             {
-                
+
                 Context.Response.StatusCode = 500;
                 Context.Response.Write("Error: " + ex.Message);
                 return;
             }
-}
+        }
 
         [WebMethod]
         public void UpdateTransaction(string id_transakcie, string id_knihy, string datum, string typ_transakcie, string mnozstvo, string cena_za_jednotku, string celkovo_cena, string aktualne_mnozstvo_na_sklade)
@@ -900,7 +895,7 @@ namespace knihy_jankech
                     Context.Response.StatusCode = 500;
                     Context.Response.Write("kniha zo zadanym id sa nenasla");
                 }
-               else
+                else
                 {
                     transactionElement.SetElementValue("id_knihy", id_knihy);
                     transactionElement.SetElementValue("datum", datum);
@@ -913,7 +908,7 @@ namespace knihy_jankech
 
                 xmlDoc.Save(xmlFilePath);
                 Context.Response.Write("Transakcia bola uspesne aktualizovana");
-             
+
             }
 
             catch (Exception ex)
@@ -922,16 +917,17 @@ namespace knihy_jankech
                 Context.Response.Write("Error: " + ex.Message);
             }
         }
-        
-        
 
-[WebMethod]
+
+
+        [WebMethod]
         public void DeleteTransaction(string id_transakcie)
         {
-            try { 
-            // Load the existing XML file
-            string xmlFilePath = fileBookTransactionInfo;
-            XDocument xmlDoc = LoadXDocument(xmlFilePath);
+            try
+            {
+                // Load the existing XML file
+                string xmlFilePath = fileBookTransactionInfo;
+                XDocument xmlDoc = LoadXDocument(xmlFilePath);
 
 
                 // Find the transaction element to delete by its id
@@ -942,19 +938,20 @@ namespace knihy_jankech
                     Context.Response.Write("kniha zo zadanym id sa nenasla");
                 }
 
-               else
-            {
-                transactionElement.Remove();
-                xmlDoc.Save(xmlFilePath);
-                
+                else
+                {
+                    transactionElement.Remove();
+                    xmlDoc.Save(xmlFilePath);
+
+                }
+
             }
-                
-            }
-            
+
             catch (Exception ex)
-            { Context.Response.StatusCode = 500;
-               Context.Response.Write("Error: " + ex.Message);
-                
+            {
+                Context.Response.StatusCode = 500;
+                Context.Response.Write("Error: " + ex.Message);
+
             }
         }
         [WebMethod]
@@ -1021,7 +1018,7 @@ namespace knihy_jankech
             var booksXml = LoadXElement(fileBookInfo);
             var warehouseXml = LoadXElement(fileBookTransactionInfo);
             // Convert the start and end dates to DateTime format
-          
+
             // Use LINQ to join the information from the two XML files and filter the results based on selected category and selected value
             if (selectedAtribute != "vsetky")
             {
@@ -1360,7 +1357,7 @@ namespace knihy_jankech
                     Context.Response.Write("Žiadny záznam nespĺňa zadané kritériá");
 
                 };
-                SaveWebMethodResult(result, "SaveWebMethodResult", parameters, fileAmountFilterPath);
+                SaveWebMethodResult(result, "AgregatedStatiscticsAmount", parameters, fileAmountFilterPath);
                 Context.Response.ContentType = "application/json";
                 Context.Response.Write(JsonConvert.SerializeObject(serializedResult, Formatting.Indented));
             }
@@ -1370,146 +1367,9 @@ namespace knihy_jankech
         // nemazat zatial najlesia uz ju len doplnit 
 
         [WebMethod]
-        public void GetAggregatedDataSellByDateAndSelectedCategory(string atribute, DateTime startDate, DateTime endDate)
-        {
-            // Load the books data from XML
-            XDocument booksData = LoadXDocument(fileBookInfo);
-            // Load the transactions data from XML
-            XDocument transactionsData = LoadXDocument(fileBookTransactionInfo);
-            if (atribute != "autor" && atribute != "autori")
-            {
-
-
-                // Join the books data and transactions data on book id to get all information related to each transaction
-                var aggregatedData = from book in booksData.Descendants("book")
-                                     join transaction in transactionsData.Descendants("transakcia")
-                                     on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
-
-                                     // Filter the transactions to only those with a date within the specified range and of type "predaj"
-                                     where (DateTime)transaction.Element("datum") >= startDate
-                                     && (DateTime)transaction.Element("datum") <= endDate
-                                     && transaction.Element("typ_transakcie").Value == "predaj"
-
-                                     // Group the transactions by the specified category element value
-                                     group new { Book = book, Transaction = transaction } by book.Element(atribute).Value into g
-                                     select new
-                                     {
-                                         // Store the category value as Podkategoria
-                                         Podkategoria = g.Key,
-
-                                         // Calculate the total quantity of books sold and total revenue for each category
-                                         TotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))),
-                                         TotalRevenue = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")),
-
-                                         // Group the books by their id to get aggregated data for books with the same id
-                                         Books = g.GroupBy(x => x.Book.Element("id").Value)
-                                             .Select(x => new
-                                             {
-                                                 Id = x.Key,
-                                                 Name = x.First().Book.Element("nazov").Value,
-
-                                                 // Calculate the total quantity sold and total revenue for each book
-                                                 TotalQuantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))),
-                                                 TotalRevenue = x.Sum(y => (double)y.Transaction.Element("celkovo_cena"))
-                                             }).ToList()
-                                     };
-                var totalAggregatedData = new
-                {
-                    TotalQuantity = aggregatedData.Sum(x => x.TotalQuantity),
-                    TotalRevenue = aggregatedData.Sum(x => x.TotalRevenue)
-                };
-
-                // Combine the aggregated data and total aggregated data into a single object
-                var result = new
-
-                {
-                    AggregatedData = aggregatedData,
-                    TotalAggregatedData = totalAggregatedData
-                };
-
-                // Serialize the result to JSON using the Newtonsoft.Json library
-                Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
-                Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
-
-            }
-            else
-            {
-                var aggregatedData = from book in booksData.Descendants("book")
-                                     join transaction in transactionsData.Descendants("transakcia")
-                                     on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
-                                     where (DateTime)transaction.Element("datum") >= startDate
-                                     && (DateTime)transaction.Element("datum") <= endDate
-                                     && transaction.Element("typ_transakcie").Value == "predaj"
-                                     group new { Book = book, Transaction = transaction } by book.Element("autori").Element("autor1").Value into g
-                                     select new
-                                     {
-                                         // Store the author1 as Podkategoria
-                                         Podkategoria = g.Key,
-                                         TotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))),
-                                         TotalRevenue = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")),
-                                         Books = g.GroupBy(x => x.Book.Element("id").Value)
-                                             .Select(x => new
-                                             {
-                                                 Id = x.Key,
-                                                 Name = x.First().Book.Element("nazov").Value,
-                                                 TotalQuantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))),
-                                                 TotalRevenue = x.Sum(y => (double)y.Transaction.Element("celkovo_cena"))
-                                             })
-                                     };
-                // Group by author2 - toto sluzi len na analyticke uceli to Totalneho poctu predananzch knih a totalneho prijmu sa to nezaratava ale
-                // aby sme mali prehlad o prijmi a predajoch knih aj podla autora dva a mohli to vyuzit pri drill down operacii 
-
-
-                var aggregatedData2 = from book in booksData.Descendants("book")
-                                      join transaction in transactionsData.Descendants("transakcia")
-                                      on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
-                                      where (DateTime)transaction.Element("datum") >= startDate
-                                      && (DateTime)transaction.Element("datum") <= endDate
-                                      && transaction.Element("typ_transakcie").Value == "predaj"
-                                      where book.Element("autori").Element("autor2").Value != "-"
-                                      group new { Book = book, Transaction = transaction } by book.Element("autori").Element("autor2").Value into g
-                                      select new
-                                      {
-                                          // Store the author2 as Podkategoria
-                                          Podkategoria = g.Key,
-                                          TotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))),
-                                          TotalRevenue = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")),
-                                          Books = g.GroupBy(x => x.Book.Element("id").Value)
-                                              .Select(x => new
-                                              {
-
-                                                  Id = x.Key,
-                                                  Name = x.First().Book.Element("nazov").Value,
-                                                  TotalQuantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))),
-                                                  TotalRevenue = x.Sum(y => (double)y.Transaction.Element("celkovo_cena"))
-                                              })
-                                      };
-
-                // Calculate the total quantity and total revenue for all books
-                var totalAggregatedData = new
-                {
-                    TotalQuantity = aggregatedData.Sum(x => x.TotalQuantity),
-                    TotalRevenue = aggregatedData.Sum(x => x.TotalRevenue)
-                };
-                var combinedData = aggregatedData.Concat(aggregatedData2);
-                // Combine the aggregated data and total aggregated data into a single object
-                var result = new
-
-                {
-                    AggregatedData = combinedData,
-                    TotalAggregatedData = totalAggregatedData
-                };
-
-                // Serialize the result to JSON using the Newtonsoft.Json library
-                Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
-                Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
-            }
-
-
-        }
-        [WebMethod]
         public void SortedDrillDownByAtributeDataBetweenTwoDatesSell(string atribute, string startDate, string endDate, string sortingField = "", string sortingOrder = "", string optionalParameter = "")
         {
+            string[] parameters = { atribute,startDate, endDate, sortingField,sortingOrder,optionalParameter };
             // Load the books data from XML
             XDocument booksData = LoadXDocument(fileBookInfo);
             // Load the transactions data from XML
@@ -1532,8 +1392,8 @@ namespace knihy_jankech
             {
                 Context.Response.StatusCode = 500;
                 Context.Response.Write("Zaciatočný dátum nesmie byť vačší ako konečný");
-                
-              
+
+
                 return;
             }
 
@@ -1541,14 +1401,14 @@ namespace knihy_jankech
             {
                 Context.Response.StatusCode = 500;
                 Context.Response.Write("Sortovanie može byť iba zostupne alebo vzostupne");
-                
+
             }
 
             if (sortingField != "hodnota" && sortingField != "nazov")
             {
                 Context.Response.StatusCode = 500;
                 Context.Response.Write("zoradovat sa može iba podľa názvu alebo hodnoty");
-              
+
             }
             double days = (end - start).Days + 1;
             if (atribute != "autor" && atribute != "autori")
@@ -1563,7 +1423,7 @@ namespace knihy_jankech
                                      where (DateTime)transaction.Element("datum") >= start
                                      && (DateTime)transaction.Element("datum") <= end
                                      && transaction.Element("typ_transakcie").Value == "predaj"
-                                   
+
 
 
                                      // Group the transactions by the specified category element value
@@ -1578,7 +1438,7 @@ namespace knihy_jankech
                                          TotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))),
                                          TotalRevenue = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")),
                                          AverageTotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))) / days,
-                                         AverageTotalRevenue = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")) /days,
+                                         AverageTotalRevenue = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")) / days,
 
                                          // Group the books by their id to get aggregated data for books with the same id
                                          Books = g.GroupBy(x => x.Book.Element("id").Value)
@@ -1590,8 +1450,8 @@ namespace knihy_jankech
                                                  // Calculate the total quantity sold and total revenue for each book
                                                  TotalQuantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))),
                                                  TotalRevenue = x.Sum(y => (double)y.Transaction.Element("celkovo_cena")),
-                                                 AverageTotalQuantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo")))/days,
-                                                 AverageTotalRevenue = x.Sum(y => (double)y.Transaction.Element("celkovo_cena"))/days
+                                                 AverageTotalQuantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))) / days,
+                                                 AverageTotalRevenue = x.Sum(y => (double)y.Transaction.Element("celkovo_cena")) / days
 
 
                                              }).ToList()
@@ -1615,7 +1475,7 @@ namespace knihy_jankech
                             TotalQuantity = x.TotalQuantity,
                             TotalRevenue = x.TotalRevenue,
                             AverageTotalQuantity = x.AverageTotalQuantity,
-                            AverageTotalRevenue=x.AverageTotalRevenue,
+                            AverageTotalRevenue = x.AverageTotalRevenue,
                             Books = x.Books.OrderBy(y => y.Name).ToList()
 
                         })
@@ -1686,18 +1546,18 @@ namespace knihy_jankech
                 {
                     totalQuantity = aggregatedData.Sum(x => x.TotalQuantity),
                     totalRevenue = aggregatedData.Sum(x => x.TotalRevenue),
-                    averageTotalDailyQuantity = aggregatedData.Sum(x=>x.TotalQuantity)/days,
+                    averageTotalDailyQuantity = aggregatedData.Sum(x => x.TotalQuantity) / days,
                     averageTotalDailyRevenue = aggregatedData.Sum(x => x.TotalRevenue) / days,
-                    namePodkategoriaMaxRevenue=namePodkategoriaMaxRevenue,
-                    maxRevenuePodkategoria=maxRevenuePodkategoria,
-                    namePodkategoriaMinRevenue=namePodkategoriaMinRevenue,
-                    minRevenuePodkategoria=minRevenuePodkategoria,
-                    namePodkategoriaMaxQuantity=namePodkategoriaMaxQuantity,
-                    maxQuantityPodkategoria=maxQuantityPodkategoria,
-                    namePodkategoriaMinQuantity=namePodkategoriaMinQuantity,
-                    minQuantityPodkategoria=minQuantityPodkategoria,
-                    nameBookMaxRevenue=nameBookMaxRevenue,
-                 maxRevenueBook=maxRevenueBook,
+                    namePodkategoriaMaxRevenue = namePodkategoriaMaxRevenue,
+                    maxRevenuePodkategoria = maxRevenuePodkategoria,
+                    namePodkategoriaMinRevenue = namePodkategoriaMinRevenue,
+                    minRevenuePodkategoria = minRevenuePodkategoria,
+                    namePodkategoriaMaxQuantity = namePodkategoriaMaxQuantity,
+                    maxQuantityPodkategoria = maxQuantityPodkategoria,
+                    namePodkategoriaMinQuantity = namePodkategoriaMinQuantity,
+                    minQuantityPodkategoria = minQuantityPodkategoria,
+                    nameBookMaxRevenue = nameBookMaxRevenue,
+                    maxRevenueBook = maxRevenueBook,
                     nameBookMinRevenue = nameBookMinRevenue,
                     minRevenueBook = minRevenueBook,
                     nameBookMaxQuantity = nameBookMaxQuantity,
@@ -1719,6 +1579,7 @@ namespace knihy_jankech
                 };
 
                 // Serialize the result to JSON using the Newtonsoft.Json library
+                SaveWebMethodResult(result, "SortedDrillDownByAtributeDataBetweenTwoDatesSell", parameters, fileAmountFilterPath);
                 Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
                 Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
             }
@@ -1957,6 +1818,7 @@ namespace knihy_jankech
                 };
 
                 // Serialize the result to JSON using the Newtonsoft.Json library
+                SaveWebMethodResult(result, "SortedDrillDownByAtributeDataBetweenTwoDatesSell", parameters, fileAmountFilterPath);
                 Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
                 Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
             }
@@ -2428,7 +2290,7 @@ namespace knihy_jankech
                                    Amount = (int)transaction.Element("mnozstvo"),
                                    Price = (double)(transaction.Element("cena_za_jednotku"))
                                };
-            if (year==0)
+            if (year == 0)
             {
                 Context.Response.StatusCode = 500;
                 Context.Response.Write("Prosím zvoľte si rok ");
@@ -2456,19 +2318,25 @@ namespace knihy_jankech
             }
 
             double totalRevenue = transactions.Where(t => t.Type == "predaj" && (t.Amount < 0))
-                                                   .Sum(t => Math.Abs(t.Amount) * t.Price);
+                                                       .Sum(t => Math.Abs(t.Amount) * t.Price);
 
             double totalCost = transactions.Where(t => t.Type == "nákup" && t.Amount > 0)
-                                                .Sum(t => t.Amount * t.Price);
+                                                    .Sum(t => t.Amount * t.Price);
 
             double profit = totalRevenue - totalCost;
 
-            var result = new { totalRevenue, totalCost, profit };
+            int numSellOrders = transactions.Count(t => t.Type == "predaj" && (t.Amount < 0));
+            int numBuyOrders = transactions.Count(t => t.Type == "nákup" && t.Amount > 0);
+            double netProfitMargin = profit / totalRevenue;
+            double returnOnInvestment = profit / totalCost;
+ 
+
+            var result = new { totalRevenue, totalCost, profit, numSellOrders, numBuyOrders,  netProfitMargin, returnOnInvestment, };
             Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
             Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
         }
-    }
 
+    }
 }
 
 

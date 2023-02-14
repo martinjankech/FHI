@@ -98,81 +98,124 @@
     </div>
     <button id="submit" type="submit" class=" mt-4 mb-4 btn btn-primary">Potvrdiť</button>
    </form>
+   <div class="container">
+    <div class="row mt-5">
+     <div class="col-sm-4">
+      <div class="card">
+       <div class="card-body">
+        <h5 class="card-title">Celkový príjem</h5>
+        <p class="card-text" id="totalRevenue"></p>
+       </div>
+      </div>
+     </div>
+     <div class="col-sm-4">
+      <div class="card">
+       <div class="card-body">
+        <h5 class="card-title">Celkové náklady</h5>
+        <p class="card-text" id="totalCost"></p>
+       </div>
+      </div>
+     </div>
+     <div class="col-sm-4">
+      <div class="card">
+       <div class="card-body">
+        <h5 class="card-title">Celkový zisk</h5>
+        <p class="card-text" id="totalProfit"></p>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="row mt-5">
+     <div class="col-sm-6">
+      <div class="card">
+       <div class="card-body">
+        <h5 class="card-title">Celkovy pocet predanych knih</h5>
+        <p class="card-text" id="numSellOrders"></p>
+       </div>
+      </div>
+     </div>
+     <div class="col-sm-6">
+      <div class="card">
+       <div class="card-body">
+        <h5 class="card-title">Celkový pocet naskladnenych knih</h5>
+        <p class="card-text" id="numBuyOrders"></p>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="row mt-5 mb-5">
+     <div class="col-sm-6">
+      <div class="card">
+       <div class="card-body">
+        <h5 class="card-title">Net profit margin</h5>
+        <p class="card-text" id="netProfitMargin"></p>
+       </div>
+      </div>
+     </div>
+     <div class="col-sm-6 ">
+      <div class="card">
+       <div class="card-body">
+        <h5 class="card-title">ROI</h5>
+        <p class="card-text" id="returnOnInvestment"></p>
+       </div>
+      </div>
+     </div>
 
-   <div class="row mt-5">
-    <div class="col-sm-4">
-     <div class="card">
-      <div class="card-body">
-       <h5 class="card-title">Celkový príjem</h5>
-       <p class="card-text" id="totalRevenue"></p>
-      </div>
-     </div>
     </div>
-    <div class="col-sm-4">
-     <div class="card">
-      <div class="card-body">
-       <h5 class="card-title">Celkové náklady</h5>
-       <p class="card-text" id="totalCost"></p>
-      </div>
-     </div>
-    </div>
-    <div class="col-sm-4">
-     <div class="card">
-      <div class="card-body">
-       <h5 class="card-title">Celkový zisk</h5>
-       <p class="card-text" id="totalProfit"></p>
-      </div>
-     </div>
-    </div>
+
    </div>
   </div>
- </div>
- <footer>
+  <div>
+   <footer>
 
- </footer>
- <script>
-  $(document).on('submit', "#formAg", function (event) {
-   event.preventDefault()
-   var year = $("#yearSelect").val();
-   var quarter = $("#quarterSelect").val();
-   var month = $("#monthSelect").val();
-   if (year == 0) {
-    showAlert("Prosím zvoľte rok", "alerts", "danger")
-    event.preventDefault()
-
-
-
-   }
-   else if (quarter != 0 & month != 0) {
-
-    showAlert("štvrťrok a mesiac nemožu byť zvolené súčasne", "alerts", "danger")
-    event.preventDefault()
-   }
-
-   $.ajax({
-    type: "POST",
-    url: "http://localhost:8050/book_services.asmx/CalculateRevenueCostProfit",
-    data: { year: year, quarter: quarter, month: month },
-    dataType: "json",
-    encode: true,
-   }).done(function (response) {
-    var result = response
-    $("#totalRevenue").text(Math.round(result.totalRevenue * 100) / 100 + "€");
-    $("#totalCost").text(Math.round(result.totalCost * 100) / 100 + "€");
-    $("#totalProfit").text(Math.round(result.profit * 100) / 100 + "€");
+   </footer>
+   <script>
+    $(document).on('submit', "#formAg", function (event) {
+     event.preventDefault()
+     var year = $("#yearSelect").val();
+     var quarter = $("#quarterSelect").val();
+     var month = $("#monthSelect").val();
+     if (year == 0) {
+      showAlert("Prosím zvoľte rok", "alerts", "danger")
+      event.preventDefault()
 
 
-   })
-    .fail(function (jqXHR, textStatus, errorThrown) { showAlert(jqXHR.responseText, "alerts", "danger"); })
-   event.preventDefault()
-  });
+
+     }
+     else if (quarter != 0 & month != 0) {
+
+      showAlert("štvrťrok a mesiac nemožu byť zvolené súčasne", "alerts", "danger")
+      event.preventDefault()
+     }
+
+     $.ajax({
+      type: "POST",
+      url: "http://localhost:8050/book_services.asmx/CalculateRevenueCostProfit",
+      data: { year: year, quarter: quarter, month: month },
+      dataType: "json",
+      encode: true,
+     }).done(function (response) {
+      var result = response
+      $("#totalRevenue").text(Math.round(result.totalRevenue * 100) / 100 + "€");
+      $("#totalCost").text(Math.round(result.totalCost * 100) / 100 + "€");
+      $("#totalProfit").text(Math.round(result.profit * 100) / 100 + "€");
+      $("#numSellOrders").text(result.numSellOrders + "ks")
+      $("#numBuyOrders").text(result.numBuyOrders + "ks");
+      $("#netProfitMargin").text(Math.round(result.netProfitMargin * 10000) / 100 + "%");
+      $("#returnOnInvestment").text(Math.round(result.returnOnInvestment * 10000) / 100 + "%");
 
 
- </script>
- <script>
-  $("#navbar").load("navbar.html")
-  $("footer").load("footer.html")
- </script>
+     })
+      .fail(function (jqXHR, textStatus, errorThrown) { showAlert(jqXHR.responseText, "alerts", "danger"); })
+     event.preventDefault()
+    });
+
+
+   </script>
+   <script>
+    $("#navbar").load("navbar.html")
+    $("footer").load("footer.html")
+   </script>
 
 
 </body>
