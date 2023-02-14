@@ -6,6 +6,9 @@
 .grey-card {
  background-color: #f0f0f0;
 }
+.red-card {
+ background-color: lightpink
+}
 
 .card-text,
 .card-title {

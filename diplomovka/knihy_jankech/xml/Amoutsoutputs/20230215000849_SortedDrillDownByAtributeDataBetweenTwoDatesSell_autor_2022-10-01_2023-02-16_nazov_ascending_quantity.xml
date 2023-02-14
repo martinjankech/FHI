@@ -1,0 +1,801 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Root>
+  <Item>
+    <Item>
+      <Podkategoria>Agatha Christie</Podkategoria>
+      <TotalQuantity>395</TotalQuantity>
+      <TotalRevenue>3562.0000000000005</TotalRevenue>
+      <AverageTotalQuantity>2.8417266187050361</AverageTotalQuantity>
+      <AverageTotalRevenue>25.625899280575542</AverageTotalRevenue>
+      <Item>
+        <Id>14</Id>
+        <Name>Nemý svedok</Name>
+        <TotalQuantity>135</TotalQuantity>
+        <TotalRevenue>1053</TotalRevenue>
+        <AverageTotalQuantity>0.97122302158273377</AverageTotalQuantity>
+        <AverageTotalRevenue>7.5755395683453237</AverageTotalRevenue>
+      </Item>
+      <Item>
+        <Id>15</Id>
+        <Name>Veľká štvorka</Name>
+        <TotalQuantity>260</TotalQuantity>
+        <TotalRevenue>2509</TotalRevenue>
+        <AverageTotalQuantity>1.8705035971223021</AverageTotalQuantity>
+        <AverageTotalRevenue>18.050359712230215</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Andrew Morton</Podkategoria>
+      <TotalQuantity>212</TotalQuantity>
+      <TotalRevenue>4786.96</TotalRevenue>
+      <AverageTotalQuantity>1.525179856115108</AverageTotalQuantity>
+      <AverageTotalRevenue>34.438561151079135</AverageTotalRevenue>
+      <Item>
+        <Id>22</Id>
+        <Name>Diana</Name>
+        <TotalQuantity>212</TotalQuantity>
+        <TotalRevenue>4786.96</TotalRevenue>
+        <AverageTotalQuantity>1.525179856115108</AverageTotalQuantity>
+        <AverageTotalRevenue>34.438561151079135</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Antoine De Saint-Exupéry</Podkategoria>
+      <TotalQuantity>182</TotalQuantity>
+      <TotalRevenue>2720.8999999999996</TotalRevenue>
+      <AverageTotalQuantity>1.3093525179856116</AverageTotalQuantity>
+      <AverageTotalRevenue>19.574820143884889</AverageTotalRevenue>
+      <Item>
+        <Id>25</Id>
+        <Name>Malý princ</Name>
+        <TotalQuantity>182</TotalQuantity>
+        <TotalRevenue>2720.8999999999996</TotalRevenue>
+        <AverageTotalQuantity>1.3093525179856116</AverageTotalQuantity>
+        <AverageTotalRevenue>19.574820143884889</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Arthur C. Clarke</Podkategoria>
+      <TotalQuantity>287</TotalQuantity>
+      <TotalRevenue>4201.2399999999971</TotalRevenue>
+      <AverageTotalQuantity>2.064748201438849</AverageTotalQuantity>
+      <AverageTotalRevenue>30.224748201438828</AverageTotalRevenue>
+      <Item>
+        <Id>6</Id>
+        <Name>2010: Druhá vesmírná odysea</Name>
+        <TotalQuantity>114</TotalQuantity>
+        <TotalRevenue>1509.3600000000004</TotalRevenue>
+        <AverageTotalQuantity>0.82014388489208634</AverageTotalQuantity>
+        <AverageTotalRevenue>10.858705035971225</AverageTotalRevenue>
+      </Item>
+      <Item>
+        <Id>5</Id>
+        <Name>Setkání s Rámou</Name>
+        <TotalQuantity>173</TotalQuantity>
+        <TotalRevenue>2691.8799999999987</TotalRevenue>
+        <AverageTotalQuantity>1.2446043165467626</AverageTotalQuantity>
+        <AverageTotalRevenue>19.366043165467616</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Dale Carnegie</Podkategoria>
+      <TotalQuantity>397</TotalQuantity>
+      <TotalRevenue>6890.7</TotalRevenue>
+      <AverageTotalQuantity>2.8561151079136691</AverageTotalQuantity>
+      <AverageTotalRevenue>49.57338129496403</AverageTotalRevenue>
+      <Item>
+        <Id>21</Id>
+        <Name>Ako sa zbaviť starostí a začať žiť</Name>
+        <TotalQuantity>233</TotalQuantity>
+        <TotalRevenue>5242.5</TotalRevenue>
+        <AverageTotalQuantity>1.6762589928057554</AverageTotalQuantity>
+        <AverageTotalRevenue>37.715827338129493</AverageTotalRevenue>
+      </Item>
+      <Item>
+        <Id>20</Id>
+        <Name>Ako si získavať priateľov a pôsobiť na ľudí</Name>
+        <TotalQuantity>164</TotalQuantity>
+        <TotalRevenue>1648.1999999999996</TotalRevenue>
+        <AverageTotalQuantity>1.1798561151079137</AverageTotalQuantity>
+        <AverageTotalRevenue>11.857553956834529</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Dominik Dán</Podkategoria>
+      <TotalQuantity>436</TotalQuantity>
+      <TotalRevenue>4293.4000000000005</TotalRevenue>
+      <AverageTotalQuantity>3.1366906474820144</AverageTotalQuantity>
+      <AverageTotalRevenue>30.887769784172665</AverageTotalRevenue>
+      <Item>
+        <Id>13</Id>
+        <Name>Mucha</Name>
+        <TotalQuantity>127</TotalQuantity>
+        <TotalRevenue>1898.65</TotalRevenue>
+        <AverageTotalQuantity>0.91366906474820142</AverageTotalQuantity>
+        <AverageTotalRevenue>13.659352517985612</AverageTotalRevenue>
+      </Item>
+      <Item>
+        <Id>12</Id>
+        <Name>Smrť na druhom brehu</Name>
+        <TotalQuantity>103</TotalQuantity>
+        <TotalRevenue>1364.75</TotalRevenue>
+        <AverageTotalQuantity>0.74100719424460426</AverageTotalQuantity>
+        <AverageTotalRevenue>9.8183453237410063</AverageTotalRevenue>
+      </Item>
+      <Item>
+        <Id>11</Id>
+        <Name>Tajomný závoj</Name>
+        <TotalQuantity>206</TotalQuantity>
+        <TotalRevenue>1030</TotalRevenue>
+        <AverageTotalQuantity>1.4820143884892085</AverageTotalQuantity>
+        <AverageTotalRevenue>7.4100719424460433</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Friedrich Nietzsche</Podkategoria>
+      <TotalQuantity>122</TotalQuantity>
+      <TotalRevenue>1995.9199999999996</TotalRevenue>
+      <AverageTotalQuantity>0.87769784172661869</AverageTotalQuantity>
+      <AverageTotalRevenue>14.35913669064748</AverageTotalRevenue>
+      <Item>
+        <Id>27</Id>
+        <Name>Mimo dobro a zlo</Name>
+        <TotalQuantity>122</TotalQuantity>
+        <TotalRevenue>1995.9199999999996</TotalRevenue>
+        <AverageTotalQuantity>0.87769784172661869</AverageTotalQuantity>
+        <AverageTotalRevenue>14.35913669064748</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>George Orwell</Podkategoria>
+      <TotalQuantity>115</TotalQuantity>
+      <TotalRevenue>1477.75</TotalRevenue>
+      <AverageTotalQuantity>0.82733812949640284</AverageTotalQuantity>
+      <AverageTotalRevenue>10.631294964028777</AverageTotalRevenue>
+      <Item>
+        <Id>26</Id>
+        <Name>1984</Name>
+        <TotalQuantity>115</TotalQuantity>
+        <TotalRevenue>1477.75</TotalRevenue>
+        <AverageTotalQuantity>0.82733812949640284</AverageTotalQuantity>
+        <AverageTotalRevenue>10.631294964028777</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Igor Bukovský</Podkategoria>
+      <TotalQuantity>132</TotalQuantity>
+      <TotalRevenue>3298.68</TotalRevenue>
+      <AverageTotalQuantity>0.94964028776978415</AverageTotalQuantity>
+      <AverageTotalRevenue>23.731510791366905</AverageTotalRevenue>
+      <Item>
+        <Id>29</Id>
+        <Name>Návod na prežitie pre muža</Name>
+        <TotalQuantity>132</TotalQuantity>
+        <TotalRevenue>3298.68</TotalRevenue>
+        <AverageTotalQuantity>0.94964028776978415</AverageTotalQuantity>
+        <AverageTotalRevenue>23.731510791366905</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>J.K. Rowling</Podkategoria>
+      <TotalQuantity>246</TotalQuantity>
+      <TotalRevenue>3314.7200000000007</TotalRevenue>
+      <AverageTotalQuantity>1.7697841726618706</AverageTotalQuantity>
+      <AverageTotalRevenue>23.846906474820148</AverageTotalRevenue>
+      <Item>
+        <Id>2</Id>
+        <Name>Harry Potter a Ohnivá čaša</Name>
+        <TotalQuantity>92</TotalQuantity>
+        <TotalRevenue>1482.1199999999997</TotalRevenue>
+        <AverageTotalQuantity>0.66187050359712229</AverageTotalQuantity>
+        <AverageTotalRevenue>10.662733812949638</AverageTotalRevenue>
+      </Item>
+      <Item>
+        <Id>1</Id>
+        <Name>Harry Potter a Tajomná komnata</Name>
+        <TotalQuantity>154</TotalQuantity>
+        <TotalRevenue>1832.6000000000004</TotalRevenue>
+        <AverageTotalQuantity>1.1079136690647482</AverageTotalQuantity>
+        <AverageTotalRevenue>13.184172661870507</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>J.R.R. Tolkien</Podkategoria>
+      <TotalQuantity>221</TotalQuantity>
+      <TotalRevenue>3195.66</TotalRevenue>
+      <AverageTotalQuantity>1.5899280575539569</AverageTotalQuantity>
+      <AverageTotalRevenue>22.990359712230216</AverageTotalRevenue>
+      <Item>
+        <Id>17</Id>
+        <Name>Pán prsteňov III. - Návrat kráľa</Name>
+        <TotalQuantity>221</TotalQuantity>
+        <TotalRevenue>3195.66</TotalRevenue>
+        <AverageTotalQuantity>1.5899280575539569</AverageTotalQuantity>
+        <AverageTotalRevenue>22.990359712230216</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Jaroslava Lukačovičová</Podkategoria>
+      <TotalQuantity>349</TotalQuantity>
+      <TotalRevenue>5335.1000000000022</TotalRevenue>
+      <AverageTotalQuantity>2.5107913669064748</AverageTotalQuantity>
+      <AverageTotalRevenue>38.382014388489225</AverageTotalRevenue>
+      <Item>
+        <Id>3</Id>
+        <Name>Jednoduché účtovníctvo pre neziskovky</Name>
+        <TotalQuantity>138</TotalQuantity>
+        <TotalRevenue>1330.3200000000002</TotalRevenue>
+        <AverageTotalQuantity>0.9928057553956835</AverageTotalQuantity>
+        <AverageTotalRevenue>9.57064748201439</AverageTotalRevenue>
+      </Item>
+      <Item>
+        <Id>24</Id>
+        <Name>Šlabikár financií pre neziskovky</Name>
+        <TotalQuantity>211</TotalQuantity>
+        <TotalRevenue>4004.78</TotalRevenue>
+        <AverageTotalQuantity>1.5179856115107915</AverageTotalQuantity>
+        <AverageTotalRevenue>28.81136690647482</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Julie Caplin</Podkategoria>
+      <TotalQuantity>358</TotalQuantity>
+      <TotalRevenue>5042.4400000000005</TotalRevenue>
+      <AverageTotalQuantity>2.5755395683453237</AverageTotalQuantity>
+      <AverageTotalRevenue>36.27654676258993</AverageTotalRevenue>
+      <Item>
+        <Id>19</Id>
+        <Name>Hotelík na Islande</Name>
+        <TotalQuantity>189</TotalQuantity>
+        <TotalRevenue>2678.13</TotalRevenue>
+        <AverageTotalQuantity>1.3597122302158273</AverageTotalQuantity>
+        <AverageTotalRevenue>19.267122302158274</AverageTotalRevenue>
+      </Item>
+      <Item>
+        <Id>18</Id>
+        <Name>Kaviareň v Kodani</Name>
+        <TotalQuantity>169</TotalQuantity>
+        <TotalRevenue>2364.3100000000004</TotalRevenue>
+        <AverageTotalQuantity>1.2158273381294964</AverageTotalQuantity>
+        <AverageTotalRevenue>17.009424460431656</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Karolína Fourová</Podkategoria>
+      <TotalQuantity>148</TotalQuantity>
+      <TotalRevenue>2368</TotalRevenue>
+      <AverageTotalQuantity>1.064748201438849</AverageTotalQuantity>
+      <AverageTotalRevenue>17.035971223021583</AverageTotalRevenue>
+      <Item>
+        <Id>4</Id>
+        <Name>Jediná kniha o jídle, kterou potřebujete</Name>
+        <TotalQuantity>148</TotalQuantity>
+        <TotalRevenue>2368</TotalRevenue>
+        <AverageTotalQuantity>1.064748201438849</AverageTotalQuantity>
+        <AverageTotalRevenue>17.035971223021583</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Martin Heidegger</Podkategoria>
+      <TotalQuantity>132</TotalQuantity>
+      <TotalRevenue>1898.16</TotalRevenue>
+      <AverageTotalQuantity>0.94964028776978415</AverageTotalQuantity>
+      <AverageTotalRevenue>13.655827338129496</AverageTotalRevenue>
+      <Item>
+        <Id>28</Id>
+        <Name>Co znamená myslet?</Name>
+        <TotalQuantity>132</TotalQuantity>
+        <TotalRevenue>1898.16</TotalRevenue>
+        <AverageTotalQuantity>0.94964028776978415</AverageTotalQuantity>
+        <AverageTotalRevenue>13.655827338129496</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Michaela  Vannini</Podkategoria>
+      <TotalQuantity>96</TotalQuantity>
+      <TotalRevenue>1416</TotalRevenue>
+      <AverageTotalQuantity>0.69064748201438853</AverageTotalQuantity>
+      <AverageTotalRevenue>10.187050359712231</AverageTotalRevenue>
+      <Item>
+        <Id>7</Id>
+        <Name>Nová taliančina pre samoukov</Name>
+        <TotalQuantity>96</TotalQuantity>
+        <TotalRevenue>1416</TotalRevenue>
+        <AverageTotalQuantity>0.69064748201438853</AverageTotalQuantity>
+        <AverageTotalRevenue>10.187050359712231</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Mike Shema</Podkategoria>
+      <TotalQuantity>354</TotalQuantity>
+      <TotalRevenue>12309</TotalRevenue>
+      <AverageTotalQuantity>2.5467625899280577</AverageTotalQuantity>
+      <AverageTotalRevenue>88.553956834532372</AverageTotalRevenue>
+      <Item>
+        <Id>10</Id>
+        <Name>Hacking bez tajemství - Webové aplikace</Name>
+        <TotalQuantity>98</TotalQuantity>
+        <TotalRevenue>1813</TotalRevenue>
+        <AverageTotalQuantity>0.70503597122302153</AverageTotalQuantity>
+        <AverageTotalRevenue>13.043165467625899</AverageTotalRevenue>
+      </Item>
+      <Item>
+        <Id>9</Id>
+        <Name>Hacking Web Apps</Name>
+        <TotalQuantity>256</TotalQuantity>
+        <TotalRevenue>10496</TotalRevenue>
+        <AverageTotalQuantity>1.8417266187050361</AverageTotalQuantity>
+        <AverageTotalRevenue>75.510791366906474</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Miroslav Virius</Podkategoria>
+      <TotalQuantity>117</TotalQuantity>
+      <TotalRevenue>2093.1299999999997</TotalRevenue>
+      <AverageTotalQuantity>0.841726618705036</AverageTotalQuantity>
+      <AverageTotalRevenue>15.058489208633091</AverageTotalRevenue>
+      <Item>
+        <Id>8</Id>
+        <Name>Programování v C#</Name>
+        <TotalQuantity>117</TotalQuantity>
+        <TotalRevenue>2093.1299999999997</TotalRevenue>
+        <AverageTotalQuantity>0.841726618705036</AverageTotalQuantity>
+        <AverageTotalRevenue>15.058489208633091</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Nicolas d'Estienne d'Orves</Podkategoria>
+      <TotalQuantity>148</TotalQuantity>
+      <TotalRevenue>2144.5200000000009</TotalRevenue>
+      <AverageTotalQuantity>1.064748201438849</AverageTotalQuantity>
+      <AverageTotalRevenue>15.428201438848927</AverageTotalRevenue>
+      <Item>
+        <Id>16</Id>
+        <Name>Eiffel</Name>
+        <TotalQuantity>148</TotalQuantity>
+        <TotalRevenue>2144.5200000000009</TotalRevenue>
+        <AverageTotalQuantity>1.064748201438849</AverageTotalQuantity>
+        <AverageTotalRevenue>15.428201438848927</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Walter Isaacson</Podkategoria>
+      <TotalQuantity>145</TotalQuantity>
+      <TotalRevenue>3269.75</TotalRevenue>
+      <AverageTotalQuantity>1.0431654676258992</AverageTotalQuantity>
+      <AverageTotalRevenue>23.523381294964029</AverageTotalRevenue>
+      <Item>
+        <Id>23</Id>
+        <Name>Steve Jobs</Name>
+        <TotalQuantity>145</TotalQuantity>
+        <TotalRevenue>3269.75</TotalRevenue>
+        <AverageTotalQuantity>1.0431654676258992</AverageTotalQuantity>
+        <AverageTotalRevenue>23.523381294964029</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Zdenka Horecká</Podkategoria>
+      <TotalQuantity>67</TotalQuantity>
+      <TotalRevenue>770.5</TotalRevenue>
+      <AverageTotalQuantity>0.48201438848920863</AverageTotalQuantity>
+      <AverageTotalRevenue>5.543165467625899</AverageTotalRevenue>
+      <Item>
+        <Id>30</Id>
+        <Name>Víkendové varenie</Name>
+        <TotalQuantity>67</TotalQuantity>
+        <TotalRevenue>770.5</TotalRevenue>
+        <AverageTotalQuantity>0.48201438848920863</AverageTotalQuantity>
+        <AverageTotalRevenue>5.543165467625899</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Agatha Christie</Podkategoria>
+      <TotalQuantity>395</TotalQuantity>
+      <TotalRevenue>3562.0000000000005</TotalRevenue>
+      <AverageTotalQuantity>2.8417266187050361</AverageTotalQuantity>
+      <AverageTotalRevenue>25.625899280575542</AverageTotalRevenue>
+      <Item>
+        <Id>14</Id>
+        <Name>Nemý svedok</Name>
+        <TotalQuantity>135</TotalQuantity>
+        <TotalRevenue>1053</TotalRevenue>
+        <AverageTotalQuantity>0.97122302158273377</AverageTotalQuantity>
+        <AverageTotalRevenue>7.5755395683453237</AverageTotalRevenue>
+      </Item>
+      <Item>
+        <Id>15</Id>
+        <Name>Veľká štvorka</Name>
+        <TotalQuantity>260</TotalQuantity>
+        <TotalRevenue>2509</TotalRevenue>
+        <AverageTotalQuantity>1.8705035971223021</AverageTotalQuantity>
+        <AverageTotalRevenue>18.050359712230215</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Andrew Morton</Podkategoria>
+      <TotalQuantity>212</TotalQuantity>
+      <TotalRevenue>4786.96</TotalRevenue>
+      <AverageTotalQuantity>1.525179856115108</AverageTotalQuantity>
+      <AverageTotalRevenue>34.438561151079135</AverageTotalRevenue>
+      <Item>
+        <Id>22</Id>
+        <Name>Diana</Name>
+        <TotalQuantity>212</TotalQuantity>
+        <TotalRevenue>4786.96</TotalRevenue>
+        <AverageTotalQuantity>1.525179856115108</AverageTotalQuantity>
+        <AverageTotalRevenue>34.438561151079135</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Antoine De Saint-Exupéry</Podkategoria>
+      <TotalQuantity>182</TotalQuantity>
+      <TotalRevenue>2720.8999999999996</TotalRevenue>
+      <AverageTotalQuantity>1.3093525179856116</AverageTotalQuantity>
+      <AverageTotalRevenue>19.574820143884889</AverageTotalRevenue>
+      <Item>
+        <Id>25</Id>
+        <Name>Malý princ</Name>
+        <TotalQuantity>182</TotalQuantity>
+        <TotalRevenue>2720.8999999999996</TotalRevenue>
+        <AverageTotalQuantity>1.3093525179856116</AverageTotalQuantity>
+        <AverageTotalRevenue>19.574820143884889</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Arthur C. Clarke</Podkategoria>
+      <TotalQuantity>287</TotalQuantity>
+      <TotalRevenue>4201.2399999999971</TotalRevenue>
+      <AverageTotalQuantity>2.064748201438849</AverageTotalQuantity>
+      <AverageTotalRevenue>30.224748201438828</AverageTotalRevenue>
+      <Item>
+        <Id>6</Id>
+        <Name>2010: Druhá vesmírná odysea</Name>
+        <TotalQuantity>114</TotalQuantity>
+        <TotalRevenue>1509.3600000000004</TotalRevenue>
+        <AverageTotalQuantity>0.82014388489208634</AverageTotalQuantity>
+        <AverageTotalRevenue>10.858705035971225</AverageTotalRevenue>
+      </Item>
+      <Item>
+        <Id>5</Id>
+        <Name>Setkání s Rámou</Name>
+        <TotalQuantity>173</TotalQuantity>
+        <TotalRevenue>2691.8799999999987</TotalRevenue>
+        <AverageTotalQuantity>1.2446043165467626</AverageTotalQuantity>
+        <AverageTotalRevenue>19.366043165467616</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Dale Carnegie</Podkategoria>
+      <TotalQuantity>397</TotalQuantity>
+      <TotalRevenue>6890.7</TotalRevenue>
+      <AverageTotalQuantity>2.8561151079136691</AverageTotalQuantity>
+      <AverageTotalRevenue>49.57338129496403</AverageTotalRevenue>
+      <Item>
+        <Id>21</Id>
+        <Name>Ako sa zbaviť starostí a začať žiť</Name>
+        <TotalQuantity>233</TotalQuantity>
+        <TotalRevenue>5242.5</TotalRevenue>
+        <AverageTotalQuantity>1.6762589928057554</AverageTotalQuantity>
+        <AverageTotalRevenue>37.715827338129493</AverageTotalRevenue>
+      </Item>
+      <Item>
+        <Id>20</Id>
+        <Name>Ako si získavať priateľov a pôsobiť na ľudí</Name>
+        <TotalQuantity>164</TotalQuantity>
+        <TotalRevenue>1648.1999999999996</TotalRevenue>
+        <AverageTotalQuantity>1.1798561151079137</AverageTotalQuantity>
+        <AverageTotalRevenue>11.857553956834529</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Dominik Dán</Podkategoria>
+      <TotalQuantity>436</TotalQuantity>
+      <TotalRevenue>4293.4000000000005</TotalRevenue>
+      <AverageTotalQuantity>3.1366906474820144</AverageTotalQuantity>
+      <AverageTotalRevenue>30.887769784172665</AverageTotalRevenue>
+      <Item>
+        <Id>13</Id>
+        <Name>Mucha</Name>
+        <TotalQuantity>127</TotalQuantity>
+        <TotalRevenue>1898.65</TotalRevenue>
+        <AverageTotalQuantity>0.91366906474820142</AverageTotalQuantity>
+        <AverageTotalRevenue>13.659352517985612</AverageTotalRevenue>
+      </Item>
+      <Item>
+        <Id>12</Id>
+        <Name>Smrť na druhom brehu</Name>
+        <TotalQuantity>103</TotalQuantity>
+        <TotalRevenue>1364.75</TotalRevenue>
+        <AverageTotalQuantity>0.74100719424460426</AverageTotalQuantity>
+        <AverageTotalRevenue>9.8183453237410063</AverageTotalRevenue>
+      </Item>
+      <Item>
+        <Id>11</Id>
+        <Name>Tajomný závoj</Name>
+        <TotalQuantity>206</TotalQuantity>
+        <TotalRevenue>1030</TotalRevenue>
+        <AverageTotalQuantity>1.4820143884892085</AverageTotalQuantity>
+        <AverageTotalRevenue>7.4100719424460433</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Friedrich Nietzsche</Podkategoria>
+      <TotalQuantity>122</TotalQuantity>
+      <TotalRevenue>1995.9199999999996</TotalRevenue>
+      <AverageTotalQuantity>0.87769784172661869</AverageTotalQuantity>
+      <AverageTotalRevenue>14.35913669064748</AverageTotalRevenue>
+      <Item>
+        <Id>27</Id>
+        <Name>Mimo dobro a zlo</Name>
+        <TotalQuantity>122</TotalQuantity>
+        <TotalRevenue>1995.9199999999996</TotalRevenue>
+        <AverageTotalQuantity>0.87769784172661869</AverageTotalQuantity>
+        <AverageTotalRevenue>14.35913669064748</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>George Orwell</Podkategoria>
+      <TotalQuantity>115</TotalQuantity>
+      <TotalRevenue>1477.75</TotalRevenue>
+      <AverageTotalQuantity>0.82733812949640284</AverageTotalQuantity>
+      <AverageTotalRevenue>10.631294964028777</AverageTotalRevenue>
+      <Item>
+        <Id>26</Id>
+        <Name>1984</Name>
+        <TotalQuantity>115</TotalQuantity>
+        <TotalRevenue>1477.75</TotalRevenue>
+        <AverageTotalQuantity>0.82733812949640284</AverageTotalQuantity>
+        <AverageTotalRevenue>10.631294964028777</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Igor Bukovský</Podkategoria>
+      <TotalQuantity>132</TotalQuantity>
+      <TotalRevenue>3298.68</TotalRevenue>
+      <AverageTotalQuantity>0.94964028776978415</AverageTotalQuantity>
+      <AverageTotalRevenue>23.731510791366905</AverageTotalRevenue>
+      <Item>
+        <Id>29</Id>
+        <Name>Návod na prežitie pre muža</Name>
+        <TotalQuantity>132</TotalQuantity>
+        <TotalRevenue>3298.68</TotalRevenue>
+        <AverageTotalQuantity>0.94964028776978415</AverageTotalQuantity>
+        <AverageTotalRevenue>23.731510791366905</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>J.K. Rowling</Podkategoria>
+      <TotalQuantity>246</TotalQuantity>
+      <TotalRevenue>3314.7200000000007</TotalRevenue>
+      <AverageTotalQuantity>1.7697841726618706</AverageTotalQuantity>
+      <AverageTotalRevenue>23.846906474820148</AverageTotalRevenue>
+      <Item>
+        <Id>2</Id>
+        <Name>Harry Potter a Ohnivá čaša</Name>
+        <TotalQuantity>92</TotalQuantity>
+        <TotalRevenue>1482.1199999999997</TotalRevenue>
+        <AverageTotalQuantity>0.66187050359712229</AverageTotalQuantity>
+        <AverageTotalRevenue>10.662733812949638</AverageTotalRevenue>
+      </Item>
+      <Item>
+        <Id>1</Id>
+        <Name>Harry Potter a Tajomná komnata</Name>
+        <TotalQuantity>154</TotalQuantity>
+        <TotalRevenue>1832.6000000000004</TotalRevenue>
+        <AverageTotalQuantity>1.1079136690647482</AverageTotalQuantity>
+        <AverageTotalRevenue>13.184172661870507</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>J.R.R. Tolkien</Podkategoria>
+      <TotalQuantity>221</TotalQuantity>
+      <TotalRevenue>3195.66</TotalRevenue>
+      <AverageTotalQuantity>1.5899280575539569</AverageTotalQuantity>
+      <AverageTotalRevenue>22.990359712230216</AverageTotalRevenue>
+      <Item>
+        <Id>17</Id>
+        <Name>Pán prsteňov III. - Návrat kráľa</Name>
+        <TotalQuantity>221</TotalQuantity>
+        <TotalRevenue>3195.66</TotalRevenue>
+        <AverageTotalQuantity>1.5899280575539569</AverageTotalQuantity>
+        <AverageTotalRevenue>22.990359712230216</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Jaroslava Lukačovičová</Podkategoria>
+      <TotalQuantity>349</TotalQuantity>
+      <TotalRevenue>5335.1000000000022</TotalRevenue>
+      <AverageTotalQuantity>2.5107913669064748</AverageTotalQuantity>
+      <AverageTotalRevenue>38.382014388489225</AverageTotalRevenue>
+      <Item>
+        <Id>3</Id>
+        <Name>Jednoduché účtovníctvo pre neziskovky</Name>
+        <TotalQuantity>138</TotalQuantity>
+        <TotalRevenue>1330.3200000000002</TotalRevenue>
+        <AverageTotalQuantity>0.9928057553956835</AverageTotalQuantity>
+        <AverageTotalRevenue>9.57064748201439</AverageTotalRevenue>
+      </Item>
+      <Item>
+        <Id>24</Id>
+        <Name>Šlabikár financií pre neziskovky</Name>
+        <TotalQuantity>211</TotalQuantity>
+        <TotalRevenue>4004.78</TotalRevenue>
+        <AverageTotalQuantity>1.5179856115107915</AverageTotalQuantity>
+        <AverageTotalRevenue>28.81136690647482</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Julie Caplin</Podkategoria>
+      <TotalQuantity>358</TotalQuantity>
+      <TotalRevenue>5042.4400000000005</TotalRevenue>
+      <AverageTotalQuantity>2.5755395683453237</AverageTotalQuantity>
+      <AverageTotalRevenue>36.27654676258993</AverageTotalRevenue>
+      <Item>
+        <Id>19</Id>
+        <Name>Hotelík na Islande</Name>
+        <TotalQuantity>189</TotalQuantity>
+        <TotalRevenue>2678.13</TotalRevenue>
+        <AverageTotalQuantity>1.3597122302158273</AverageTotalQuantity>
+        <AverageTotalRevenue>19.267122302158274</AverageTotalRevenue>
+      </Item>
+      <Item>
+        <Id>18</Id>
+        <Name>Kaviareň v Kodani</Name>
+        <TotalQuantity>169</TotalQuantity>
+        <TotalRevenue>2364.3100000000004</TotalRevenue>
+        <AverageTotalQuantity>1.2158273381294964</AverageTotalQuantity>
+        <AverageTotalRevenue>17.009424460431656</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Karolína Fourová</Podkategoria>
+      <TotalQuantity>148</TotalQuantity>
+      <TotalRevenue>2368</TotalRevenue>
+      <AverageTotalQuantity>1.064748201438849</AverageTotalQuantity>
+      <AverageTotalRevenue>17.035971223021583</AverageTotalRevenue>
+      <Item>
+        <Id>4</Id>
+        <Name>Jediná kniha o jídle, kterou potřebujete</Name>
+        <TotalQuantity>148</TotalQuantity>
+        <TotalRevenue>2368</TotalRevenue>
+        <AverageTotalQuantity>1.064748201438849</AverageTotalQuantity>
+        <AverageTotalRevenue>17.035971223021583</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Martin Heidegger</Podkategoria>
+      <TotalQuantity>132</TotalQuantity>
+      <TotalRevenue>1898.16</TotalRevenue>
+      <AverageTotalQuantity>0.94964028776978415</AverageTotalQuantity>
+      <AverageTotalRevenue>13.655827338129496</AverageTotalRevenue>
+      <Item>
+        <Id>28</Id>
+        <Name>Co znamená myslet?</Name>
+        <TotalQuantity>132</TotalQuantity>
+        <TotalRevenue>1898.16</TotalRevenue>
+        <AverageTotalQuantity>0.94964028776978415</AverageTotalQuantity>
+        <AverageTotalRevenue>13.655827338129496</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Michaela  Vannini</Podkategoria>
+      <TotalQuantity>96</TotalQuantity>
+      <TotalRevenue>1416</TotalRevenue>
+      <AverageTotalQuantity>0.69064748201438853</AverageTotalQuantity>
+      <AverageTotalRevenue>10.187050359712231</AverageTotalRevenue>
+      <Item>
+        <Id>7</Id>
+        <Name>Nová taliančina pre samoukov</Name>
+        <TotalQuantity>96</TotalQuantity>
+        <TotalRevenue>1416</TotalRevenue>
+        <AverageTotalQuantity>0.69064748201438853</AverageTotalQuantity>
+        <AverageTotalRevenue>10.187050359712231</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Mike Shema</Podkategoria>
+      <TotalQuantity>354</TotalQuantity>
+      <TotalRevenue>12309</TotalRevenue>
+      <AverageTotalQuantity>2.5467625899280577</AverageTotalQuantity>
+      <AverageTotalRevenue>88.553956834532372</AverageTotalRevenue>
+      <Item>
+        <Id>10</Id>
+        <Name>Hacking bez tajemství - Webové aplikace</Name>
+        <TotalQuantity>98</TotalQuantity>
+        <TotalRevenue>1813</TotalRevenue>
+        <AverageTotalQuantity>0.70503597122302153</AverageTotalQuantity>
+        <AverageTotalRevenue>13.043165467625899</AverageTotalRevenue>
+      </Item>
+      <Item>
+        <Id>9</Id>
+        <Name>Hacking Web Apps</Name>
+        <TotalQuantity>256</TotalQuantity>
+        <TotalRevenue>10496</TotalRevenue>
+        <AverageTotalQuantity>1.8417266187050361</AverageTotalQuantity>
+        <AverageTotalRevenue>75.510791366906474</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Miroslav Virius</Podkategoria>
+      <TotalQuantity>117</TotalQuantity>
+      <TotalRevenue>2093.1299999999997</TotalRevenue>
+      <AverageTotalQuantity>0.841726618705036</AverageTotalQuantity>
+      <AverageTotalRevenue>15.058489208633091</AverageTotalRevenue>
+      <Item>
+        <Id>8</Id>
+        <Name>Programování v C#</Name>
+        <TotalQuantity>117</TotalQuantity>
+        <TotalRevenue>2093.1299999999997</TotalRevenue>
+        <AverageTotalQuantity>0.841726618705036</AverageTotalQuantity>
+        <AverageTotalRevenue>15.058489208633091</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Nicolas d'Estienne d'Orves</Podkategoria>
+      <TotalQuantity>148</TotalQuantity>
+      <TotalRevenue>2144.5200000000009</TotalRevenue>
+      <AverageTotalQuantity>1.064748201438849</AverageTotalQuantity>
+      <AverageTotalRevenue>15.428201438848927</AverageTotalRevenue>
+      <Item>
+        <Id>16</Id>
+        <Name>Eiffel</Name>
+        <TotalQuantity>148</TotalQuantity>
+        <TotalRevenue>2144.5200000000009</TotalRevenue>
+        <AverageTotalQuantity>1.064748201438849</AverageTotalQuantity>
+        <AverageTotalRevenue>15.428201438848927</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Walter Isaacson</Podkategoria>
+      <TotalQuantity>145</TotalQuantity>
+      <TotalRevenue>3269.75</TotalRevenue>
+      <AverageTotalQuantity>1.0431654676258992</AverageTotalQuantity>
+      <AverageTotalRevenue>23.523381294964029</AverageTotalRevenue>
+      <Item>
+        <Id>23</Id>
+        <Name>Steve Jobs</Name>
+        <TotalQuantity>145</TotalQuantity>
+        <TotalRevenue>3269.75</TotalRevenue>
+        <AverageTotalQuantity>1.0431654676258992</AverageTotalQuantity>
+        <AverageTotalRevenue>23.523381294964029</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <Podkategoria>Zdenka Horecká</Podkategoria>
+      <TotalQuantity>67</TotalQuantity>
+      <TotalRevenue>770.5</TotalRevenue>
+      <AverageTotalQuantity>0.48201438848920863</AverageTotalQuantity>
+      <AverageTotalRevenue>5.543165467625899</AverageTotalRevenue>
+      <Item>
+        <Id>30</Id>
+        <Name>Víkendové varenie</Name>
+        <TotalQuantity>67</TotalQuantity>
+        <TotalRevenue>770.5</TotalRevenue>
+        <AverageTotalQuantity>0.48201438848920863</AverageTotalQuantity>
+        <AverageTotalRevenue>5.543165467625899</AverageTotalRevenue>
+      </Item>
+    </Item>
+    <Item>
+      <totalQuantity>4659</totalQuantity>
+      <totalRevenue>76384.530000000013</totalRevenue>
+      <averageTotalDailyQuantity>33.517985611510788</averageTotalDailyQuantity>
+      <averageTotalDailyRevenue>549.52899280575548</averageTotalDailyRevenue>
+      <namePodkategoriaMaxRevenue>Mike Shema</namePodkategoriaMaxRevenue>
+      <maxRevenuePodkategoria>12309</maxRevenuePodkategoria>
+      <namePodkategoriaMinRevenue>Zdenka Horecká</namePodkategoriaMinRevenue>
+      <minRevenuePodkategoria>770.5</minRevenuePodkategoria>
+      <namePodkategoriaMaxQuantity>Dominik Dán</namePodkategoriaMaxQuantity>
+      <maxQuantityPodkategoria>436</maxQuantityPodkategoria>
+      <namePodkategoriaMinQuantity>Zdenka Horecká</namePodkategoriaMinQuantity>
+      <minQuantityPodkategoria>67</minQuantityPodkategoria>
+      <nameBookMaxRevenue>Hacking Web Apps</nameBookMaxRevenue>
+      <maxRevenueBook>10496</maxRevenueBook>
+      <nameBookMinRevenue>Víkendové varenie</nameBookMinRevenue>
+      <minRevenueBook>770.5</minRevenueBook>
+      <nameBookMaxQuantity>Veľká štvorka</nameBookMaxQuantity>
+      <maxQuantityBook>260</maxQuantityBook>
+      <nameBookMinQuantity>Víkendové varenie</nameBookMinQuantity>
+      <minQuantityBook>67</minQuantityBook>
+    </Item>
+  </Item>
+</Root>

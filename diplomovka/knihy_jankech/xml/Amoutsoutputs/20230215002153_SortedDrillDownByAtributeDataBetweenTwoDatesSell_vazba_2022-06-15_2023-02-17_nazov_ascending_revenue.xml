@@ -3,17 +3,17 @@
   <Item>
     <Item>
       <Podkategoria>brožovaná väzba</Podkategoria>
-      <TotalQuantity>1754</TotalQuantity>
-      <TotalRevenue>37270.039999999986</TotalRevenue>
-      <AverageTotalQuantity>7.07258064516129</AverageTotalQuantity>
-      <AverageTotalRevenue>150.28241935483865</AverageTotalRevenue>
+      <TotalQuantity>1752</TotalQuantity>
+      <TotalRevenue>37233.039999999986</TotalRevenue>
+      <AverageTotalQuantity>7.064516129032258</AverageTotalQuantity>
+      <AverageTotalRevenue>150.13322580645155</AverageTotalRevenue>
       <Item>
         <Id>10</Id>
         <Name>Hacking bez tajemství - Webové aplikace</Name>
-        <TotalQuantity>203</TotalQuantity>
-        <TotalRevenue>3755.5</TotalRevenue>
-        <AverageTotalQuantity>0.81854838709677424</AverageTotalQuantity>
-        <AverageTotalRevenue>15.143145161290322</AverageTotalRevenue>
+        <TotalQuantity>201</TotalQuantity>
+        <TotalRevenue>3718.5</TotalRevenue>
+        <AverageTotalQuantity>0.81048387096774188</AverageTotalQuantity>
+        <AverageTotalRevenue>14.993951612903226</AverageTotalRevenue>
       </Item>
       <Item>
         <Id>9</Id>
@@ -66,10 +66,10 @@
     </Item>
     <Item>
       <Podkategoria>pevná väzba</Podkategoria>
-      <TotalQuantity>5055</TotalQuantity>
-      <TotalRevenue>75597.46</TotalRevenue>
-      <AverageTotalQuantity>20.383064516129032</AverageTotalQuantity>
-      <AverageTotalRevenue>304.82846774193553</AverageTotalRevenue>
+      <TotalQuantity>5041</TotalQuantity>
+      <TotalRevenue>75290.560000000012</TotalRevenue>
+      <AverageTotalQuantity>20.326612903225808</AverageTotalQuantity>
+      <AverageTotalRevenue>303.59096774193551</AverageTotalRevenue>
       <Item>
         <Id>26</Id>
         <Name>1984</Name>
@@ -121,10 +121,10 @@
       <Item>
         <Id>16</Id>
         <Name>Eiffel</Name>
-        <TotalQuantity>184</TotalQuantity>
-        <TotalRevenue>2666.1600000000003</TotalRevenue>
-        <AverageTotalQuantity>0.74193548387096775</AverageTotalQuantity>
-        <AverageTotalRevenue>10.750645161290324</AverageTotalRevenue>
+        <TotalQuantity>182</TotalQuantity>
+        <TotalRevenue>2637.18</TotalRevenue>
+        <AverageTotalQuantity>0.7338709677419355</AverageTotalQuantity>
+        <AverageTotalRevenue>10.633790322580644</AverageTotalRevenue>
       </Item>
       <Item>
         <Id>2</Id>
@@ -177,10 +177,10 @@
       <Item>
         <Id>29</Id>
         <Name>Návod na prežitie pre muža</Name>
-        <TotalQuantity>224</TotalQuantity>
-        <TotalRevenue>5597.7599999999984</TotalRevenue>
-        <AverageTotalQuantity>0.90322580645161288</AverageTotalQuantity>
-        <AverageTotalRevenue>22.5716129032258</AverageTotalRevenue>
+        <TotalQuantity>221</TotalQuantity>
+        <TotalRevenue>5522.7899999999991</TotalRevenue>
+        <AverageTotalQuantity>0.8911290322580645</AverageTotalQuantity>
+        <AverageTotalRevenue>22.269314516129029</AverageTotalRevenue>
       </Item>
       <Item>
         <Id>14</Id>
@@ -225,10 +225,10 @@
       <Item>
         <Id>23</Id>
         <Name>Steve Jobs</Name>
-        <TotalQuantity>199</TotalQuantity>
-        <TotalRevenue>4487.4499999999989</TotalRevenue>
-        <AverageTotalQuantity>0.80241935483870963</AverageTotalQuantity>
-        <AverageTotalRevenue>18.0945564516129</AverageTotalRevenue>
+        <TotalQuantity>190</TotalQuantity>
+        <TotalRevenue>4284.5</TotalRevenue>
+        <AverageTotalQuantity>0.7661290322580645</AverageTotalQuantity>
+        <AverageTotalRevenue>17.276209677419356</AverageTotalRevenue>
       </Item>
       <Item>
         <Id>11</Id>
@@ -256,18 +256,18 @@
       </Item>
     </Item>
     <Item>
-      <totalQuantity>6809</totalQuantity>
-      <totalRevenue>112867.5</totalRevenue>
-      <averageTotalDailyQuantity>27.455645161290324</averageTotalDailyQuantity>
-      <averageTotalDailyRevenue>455.11088709677421</averageTotalDailyRevenue>
+      <totalQuantity>6793</totalQuantity>
+      <totalRevenue>112523.6</totalRevenue>
+      <averageTotalDailyQuantity>27.391129032258064</averageTotalDailyQuantity>
+      <averageTotalDailyRevenue>453.72419354838712</averageTotalDailyRevenue>
       <namePodkategoriaMaxRevenue>pevná väzba</namePodkategoriaMaxRevenue>
-      <maxRevenuePodkategoria>75597.46</maxRevenuePodkategoria>
+      <maxRevenuePodkategoria>75290.560000000012</maxRevenuePodkategoria>
       <namePodkategoriaMinRevenue>brožovaná väzba</namePodkategoriaMinRevenue>
-      <minRevenuePodkategoria>37270.039999999986</minRevenuePodkategoria>
+      <minRevenuePodkategoria>37233.039999999986</minRevenuePodkategoria>
       <namePodkategoriaMaxQuantity>pevná väzba</namePodkategoriaMaxQuantity>
-      <maxQuantityPodkategoria>5055</maxQuantityPodkategoria>
+      <maxQuantityPodkategoria>5041</maxQuantityPodkategoria>
       <namePodkategoriaMinQuantity>brožovaná väzba</namePodkategoriaMinQuantity>
-      <minQuantityPodkategoria>1754</minQuantityPodkategoria>
+      <minQuantityPodkategoria>1752</minQuantityPodkategoria>
       <nameBookMaxRevenue>Hacking Web Apps</nameBookMaxRevenue>
       <maxRevenueBook>15498</maxRevenueBook>
       <nameBookMinRevenue>Tajomný závoj</nameBookMinRevenue>

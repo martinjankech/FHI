@@ -2,220 +2,244 @@
 <html lang="en">
 
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <meta charset="UTF-8">
- <meta http-equiv="X-UA-Compatible" content="IE=edge">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
-  crossorigin="anonymous"></script>
- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
-  integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
-  integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
-  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
- <link rel="stylesheet" href="css/footer.css">
- <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
- <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
-  integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
- <!-- jqury kniznica na obmedzenie maximalneho poctu poloziek v autocomplete  -->
- <script src="js/jquery.ui.autocomplete.scroll.min.js"></script>
- <link href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.css" rel="stylesheet" />
- <script src="js/app.js"></script>
- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
- <link rel="stylesheet" href="css/datatable.css">
- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
- <script src="https://code.highcharts.com/highcharts.js"></script>
- <script src="https://code.highcharts.com/modules/data.js"></script>
- <script src="https://code.highcharts.com/modules/drilldown.js"></script>
- <script src="https://code.highcharts.com/modules/exporting.js"></script>
- <script src="https://code.highcharts.com/modules/export-data.js"></script>
- <script src="https://code.highcharts.com/modules/accessibility.js"></script>
- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
-  integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
- <link rel="stylesheet" href="css/predaje.css">
- <title>Calculate Revenue Cost Profit</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+      crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+   <link rel="stylesheet" href="css/footer.css">
+   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+      integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
+   <!-- jqury kniznica na obmedzenie maximalneho poctu poloziek v autocomplete  -->
+   <script src="js/jquery.ui.autocomplete.scroll.min.js"></script>
+   <link href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.css" rel="stylesheet" />
+   <script src="js/app.js"></script>
+   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+   <script type="text/javascript" charset="utf8"
+      src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+   <link rel="stylesheet" href="css/datatable.css">
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <script src="https://code.highcharts.com/highcharts.js"></script>
+   <script src="https://code.highcharts.com/modules/data.js"></script>
+   <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+   <script src="https://code.highcharts.com/modules/exporting.js"></script>
+   <script src="https://code.highcharts.com/modules/export-data.js"></script>
+   <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+      integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+   <link rel="stylesheet" href="css/predaje.css">
+   <title>Calculate Revenue Cost Profit</title>
 </head>
 
 <body>
- <div id="navbar">
- </div>
- <div id="alerts">
-  <div style="display: none;" id="alert_container">
-   <div class="alert" role="alert">
-    <span id="alert-text"></span>
+   <div id="navbar">
    </div>
-  </div>
- </div>
- <div class="flex-wrapper">
-  <div class="container">
-   <form id="formAg" method="POST">
-    <div class="row mt-5">
-
-     <h1 class="mb-3 mt-5">Hospodárske výsledky</h1>
-     <h4 class="mt-2 mb-3">Vždy može byť zvovený len rok alebo rok a štvrťrok alebo rok a mesiac nikdy nie všetky 3</h4>
-     <div class="col-sm-4 mt-4">
-      <select class="form-control" id="yearSelect">
-       <option value="0">Rok</option>
-       <option value="2022">2022</option>
-       <option value="2021">2021</option>
-       <option value="2020">2020</option>
-      </select>
-     </div>
-     <div class="col-sm-4 mt-4">
-      <select class="form-control" id="quarterSelect">
-       <option value="0">Štvrťrok</option>
-       <option value="1">1</option>
-       <option value="2">2</option>
-       <option value="3">3</option>
-       <option value="4">4</option>
-      </select>
-     </div>
-     <div class="col-sm-4 mt-4">
-      <select class="form-control" id="monthSelect">
-       <option value="0">Mesiac</option>
-       <option value="1">Január</option>
-       <option value="2">Február</option>
-       <option value="3">Marec</option>
-       <option value="4">Apríl</option>
-       <option value="5">Máj</option>
-       <option value="6">Jún</option>
-       <option value="7">Júl</option>
-       <option value="8">August</option>
-       <option value="9">September</option>
-       <option value="10">Október</option>
-       <option value="11">November</option>
-       <option value="12">December</option>
-      </select>
-
-     </div>
-
-
-    </div>
-    <button id="submit" type="submit" class=" mt-4 mb-4 btn btn-primary">Potvrdiť</button>
-   </form>
-   <div class="container">
-    <div class="row mt-5">
-     <div class="col-sm-4">
-      <div class="card">
-       <div class="card-body">
-        <h5 class="card-title">Celkový príjem</h5>
-        <p class="card-text" id="totalRevenue"></p>
-       </div>
+   <div id="alerts">
+      <div style="display: none;" id="alert_container">
+         <div class="alert" role="alert">
+            <span id="alert-text"></span>
+         </div>
       </div>
-     </div>
-     <div class="col-sm-4">
-      <div class="card">
-       <div class="card-body">
-        <h5 class="card-title">Celkové náklady</h5>
-        <p class="card-text" id="totalCost"></p>
-       </div>
-      </div>
-     </div>
-     <div class="col-sm-4">
-      <div class="card">
-       <div class="card-body">
-        <h5 class="card-title">Celkový zisk</h5>
-        <p class="card-text" id="totalProfit"></p>
-       </div>
-      </div>
-     </div>
-    </div>
-    <div class="row mt-5">
-     <div class="col-sm-6">
-      <div class="card">
-       <div class="card-body">
-        <h5 class="card-title">Celkovy pocet predanych knih</h5>
-        <p class="card-text" id="numSellOrders"></p>
-       </div>
-      </div>
-     </div>
-     <div class="col-sm-6">
-      <div class="card">
-       <div class="card-body">
-        <h5 class="card-title">Celkový pocet naskladnenych knih</h5>
-        <p class="card-text" id="numBuyOrders"></p>
-       </div>
-      </div>
-     </div>
-    </div>
-    <div class="row mt-5 mb-5">
-     <div class="col-sm-6">
-      <div class="card">
-       <div class="card-body">
-        <h5 class="card-title">Net profit margin</h5>
-        <p class="card-text" id="netProfitMargin"></p>
-       </div>
-      </div>
-     </div>
-     <div class="col-sm-6 ">
-      <div class="card">
-       <div class="card-body">
-        <h5 class="card-title">ROI</h5>
-        <p class="card-text" id="returnOnInvestment"></p>
-       </div>
-      </div>
-     </div>
-
-    </div>
-
    </div>
-  </div>
-  <div>
-   <footer>
+   <div class="flex-wrapper">
+      <div class="container">
+         <form id="formAg" method="POST">
+            <div class="row mt-5">
 
-   </footer>
-   <script>
-    $(document).on('submit', "#formAg", function (event) {
-     event.preventDefault()
-     var year = $("#yearSelect").val();
-     var quarter = $("#quarterSelect").val();
-     var month = $("#monthSelect").val();
-     if (year == 0) {
-      showAlert("Prosím zvoľte rok", "alerts", "danger")
-      event.preventDefault()
+               <h1 class="mb-3 mt-5">Hospodárske výsledky</h1>
+               <h4 class="mt-2 mb-3">Vždy može byť zvovený len rok alebo rok a štvrťrok alebo rok a mesiac nikdy nie
+                  všetky 3</h4>
+               <div class="col-sm-4 mt-4">
+                  <select class="form-control" id="yearSelect">
+                     <option value="0">Rok</option>
+                     <option value="2022">2022</option>
+                     <option value="2021">2021</option>
+                     <option value="2020">2020</option>
+                  </select>
+               </div>
+               <div class="col-sm-4 mt-4">
+                  <select class="form-control" id="quarterSelect">
+                     <option value="0">Štvrťrok</option>
+                     <option value="1">1</option>
+                     <option value="2">2</option>
+                     <option value="3">3</option>
+                     <option value="4">4</option>
+                  </select>
+               </div>
+               <div class="col-sm-4 mt-4">
+                  <select class="form-control" id="monthSelect">
+                     <option value="0">Mesiac</option>
+                     <option value="1">Január</option>
+                     <option value="2">Február</option>
+                     <option value="3">Marec</option>
+                     <option value="4">Apríl</option>
+                     <option value="5">Máj</option>
+                     <option value="6">Jún</option>
+                     <option value="7">Júl</option>
+                     <option value="8">August</option>
+                     <option value="9">September</option>
+                     <option value="10">Október</option>
+                     <option value="11">November</option>
+                     <option value="12">December</option>
+                  </select>
 
-
-
-     }
-     else if (quarter != 0 & month != 0) {
-
-      showAlert("štvrťrok a mesiac nemožu byť zvolené súčasne", "alerts", "danger")
-      event.preventDefault()
-     }
-
-     $.ajax({
-      type: "POST",
-      url: "http://localhost:8050/book_services.asmx/CalculateRevenueCostProfit",
-      data: { year: year, quarter: quarter, month: month },
-      dataType: "json",
-      encode: true,
-     }).done(function (response) {
-      var result = response
-      $("#totalRevenue").text(Math.round(result.totalRevenue * 100) / 100 + "€");
-      $("#totalCost").text(Math.round(result.totalCost * 100) / 100 + "€");
-      $("#totalProfit").text(Math.round(result.profit * 100) / 100 + "€");
-      $("#numSellOrders").text(result.numSellOrders + "ks")
-      $("#numBuyOrders").text(result.numBuyOrders + "ks");
-      $("#netProfitMargin").text(Math.round(result.netProfitMargin * 10000) / 100 + "%");
-      $("#returnOnInvestment").text(Math.round(result.returnOnInvestment * 10000) / 100 + "%");
-
-
-     })
-      .fail(function (jqXHR, textStatus, errorThrown) { showAlert(jqXHR.responseText, "alerts", "danger"); })
-     event.preventDefault()
-    });
+               </div>
 
 
-   </script>
-   <script>
-    $("#navbar").load("navbar.html")
-    $("footer").load("footer.html")
-   </script>
+            </div>
+            <button id="submit" type="submit" class=" mt-4 mb-4 btn btn-primary">Potvrdiť</button>
+         </form>
+         <div class="container">
+            <div class="row mt-5">
+               <div class="col-sm-4">
+                  <div class="card blue-card">
+                     <div class="card-body ">
+                        <h5 class="card-title">Celkový príjem</h5>
+                        <p class="card-text" id="totalRevenue"></p>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-sm-4">
+                  <div class="card blue-card">
+                     <div class="card-body">
+                        <h5 class="card-title">Celkové náklady</h5>
+                        <p class="card-text" id="totalCost"></p>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-sm-4">
+                  <div class="card blue-card">
+                     <div class="card-body">
+                        <h5 class="card-title">Celkový zisk</h5>
+                        <p class="card-text" id="totalProfit"></p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="row mt-5">
+               <div class="col-sm-6">
+                  <div class="card grey-card">
+                     <div class="card-body">
+                        <h5 class="card-title">Celkový počet kníh objednaých od zákazníkov</h5>
+                        <p class="card-text" id="totalQuantityOfBooksPredaj"></p>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-sm-6">
+                  <div class="card grey-card">
+                     <div class="card-body">
+                        <h5 class="card-title">Celkový pocet kníh zaslaných dodávateľom</h5>
+                        <p class="card-text" id="totalQuantityOfBooksNakup"></p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="row mt-5">
+               <div class="col-sm-6">
+                  <div class="card grey-card">
+                     <div class="card-body">
+                        <h5 class="card-title">Celkovy pocet objednávok od zákaznikov</h5>
+                        <p class="card-text" id="numSellOrders"></p>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-sm-6">
+                  <div class="card grey-card">
+                     <div class="card-body">
+                        <h5 class="card-title">Celkový pocet objednavok zaslaných dodávateľom</h5>
+                        <p class="card-text" id="numBuyOrders"></p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="row mt-5 mb-5">
+               <div class="col-sm-6">
+                  <div class="card grey-card">
+                     <div class="card-body">
+                        <h5 class="card-title">Net profit margin</h5>
+                        <p class="card-text" id="netProfitMargin"></p>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-sm-6 ">
+                  <div class="card grey-card">
+                     <div class="card-body">
+                        <h5 class="card-title">ROI</h5>
+                        <p class="card-text" id="returnOnInvestment"></p>
+                     </div>
+                  </div>
+               </div>
+
+            </div>
+
+         </div>
+      </div>
+      <div>
+         <footer>
+
+         </footer>
+         <script>
+            $(document).on('submit', "#formAg", function (event) {
+               event.preventDefault()
+               var year = $("#yearSelect").val();
+               var quarter = $("#quarterSelect").val();
+               var month = $("#monthSelect").val();
+               if (year == 0) {
+                  showAlert("Prosím zvoľte rok", "alerts", "danger")
+                  event.preventDefault()
+
+
+
+               }
+               else if (quarter != 0 & month != 0) {
+
+                  showAlert("štvrťrok a mesiac nemožu byť zvolené súčasne", "alerts", "danger")
+                  event.preventDefault()
+               }
+
+               $.ajax({
+                  type: "POST",
+                  url: "http://localhost:8050/book_services.asmx/CalculateRevenueCostProfit",
+                  data: { year: year, quarter: quarter, month: month },
+                  dataType: "json",
+                  encode: true,
+               }).done(function (response) {
+                  var result = response
+                  $("#totalRevenue").text(Math.round(result.totalRevenue * 100) / 100 + "€");
+                  $("#totalCost").text(Math.round(result.totalCost * 100) / 100 + "€");
+                  $("#totalProfit").text(Math.round(result.profit * 100) / 100 + "€");
+                  $("#numSellOrders").text(result.numSellOrders)
+                  $("#numBuyOrders").text(result.numBuyOrders);
+                  $("#totalQuantityOfBooksNakup").text(result.totalQuantityOfBooksNakup + "ks")
+                  $("#totalQuantityOfBooksPredaj").text(result.totalQuantityOfBooksPredaj + "ks");
+                  $("#netProfitMargin").text(Math.round(result.netProfitMargin * 10000) / 100 + "%");
+                  $("#returnOnInvestment").text(Math.round(result.returnOnInvestment * 10000) / 100 + "%");
+
+
+               })
+                  .fail(function (jqXHR, textStatus, errorThrown) { showAlert(jqXHR.responseText, "alerts", "danger"); })
+               event.preventDefault()
+            });
+
+
+         </script>
+         <script>
+            $("#navbar").load("navbar.html")
+            $("footer").load("footer.html")
+         </script>
 
 
 </body>

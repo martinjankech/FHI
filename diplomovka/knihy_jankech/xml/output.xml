@@ -2194,4 +2194,686 @@ A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole
     </book>
     <timestamp>2023-02-14 11:36:50</timestamp>
   </output>
+  <output>
+    <book>
+      <id>7</id>
+      <nazov>Nová taliančina pre samoukov</nazov>
+      <autori>
+        <autor1>Michaela  Vannini</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Odborné a náučné</kategoria>
+      <isbn>9788081092923</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>296</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2016</rok_vydania>
+      <vydavatelstvo>Eastone Books</vydavatelstvo>
+      <predajna_cena>14.75</predajna_cena>
+      <nakupna_cena>8.56</nakupna_cena>
+      <marza>0.723130841121495</marza>
+      <zisk_kus>6.19</zisk_kus>
+      <obsah>Táto kniha je určená všetkým, ktorí sa chcú učiť taliansky jazyk a zároveň spoznávať taliansku kultúru. Učebnica je zostavená tak, aby sa z nej mohli učiť úplní začiatočníci aj pokročilejší používatelia tohto jazyka, samouci aj účastníci kurzov. Slovíčka, dôležité frázy aj gramatiku sa učíte popri čítaní príbehu o Anne a Petrovi, ktorí žijú a pracujú v talianskom mestečku Barga. Prevedú vás bežnými situáciami, s ktorými sa pri pobyte v Taliansku môžete stretnúť.</obsah>
+      <priemerne_hodnotenie>4.2</priemerne_hodnotenie>
+      <obrazok>../img/7.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 20:17:03</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>5</id>
+      <nazov>Setkání s Rámou</nazov>
+      <autori>
+        <autor1>Arthur C. Clarke</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788025738726</isbn>
+      <jazyk>cz</jazyk>
+      <pocet_stran>256</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2022</rok_vydania>
+      <vydavatelstvo>Argo</vydavatelstvo>
+      <predajna_cena>15.56</predajna_cena>
+      <nakupna_cena>8.29</nakupna_cena>
+      <marza>0.876960193003619</marza>
+      <zisk_kus>7.27</zisk_kus>
+      <obsah>Po ničivém dopadu meteoritu na Itálii v roce 2077 se nejvyšší představitelé lidstva rozhodli vytvořit systém radarů a teleskopů, jenž monitoruje všechna tělesa prolétávající Sluneční soustavou. V roce 2130 systém zachytil objekt mimořádných rozměrů. Pohyboval se po přímce, nikoliv po elipse jako ostatní asteroidy. Dostal jméno Ráma a na čas se na něj zapomnělo. Až když se přiblížil k Marsu, byla k němu vyslána sonda, jejíž kamerové snímky vyrazily lidstvu dech. Ráma je válec o délce padesát kilometrů a průměru dvacet kilometrů. Jeho povrch je zcela hladký a podle slabého gravitačního pole lze předpokládat, že je dutý. Lidstvo se chystá na první návštěvu z hvězd…</obsah>
+      <priemerne_hodnotenie>4.8</priemerne_hodnotenie>
+      <obrazok>../img/5.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 20:17:18</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>5</id>
+      <nazov>Setkání s Rámou</nazov>
+      <autori>
+        <autor1>Arthur C. Clarke</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788025738726</isbn>
+      <jazyk>cz</jazyk>
+      <pocet_stran>256</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2022</rok_vydania>
+      <vydavatelstvo>Argo</vydavatelstvo>
+      <predajna_cena>15.56</predajna_cena>
+      <nakupna_cena>8.29</nakupna_cena>
+      <marza>0.876960193003619</marza>
+      <zisk_kus>7.27</zisk_kus>
+      <obsah>Po ničivém dopadu meteoritu na Itálii v roce 2077 se nejvyšší představitelé lidstva rozhodli vytvořit systém radarů a teleskopů, jenž monitoruje všechna tělesa prolétávající Sluneční soustavou. V roce 2130 systém zachytil objekt mimořádných rozměrů. Pohyboval se po přímce, nikoliv po elipse jako ostatní asteroidy. Dostal jméno Ráma a na čas se na něj zapomnělo. Až když se přiblížil k Marsu, byla k němu vyslána sonda, jejíž kamerové snímky vyrazily lidstvu dech. Ráma je válec o délce padesát kilometrů a průměru dvacet kilometrů. Jeho povrch je zcela hladký a podle slabého gravitačního pole lze předpokládat, že je dutý. Lidstvo se chystá na první návštěvu z hvězd…</obsah>
+      <priemerne_hodnotenie>4.8</priemerne_hodnotenie>
+      <obrazok>../img/5.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 20:17:19</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>1</id>
+      <nazov>Harry Potter a Tajomná komnata</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143088</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>360</pocet_stran>
+      <vazba>brožovaná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>11.9</predajna_cena>
+      <nakupna_cena>8.25</nakupna_cena>
+      <marza>0.442424242424242</marza>
+      <zisk_kus>3.65</zisk_kus>
+      <obsah>Dursleyovci boli v to leto takí odporní, že Harry Potter sa už nevedel dočkať, kedy sa vráti do čarodejníckej školy. Jedného dňa sa v jeho izbe objaví čudné, zlomyseľné stvorenie. Volá sa Dobby a tvrdí, že ak sa Harry vráti na Rokfort, hrozí mu smrteľné nebezpečenstvo.
+A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole tajuplné a hrôzostrašné veci. Niekto, lepšie povedané niečo napáda rokfortských študentov a premieňa ich na kameň. Že by bol za tým Draco Malfoy, Harryho úhlavný nepriateľ? Alebo to má na svedomí ten, koho na Rokforte najviac upodozrievajú – samotný Harry Potter?</obsah>
+      <priemerne_hodnotenie>4.7</priemerne_hodnotenie>
+      <obrazok>../img/1.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 20:17:24</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>1</id>
+      <nazov>Harry Potter a Tajomná komnata</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143088</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>360</pocet_stran>
+      <vazba>brožovaná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>11.9</predajna_cena>
+      <nakupna_cena>8.25</nakupna_cena>
+      <marza>0.442424242424242</marza>
+      <zisk_kus>3.65</zisk_kus>
+      <obsah>Dursleyovci boli v to leto takí odporní, že Harry Potter sa už nevedel dočkať, kedy sa vráti do čarodejníckej školy. Jedného dňa sa v jeho izbe objaví čudné, zlomyseľné stvorenie. Volá sa Dobby a tvrdí, že ak sa Harry vráti na Rokfort, hrozí mu smrteľné nebezpečenstvo.
+A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole tajuplné a hrôzostrašné veci. Niekto, lepšie povedané niečo napáda rokfortských študentov a premieňa ich na kameň. Že by bol za tým Draco Malfoy, Harryho úhlavný nepriateľ? Alebo to má na svedomí ten, koho na Rokforte najviac upodozrievajú – samotný Harry Potter?</obsah>
+      <priemerne_hodnotenie>4.7</priemerne_hodnotenie>
+      <obrazok>../img/1.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 20:17:24</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>6</id>
+      <nazov>2010: Druhá vesmírná odysea</nazov>
+      <autori>
+        <autor1>Arthur C. Clarke</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788025720936</isbn>
+      <jazyk>cz</jazyk>
+      <pocet_stran>315</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2017</rok_vydania>
+      <vydavatelstvo>Argo</vydavatelstvo>
+      <predajna_cena>13.24</predajna_cena>
+      <nakupna_cena>9.35</nakupna_cena>
+      <marza>0.416042780748663</marza>
+      <zisk_kus>3.89</zisk_kus>
+      <obsah>Ke kosmické lodi Discovery, osamoceně plující hlubokým vesmírem od doby, co David Bowman prošel „Hvězdnou bránou“, se vydává nová mezinárodní expedice. Jedním z cílů výpravy je objasnění tragických událostí, které se na Discovery odehrály. Ale tím nejdůležitějším úkolem je průzkum záhadného vesmírného tělesa zcela pravidelných tvarů. Jde o přírodní úkaz, nebo o výtvor mimozemské civilizace? Znamená těleso pro lidstvo hrozbu, nebo mu naopak může prospět? Vynořují se tisíce různých otázek a zodpovězení byť jen části z nich může navždy změnit chápání samé podstaty existence vesmíru a tím i budoucnost lidského druhu...</obsah>
+      <priemerne_hodnotenie>2.9</priemerne_hodnotenie>
+      <obrazok>../img/6.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 21:42:51</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>6</id>
+      <nazov>2010: Druhá vesmírná odysea</nazov>
+      <autori>
+        <autor1>Arthur C. Clarke</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788025720936</isbn>
+      <jazyk>cz</jazyk>
+      <pocet_stran>315</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2017</rok_vydania>
+      <vydavatelstvo>Argo</vydavatelstvo>
+      <predajna_cena>13.24</predajna_cena>
+      <nakupna_cena>9.35</nakupna_cena>
+      <marza>0.416042780748663</marza>
+      <zisk_kus>3.89</zisk_kus>
+      <obsah>Ke kosmické lodi Discovery, osamoceně plující hlubokým vesmírem od doby, co David Bowman prošel „Hvězdnou bránou“, se vydává nová mezinárodní expedice. Jedním z cílů výpravy je objasnění tragických událostí, které se na Discovery odehrály. Ale tím nejdůležitějším úkolem je průzkum záhadného vesmírného tělesa zcela pravidelných tvarů. Jde o přírodní úkaz, nebo o výtvor mimozemské civilizace? Znamená těleso pro lidstvo hrozbu, nebo mu naopak může prospět? Vynořují se tisíce různých otázek a zodpovězení byť jen části z nich může navždy změnit chápání samé podstaty existence vesmíru a tím i budoucnost lidského druhu...</obsah>
+      <priemerne_hodnotenie>2.9</priemerne_hodnotenie>
+      <obrazok>../img/6.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 21:42:51</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>2</id>
+      <nazov>Harry Potter a Ohnivá čaša</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143866</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>712</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>16.11</predajna_cena>
+      <nakupna_cena>10.25</nakupna_cena>
+      <marza>0.571707317073171</marza>
+      <zisk_kus>5.86</zisk_kus>
+      <obsah>Harry Potter je znovu na prázdninách u otravných Dursleyovcov. Chce sa od nich odpútať, a tak sa zúčastní na Svetovom pohári v metlobale spolu s Hermionou, Ronom a Weasleyovcami. Okrem toho sa po sto rokoch na Rokforte pripravuje Trojčarodejnícky turnaj a majú sa na ňom zúčastniť dve ďalšie čarodejnícke školy. Harry aj naďalej túži byť obyčajným štrnásťročným čarodejníkom. Má však smolu, lebo nie je obyčajný - dokonca ani podľa čarodejníckych meradiel. V jeho prípade to môže mať smrteľné dôsledky...</obsah>
+      <priemerne_hodnotenie>4.5</priemerne_hodnotenie>
+      <obrazok>../img/2.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 22:40:41</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>6</id>
+      <nazov>2010: Druhá vesmírná odysea</nazov>
+      <autori>
+        <autor1>Arthur C. Clarke</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788025720936</isbn>
+      <jazyk>cz</jazyk>
+      <pocet_stran>315</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2017</rok_vydania>
+      <vydavatelstvo>Argo</vydavatelstvo>
+      <predajna_cena>13.24</predajna_cena>
+      <nakupna_cena>9.35</nakupna_cena>
+      <marza>0.416042780748663</marza>
+      <zisk_kus>3.89</zisk_kus>
+      <obsah>Ke kosmické lodi Discovery, osamoceně plující hlubokým vesmírem od doby, co David Bowman prošel „Hvězdnou bránou“, se vydává nová mezinárodní expedice. Jedním z cílů výpravy je objasnění tragických událostí, které se na Discovery odehrály. Ale tím nejdůležitějším úkolem je průzkum záhadného vesmírného tělesa zcela pravidelných tvarů. Jde o přírodní úkaz, nebo o výtvor mimozemské civilizace? Znamená těleso pro lidstvo hrozbu, nebo mu naopak může prospět? Vynořují se tisíce různých otázek a zodpovězení byť jen části z nich může navždy změnit chápání samé podstaty existence vesmíru a tím i budoucnost lidského druhu...</obsah>
+      <priemerne_hodnotenie>2.9</priemerne_hodnotenie>
+      <obrazok>../img/6.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 22:40:48</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>6</id>
+      <nazov>2010: Druhá vesmírná odysea</nazov>
+      <autori>
+        <autor1>Arthur C. Clarke</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788025720936</isbn>
+      <jazyk>cz</jazyk>
+      <pocet_stran>315</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2017</rok_vydania>
+      <vydavatelstvo>Argo</vydavatelstvo>
+      <predajna_cena>13.24</predajna_cena>
+      <nakupna_cena>9.35</nakupna_cena>
+      <marza>0.416042780748663</marza>
+      <zisk_kus>3.89</zisk_kus>
+      <obsah>Ke kosmické lodi Discovery, osamoceně plující hlubokým vesmírem od doby, co David Bowman prošel „Hvězdnou bránou“, se vydává nová mezinárodní expedice. Jedním z cílů výpravy je objasnění tragických událostí, které se na Discovery odehrály. Ale tím nejdůležitějším úkolem je průzkum záhadného vesmírného tělesa zcela pravidelných tvarů. Jde o přírodní úkaz, nebo o výtvor mimozemské civilizace? Znamená těleso pro lidstvo hrozbu, nebo mu naopak může prospět? Vynořují se tisíce různých otázek a zodpovězení byť jen části z nich může navždy změnit chápání samé podstaty existence vesmíru a tím i budoucnost lidského druhu...</obsah>
+      <priemerne_hodnotenie>2.9</priemerne_hodnotenie>
+      <obrazok>../img/6.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 22:40:48</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>6</id>
+      <nazov>2010: Druhá vesmírná odysea</nazov>
+      <autori>
+        <autor1>Arthur C. Clarke</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788025720936</isbn>
+      <jazyk>cz</jazyk>
+      <pocet_stran>315</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2017</rok_vydania>
+      <vydavatelstvo>Argo</vydavatelstvo>
+      <predajna_cena>13.24</predajna_cena>
+      <nakupna_cena>9.35</nakupna_cena>
+      <marza>0.416042780748663</marza>
+      <zisk_kus>3.89</zisk_kus>
+      <obsah>Ke kosmické lodi Discovery, osamoceně plující hlubokým vesmírem od doby, co David Bowman prošel „Hvězdnou bránou“, se vydává nová mezinárodní expedice. Jedním z cílů výpravy je objasnění tragických událostí, které se na Discovery odehrály. Ale tím nejdůležitějším úkolem je průzkum záhadného vesmírného tělesa zcela pravidelných tvarů. Jde o přírodní úkaz, nebo o výtvor mimozemské civilizace? Znamená těleso pro lidstvo hrozbu, nebo mu naopak může prospět? Vynořují se tisíce různých otázek a zodpovězení byť jen části z nich může navždy změnit chápání samé podstaty existence vesmíru a tím i budoucnost lidského druhu...</obsah>
+      <priemerne_hodnotenie>2.9</priemerne_hodnotenie>
+      <obrazok>../img/6.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 22:41:25</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>6</id>
+      <nazov>2010: Druhá vesmírná odysea</nazov>
+      <autori>
+        <autor1>Arthur C. Clarke</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788025720936</isbn>
+      <jazyk>cz</jazyk>
+      <pocet_stran>315</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2017</rok_vydania>
+      <vydavatelstvo>Argo</vydavatelstvo>
+      <predajna_cena>13.24</predajna_cena>
+      <nakupna_cena>9.35</nakupna_cena>
+      <marza>0.416042780748663</marza>
+      <zisk_kus>3.89</zisk_kus>
+      <obsah>Ke kosmické lodi Discovery, osamoceně plující hlubokým vesmírem od doby, co David Bowman prošel „Hvězdnou bránou“, se vydává nová mezinárodní expedice. Jedním z cílů výpravy je objasnění tragických událostí, které se na Discovery odehrály. Ale tím nejdůležitějším úkolem je průzkum záhadného vesmírného tělesa zcela pravidelných tvarů. Jde o přírodní úkaz, nebo o výtvor mimozemské civilizace? Znamená těleso pro lidstvo hrozbu, nebo mu naopak může prospět? Vynořují se tisíce různých otázek a zodpovězení byť jen části z nich může navždy změnit chápání samé podstaty existence vesmíru a tím i budoucnost lidského druhu...</obsah>
+      <priemerne_hodnotenie>2.9</priemerne_hodnotenie>
+      <obrazok>../img/6.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 22:41:25</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>2</id>
+      <nazov>Harry Potter a Ohnivá čaša</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143866</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>712</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>16.11</predajna_cena>
+      <nakupna_cena>10.25</nakupna_cena>
+      <marza>0.571707317073171</marza>
+      <zisk_kus>5.86</zisk_kus>
+      <obsah>Harry Potter je znovu na prázdninách u otravných Dursleyovcov. Chce sa od nich odpútať, a tak sa zúčastní na Svetovom pohári v metlobale spolu s Hermionou, Ronom a Weasleyovcami. Okrem toho sa po sto rokoch na Rokforte pripravuje Trojčarodejnícky turnaj a majú sa na ňom zúčastniť dve ďalšie čarodejnícke školy. Harry aj naďalej túži byť obyčajným štrnásťročným čarodejníkom. Má však smolu, lebo nie je obyčajný - dokonca ani podľa čarodejníckych meradiel. V jeho prípade to môže mať smrteľné dôsledky...</obsah>
+      <priemerne_hodnotenie>4.5</priemerne_hodnotenie>
+      <obrazok>../img/2.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 22:43:23</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>2</id>
+      <nazov>Harry Potter a Ohnivá čaša</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143866</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>712</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>16.11</predajna_cena>
+      <nakupna_cena>10.25</nakupna_cena>
+      <marza>0.571707317073171</marza>
+      <zisk_kus>5.86</zisk_kus>
+      <obsah>Harry Potter je znovu na prázdninách u otravných Dursleyovcov. Chce sa od nich odpútať, a tak sa zúčastní na Svetovom pohári v metlobale spolu s Hermionou, Ronom a Weasleyovcami. Okrem toho sa po sto rokoch na Rokforte pripravuje Trojčarodejnícky turnaj a majú sa na ňom zúčastniť dve ďalšie čarodejnícke školy. Harry aj naďalej túži byť obyčajným štrnásťročným čarodejníkom. Má však smolu, lebo nie je obyčajný - dokonca ani podľa čarodejníckych meradiel. V jeho prípade to môže mať smrteľné dôsledky...</obsah>
+      <priemerne_hodnotenie>4.5</priemerne_hodnotenie>
+      <obrazok>../img/2.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 22:43:37</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>12</id>
+      <nazov>Smrť na druhom brehu</nazov>
+      <autori>
+        <autor1>Dominik Dán</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Detektívky</kategoria>
+      <isbn>9788055625935</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>320</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2016</rok_vydania>
+      <vydavatelstvo>Slovart</vydavatelstvo>
+      <predajna_cena>13.25</predajna_cena>
+      <nakupna_cena>7.69</nakupna_cena>
+      <marza>0.723016905071521</marza>
+      <zisk_kus>5.56</zisk_kus>
+      <obsah>Začiatky deväťdesiatych rokov boli hektickým obdobím nielen na oddelení vrážd, ale v celej spoločnosti. Čo sa dialo v Našom Meste automaticky registrovali aj detektívi, a nielen registrovali, aj riešili, vyšetrovali a vypočúvali. Zo zelenáča Richarda Krauza je samostatne pracujúci detektív a s parťákom Jozefom Fischerom zvaným Chosé riešia jeden prípad za druhým. Tento sa stal na jar 1994 ‒ na brehu rieky Morava na úrovni 4. kilometrovníka našli dvaja výrastkovia polozahrabanú, polorozpadnutú mŕtvolu muža. Nič zvláštne, pokojne mohla skončiť v krematóriu a na štátne trovy jej mohli podkúriť - to by ale nesmela mať uprostred čela pravidelný kruhový otvor s priemerom 9 mm. Stačil jeden pohľad a dvojici detektívov bolo hneď jasné, že ho nespôsobil vrták, ale olovo odliate do tvaru guľky. No z akej pištole bola vystrelená a čia ruka ju v tom momente držala, sa dozvedia až po dlhom vyšetrovaní, Chlapci z mord partie sa riadne zapotia, lebo nič nevedia ani o vrahovi, ani o obeti. Mŕtvy chlap nikomu nechýba. Nevedia ani to, že kruhový otvor uprostred čela sa onedlho stane symbolom vybavovania si účtov v podsvetí, ktoré sa práve začína formovať.</obsah>
+      <priemerne_hodnotenie>4.6</priemerne_hodnotenie>
+      <obrazok>../img/12.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 22:45:29</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>3</id>
+      <nazov>Jednoduché účtovníctvo pre neziskovky</nazov>
+      <autori>
+        <autor1>Jaroslava Lukačovičová</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Biznis a manažment</kategoria>
+      <isbn>9788097029142</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>165</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2022</rok_vydania>
+      <vydavatelstvo>Sauno</vydavatelstvo>
+      <predajna_cena>9.64</predajna_cena>
+      <nakupna_cena>6.24</nakupna_cena>
+      <marza>0.544871794871795</marza>
+      <zisk_kus>3.4</zisk_kus>
+      <obsah>Ďalšia publikácia autorky zavedie čitateľov do sveta, ktorý by mal byť jednoduchý, ale podľa jej názoru a skúsenosti svet jednoduchého účtovníctva neziskových účtovných jednotiek až taký jednoduchý nie je.</obsah>
+      <priemerne_hodnotenie>4.4</priemerne_hodnotenie>
+      <obrazok>../img/3.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 22:45:35</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>2</id>
+      <nazov>Harry Potter a Ohnivá čaša</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143866</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>712</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>16.11</predajna_cena>
+      <nakupna_cena>10.25</nakupna_cena>
+      <marza>0.571707317073171</marza>
+      <zisk_kus>5.86</zisk_kus>
+      <obsah>Harry Potter je znovu na prázdninách u otravných Dursleyovcov. Chce sa od nich odpútať, a tak sa zúčastní na Svetovom pohári v metlobale spolu s Hermionou, Ronom a Weasleyovcami. Okrem toho sa po sto rokoch na Rokforte pripravuje Trojčarodejnícky turnaj a majú sa na ňom zúčastniť dve ďalšie čarodejnícke školy. Harry aj naďalej túži byť obyčajným štrnásťročným čarodejníkom. Má však smolu, lebo nie je obyčajný - dokonca ani podľa čarodejníckych meradiel. V jeho prípade to môže mať smrteľné dôsledky...</obsah>
+      <priemerne_hodnotenie>4.5</priemerne_hodnotenie>
+      <obrazok>../img/2.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 22:46:27</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>3</id>
+      <nazov>Jednoduché účtovníctvo pre neziskovky</nazov>
+      <autori>
+        <autor1>Jaroslava Lukačovičová</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Biznis a manažment</kategoria>
+      <isbn>9788097029142</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>165</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2022</rok_vydania>
+      <vydavatelstvo>Sauno</vydavatelstvo>
+      <predajna_cena>9.64</predajna_cena>
+      <nakupna_cena>6.24</nakupna_cena>
+      <marza>0.544871794871795</marza>
+      <zisk_kus>3.4</zisk_kus>
+      <obsah>Ďalšia publikácia autorky zavedie čitateľov do sveta, ktorý by mal byť jednoduchý, ale podľa jej názoru a skúsenosti svet jednoduchého účtovníctva neziskových účtovných jednotiek až taký jednoduchý nie je.</obsah>
+      <priemerne_hodnotenie>4.4</priemerne_hodnotenie>
+      <obrazok>../img/3.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 22:46:32</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>1</id>
+      <nazov>Harry Potter a Tajomná komnata</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143088</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>360</pocet_stran>
+      <vazba>brožovaná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>11.9</predajna_cena>
+      <nakupna_cena>8.25</nakupna_cena>
+      <marza>0.442424242424242</marza>
+      <zisk_kus>3.65</zisk_kus>
+      <obsah>Dursleyovci boli v to leto takí odporní, že Harry Potter sa už nevedel dočkať, kedy sa vráti do čarodejníckej školy. Jedného dňa sa v jeho izbe objaví čudné, zlomyseľné stvorenie. Volá sa Dobby a tvrdí, že ak sa Harry vráti na Rokfort, hrozí mu smrteľné nebezpečenstvo.
+A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole tajuplné a hrôzostrašné veci. Niekto, lepšie povedané niečo napáda rokfortských študentov a premieňa ich na kameň. Že by bol za tým Draco Malfoy, Harryho úhlavný nepriateľ? Alebo to má na svedomí ten, koho na Rokforte najviac upodozrievajú – samotný Harry Potter?</obsah>
+      <priemerne_hodnotenie>4.7</priemerne_hodnotenie>
+      <obrazok>../img/1.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 22:46:52</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>1</id>
+      <nazov>Harry Potter a Tajomná komnata</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143088</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>360</pocet_stran>
+      <vazba>brožovaná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>11.9</predajna_cena>
+      <nakupna_cena>8.25</nakupna_cena>
+      <marza>0.442424242424242</marza>
+      <zisk_kus>3.65</zisk_kus>
+      <obsah>Dursleyovci boli v to leto takí odporní, že Harry Potter sa už nevedel dočkať, kedy sa vráti do čarodejníckej školy. Jedného dňa sa v jeho izbe objaví čudné, zlomyseľné stvorenie. Volá sa Dobby a tvrdí, že ak sa Harry vráti na Rokfort, hrozí mu smrteľné nebezpečenstvo.
+A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole tajuplné a hrôzostrašné veci. Niekto, lepšie povedané niečo napáda rokfortských študentov a premieňa ich na kameň. Že by bol za tým Draco Malfoy, Harryho úhlavný nepriateľ? Alebo to má na svedomí ten, koho na Rokforte najviac upodozrievajú – samotný Harry Potter?</obsah>
+      <priemerne_hodnotenie>4.7</priemerne_hodnotenie>
+      <obrazok>../img/1.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 22:46:52</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>31</id>
+      <nazov>1231</nazov>
+      <autori>
+        <autor1>123</autor1>
+        <autor2>231</autor2>
+      </autori>
+      <kategoria>123</kategoria>
+      <isbn>123</isbn>
+      <jazyk>123</jazyk>
+      <pocet_stran>123</pocet_stran>
+      <vazba>3</vazba>
+      <rok_vydania>312</rok_vydania>
+      <vydavatelstvo>123</vydavatelstvo>
+      <predajna_cena>123</predajna_cena>
+      <nakupna_cena>123</nakupna_cena>
+      <marza>0</marza>
+      <zisk_kus>0</zisk_kus>
+      <obsah>123</obsah>
+      <priemerne_hodnotenie>123</priemerne_hodnotenie>
+      <obrazok>../img/31.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 22:47:02</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>32</id>
+      <nazov>213</nazov>
+      <autori>
+        <autor1>123</autor1>
+        <autor2>123</autor2>
+      </autori>
+      <kategoria>1231</kategoria>
+      <isbn>123</isbn>
+      <jazyk>12</jazyk>
+      <pocet_stran>123</pocet_stran>
+      <vazba>123</vazba>
+      <rok_vydania>132</rok_vydania>
+      <vydavatelstvo>123</vydavatelstvo>
+      <predajna_cena>1231</predajna_cena>
+      <nakupna_cena>333</nakupna_cena>
+      <marza>72.948822095857026807473598700</marza>
+      <zisk_kus>898</zisk_kus>
+      <obsah />
+      <priemerne_hodnotenie>123</priemerne_hodnotenie>
+      <obrazok>../img/32.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 22:47:07</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>2</id>
+      <nazov>Harry Potter a Ohnivá čaša</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143866</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>712</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>16.11</predajna_cena>
+      <nakupna_cena>10.25</nakupna_cena>
+      <marza>0.571707317073171</marza>
+      <zisk_kus>5.86</zisk_kus>
+      <obsah>Harry Potter je znovu na prázdninách u otravných Dursleyovcov. Chce sa od nich odpútať, a tak sa zúčastní na Svetovom pohári v metlobale spolu s Hermionou, Ronom a Weasleyovcami. Okrem toho sa po sto rokoch na Rokforte pripravuje Trojčarodejnícky turnaj a majú sa na ňom zúčastniť dve ďalšie čarodejnícke školy. Harry aj naďalej túži byť obyčajným štrnásťročným čarodejníkom. Má však smolu, lebo nie je obyčajný - dokonca ani podľa čarodejníckych meradiel. V jeho prípade to môže mať smrteľné dôsledky...</obsah>
+      <priemerne_hodnotenie>4.5</priemerne_hodnotenie>
+      <obrazok>../img/2.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 22:47:16</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>1</id>
+      <nazov>Harry Potter a Tajomná komnata</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143088</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>360</pocet_stran>
+      <vazba>brožovaná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>11.9</predajna_cena>
+      <nakupna_cena>8.25</nakupna_cena>
+      <marza>0.442424242424242</marza>
+      <zisk_kus>3.65</zisk_kus>
+      <obsah>Dursleyovci boli v to leto takí odporní, že Harry Potter sa už nevedel dočkať, kedy sa vráti do čarodejníckej školy. Jedného dňa sa v jeho izbe objaví čudné, zlomyseľné stvorenie. Volá sa Dobby a tvrdí, že ak sa Harry vráti na Rokfort, hrozí mu smrteľné nebezpečenstvo.
+A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole tajuplné a hrôzostrašné veci. Niekto, lepšie povedané niečo napáda rokfortských študentov a premieňa ich na kameň. Že by bol za tým Draco Malfoy, Harryho úhlavný nepriateľ? Alebo to má na svedomí ten, koho na Rokforte najviac upodozrievajú – samotný Harry Potter?</obsah>
+      <priemerne_hodnotenie>4.7</priemerne_hodnotenie>
+      <obrazok>../img/1.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 22:47:33</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>2</id>
+      <nazov>Harry Potter a Ohnivá čaša</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143866</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>712</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>16.11</predajna_cena>
+      <nakupna_cena>10.25</nakupna_cena>
+      <marza>0.571707317073171</marza>
+      <zisk_kus>5.86</zisk_kus>
+      <obsah>Harry Potter je znovu na prázdninách u otravných Dursleyovcov. Chce sa od nich odpútať, a tak sa zúčastní na Svetovom pohári v metlobale spolu s Hermionou, Ronom a Weasleyovcami. Okrem toho sa po sto rokoch na Rokforte pripravuje Trojčarodejnícky turnaj a majú sa na ňom zúčastniť dve ďalšie čarodejnícke školy. Harry aj naďalej túži byť obyčajným štrnásťročným čarodejníkom. Má však smolu, lebo nie je obyčajný - dokonca ani podľa čarodejníckych meradiel. V jeho prípade to môže mať smrteľné dôsledky...</obsah>
+      <priemerne_hodnotenie>4.5</priemerne_hodnotenie>
+      <obrazok>../img/2.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 22:47:38</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>1</id>
+      <nazov>Harry Potter a Tajomná komnata</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143088</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>360</pocet_stran>
+      <vazba>brožovaná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>11.9</predajna_cena>
+      <nakupna_cena>8.25</nakupna_cena>
+      <marza>0.442424242424242</marza>
+      <zisk_kus>3.65</zisk_kus>
+      <obsah>Dursleyovci boli v to leto takí odporní, že Harry Potter sa už nevedel dočkať, kedy sa vráti do čarodejníckej školy. Jedného dňa sa v jeho izbe objaví čudné, zlomyseľné stvorenie. Volá sa Dobby a tvrdí, že ak sa Harry vráti na Rokfort, hrozí mu smrteľné nebezpečenstvo.
+A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole tajuplné a hrôzostrašné veci. Niekto, lepšie povedané niečo napáda rokfortských študentov a premieňa ich na kameň. Že by bol za tým Draco Malfoy, Harryho úhlavný nepriateľ? Alebo to má na svedomí ten, koho na Rokforte najviac upodozrievajú – samotný Harry Potter?</obsah>
+      <priemerne_hodnotenie>4.7</priemerne_hodnotenie>
+      <obrazok>../img/1.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 22:47:46</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>1</id>
+      <nazov>Harry Potter a Tajomná komnata</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143088</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>360</pocet_stran>
+      <vazba>brožovaná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>11.9</predajna_cena>
+      <nakupna_cena>8.25</nakupna_cena>
+      <marza>0.442424242424242</marza>
+      <zisk_kus>3.65</zisk_kus>
+      <obsah>Dursleyovci boli v to leto takí odporní, že Harry Potter sa už nevedel dočkať, kedy sa vráti do čarodejníckej školy. Jedného dňa sa v jeho izbe objaví čudné, zlomyseľné stvorenie. Volá sa Dobby a tvrdí, že ak sa Harry vráti na Rokfort, hrozí mu smrteľné nebezpečenstvo.
+A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole tajuplné a hrôzostrašné veci. Niekto, lepšie povedané niečo napáda rokfortských študentov a premieňa ich na kameň. Že by bol za tým Draco Malfoy, Harryho úhlavný nepriateľ? Alebo to má na svedomí ten, koho na Rokforte najviac upodozrievajú – samotný Harry Potter?</obsah>
+      <priemerne_hodnotenie>4.7</priemerne_hodnotenie>
+      <obrazok>../img/1.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-14 22:47:46</timestamp>
+  </output>
 </root>

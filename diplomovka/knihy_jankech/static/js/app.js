@@ -64,15 +64,12 @@ function showAlert(message, Id, type) {
 
         }).done(function (data) {
 
-           $('html, body').animate({
-    scrollTop: $("footer").offset().top
-  }, 1000);
+           
           $(".card-body").show();
-          $('footer').css({
-            'position': ' relative',
-            ' width': '100 %',
-            'bottom': '1vh',
-          })
+          $('html, body').animate({
+    scrollTop: $("#nazov_hore").offset().top
+  }, 1200);
+          
           if (data.book.autori.autor2 != "-") {
             $("#autori").html(data.book.autori.autor1 + "," + data.book.autori.autor2)
             $("#autori_hore").html(data.book.autori.autor1 + "," + data.book.autori.autor2)

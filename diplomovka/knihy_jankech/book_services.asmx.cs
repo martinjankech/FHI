@@ -2327,11 +2327,16 @@ namespace knihy_jankech
 
             int numSellOrders = transactions.Count(t => t.Type == "predaj" && (t.Amount < 0));
             int numBuyOrders = transactions.Count(t => t.Type == "nákup" && t.Amount > 0);
+            int totalQuantityOfBooksNakup = transactions.Where(t => t.Type == "nákup" && t.Amount > 0)
+                                                       .Sum(t => t.Amount);
+
+            int totalQuantityOfBooksPredaj = transactions.Where(t => t.Type == "predaj" && (t.Amount < 0))
+                                                                   .Sum(t => Math.Abs(t.Amount));
             double netProfitMargin = profit / totalRevenue;
             double returnOnInvestment = profit / totalCost;
  
 
-            var result = new { totalRevenue, totalCost, profit, numSellOrders, numBuyOrders,  netProfitMargin, returnOnInvestment, };
+            var result = new { totalRevenue, totalCost, profit, numSellOrders, numBuyOrders,totalQuantityOfBooksNakup,totalQuantityOfBooksPredaj,  netProfitMargin, returnOnInvestment, };
             Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
             Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
         }
