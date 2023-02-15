@@ -84,6 +84,7 @@ function showAlert(message, Id, type) {
           $("#nazov_hore").html(data.book.nazov)
           $("#nazov").html(data.book.nazov)
           $("#kategoria").html(data.book.kategoria)
+          $("#vazba").html(data.book.vazba)
           $("#isbn").html(data.book.isbn)
           $("#jazyk").html(data.book.jazyk)
           $("#pocet_stran").html(data.book.pocet_stran)

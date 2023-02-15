@@ -252,7 +252,7 @@
       encode: true,
       // 
     }).done(function (response) {
-      var data = response;
+      var data = response.result;
       // vyčistni a znici predoslu instanciu Datatable aby sa mohla vytvorit nova po resubminuti formulara 
       $('#bookData').DataTable().clear();
       $('#bookData').DataTable().destroy()
@@ -291,9 +291,9 @@
 
         ]
       });
-      var bookNames = response.map(function (book) { return book.BookName });
-      var startAmounts = response.map(function (book) { return book.StartAmount });
-      var endAmounts = response.map(function (book) { return book.EndAmount });
+      var bookNames = data.map(function (book) { return book.BookName });
+      var startAmounts = data.map(function (book) { return book.StartAmount });
+      var endAmounts = data.map(function (book) { return book.EndAmount });
       $("#chart").show()
       var ctx = document.getElementById('myChart').getContext('2d');
       myChart = new Chart(ctx, {
@@ -349,7 +349,7 @@
       //var startAmounts = response.map(function (book) { return book.StartAmount });
       //var endAmounts = response.map(function (book) { return book.EndAmount });
       $("#chartAg").show()
-      var labels = ['TotalStartAmount', 'MaxStartAmount', 'MinStartAmont', 'AvgStartAmont', 'TotalEndAmount', 'MaxEndAmount', 'MinEndAmont', 'AvgEndAmont'];
+      var labels = ['Celkový počet začiatok', 'Maximálny počet začiatok', 'Minimálny počet začiatok', 'Priemerné začiatočné množsvo', 'celkový počet koniec', 'maximálny počet koniec', 'minimálny počet koniec', 'priemerný počet koniec'];
       var startData = [data.TotalStartAmount, data.MaxStartAmount, data.MinStartAmont, data.AvgStartAmont, 0, 0, 0, 0];
       var endData = [0, 0, 0, 0, data.TotalEndAmount, data.MaxEndAmount, data.MinEndAmont, data.AvgEndAmont];
 

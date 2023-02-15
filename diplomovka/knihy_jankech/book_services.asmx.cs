@@ -1,26 +1,12 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Runtime.Remoting.Contexts;
-using System.Security.Cryptography;
-using System.Text;
 using System.Web;
 using System.Web.Services;
-using System.Web.Services.Description;
 using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
 using System.Xml;
 using System.Xml.Linq;
-using System.Xml.Serialization;
-using knihy_jankech;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using static System.Net.Mime.MediaTypeNames;
-using static System.Net.WebRequestMethods;
 using Formatting = Newtonsoft.Json.Formatting;
 
 namespace knihy_jankech
@@ -39,7 +25,7 @@ namespace knihy_jankech
         private String fileBookInfo = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\book_moje.xml ";
         private String fileBookTransactionInfo = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\book_transakcie.xml ";
         public String fileOutputSingleSearch = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\output.xml";
-        public String fileAmountFilterPath = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\Amoutsoutputs";
+        public String fileAmountFilterPath = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\outputfiles";
 
         //private String fileBookInfoTest = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\book_moje_test.xml ";
         //private String fileBookTransactionInfoTest = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\book_transakcie_moje_test.xml ";
@@ -233,66 +219,117 @@ namespace knihy_jankech
         }
 
 
-        // ulozi IEnumerable alebo iny objekt vysledok LINQ dopytu spolu s casovou peciatkov a hladanymi parametrami do noveho xml suboru (na rozdiel od metody WriteToTheFileWithTimeStamp ktora vklada všetko do jedného súboru )
+        //ulozi IEnumerable alebo iny objekt vysledok LINQ dopytu spolu s casovou peciatkov a hladanymi parametrami do noveho xml suboru(na rozdiel od metody WriteToTheFileWithTimeStamp ktora vklada všetko do jedného súboru)
         //dynamic je kľúčové slovo C#, ktoré umožňuje deklarovať premennú ako dynamický typ. Typ premennej sa rieši počas behu namiesto kompilácie. To znamená, že typ premennej sa môže dynamicky meniť na základe hodnoty, ku ktorej je priradená.
         //Použitie dynamic v tejto metode je výhodné, pretože  umožňuje odovzdať akýkoľvek typ objektu metóde SaveWebMethodResult bez toho, aby sa muselo zadava5 presný typ.Vďaka tomu je metóda flexibilnejšia a všeobecnejšia, pretože dokáže spracovať objekty rôznych typov a uložiť ich do súboru XML.
         // Keďže typ výsledku je dynamický, kód môže určiť typ objektu za behu a skontrolovať, či ide o IEnumerable<object>. Ak áno, kód prejde každú položku a pridá ju do súboru XML. Ak nie, kód ho pridá ako jednu položku.
         //Použitím dynamických sa môžete vyhnúť nutnosti písať viacero metód na spracovanie rôznych typov objektov a namiesto toho napísať jednu metódu, ktorá zvládne všetky typy.
-        public static void SaveWebMethodResult(dynamic result, string methodName, string[] parameters, string path)
+        // This is a method to save the result of a web method to an XML file
+        //public static void SaveWebMethodResult(dynamic result, string methodName, string[] parameters, string path)
+        //{
+        //    // Check if the directory exists, and create it if it doesn't
+        //    if (!Directory.Exists(path))
+        //    {
+        //        Directory.CreateDirectory(path);
+        //    }
+        //    // Create a file name for the XML file using the current date and time, method name, and parameters
+        //    string fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + methodName + "_" + string.Join("_", parameters) + ".xml";
+
+        //    // Create a new XElement object to serve as the root element of the XML file
+        //    XElement root = new XElement("Root");
+
+        //    // Define a method to add elements to the XML tree
+        //    void AddToXml(XElement parent, object obj, string parentName = "data")
+        //    {
+        //        // Create a new element and add the parent name as an attribute
+        //        var element = new XElement(parentName);
+
+        //        // Iterate through the properties of the object
+        //        foreach (var prop in obj.GetType().GetProperties())
+        //        {
+        //            // Get the value of the property
+        //            var value = prop.GetValue(obj);
+
+        //            // If the value is not null, add it to the element
+        //            if (value != null)
+        //            {
+        //                // If the property type is primitive or string, add a new element with the property name and value
+        //                if (prop.PropertyType.IsPrimitive || prop.PropertyType == typeof(string))
+        //                {
+        //                    element.Add(new XElement(prop.Name, value));
+        //                }
+        //                // If the property value is an IEnumerable (but not a string), iterate through it and add its elements to the XML tree
+        //                else if (value is IEnumerable enumerable1 && !(value is string))
+        //                {
+        //                    foreach (var item in enumerable1)
+        //                    {
+        //                        AddToXml(element, item, prop.Name); // pass current property name as parent name
+        //                    }
+        //                }
+        //                // If the property value is not primitive or string and is not an IEnumerable, recursively call AddToXml to add its elements to the XML tree
+        //                else
+        //                {
+        //                    AddToXml(element, value, prop.Name); // pass current property name as parent name
+        //                }
+        //            }
+        //        }
+        //        // Add the element to the parent element
+        //        parent.Add(element);
+        //    }
+
+        //    // If the result is an IEnumerable (but not a string), iterate through it and add its elements to the XML tree
+        //    if (result is IEnumerable enumerable && !(result is string))
+        //    {
+        //        foreach (var item in enumerable)
+        //        {
+        //            AddToXml(root, item);
+        //        }
+        //    }
+        //    // If the result is not an IEnumerable or is a string, recursively call AddToXml to add its elements to the XML tree
+        //    else
+        //    {
+        //        AddToXml(root, result);
+        //    }
+
+        //    // Combine the file path and name and save the XML file
+        //    string fullPath = Path.Combine(path, fileName);
+        //    root.Save(fullPath);
+        //}
+
+        //public static void SaveWebMethodResult(dynamic result, string methodName, string[] parameters, string path)
+        //{
+        //    // Check if the directory exists, and create it if it doesn't
+        //    if (!Directory.Exists(path))
+        //    {
+        //        Directory.CreateDirectory(path);
+        //    }
+
+        //    // Create a file name for the XML file using the current date and time, method name, and parameters
+        //    string fileName = $"{DateTime.Now:yyyyMMddHHmmss}_{methodName}_{string.Join("_", parameters)}.xml";
+        //    string fullPath = Path.Combine(path, fileName);
+
+        //    // Use XmlSerializer to serialize the dynamic result to XML
+        //    var serializer = new XmlSerializer(result.GetType());
+        //    using (var writer = new StreamWriter(fullPath))
+        //    {
+        //        serializer.Serialize(writer, result);
+        //    }
+        //}
+        public static void SaveWebMethodResult(string xmlResult, string methodName, string[] parameters, string path)
         {
+            // Check if the directory exists, and create it if it doesn't
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
 
+            // Create a file name for the XML file using the current date and time, method name, and parameters
             string fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + methodName + "_" + string.Join("_", parameters) + ".xml";
-            XElement root = new XElement("Root");
 
-            void AddToXml(XElement parent, object obj)
-            {
-                var element = new XElement("Item");
-
-                foreach (var prop in obj.GetType().GetProperties())
-                {
-                    var value = prop.GetValue(obj);
-                    if (value != null)
-                    {
-                        if (prop.PropertyType.IsPrimitive || prop.PropertyType == typeof(string))
-                        {
-                            element.Add(new XElement(prop.Name, value));
-                        }
-                        else if (value is IEnumerable enumerable1 && !(value is string))
-                        {
-                            foreach (var item in enumerable1)
-                            {
-                                AddToXml(element, item);
-                            }
-                        }
-                        else
-                        {
-                            AddToXml(element, value);
-                        }
-                    }
-                }
-                parent.Add(element);
-            }
-
-            if (result is IEnumerable enumerable && !(result is string))
-            {
-                foreach (var item in enumerable)
-                {
-                    AddToXml(root, item);
-                }
-            }
-            else
-            {
-                AddToXml(root, result);
-            }
-
+            // Save the XML result to the file
             string fullPath = Path.Combine(path, fileName);
-            root.Save(fullPath);
+            System.IO.File.WriteAllText(fullPath, xmlResult);
         }
-
         [WebMethod]
         public void AddBook()
         {
@@ -1103,8 +1140,7 @@ namespace knihy_jankech
                             break;
                     }
                 }
-                double TotalStartAmount = result.Sum(x => x.StartAmount);
-                double TotalEndAmount = result.Sum(x => x.EndAmount);
+                
 
                 if (result.Count() == 0)
                 {
@@ -1112,9 +1148,16 @@ namespace knihy_jankech
                     Context.Response.Write("Žiadny záznam nespĺňa zadané kritériá");
 
                 };
-                SaveWebMethodResult(result, "SaveWebMethodResult", parameters, fileAmountFilterPath);
-                Context.Response.ContentType = "application/json";
-                Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
+                var anoresult = new { result, };
+                var json = JsonConvert.SerializeObject(anoresult, Formatting.Indented);
+                XmlDocument doc = JsonConvert.DeserializeXmlNode(json, "Root");
+
+                // Serialize the XmlDocument to a string
+                string xmlString = doc.OuterXml;
+                SaveWebMethodResult(xmlString, "SortedBookAmoutsByDateAndCategory", parameters, fileAmountFilterPath);
+                // Serialize the result to JSON using the Newtonsoft.Json library
+                Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+                Context.Response.Write(json);
             }
             else
             {
@@ -1206,9 +1249,16 @@ namespace knihy_jankech
                     Context.Response.Write("Žiadny záznam nespĺňa zadané kritériá");
 
                 };
-                SaveWebMethodResult(result, "SaveWebMethodResult", parameters, fileAmountFilterPath);
-                Context.Response.ContentType = "application/json";
-                Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
+                var anoresult = new { result, };
+                var json = JsonConvert.SerializeObject(anoresult, Formatting.Indented);
+                XmlDocument doc = JsonConvert.DeserializeXmlNode(json, "Root");
+
+                // Serialize the XmlDocument to a string
+                string xmlString = doc.OuterXml;
+                SaveWebMethodResult(xmlString, "SortedBookAmoutsByDateAndCategory", parameters, fileAmountFilterPath);
+                // Serialize the result to JSON using the Newtonsoft.Json library
+                Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+                Context.Response.Write(json);
             }
 
 
@@ -1312,9 +1362,16 @@ namespace knihy_jankech
                     Context.Response.Write("Žiadny záznam nespĺňa zadané kritériá");
 
                 };
-                SaveWebMethodResult(serializedResult, "SaveWebMethodResult", parameters, fileAmountFilterPath);
-                Context.Response.ContentType = "application/json";
-                Context.Response.Write(JsonConvert.SerializeObject(serializedResult, Formatting.Indented));
+                
+                var json = JsonConvert.SerializeObject(serializedResult, Formatting.Indented);
+                XmlDocument doc = JsonConvert.DeserializeXmlNode(json, "Root");
+
+                // Serialize the XmlDocument to a string
+                string xmlString = doc.OuterXml;
+                SaveWebMethodResult(xmlString, " AgregatedStatiscticsAmount", parameters, fileAmountFilterPath);
+                // Serialize the result to JSON using the Newtonsoft.Json library
+                Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+                Context.Response.Write(json);
             }
             else
             {
@@ -1357,9 +1414,16 @@ namespace knihy_jankech
                     Context.Response.Write("Žiadny záznam nespĺňa zadané kritériá");
 
                 };
-                SaveWebMethodResult(result, "AgregatedStatiscticsAmount", parameters, fileAmountFilterPath);
-                Context.Response.ContentType = "application/json";
-                Context.Response.Write(JsonConvert.SerializeObject(serializedResult, Formatting.Indented));
+
+                var json = JsonConvert.SerializeObject(serializedResult, Formatting.Indented);
+                XmlDocument doc = JsonConvert.DeserializeXmlNode(json, "Root");
+
+                // Serialize the XmlDocument to a string
+                string xmlString = doc.OuterXml;
+                SaveWebMethodResult(xmlString, " AgregatedStatiscticsAmount", parameters, fileAmountFilterPath);
+                // Serialize the result to JSON using the Newtonsoft.Json library
+                Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+                Context.Response.Write(json);
             }
 
         }
@@ -1578,10 +1642,25 @@ namespace knihy_jankech
                     TotalAggregatedData = totalAggregatedData
                 };
 
+                
+               
+                var json = JsonConvert.SerializeObject(result, Formatting.Indented);
+                XmlDocument doc = JsonConvert.DeserializeXmlNode(json, "Root");
+
+                // Serialize the XmlDocument to a string
+                string xmlString = doc.OuterXml;
+                SaveWebMethodResult(xmlString, "SortedDrillDownByAtributeDataBetweenTwoDatesSell", parameters, fileAmountFilterPath);
                 // Serialize the result to JSON using the Newtonsoft.Json library
-                SaveWebMethodResult(result, "SortedDrillDownByAtributeDataBetweenTwoDatesSell", parameters, fileAmountFilterPath);
                 Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
-                Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
+                Context.Response.Write(json);
+
+                // Write the XML string to the response
+                //Context.Response.ContentType = "application/xml";
+                //Context.Response.Write(xmlString);
+
+
+
+
             }
             else
             {
@@ -1817,16 +1896,23 @@ namespace knihy_jankech
                     TotalAggregatedData = totalAggregatedData
                 };
 
+                var json = JsonConvert.SerializeObject(result, Formatting.Indented);
+                XmlDocument doc = JsonConvert.DeserializeXmlNode(json, "Root");
+
+                // Serialize the XmlDocument to a string
+                string xmlString = doc.OuterXml;
+                SaveWebMethodResult(xmlString, "SortedDrillDownByAtributeDataBetweenTwoDatesSell", parameters, fileAmountFilterPath);
                 // Serialize the result to JSON using the Newtonsoft.Json library
-                SaveWebMethodResult(result, "SortedDrillDownByAtributeDataBetweenTwoDatesSell", parameters, fileAmountFilterPath);
                 Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
-                Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
+                Context.Response.Write(json);
+
             }
         }
 
         [WebMethod]
         public void SortedDrillDownByAtributeDataBetweenTwoDatesCost(string atribute, string startDate, string endDate, string sortingField = "", string sortingOrder = "", string optionalParameter = "")
         {
+            string[] parameters = { atribute, startDate, endDate, sortingField, sortingOrder, optionalParameter };
             // Load the books data from XML
             XDocument booksData = LoadXDocument(fileBookInfo);
             // Load the transactions data from XML
@@ -2026,8 +2112,6 @@ namespace knihy_jankech
 
 
                 };
-
-                // Combine the aggregated data and total aggregated data into a single object
                 var result = new
 
                 {
@@ -2035,10 +2119,19 @@ namespace knihy_jankech
                     TotalAggregatedData = totalAggregatedData
                 };
 
+                var json = JsonConvert.SerializeObject(result, Formatting.Indented);
+                XmlDocument doc = JsonConvert.DeserializeXmlNode(json, "Root");
+
+                // Serialize the XmlDocument to a string
+                string xmlString = doc.OuterXml;
+                SaveWebMethodResult(xmlString, "SortedDrillDownByAtributeDataBetweenTwoDatesCost", parameters, fileAmountFilterPath);
                 // Serialize the result to JSON using the Newtonsoft.Json library
                 Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
-                Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
+                Context.Response.Write(json);
             }
+        
+
+        
             else
             {
                 var aggregatedData = from book in booksData.Descendants("book")
@@ -2191,7 +2284,7 @@ namespace knihy_jankech
                     .ToList()
                     });
                 }
-                else if (sortingField == "hodnota" && optionalParameter == "revenue")
+                else if (sortingField == "hodnota" && optionalParameter == "cost")
                 {
                     aggregatedData = aggregatedData.OrderBy(x => x.TotalCost * (sortingOrder == "ascending" ? 1 : -1))
                     .ThenBy(x => x.Podkategoria)
@@ -2273,14 +2366,23 @@ namespace knihy_jankech
                     TotalAggregatedData = totalAggregatedData
                 };
 
+                var json = JsonConvert.SerializeObject(result, Formatting.Indented);
+                XmlDocument doc = JsonConvert.DeserializeXmlNode(json, "Root");
+
+                // Serialize the XmlDocument to a string
+                string xmlString = doc.OuterXml;
+                SaveWebMethodResult(xmlString, "SortedDrillDownByAtributeDataBetweenTwoDatesCost", parameters, fileAmountFilterPath);
                 // Serialize the result to JSON using the Newtonsoft.Json library
                 Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
-                Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
+                Context.Response.Write(json);
             }
         }
+        
         [WebMethod]
         public void CalculateRevenueCostProfit(int year, int quarter, int month)
         {
+            string[] parameters =   { year.ToString(), quarter.ToString(), month.ToString() };
+         
             XDocument xDoc = LoadXDocument(fileBookTransactionInfo);
             var transactions = from transaction in xDoc.Descendants("transakcia")
                                select new
@@ -2337,8 +2439,16 @@ namespace knihy_jankech
  
 
             var result = new { totalRevenue, totalCost, profit, numSellOrders, numBuyOrders,totalQuantityOfBooksNakup,totalQuantityOfBooksPredaj,  netProfitMargin, returnOnInvestment, };
+            
+            var json = JsonConvert.SerializeObject(result, Formatting.Indented);
+            XmlDocument doc = JsonConvert.DeserializeXmlNode(json, "Root");
+
+            // Serialize the XmlDocument to a string
+            string xmlString = doc.OuterXml;
+            SaveWebMethodResult(xmlString, " CalculateRevenueCostProfit", parameters, fileAmountFilterPath);
+            // Serialize the result to JSON using the Newtonsoft.Json library
             Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
-            Context.Response.Write(JsonConvert.SerializeObject(result, Formatting.Indented));
+            Context.Response.Write(json);
         }
 
     }

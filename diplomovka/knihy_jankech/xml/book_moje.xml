@@ -676,24 +676,24 @@ Saint-Exupéry svoju knižku s čistým detským pohľadom na svet venoval najle
     </book>
     <book>
       <id>31</id>
-      <nazov>1231</nazov>
+      <nazov>Martin</nazov>
       <autori>
-        <autor1>123</autor1>
-        <autor2>231</autor2>
+        <autor1>autor1</autor1>
+        <autor2>autor2</autor2>
       </autori>
-      <kategoria>123</kategoria>
-      <isbn>123</isbn>
-      <jazyk>123</jazyk>
+      <kategoria>sport</kategoria>
+      <isbn>1234948494</isbn>
+      <jazyk>sk</jazyk>
       <pocet_stran>123</pocet_stran>
-      <vazba>3</vazba>
-      <rok_vydania>312</rok_vydania>
-      <vydavatelstvo>123</vydavatelstvo>
-      <predajna_cena>123</predajna_cena>
-      <nakupna_cena>123</nakupna_cena>
+      <vazba>pevna</vazba>
+      <rok_vydania>2020</rok_vydania>
+      <vydavatelstvo>ikar</vydavatelstvo>
+      <predajna_cena>20</predajna_cena>
+      <nakupna_cena>10</nakupna_cena>
       <marza>0</marza>
       <zisk_kus>0</zisk_kus>
-      <obsah>123</obsah>
-      <priemerne_hodnotenie>123</priemerne_hodnotenie>
+      <obsah>Najlep3ia kniha na svete </obsah>
+      <priemerne_hodnotenie>4</priemerne_hodnotenie>
       <obrazok>../img/31.jpg</obrazok>
     </book>
     <book>
@@ -714,9 +714,7 @@ Saint-Exupéry svoju knižku s čistým detským pohľadom na svet venoval najle
       <nakupna_cena>333</nakupna_cena>
       <marza>72.948822095857026807473598700</marza>
       <zisk_kus>898</zisk_kus>
-      <obsah>
-
-</obsah>
+      <obsah></obsah>
       <priemerne_hodnotenie>123</priemerne_hodnotenie>
       <obrazok>../img/32.jpg</obrazok>
     </book>

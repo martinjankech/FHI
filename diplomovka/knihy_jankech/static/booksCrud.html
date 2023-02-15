@@ -439,7 +439,7 @@
             render: (data, type, row) => {
 
               // return `<a href="singleBookSearcher.html/${row.isbn}` + '"><img style="width:55px ; height:85px ;" src="' + data + '" /> </a>';
-              return '<a href=""data-toggle="modal" data-target="#bookmodal" data-obsah="' + row.obsah + '"  data-autor1="' + row.autori.autor1 + '"  data-autor2="' + row.autori.autor2 + '" data-obrazok="' + row.obrazok + '" data-id="' + row.id + '" data-nazov="' + row.nazov + '" data-kategoria="' + row.kategoria + '" data-isbn="' + row.isbn + '" data-jazyk="' + row.jazyk + '" data-pocet_stran="' + row.pocet_stran + '" data-vazba="' + row.vazba + '" data-rok_vydania="' + row.rok_vydania + '" data-vydavatelstvo="' + row.vydavatelstvo + '" data-predajna_cena="' + row.predajna_cena + '" data-nakupna_cena="' + row.nakupna_cena + '" data-marza="' + row.marza + '" data-zisk_kus="' + row.zisk_kus + '" data-priemerne_hodnotenie="' + row.priemerne_hodnotenie + '"><img style="width:55px ; height:85px ;" src="' + row.obrazok + '" /> </a>';
+              return '<a href=""data-toggle="modal" data-target="#bookmodal" data-obsah="' + row.obsah + '"  data-vazba="' + row.vazba + '"  data-autor1="' + row.autori.autor1 + '"  data-autor2="' + row.autori.autor2 + '" data-obrazok="' + row.obrazok + '" data-id="' + row.id + '" data-nazov="' + row.nazov + '" data-kategoria="' + row.kategoria + '" data-isbn="' + row.isbn + '" data-jazyk="' + row.jazyk + '" data-pocet_stran="' + row.pocet_stran + '" data-vazba="' + row.vazba + '" data-rok_vydania="' + row.rok_vydania + '" data-vydavatelstvo="' + row.vydavatelstvo + '" data-predajna_cena="' + row.predajna_cena + '" data-nakupna_cena="' + row.nakupna_cena + '" data-marza="' + row.marza + '" data-zisk_kus="' + row.zisk_kus + '" data-priemerne_hodnotenie="' + row.priemerne_hodnotenie + '"><img style="width:83px ; height:128px ;" src="' + row.obrazok + '" /> </a>';
 
             }
           },
@@ -502,6 +502,7 @@
       var kategoria = triggerLink.data("kategoria");
       var isbn = triggerLink.data("isbn");
       var jazyk = triggerLink.data("jazyk");
+      var vazba = triggerLink.data("vazba");
       var pocet_stran = triggerLink.data("pocet_stran");
       var vazba = triggerLink.data("vazba");
       var rok_vydania = triggerLink.data("rok_vydania");
@@ -545,6 +546,7 @@
         "<li><i class=\"fa fa-check text-success\"></i>kategoria: <span id=\"kategoria\"></span></li>" +
         "<li><i class=\"fa fa-check text-success\"></i>isbn: <span id=\"isbn\"></span></li>" +
         "<li><i class=\"fa fa-check text-success\"></i>jazyk: <span id=\"jazyk\"></span></li>" +
+        " <li><i class=\"fa fa-check text-success\"></i>vazba: <span id=\"vazba\"></span></li>" +
         "  <li><i class=\"fa fa-check text-success\"></i>pocet stran: <span id=\"pocet_stran\"></span></li>" +
         "<li><i class=\"fa fa-check text-success\"></i>rok vydania: <span id=\"rok_vydania\"></span></li>" +
         " <li><i class=\"fa fa-check text-success\"></i>vydavateľstvo: <span id=\"vydavatelstvo\"></span>" +
@@ -577,6 +579,7 @@
       $("#kategoria").html(kategoria)
       $("#isbn").html(isbn)
       $("#jazyk").html(jazyk)
+      $("#vazba").html(vazba)
       $("#pocet_stran").html(pocet_stran)
       $("#rok_vydania").html(rok_vydania)
       $("#vydavatelstvo").html(vydavatelstvo)
