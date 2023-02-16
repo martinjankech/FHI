@@ -5,6 +5,7 @@ https://opac.crzp.sk/?fn=detailBiblioForm&sid=728DDAFCA0C23A4506FC6655699D&seo=C
 popísané aj kody napr čo je xml node list, serializacia, využil ajax ma aj uspopriadanie na tlačitkach 
 https://opac.crzp.sk/?fn=detailBiblioForm&sid=EE347D3FB9176FA23A62607BB7F1&seo=CRZP-detail-kniha - automobilovy park
 použil konkretne firmy asi vymyslene , aj kody jednotlivých metod podlľa mna veľke metody z vela parametrami uvidime či sa to bude dať jednoduchšie 
+pozil podobne ako ja datatable a ajax 
 
 https://opac.crzp.sk/?fn=detailBiblioForm&sid=99467F2B4D35905AF25F2764CF03&seo=CRZP-detail-kniha . naklady firmy
 statistiky o vyrobkoch dobry napad ajax popis tvorby webovej služby, využil newebove čiastkove metody

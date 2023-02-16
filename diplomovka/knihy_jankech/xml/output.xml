@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <output>
+    <book>
+      <id>2</id>
+      <nazov>Harry Potter a Ohnivá čaša</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143866</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>712</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>16.11</predajna_cena>
+      <nakupna_cena>10.25</nakupna_cena>
+      <marza>0.571707317073171</marza>
+      <zisk_kus>5.86</zisk_kus>
+      <obsah>Harry Potter je znovu na prázdninách u otravných Dursleyovcov. Chce sa od nich odpútať, a tak sa zúčastní na Svetovom pohári v metlobale spolu s Hermionou, Ronom a Weasleyovcami. Okrem toho sa po sto rokoch na Rokforte pripravuje Trojčarodejnícky turnaj a majú sa na ňom zúčastniť dve ďalšie čarodejnícke školy. Harry aj naďalej túži byť obyčajným štrnásťročným čarodejníkom. Má však smolu, lebo nie je obyčajný - dokonca ani podľa čarodejníckych meradiel. V jeho prípade to môže mať smrteľné dôsledky...</obsah>
+      <priemerne_hodnotenie>4.5</priemerne_hodnotenie>
+      <obrazok>../img/2.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-15 21:49:18</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>6</id>
+      <nazov>2010: Druhá vesmírná odysea</nazov>
+      <autori>
+        <autor1>Arthur C. Clarke</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788025720936</isbn>
+      <jazyk>cz</jazyk>
+      <pocet_stran>315</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2017</rok_vydania>
+      <vydavatelstvo>Argo</vydavatelstvo>
+      <predajna_cena>13.24</predajna_cena>
+      <nakupna_cena>9.35</nakupna_cena>
+      <marza>0.416042780748663</marza>
+      <zisk_kus>3.89</zisk_kus>
+      <obsah>Ke kosmické lodi Discovery, osamoceně plující hlubokým vesmírem od doby, co David Bowman prošel „Hvězdnou bránou“, se vydává nová mezinárodní expedice. Jedním z cílů výpravy je objasnění tragických událostí, které se na Discovery odehrály. Ale tím nejdůležitějším úkolem je průzkum záhadného vesmírného tělesa zcela pravidelných tvarů. Jde o přírodní úkaz, nebo o výtvor mimozemské civilizace? Znamená těleso pro lidstvo hrozbu, nebo mu naopak může prospět? Vynořují se tisíce různých otázek a zodpovězení byť jen části z nich může navždy změnit chápání samé podstaty existence vesmíru a tím i budoucnost lidského druhu...</obsah>
+      <priemerne_hodnotenie>2.9</priemerne_hodnotenie>
+      <obrazok>../img/6.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-15 21:49:23</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>6</id>
+      <nazov>2010: Druhá vesmírná odysea</nazov>
+      <autori>
+        <autor1>Arthur C. Clarke</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788025720936</isbn>
+      <jazyk>cz</jazyk>
+      <pocet_stran>315</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2017</rok_vydania>
+      <vydavatelstvo>Argo</vydavatelstvo>
+      <predajna_cena>13.24</predajna_cena>
+      <nakupna_cena>9.35</nakupna_cena>
+      <marza>0.416042780748663</marza>
+      <zisk_kus>3.89</zisk_kus>
+      <obsah>Ke kosmické lodi Discovery, osamoceně plující hlubokým vesmírem od doby, co David Bowman prošel „Hvězdnou bránou“, se vydává nová mezinárodní expedice. Jedním z cílů výpravy je objasnění tragických událostí, které se na Discovery odehrály. Ale tím nejdůležitějším úkolem je průzkum záhadného vesmírného tělesa zcela pravidelných tvarů. Jde o přírodní úkaz, nebo o výtvor mimozemské civilizace? Znamená těleso pro lidstvo hrozbu, nebo mu naopak může prospět? Vynořují se tisíce různých otázek a zodpovězení byť jen části z nich může navždy změnit chápání samé podstaty existence vesmíru a tím i budoucnost lidského druhu...</obsah>
+      <priemerne_hodnotenie>2.9</priemerne_hodnotenie>
+      <obrazok>../img/6.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-15 21:49:23</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>1</id>
+      <nazov>Harry Potter a Tajomná komnata</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143088</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>360</pocet_stran>
+      <vazba>brožovaná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>11.9</predajna_cena>
+      <nakupna_cena>8.25</nakupna_cena>
+      <marza>0.442424242424242</marza>
+      <zisk_kus>3.65</zisk_kus>
+      <obsah>Dursleyovci boli v to leto takí odporní, že Harry Potter sa už nevedel dočkať, kedy sa vráti do čarodejníckej školy. Jedného dňa sa v jeho izbe objaví čudné, zlomyseľné stvorenie. Volá sa Dobby a tvrdí, že ak sa Harry vráti na Rokfort, hrozí mu smrteľné nebezpečenstvo.
+A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole tajuplné a hrôzostrašné veci. Niekto, lepšie povedané niečo napáda rokfortských študentov a premieňa ich na kameň. Že by bol za tým Draco Malfoy, Harryho úhlavný nepriateľ? Alebo to má na svedomí ten, koho na Rokforte najviac upodozrievajú – samotný Harry Potter?</obsah>
+      <priemerne_hodnotenie>4.7</priemerne_hodnotenie>
+      <obrazok>../img/1.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-15 21:49:27</timestamp>
+  </output>
+</root>
