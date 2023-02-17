@@ -2,3 +2,13 @@
 
 his in function header public void WriteToTheFileWithTimeStamp(string path, XmlNodeList data)
 please create a function which write xml data to the selected file path if the xml file does not exist it will create one. if the file does not existed you must create root element but only once in this root elememts will be append output element with data from xmlnodelist. The function should be able to append to the previous data which are aleready in file 
+
+Čo to chcem napísať : 
+Vytvoriť vhodnú xml dátovú štruktúru pomocou s ktorou budú môcť dané sám webové služby pracovať. 
+Naplniť tuto štruktúru dostatčými vzorovými dátami.
+Ciele : vytvoriť asmx soap webové služby pomocou asp net frameworku a jeho vybraných knižníc.
+Služby na crud operacie pre knihy a transakcie  ako je vybratie jednej knihy , poskytnutie zoznamu všetkých knih, pridanie aktualizácia a vymazanie knihy.
+Služby ktoré dokážu poskytnúť rôzne štatistické údaje o počte kníh a to na v rôznych obdobiach, podľa rôznych atribút zoradené vzostupne alebo zostupne podlá zadaného atribútu
+Služby na poskytnutie štatistický údajov o predajoch nákladoch alebo zisku 
+Vytvoriť prekladového  responzivneho webového klienta ktorá bude schopný tieto služby skonzumovať a výsledky prace týchto služieb zobraziť v tabuľke alebo grafe, drill down grafe alebo v prehľadových kartách. V klientovi budeme používať technológie ako je boostrap (efektívna tvorba responzivnej html stranjy) jquert (veľmi pohodlná konzumácia webovej služby pomocou technológie ajax ) 
+Ďalej použijeme jquerz knižnice ako autocomplete , datatable , chartjs , highchartsjs a iné 
