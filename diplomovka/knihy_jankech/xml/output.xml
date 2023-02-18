@@ -101,4 +101,54 @@ A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole
     </book>
     <timestamp>2023-02-15 21:49:27</timestamp>
   </output>
+  <output>
+    <book>
+      <id>1</id>
+      <nazov>Harry Potter a Tajomná komnata</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143088</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>360</pocet_stran>
+      <vazba>brožovaná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>11.9</predajna_cena>
+      <nakupna_cena>8.25</nakupna_cena>
+      <marza>0.442424242424242</marza>
+      <zisk_kus>3.65</zisk_kus>
+      <obsah>V lete boli Dursleyovci veľmi odporní, takže sa Harry Potter už netrpezlivo tešil na návrat do čarovnej školy. Jedného dňa sa v jeho izbe objavilo zvláštne a zákerné stvorenie menom Dobby. Dobby tvrdil, že ak sa Harry vráti na Rokfort, bude v ohrození života. A mal pravdu. Keď Harry nastúpil do druhého ročníka, začali sa diať na škole tajomné a strašidelné veci. Niečo alebo niekto napáda študentov Rokfortu a mení ich na kameň. Je to práca Draco Malfoya, Harryho hlavného nepriateľa? Alebo za tým stojí niekto, na koho najviac podozrievajú na Rokforte - možno aj sám Harry Potter?</obsah>
+      <priemerne_hodnotenie>4.7</priemerne_hodnotenie>
+      <obrazok>../img/1.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-18 14:28:49</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>1</id>
+      <nazov>Harry Potter a Tajomná komnata</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143088</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>360</pocet_stran>
+      <vazba>brožovaná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>11.9</predajna_cena>
+      <nakupna_cena>8.25</nakupna_cena>
+      <marza>0.442424242424242</marza>
+      <zisk_kus>3.65</zisk_kus>
+      <obsah>V lete boli Dursleyovci veľmi odporní, takže sa Harry Potter už netrpezlivo tešil na návrat do čarovnej školy. Jedného dňa sa v jeho izbe objavilo zvláštne a zákerné stvorenie menom Dobby. Dobby tvrdil, že ak sa Harry vráti na Rokfort, bude v ohrození života. A mal pravdu. Keď Harry nastúpil do druhého ročníka, začali sa diať na škole tajomné a strašidelné veci. Niečo alebo niekto napáda študentov Rokfortu a mení ich na kameň. Je to práca Draco Malfoya, Harryho hlavného nepriateľa? Alebo za tým stojí niekto, na koho najviac podozrievajú na Rokforte - možno aj sám Harry Potter?</obsah>
+      <priemerne_hodnotenie>4.7</priemerne_hodnotenie>
+      <obrazok>../img/1.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-18 14:28:49</timestamp>
+  </output>
 </root>

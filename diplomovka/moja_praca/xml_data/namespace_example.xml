@@ -14,3 +14,34 @@
         <o:mnoztvo>2</o:mnozstvo>
     </o:Objednavka>
 </z:Zakaznik>
+
+
+
+
+
+<Bookstore xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <books>
+        <book>
+            <id>24</id>
+            <nazov>Šlabikár financií pre neziskovky</nazov>
+            <autori>
+                <autor1>Jaroslava Lukačovičová</autor1>
+                <autor2>Gabriela Zúbriková</autor2>
+            </autori>
+            <kategoria>Biznis a manažment</kategoria>
+            <isbn>9788097029135</isbn>
+            <jazyk>sk</jazyk>
+            <pocet_stran>137</pocet_stran>
+            <vazba>brožovaná väzba</vazba>
+            <rok_vydania>2022</rok_vydania>
+            <vydavatelstvo>Sauno</vydavatelstvo>
+            <predajna_cena>18.98</predajna_cena>
+            <nakupna_cena>8,78</nakupna_cena>
+            <marza>1.16173120728929</marza>
+            <zisk_kus>10.2</zisk_kus>
+            <obsah>Publikácia, ktorú práve držíte v rukách je určená všetkým, ktorí chcú založiť niektorý z typov neziskových organizácií a tiež tým, ktorí v rámci existujúcich prichádzajú do kontaktu s finančnými prostriedkami.</obsah>
+            <priemerne_hodnotenie>4.3</priemerne_hodnotenie>
+            <obrazok>../img/24.jpg</obrazok>
+        </book>
+        <books>
+            <Bookstore>
