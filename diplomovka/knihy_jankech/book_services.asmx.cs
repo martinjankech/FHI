@@ -11,26 +11,17 @@ using Formatting = Newtonsoft.Json.Formatting;
 
 namespace knihy_jankech
 {
-
-    /// <summary>
-    /// Summary description for book_services
-    /// </summary>
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
-    [System.Web.Script.Services.ScriptService]
+   // [System.Web.Script.Services.ScriptService]
     public class book_services : System.Web.Services.WebService
     {// tieto cesty treba nastaviť 
         private String fileBookInfo = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\books.xml ";
         private String fileBookTransactionInfo = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\books_transactions.xml ";
         public String fileOutputSingleSearch = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\output.xml";
         public String fileAmountFilterPath = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\outputfiles";
-
-        //private String fileBookInfoTest = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\book_moje_test.xml ";
-        //private String fileBookTransactionInfoTest = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\book_transakcie_moje_test.xml ";
-
-
         // newebové metódy
         // 3 metoty na nacitanie xmldocumentu xdocumentu(pouzivaný pri linq nacita celý dokument ) a xelementu(tiež linq ale konkretny element  )
         private XmlDocument LoadXmlDocument(string filePath)
@@ -330,7 +321,7 @@ namespace knihy_jankech
             string fullPath = Path.Combine(path, fileName);
             System.IO.File.WriteAllText(fullPath, xmlResult);
         }
-        [WebMethod]
+        [WebMethod (Description = "prida do xml súboru záznam o novej knihe")]
         public void AddBook()
         {
             try
@@ -550,7 +541,7 @@ namespace knihy_jankech
             }
         }
 
-        [WebMethod]
+        [WebMethod(Description = "prida do xml súboru záznam o novej knihe")]
         public void UpdateBook()
         {
             try
@@ -629,7 +620,7 @@ namespace knihy_jankech
 
         }
 
-        [WebMethod]
+        [WebMethod(Description = "prida do xml súboru záznam o novej knihe")]
         public void DeleteBook(string id)
         {
             try
@@ -674,7 +665,7 @@ namespace knihy_jankech
 
 
 
-        [WebMethod]
+        [WebMethod(Description = "prida do xml súboru záznam o novej knihe")]
         public void SinglebookDataById(string id)
         {
             try
@@ -723,7 +714,7 @@ namespace knihy_jankech
                 Context.Response.Write("Vyskytla sa interná chyba servera: " + ex.Message);
             }
         }
-        [WebMethod]
+        [WebMethod(Description = "prida do xml súboru záznam o novej knihe")]
         public void SinglebookDataByName(string name)
         {
             try
@@ -774,7 +765,7 @@ namespace knihy_jankech
             }
         }
 
-        [WebMethod]
+        [WebMethod(Description = "prida do xml súboru záznam o novej knihe")]
         public void SinglebookDataByIsbn(string isbn)
         {
             //Nacitanie XML dokumentu z cesty ulozenej v premennej fileBookInfo
@@ -817,7 +808,7 @@ namespace knihy_jankech
                 Context.Response.Write(JsonConvert.SerializeXmlNode(nodeListBook.Item(0), Formatting.Indented));
             }
         }
-        [WebMethod] // označenie pre volanie cez webový protokol
+        [WebMethod(Description = "prida do xml súboru záznam o novej knihe")] // označenie pre volanie cez webový protokol
         public void GetListAllBooks() // verejná funkcia na získanie zoznamu kníh
         {
             XmlDocument doc = LoadXmlDocument(fileBookInfo); ; // vytvorenie  a nacitanie XML dokumentu
@@ -834,7 +825,7 @@ namespace knihy_jankech
             Context.Response.Write(JsonConvert.SerializeXmlNode(AllBook.Item(0), Formatting.Indented));
             // serializácia XML uzla ako JSON a odoslanie ako http odpoveď s formátovaním
         }
-        [WebMethod]
+        [WebMethod(Description = "prida do xml súboru záznam o novej knihe")]
         public void GetListAllTransactions()
         {
             XmlDocument doc = LoadXmlDocument(fileBookTransactionInfo);
@@ -855,7 +846,7 @@ namespace knihy_jankech
             Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
             Context.Response.Write(JsonConvert.SerializeXmlNode(transactions, Formatting.Indented));
         }
-        [WebMethod]
+        [WebMethod(Description = "prida do xml súboru záznam o novej knihe")]
         public void AddTransaction(string id_knihy, string datum, string typ_transakcie, string mnozstvo, string cena_za_jednotku, string celkovo_cena, string aktualne_mnozstvo_na_sklade)
         {
 
@@ -915,7 +906,7 @@ namespace knihy_jankech
             }
         }
 
-        [WebMethod]
+        [WebMethod(Description = "prida do xml súboru záznam o novej knihe")]
         public void UpdateTransaction(string id_transakcie, string id_knihy, string datum, string typ_transakcie, string mnozstvo, string cena_za_jednotku, string celkovo_cena, string aktualne_mnozstvo_na_sklade)
         {
             try
@@ -957,7 +948,7 @@ namespace knihy_jankech
 
 
 
-        [WebMethod]
+        [WebMethod (Description = "prida do xml súboru záznam o novej knihe") ]
         public void DeleteTransaction(string id_transakcie)
         {
             try
@@ -991,7 +982,7 @@ namespace knihy_jankech
 
             }
         }
-        [WebMethod]
+        [WebMethod (Description = "prida do xml súboru záznam o novej knihe")]
         public void SortedBookAmoutsByDateAndCategory(string selectedAtribute, string selectedValueAtribute, string startDate, string endDate, string sortField, string sortOrder)
         {
             string[] parameters = { selectedAtribute, selectedValueAtribute, startDate, endDate, sortField, sortOrder, };
@@ -1265,7 +1256,7 @@ namespace knihy_jankech
 
         }
 
-        [WebMethod]
+        [WebMethod (Description = "prida do xml súboru záznam o novej knihe")]
         public void AgregatedStatiscticsAmount(string selectedAtribute, string selectedValueAtribute, string startDate, string endDate)
         {
             string[] parameters = { selectedAtribute, selectedValueAtribute, startDate, endDate, };
@@ -1430,7 +1421,7 @@ namespace knihy_jankech
 
         // nemazat zatial najlesia uz ju len doplnit 
 
-        [WebMethod]
+        [WebMethod(Description = "prida do xml súboru záznam o novej knihe")]
         public void SortedDrillDownByAtributeDataBetweenTwoDatesSell(string atribute, string startDate, string endDate, string sortingField = "", string sortingOrder = "", string optionalParameter = "")
         {
             string[] parameters = { atribute,startDate, endDate, sortingField,sortingOrder,optionalParameter };
@@ -1909,7 +1900,7 @@ namespace knihy_jankech
             }
         }
 
-        [WebMethod]
+        [WebMethod(Description = "prida do xml súboru záznam o novej knihe")]
         public void SortedDrillDownByAtributeDataBetweenTwoDatesCost(string atribute, string startDate, string endDate, string sortingField = "", string sortingOrder = "", string optionalParameter = "")
         {
             string[] parameters = { atribute, startDate, endDate, sortingField, sortingOrder, optionalParameter };
@@ -2378,7 +2369,7 @@ namespace knihy_jankech
             }
         }
         
-        [WebMethod]
+        [WebMethod(Description = "prida do xml súboru záznam o novej knihe")]
         public void CalculateRevenueCostProfit(int year, int quarter, int month)
         {
             string[] parameters =   { year.ToString(), quarter.ToString(), month.ToString() };
