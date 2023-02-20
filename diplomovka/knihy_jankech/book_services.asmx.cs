@@ -24,7 +24,7 @@ namespace knihy_jankech
         public String fileAmountFilterPath = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\outputfiles";
         // newebové metódy
         // 3 metoty na nacitanie xmldocumentu xdocumentu(pouzivaný pri linq nacita celý dokument ) a xelementu(tiež linq ale konkretny element  )
-        private XmlDocument LoadXmlDocument(string filePath)
+  public XmlDocument LoadXmlDocument(string filePath)
         {
             // Vytvorenie nového objektu XmlDocument
             XmlDocument doc = new XmlDocument();
@@ -60,7 +60,7 @@ namespace knihy_jankech
             }
         }
 
-        private XElement LoadXElement(string filePath)
+        public XElement LoadXElement(string filePath)
         {
             try
             {
@@ -93,7 +93,7 @@ namespace knihy_jankech
                 return null;
             }
         }
-        private XDocument LoadXDocument(string filePath)
+        public XDocument LoadXDocument(string filePath)
         {
             try
             {
@@ -128,7 +128,7 @@ namespace knihy_jankech
         }
 
 
-        public static string CreateTimestamp()
+        public  string CreateTimestamp()
         {
             // Formátovať aktuálny dátum a čas pomocou vzoru "yyyy-MM-dd HH:mm:ss"
             return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -520,7 +520,7 @@ namespace knihy_jankech
                     new XElement("vydavatelstvo", bookData.Vydavatelstvo),
                     new XElement("predajna_cena", bookData.Predajna_cena),
                     new XElement("nakupna_cena", bookData.Nakupna_cena),
-                    new XElement("marza", (bookData.Predajna_cena - bookData.Nakupna_cena) / bookData.Predajna_cena * 100),
+                    new XElement("marza", (bookData.Predajna_cena - bookData.Nakupna_cena) / bookData.Predajna_cena ),
             new XElement("zisk_kus", bookData.Predajna_cena - bookData.Nakupna_cena),
             new XElement("obsah", bookData.Obsah),
             new XElement("priemerne_hodnotenie", bookData.Priemerne_hodnotenie),
@@ -599,6 +599,8 @@ namespace knihy_jankech
                 bookElement.SetElementValue("nakupna_cena", bookData.Nakupna_cena.ToString());
                 bookElement.SetElementValue("obsah", bookData.Obsah);
                 bookElement.SetElementValue("priemerne_hodnotenie", bookData.Priemerne_hodnotenie);
+                bookElement.SetElementValue("marza", (bookData.Predajna_cena - bookData.Nakupna_cena) / bookData.Predajna_cena );
+                bookElement.SetElementValue("zisk_kus", bookData.Predajna_cena - bookData.Nakupna_cena);
 
 
 

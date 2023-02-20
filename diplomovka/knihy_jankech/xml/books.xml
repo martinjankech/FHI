@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Bookstore xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <books>
     <book>
@@ -603,7 +603,7 @@ Autor Saint-Exupéry svoju knižku venoval najlepšiemu priateľovi s jasným de
       <nakupna_cena>8.89</nakupna_cena>
       <marza>0.840269966254218</marza>
       <zisk_kus>7.47</zisk_kus>
-      <obsah>Kniha "Mimo dobro a zlo. Predohra k filosofii budoucnosti" bola vydaná autorom v Lipsku v roku 1886 ako prvotlač nemeckého originálu. Nietzsche zbieral materiál k tejto knihe od začiatku 80. rokov, čerpajúc zo svojich poznámok, ktoré si zapisoval ešte pred vydanim "Radostnej vedy" (1882). Táto kniha tak bola vydaná krátko po publikácii "Tak pravil Zarathustra" (1883-1885). </obsah>
+      <obsah>Kniha Mimo dobro a zlo. Predohra k filosofii budoucnosti bola vydaná autorom v Lipsku v roku 1886 ako prvotlač nemeckého originálu. Nietzsche zbieral materiál k tejto knihe od začiatku 80. rokov, čerpajúc zo svojich poznámok, ktoré si zapisoval ešte pred vydanim Radostnej vedy (1882). Táto kniha tak bola vydaná krátko po publikácii Tak pravil Zarathustra (1883-1885). </obsah>
       <priemerne_hodnotenie>4</priemerne_hodnotenie>
       <obrazok>../img/27.jpg</obrazok>
     </book>
@@ -672,6 +672,28 @@ Autor Saint-Exupéry svoju knižku venoval najlepšiemu priateľovi s jasným de
       <obsah>V tejto knihe sa nachádzajú overené recepty na rôzne pokrmy pripravované v kotlíku, na pánvi a na grile. Okrem toho sa v knihe nachádzajú aj recepty na marinády a omáčky k grilovaným jedlám, ako aj na prípravu rôznych šalátov. Veríme, že každý z vás si pri prezeraní knihy vyberie recepty, ktoré bude často a radi pripravovať.</obsah>
       <priemerne_hodnotenie>3.9</priemerne_hodnotenie>
       <obrazok>../img/30.jpg</obrazok>
+    </book>
+    <book>
+      <id>31</id>
+      <nazov>123</nazov>
+      <autori>
+        <autor1>123</autor1>
+        <autor2>123</autor2>
+      </autori>
+      <kategoria>123</kategoria>
+      <isbn>123</isbn>
+      <jazyk>123</jazyk>
+      <pocet_stran>123</pocet_stran>
+      <vazba>123</vazba>
+      <rok_vydania>123</rok_vydania>
+      <vydavatelstvo>123</vydavatelstvo>
+      <predajna_cena>15</predajna_cena>
+      <nakupna_cena>5</nakupna_cena>
+      <marza>0.6666666666666666666666666667</marza>
+      <zisk_kus>10</zisk_kus>
+      <obsah>123123</obsah>
+      <priemerne_hodnotenie>123</priemerne_hodnotenie>
+      <obrazok>../img/31.jpg</obrazok>
     </book>
   </books>
 </Bookstore>

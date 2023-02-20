@@ -586,7 +586,7 @@
       $("#vydavatelstvo").html(vydavatelstvo)
       $("#predajna_cena").html(predajna_cena)
       $("#nakupna_cena").html(nakupna_cena)
-      $("#marza").html(parseFloat(marza).toFixed(2) * 100 + "%")
+      $("#marza").html(Math.round(marza * 100) + "%")
       $("#zisk_kus").html(zisk_kus)
     });
 
