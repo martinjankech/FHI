@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Xml;
 using System.Xml.Linq;
 using Newtonsoft.Json;
+using static System.Net.Mime.MediaTypeNames;
 using Formatting = Newtonsoft.Json.Formatting;
 
 namespace knihy_jankech
@@ -477,10 +478,17 @@ namespace knihy_jankech
                     Context.Response.Write("Vlozte obrazok knihy pozadovana velkost formatu je 430*600px");
                     return;
                 }
-                // získanie obrázka so súboru
+                // získanie obrázka so requestu
                 var postedFile = request.Files[0];
+               // Tento riadok nastaví členskú premennú ImageName objektu bookData na názov súboru nahraného obrázka.
+               // Metóda Path.GetFileName získa názov súboru z úplnej cesty k súboru, ktorá je uložená vo vlastnosti FileName objektu postedFile.
                 bookData.ImageName = Path.GetFileName(postedFile.FileName);
+               // Tento riadok deklaruje v objekte bookData nové pole bajtov s názvom ImageBytes, ktorého dĺžka sa rovná vlastnosti ContentLength objektu postedFile.
+               //Toto pole bajtov sa použije na uloženie binárnych údajov nahraného obrázka.
                 bookData.ImageBytes = new byte[postedFile.ContentLength];
+                //Tento riadok načíta binárne údaje nahraného obrázka z člennskej premennje InputStream objektu postedFile a uloží ich do členneskej premmenej ImageBytes objektu bookData.
+                //Metóda Read objektu InputStream prečíta zo streamu zadaný počet bajtov a uloží ich do zadaného poľa bajtov, pričom začína na zadanom offsete (ktorý je v tomto prípade 0).
+                //Počet bajtov, ktoré sa majú prečítať, je určený vlastnostou ContentLength objektu postedFile.  
                 postedFile.InputStream.Read(bookData.ImageBytes, 0, postedFile.ContentLength);
 
                 // nacitanie xml súboru s knihami a ziskanie hodnoty najvačšieho id 
@@ -1047,9 +1055,6 @@ namespace knihy_jankech
                              where (string)b.Element(selectedAtribute) == selectedValueAtribute ||
                              (selectedAtribute == "autor" && (string)b.Element("autori").Element("autor1") == selectedValueAtribute) ||
                              (selectedAtribute == "autor" && (string)b.Element("autori").Element("autor2") == selectedValueAtribute)
-
-
-
                              select new
                              {
                                  BookID = (string)b.Element("id"),
@@ -1119,8 +1124,6 @@ namespace knihy_jankech
                             break;
                     }
                 }
-                
-
                 if (result.Count() == 0)
                 {
                     Context.Response.ContentType = "application/json";
