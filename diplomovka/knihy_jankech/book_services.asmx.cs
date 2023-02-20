@@ -153,7 +153,6 @@ namespace knihy_jankech
                 XmlDeclaration xmlDeclaration = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
                 // Kontrola, či súbor existuje
                 bool fileExists = System.IO.File.Exists(path);
-
                 // Ak súbor neexistuje, vytvorí sa nový súbor
                 if (!fileExists)
                 {
@@ -190,22 +189,22 @@ namespace knihy_jankech
             catch (FileNotFoundException ex)
             {
                 // Výpis chyby, ak súbor sa nenašiel
-                Console.WriteLine("Súbor sa nenašiel: " + ex.Message);
+                Context.Response.Write("Súbor sa nenašiel: " + ex.Message);
             }
             catch (XmlException ex)
             {
                 // Výpis chyby, ak nastala chyba v XML súbore
-                Console.WriteLine("Chyba XML: " + ex.Message);
+                Context.Response.Write("Chyba XML: " + ex.Message);
             }
             catch (IOException ex)
             {
                 // Výpis chyby, ak nastala chyba pri vstupe/výstupe
-                Console.WriteLine("Chyba I/O: " + ex.Message);
+                Context.Response.Write("Chyba I/O: " + ex.Message);
             }
             catch (UnauthorizedAccessException ex)
             {
                 // Výpis chyby, ak nemáte oprávnenie k prístupu k súboru
-                Console.WriteLine("Nedovolený prístup: " + ex.Message);
+                Context.Response.Write("Nedovolený prístup: " + ex.Message);
             }
         }
 
@@ -306,21 +305,21 @@ namespace knihy_jankech
         //        serializer.Serialize(writer, result);
         //    }
         //}
-        public static void SaveWebMethodResult(string xmlResult, string methodName, string[] parameters, string path)
+        public void SaveWebMethodResult(string xmlResult, string methodName, string[] parameters, string path)
         {
-            // Check if the directory exists, and create it if it doesn't
+            // Skontroluje, či adresár existuje, ak nie, vytvorí ho
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
-
-            // Create a file name for the XML file using the current date and time, method name, and parameters
+            // Vytvorí názov súboru pre XML súbor pomocou aktuálneho dátumu a času, názvu metódy a parametrov
             string fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + methodName + "_" + string.Join("_", parameters) + ".xml";
 
-            // Save the XML result to the file
+            // Uloží XML výsledok do súboru
             string fullPath = Path.Combine(path, fileName);
             System.IO.File.WriteAllText(fullPath, xmlResult);
         }
+
         [WebMethod (Description = "prida do xml súboru záznam o novej knihe")]
         public void AddBook()
         {
@@ -328,8 +327,10 @@ namespace knihy_jankech
             {
                 var request = HttpContext.Current.Request;
 
-
+                // vytvorí sa nová inštancia triedy BookData
                 var bookData = new BookData();
+                // Kontrola parametrov z requestu a priradenie hodnôt.
+                // Ak niektorý parameter chýba, funkcia vráti chybový kód a príslušnú hlášku
                 if (string.IsNullOrEmpty(request["nazov"]))
                 {
                     Context.Response.StatusCode = 500;
@@ -476,34 +477,19 @@ namespace knihy_jankech
                     Context.Response.Write("Vlozte obrazok knihy pozadovana velkost formatu je 430*600px");
                     return;
                 }
-
+                // získanie obrázka so súboru
                 var postedFile = request.Files[0];
-
-                bookData.Nazov = request["nazov"];
-                bookData.Autor1 = request["autor1"];
-                bookData.Autor2 = request["autor2"];
-                bookData.Kategoria = request["kategoria"];
-                bookData.Isbn = request["isbn"];
-                bookData.Jazyk = request["jazyk"];
-                bookData.Pocet_stran = request["pocet_stran"];
-                bookData.Vazba = request["vazba"];
-                bookData.Rok_vydania = request["rok_vydania"];
-                bookData.Vydavatelstvo = request["vydavatelstvo"];
-                bookData.Predajna_cena = Convert.ToDecimal(request["predajna_cena"]);
-                bookData.Nakupna_cena = Convert.ToDecimal(request["nakupna_cena"]);
-                bookData.Obsah = request["obsah"];
-                bookData.Priemerne_hodnotenie = request["priemerne_hodnotenie"];
                 bookData.ImageName = Path.GetFileName(postedFile.FileName);
                 bookData.ImageBytes = new byte[postedFile.ContentLength];
                 postedFile.InputStream.Read(bookData.ImageBytes, 0, postedFile.ContentLength);
 
-                // Load the existing XML file
+                // nacitanie xml súboru s knihami a ziskanie hodnoty najvačšieho id 
                 string xmlFilePath = fileBookInfo;
                 XElement xmlDoc = LoadXElement(xmlFilePath);
                 var lastBookId = xmlDoc.Element("books").Elements("book").Max(x => (int?)x.Element("id")) ?? 0;
                 bookData.Id = (lastBookId + 1).ToString();
 
-                // Add the new book element to the XML file
+                // pridanie novej knihy do xml suboru 
 
                 XElement bookElement = new XElement("book",
                     new XElement("id", bookData.Id),
@@ -529,7 +515,7 @@ namespace knihy_jankech
 
                 xmlDoc.Element("books").Add(bookElement);
                 xmlDoc.Save(xmlFilePath);
-                // Save the image to the file system
+                // uloženie obrazka do súboru 
                 string imageFilePath = Path.Combine(Server.MapPath("~/img"), "../img/" + bookData.Id + ".jpg");
                 System.IO.File.WriteAllBytes(imageFilePath, bookData.ImageBytes);
                 Context.Response.Write("kniha uspesne pridana");

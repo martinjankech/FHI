@@ -18,15 +18,14 @@ namespace knihy_jankech
         public string Vazba { get; set; }
         public string Rok_vydania { get; set; }
         public string Vydavatelstvo { get; set; }
-        // nullable pre decimal datove typy aby sme mohli zachytit potencionalny null
-        public decimal? Predajna_cena { get; set; }
-    public decimal? Nakupna_cena { get; set; }
-    public double Marza { get; set; }
-    public double Zisk_kus { get; set; }
-    public string Obsah { get; set; }
-    public string Priemerne_hodnotenie { get; set; }
-    public string ImageName { get; set; }
-    public byte[] ImageBytes { get; set; }
+        public decimal Predajna_cena { get; set; }
+        public decimal Nakupna_cena { get; set; }
+        public double Marza { get; set; }
+        public double Zisk_kus { get; set; }
+       public string Obsah { get; set; }
+       public string Priemerne_hodnotenie { get; set; }
+       public string ImageName { get; set; }
+       public byte[] ImageBytes { get; set; }
 }
     public class TransactionData
     {
