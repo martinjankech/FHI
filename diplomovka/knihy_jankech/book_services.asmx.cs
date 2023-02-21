@@ -208,104 +208,6 @@ namespace knihy_jankech
                 Context.Response.Write("Nedovolený prístup: " + ex.Message);
             }
         }
-
-
-        //ulozi IEnumerable alebo iny objekt vysledok LINQ dopytu spolu s casovou peciatkov a hladanymi parametrami do noveho xml suboru(na rozdiel od metody WriteToTheFileWithTimeStamp ktora vklada všetko do jedného súboru)
-        //dynamic je kľúčové slovo C#, ktoré umožňuje deklarovať premennú ako dynamický typ. Typ premennej sa rieši počas behu namiesto kompilácie. To znamená, že typ premennej sa môže dynamicky meniť na základe hodnoty, ku ktorej je priradená.
-        //Použitie dynamic v tejto metode je výhodné, pretože  umožňuje odovzdať akýkoľvek typ objektu metóde SaveWebMethodResult bez toho, aby sa muselo zadava5 presný typ.Vďaka tomu je metóda flexibilnejšia a všeobecnejšia, pretože dokáže spracovať objekty rôznych typov a uložiť ich do súboru XML.
-        // Keďže typ výsledku je dynamický, kód môže určiť typ objektu za behu a skontrolovať, či ide o IEnumerable<object>. Ak áno, kód prejde každú položku a pridá ju do súboru XML. Ak nie, kód ho pridá ako jednu položku.
-        //Použitím dynamických sa môžete vyhnúť nutnosti písať viacero metód na spracovanie rôznych typov objektov a namiesto toho napísať jednu metódu, ktorá zvládne všetky typy.
-        // This is a method to save the result of a web method to an XML file
-        //public static void SaveWebMethodResult(dynamic result, string methodName, string[] parameters, string path)
-        //{
-        //    // Check if the directory exists, and create it if it doesn't
-        //    if (!Directory.Exists(path))
-        //    {
-        //        Directory.CreateDirectory(path);
-        //    }
-        //    // Create a file name for the XML file using the current date and time, method name, and parameters
-        //    string fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + methodName + "_" + string.Join("_", parameters) + ".xml";
-
-        //    // Create a new XElement object to serve as the root element of the XML file
-        //    XElement root = new XElement("Root");
-
-        //    // Define a method to add elements to the XML tree
-        //    void AddToXml(XElement parent, object obj, string parentName = "data")
-        //    {
-        //        // Create a new element and add the parent name as an attribute
-        //        var element = new XElement(parentName);
-
-        //        // Iterate through the properties of the object
-        //        foreach (var prop in obj.GetType().GetProperties())
-        //        {
-        //            // Get the value of the property
-        //            var value = prop.GetValue(obj);
-
-        //            // If the value is not null, add it to the element
-        //            if (value != null)
-        //            {
-        //                // If the property type is primitive or string, add a new element with the property name and value
-        //                if (prop.PropertyType.IsPrimitive || prop.PropertyType == typeof(string))
-        //                {
-        //                    element.Add(new XElement(prop.Name, value));
-        //                }
-        //                // If the property value is an IEnumerable (but not a string), iterate through it and add its elements to the XML tree
-        //                else if (value is IEnumerable enumerable1 && !(value is string))
-        //                {
-        //                    foreach (var item in enumerable1)
-        //                    {
-        //                        AddToXml(element, item, prop.Name); // pass current property name as parent name
-        //                    }
-        //                }
-        //                // If the property value is not primitive or string and is not an IEnumerable, recursively call AddToXml to add its elements to the XML tree
-        //                else
-        //                {
-        //                    AddToXml(element, value, prop.Name); // pass current property name as parent name
-        //                }
-        //            }
-        //        }
-        //        // Add the element to the parent element
-        //        parent.Add(element);
-        //    }
-
-        //    // If the result is an IEnumerable (but not a string), iterate through it and add its elements to the XML tree
-        //    if (result is IEnumerable enumerable && !(result is string))
-        //    {
-        //        foreach (var item in enumerable)
-        //        {
-        //            AddToXml(root, item);
-        //        }
-        //    }
-        //    // If the result is not an IEnumerable or is a string, recursively call AddToXml to add its elements to the XML tree
-        //    else
-        //    {
-        //        AddToXml(root, result);
-        //    }
-
-        //    // Combine the file path and name and save the XML file
-        //    string fullPath = Path.Combine(path, fileName);
-        //    root.Save(fullPath);
-        //}
-
-        //public static void SaveWebMethodResult(dynamic result, string methodName, string[] parameters, string path)
-        //{
-        //    // Check if the directory exists, and create it if it doesn't
-        //    if (!Directory.Exists(path))
-        //    {
-        //        Directory.CreateDirectory(path);
-        //    }
-
-        //    // Create a file name for the XML file using the current date and time, method name, and parameters
-        //    string fileName = $"{DateTime.Now:yyyyMMddHHmmss}_{methodName}_{string.Join("_", parameters)}.xml";
-        //    string fullPath = Path.Combine(path, fileName);
-
-        //    // Use XmlSerializer to serialize the dynamic result to XML
-        //    var serializer = new XmlSerializer(result.GetType());
-        //    using (var writer = new StreamWriter(fullPath))
-        //    {
-        //        serializer.Serialize(writer, result);
-        //    }
-        //}
         public void SaveWebMethodResult(string xmlResult, string methodName, string[] parameters, string path)
         {
             // Skontroluje, či adresár existuje, ak nie, vytvorí ho
@@ -617,39 +519,37 @@ namespace knihy_jankech
 
         }
 
-        [WebMethod(Description = "prida do xml súboru záznam o novej knihe")]
+        [WebMethod(Description = "zmaze knihu podla zazadného id ")]
         public void DeleteBook(string id)
         {
             try
             {
-                // Load the existing XML file
+                // Cesta k súboru s informáciami o knihách
                 string xmlFilePath = fileBookInfo;
+                // Načíta XML dokument z daného súboru
                 XElement xmlDoc = LoadXElement(xmlFilePath);
-
-
-                // Find the book with the specified id
+                // Nájde knihu s daným ID
                 XElement bookToDelete = xmlDoc.Element("books").Elements("book").FirstOrDefault(x => x.Element("id").Value == id);
-
                 if (bookToDelete != null)
                 {
-                    // Remove the book element from the XML file
+                    // Odstráni prvok "book" z XML súboru
                     bookToDelete.Remove();
                     xmlDoc.Save(xmlFilePath);
 
-                    // Delete the image from the file system
+                    // Vymaže obrázok z filesystému
                     string imageFilePath = Path.Combine(Server.MapPath("~/img"), "../img/" + id + ".jpg");
                     System.IO.File.Delete(imageFilePath);
-
+                    // Vypíše správu o úspešnom vymazaní knihy
                     Context.Response.Write("kniha uspesne zmazana");
                 }
                 else
-                {
+                {// Ak sa kniha s daným ID nenašla, vráti chybový kód a príslušnú správu
                     Context.Response.StatusCode = 500;
                     Context.Response.Write("kniha so zadanym id nebola najdena");
                 }
             }
             catch (Exception ex)
-            {
+            {// Ak nastala chyba, vypíše chybovú správu
                 Context.Response.Write("Error: " + ex.Message);
             }
         }
@@ -805,7 +705,7 @@ namespace knihy_jankech
                 Context.Response.Write(JsonConvert.SerializeXmlNode(nodeListBook.Item(0), Formatting.Indented));
             }
         }
-        [WebMethod(Description = "prida do xml súboru záznam o novej knihe")] // označenie pre volanie cez webový protokol
+        [WebMethod(Description = "ziska zoznam vsetkých kníh v json formate")] // označenie pre volanie cez webový protokol
         public void GetListAllBooks() // verejná funkcia na získanie zoznamu kníh
         {
             XmlDocument doc = LoadXmlDocument(fileBookInfo); ; // vytvorenie  a nacitanie XML dokumentu
@@ -822,33 +722,38 @@ namespace knihy_jankech
             Context.Response.Write(JsonConvert.SerializeXmlNode(AllBook.Item(0), Formatting.Indented));
             // serializácia XML uzla ako JSON a odoslanie ako http odpoveď s formátovaním
         }
-        [WebMethod(Description = "prida do xml súboru záznam o novej knihe")]
+        [WebMethod(Description = "vrati zoznam so vsetkymi transakciami v json formate ")]
         public void GetListAllTransactions()
         {
             XmlDocument doc = LoadXmlDocument(fileBookTransactionInfo);
+            // Výber všetkých transakcií zo zoznamu
             XmlNodeList AllTransactions = doc.SelectNodes("knihy_transakcie");
+            // Kontrola, či sú k dispozícii nejaké záznamy
             if (AllTransactions == null || AllTransactions.Item(0) == null)
-            {
+            {// Nastavenie HTTP statusu na 500 a pridanie chybovej správy
                 Context.Response.StatusCode = 500;
                 Context.Response.StatusDescription = "Chyba spracovania dokumentu";
                 return;
             }
-
+            //// Vybranie prvy uzol ktory obsahuje vsetky udaje o transakiách
             XmlNode transactions = AllTransactions.Item(0);
+           
+            // Získanie xsi atribútu a jeho odstránenie, ak existuje
 
             XmlAttribute xsiAttribute = transactions.Attributes["xsi:http://www.w3.org/2001/XMLSchema-instance"];
             if (xsiAttribute != null)
                 transactions.Attributes.Remove(xsiAttribute);
-
+            // Zapísanie UTF-8 preambuly do odpovede klientovi
             Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
+            // Prevod transakcií na JSON reťazec a odoslanie odpovede klientovi
             Context.Response.Write(JsonConvert.SerializeXmlNode(transactions, Formatting.Indented));
         }
-        [WebMethod(Description = "prida do xml súboru záznam o novej knihe")]
+        [WebMethod(Description = "prida do xml súboru záznam o novej transakcii")]
         public void AddTransaction(string id_knihy, string datum, string typ_transakcie, string mnozstvo, string cena_za_jednotku, string celkovo_cena, string aktualne_mnozstvo_na_sklade)
         {
 
             try
-            {
+            {// Ak nie sú všetky vstupné parametre vyplnené, vráti chybu
                 if (string.IsNullOrEmpty(id_knihy) ||
             string.IsNullOrEmpty(datum) ||
             string.IsNullOrEmpty(typ_transakcie) ||
@@ -861,9 +766,9 @@ namespace knihy_jankech
                     Context.Response.StatusDescription = "Nezadali ste vsetky vstupne parametre";
                     return;
                 }
-
+                // Vytvorenie noveho objektu triedy TransactionData
                 var transactionData = new TransactionData();
-                //transactionData.Id_transakcie= id;
+                //inicializácia jeho clennskych premennych
                 transactionData.Id_knihy = id_knihy;
                 transactionData.Datum = datum;
                 transactionData.Typ_transakcie = typ_transakcie;
@@ -872,13 +777,14 @@ namespace knihy_jankech
                 transactionData.Celkovo_cena = Convert.ToDouble(celkovo_cena);
                 transactionData.Aktualne_mnozstvo_na_sklade = Convert.ToInt32(aktualne_mnozstvo_na_sklade);
 
-                // Load the existing XML file
+                // Načíta existujúci XML súbor
                 string xmlFilePath = fileBookTransactionInfo;
                 XDocument xmlDoc = LoadXDocument(xmlFilePath);
+                // Nájde posledné ID transakcie a priradí ho k novej transakcii
                 var lastTransactionId = xmlDoc.Elements("knihy_transakcie").Elements("transakcia").Max(x => (int?)x.Element("id_transakcie")) ?? 0;
                 transactionData.Id_transakcie = (lastTransactionId + 1).ToString();
 
-                // Add the new transaction element to the XML file
+               // Pridá nový element s detskymi elementami novej  transakcie do XML súboru
                 XElement transactionElement = new XElement("transakcia",
                     new XElement("id_transakcie", transactionData.Id_transakcie),
                     new XElement("id_knihy", transactionData.Id_knihy),
@@ -888,9 +794,10 @@ namespace knihy_jankech
                     new XElement("cena_za_jednotku", transactionData.Cena_za_jednotku),
                     new XElement("celkovo_cena", transactionData.Celkovo_cena),
                     new XElement("aktualne_mnozstvo_na_sklade", transactionData.Aktualne_mnozstvo_na_sklade));
-
+                // pridanie a ulozenie elementov s novou transaciov do korenoveho elemetu xml dokumentu
                 xmlDoc.Element("knihy_transakcie").Add(transactionElement);
                 xmlDoc.Save(xmlFilePath);
+                // Vráti správu o úspešnom pridaní transakcie
                 Context.Response.Write("transakcia uspesne pridana");
 
             }
@@ -903,16 +810,16 @@ namespace knihy_jankech
             }
         }
 
-        [WebMethod(Description = "prida do xml súboru záznam o novej knihe")]
+        [WebMethod(Description = "aktualizuje udaje o transakcii")]
         public void UpdateTransaction(string id_transakcie, string id_knihy, string datum, string typ_transakcie, string mnozstvo, string cena_za_jednotku, string celkovo_cena, string aktualne_mnozstvo_na_sklade)
         {
             try
             {
-                // Load the existing XML file
+                // Načítanie existujúceho XML súboru
                 string xmlFilePath = fileBookTransactionInfo;
                 XDocument xmlDoc = LoadXDocument(xmlFilePath);
 
-                // Find the transaction element to update by its id 
+                // Nájdenie prvku transakcie, ktorý sa má aktualizovať podľa jeho id
 
                 var transactionElement = xmlDoc.Element("knihy_transakcie").Elements("transakcia").Where(x => x.Element("id_transakcie").Value == id_transakcie).FirstOrDefault();
                 if (transactionElement == null)
@@ -921,7 +828,7 @@ namespace knihy_jankech
                     Context.Response.Write("kniha zo zadanym id sa nenasla");
                 }
                 else
-                {
+                {// Aktualizácia hodnôt elementov transakcie
                     transactionElement.SetElementValue("id_knihy", id_knihy);
                     transactionElement.SetElementValue("datum", datum);
                     transactionElement.SetElementValue("typ_transakcie", typ_transakcie);
@@ -931,7 +838,7 @@ namespace knihy_jankech
                     transactionElement.SetElementValue("aktualne_mnozstvo_na_sklade", aktualne_mnozstvo_na_sklade);
                 }
 
-                xmlDoc.Save(xmlFilePath);
+                xmlDoc.Save(xmlFilePath);// uloženie XML súboru
                 Context.Response.Write("Transakcia bola uspesne aktualizovana");
 
             }
@@ -971,7 +878,6 @@ namespace knihy_jankech
                 }
 
             }
-
             catch (Exception ex)
             {
                 Context.Response.StatusCode = 500;
@@ -996,7 +902,6 @@ namespace knihy_jankech
             }
             else
             {
-
                 if (string.IsNullOrEmpty(selectedAtribute) ||
                        string.IsNullOrEmpty(startDate) || string.IsNullOrEmpty(endDate) || string.IsNullOrEmpty(sortField) || string.IsNullOrEmpty(sortOrder))
                 {
@@ -1004,10 +909,7 @@ namespace knihy_jankech
                     Context.Response.Write("Prosím zadajte všetky vstupné parametre");
                     return;
                 }
-
-
             }
-
             // skontroluje ci su hodnoty s sortorder "Ascending" alebo "Descending "
             if (!sortOrder.Equals("ascending") && !sortOrder.Equals("descending"))
             {
@@ -1015,8 +917,6 @@ namespace knihy_jankech
                 Context.Response.Write("Input Error: sortOrder must be either 'Ascending' or 'Descending'");
                 return;
             }
-
-
             // skontroluje ci su dostal spravnu z vybranych hodnot podla ktorych ma zoradit udaje este doplnit 
             if (!sortField.Equals("nazov") && !sortField.Equals("pocet_stran") && !sortField.Equals("rok_vydania")
                 && !sortField.Equals("predajna_cena") && !sortField.Equals("nakupna_cena") && !sortField.Equals("priemerne_hodnotenie"))
@@ -1043,7 +943,6 @@ namespace knihy_jankech
             var booksXml = LoadXElement(fileBookInfo);
             var warehouseXml = LoadXElement(fileBookTransactionInfo);
             // Convert the start and end dates to DateTime format
-
             // Use LINQ to join the information from the two XML files and filter the results based on selected category and selected value
             if (selectedAtribute != "vsetky")
             {
@@ -1051,7 +950,6 @@ namespace knihy_jankech
                              join w1 in warehouseXml.Descendants("transakcia") on (string)b.Element("id") equals (string)w1.Element("id_knihy") into g
                              from w1 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - start).Ticks)).Take(1)
                              let startAmount = (int)w1.Element("aktualne_mnozstvo_na_sklade")
-
                              from w2 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - end).Ticks)).Take(1)
                              where (string)b.Element(selectedAtribute) == selectedValueAtribute ||
                              (selectedAtribute == "autor" && (string)b.Element("autori").Element("autor1") == selectedValueAtribute) ||
@@ -1070,7 +968,6 @@ namespace knihy_jankech
                                  StartDate = start.ToString("yyyy-MM-dd"),
                                  EndDate = end.ToString("yyyy-MM-dd")
                              };
-
                 if (sortOrder == "ascending")
                 {
                     switch (sortField)
@@ -1093,7 +990,6 @@ namespace knihy_jankech
                         case "priemerne_hodnotenie":
                             result = result.OrderBy(r => r.BookRating);
                             break;
-
                         default:
                             break;
                     }
@@ -1120,7 +1016,6 @@ namespace knihy_jankech
                         case "priemerne_hodnotenie":
                             result = result.OrderByDescending(r => r.BookRating);
                             break;
-
                         default:
                             break;
                     }
