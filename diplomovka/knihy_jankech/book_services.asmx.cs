@@ -325,7 +325,7 @@ namespace knihy_jankech
         public void AddBook()
         {
             try
-            {
+            {// vytvorenie premennej typu HttpConetxt a ziskanie obsahuje aktualnej http požiadavky
                 var request = HttpContext.Current.Request;
 
                 // vytvorí sa nová inštancia triedy BookData
@@ -535,15 +535,15 @@ namespace knihy_jankech
             }
         }
 
-        [WebMethod(Description = "prida do xml súboru záznam o novej knihe")]
+        [WebMethod(Description = "aktualizuje záznam o jednej knihe na základe id")]
         public void UpdateBook()
         {
             try
             {
                 var request = HttpContext.Current.Request;
-
+                // vytvorí sa nová inštancia triedy BookData
                 var bookData = new BookData();
-
+                // získanie údajov o knihe z premennej request a ich priradenie do členskych premennych book.Data
                 bookData.Id = request["id"];
                 bookData.Nazov = request["nazov"];
                 bookData.Autor1 = request["autor1"];
@@ -570,7 +570,7 @@ namespace knihy_jankech
 
                 string xmlFilePath = fileBookInfo;
                 XElement xmlDoc = LoadXElement(xmlFilePath);
-
+                // Nájdenie prvku v XML súbore s id knihy rovnakým ako členskej premmenej bookData.Id 
                 var bookElement = xmlDoc.Element("books").Elements("book").FirstOrDefault(x => x.Element("id").Value == bookData.Id);
 
                 if (bookElement == null)
@@ -578,7 +578,7 @@ namespace knihy_jankech
                     Context.Response.StatusCode = 500;
                     Context.Response.Write("kniha zo zadanym id sa nenasla");
                 }
-
+                // Aktualizovanie hodnôt elementov prvku bookElement s hodnotami z premennej bookData
                 bookElement.SetElementValue("nazov", bookData.Nazov);
                 bookElement.Element("autori").SetElementValue("autor1", bookData.Autor1);
                 bookElement.Element("autori").SetElementValue("autor2", bookData.Autor2);
@@ -597,17 +597,18 @@ namespace knihy_jankech
                 bookElement.SetElementValue("zisk_kus", bookData.Predajna_cena - bookData.Nakupna_cena);
 
 
-
+                // Overí, či boli nahrané dáta o obale knihy a sú neprázdne
                 if (bookData.ImageBytes != null && bookData.ImageBytes.Length > 0)
-                {
+                {// Vytvorí cestu k súboru s obrázkom obalu knihy a uloží dáta o obale knihy na túto cestu
                     string imageFilePath = Path.Combine(HttpContext.Current.Server.MapPath("~/img"), "../img/" + bookData.Id + ".jpg");
                     System.IO.File.WriteAllBytes(imageFilePath, bookData.ImageBytes);
                 }
-
+                // Uloží zmeny v XML súbore s informáciami o knihách
                 xmlDoc.Save(xmlFilePath);
-
+                // Vypíše správu o úspešnom vykonaní aktualizácie knihy
                 Context.Response.Write("kniha bola uspesne aktualizovana");
             }
+            // V prípade výskytu chyby, nastaví HTTP status code na 500 a vypíše chybovú správu
             catch (Exception ex)
             {
                 Context.Response.StatusCode = 500;
