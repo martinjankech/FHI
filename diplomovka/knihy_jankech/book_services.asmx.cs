@@ -553,16 +553,7 @@ namespace knihy_jankech
                 Context.Response.Write("Error: " + ex.Message);
             }
         }
-
-
-
-
-
-
-
-
-
-        [WebMethod(Description = "prida do xml súboru záznam o novej knihe")]
+        [WebMethod(Description = "odosle udaje o jednej knihe na zaklade id v json formate")]
         public void SinglebookDataById(string id)
         {
             try
@@ -611,7 +602,7 @@ namespace knihy_jankech
                 Context.Response.Write("Vyskytla sa interná chyba servera: " + ex.Message);
             }
         }
-        [WebMethod(Description = "prida do xml súboru záznam o novej knihe")]
+        [WebMethod(Description = "odosle udaje o jednej knihe na zaklade nazvu v json formate")]
         public void SinglebookDataByName(string name)
         {
             try
@@ -662,7 +653,7 @@ namespace knihy_jankech
             }
         }
 
-        [WebMethod(Description = "prida do xml súboru záznam o novej knihe")]
+        [WebMethod(Description = "odosle udaje o jednej knihe na zaklade isbn v json formate")]
         public void SinglebookDataByIsbn(string isbn)
         {
             //Nacitanie XML dokumentu z cesty ulozenej v premennej fileBookInfo
