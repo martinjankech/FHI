@@ -848,12 +848,12 @@ namespace knihy_jankech
         {
             try
             {
-                // Load the existing XML file
+                // Načítanie existujúceho XML súboru
                 string xmlFilePath = fileBookTransactionInfo;
                 XDocument xmlDoc = LoadXDocument(xmlFilePath);
 
 
-                // Find the transaction element to delete by its id
+                // Nájdenie prvku transakcie, ktorý sa má zmazať podľa jeho id
                 var transactionElement = xmlDoc.Element("knihy_transakcie").Elements("transakcia").Where(x => x.Element("id_transakcie").Value == id_transakcie).FirstOrDefault();
                 if (transactionElement == null)
                 {
@@ -862,7 +862,7 @@ namespace knihy_jankech
                 }
 
                 else
-                {
+                {// vymazanie a uloženie xml dokumentu už bez knihy
                     transactionElement.Remove();
                     xmlDoc.Save(xmlFilePath);
 
@@ -876,8 +876,8 @@ namespace knihy_jankech
 
             }
         }
-        [WebMethod (Description = "prida do xml súboru záznam o novej knihe")]
-        public void SortedBookAmoutsByDateAndCategory(string selectedAtribute, string selectedValueAtribute, string startDate, string endDate, string sortField, string sortOrder)
+        [WebMethod (Description = "poskytne  zoradené udaje o počtoch kníh na zaklade atributu v zadanom obdobi ")]
+        public void SortedBookAmoutsByDateAndAtribute(string selectedAtribute, string selectedValueAtribute, string startDate, string endDate, string sortField, string sortOrder)
         {
             string[] parameters = { selectedAtribute, selectedValueAtribute, startDate, endDate, sortField, sortOrder, };
             if (selectedAtribute != "vsetky")
@@ -916,36 +916,46 @@ namespace knihy_jankech
                 Context.Response.Write("Input Error: zoradovat možete podla tých atribútov 'nazov' 'pocet_stran''rok_vydania','predajna_cena''nakupna_cena','priemerne_hodnotenie'");
                 return;
             }
-            // Try to parse the start and end dates
+            // Definujeme premenné start a end typu DateTime
             DateTime start, end;
+            // Overíme, či vstupné dátumy sú v správnom formáte. Ak nie, nastavíme chybový kód a vypíšeme chybovú správu.
+            // Kľúčové slovo "out" sa v metóde TryParse() používa na odovzdanie premenných "start" a "end" ako argumentov prostredníctvom referencie,
+            // to znamená  že  možno upraviť vnútri metódy a ich aktualizované hodnoty možno vrátiť volajúcemu kódu.
+            // Ak konverzia nie je úspešná, metóda vráti false a premenné "start" a "end" zostanú neinicializované.
             if (!DateTime.TryParse(startDate, out start) || !DateTime.TryParse(endDate, out end))
             {
                 Context.Response.StatusCode = 400;
                 Context.Response.Write("Zadajte validný formát dútumu ( napr. 'yyyy-MM-dd')");
                 return;
             }
+            // Overíme, či začiatočný dátum nie je neskôr ako koncový dátum. Ak áno, nastavíme chybový kód a vypíšeme chybovú správu
             if (start > end)
             {
                 Context.Response.StatusCode = 400;
                 Context.Response.Write("Začiatočný dátum nemože byť neskorej ako konečný dátum");
                 return;
             }
-            // Load XML files containing book information and book transaction information
+            // Načítame XML súbory obsahujúce informácie o knihách a transakciách s knihami
             var booksXml = LoadXElement(fileBookInfo);
-            var warehouseXml = LoadXElement(fileBookTransactionInfo);
-            // Convert the start and end dates to DateTime format
-            // Use LINQ to join the information from the two XML files and filter the results based on selected category and selected value
-            if (selectedAtribute != "vsetky")
+            var transactionXml = LoadXElement(fileBookTransactionInfo);
+          
+            // Použijeme LINQ na spojenie informácií z oboch XML súborov a filtrovanie výsledkov na základe vybranej kategórie a hodnoty
+            if (selectedAtribute != "vsetky")// Kontrola, či bola vybraná konkrétna kategória a nie hodnota vsetky
             {
-                var result = from b in booksXml.Descendants("book")
-                             join w1 in warehouseXml.Descendants("transakcia") on (string)b.Element("id") equals (string)w1.Element("id_knihy") into g
+                var result = from b in booksXml.Descendants("book") // Vyberie všetky elementy "book" zo súboru booksXml
+                     // Spojí elementy zo súboru transactionXml na základe zhody atribútu "id_knihy" s atribútom "id" v súbore booksXml a vytvorí z toho kolekciu
+                             join w1 in transactionXml.Descendants("transakcia") on (string)b.Element("id") equals (string)w1.Element("id_knihy") into g
+                             // Vyberie prvý element z kolekcie, ktorý má najbližší dátum ku dátumu "start"
                              from w1 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - start).Ticks)).Take(1)
+                             // Uloží aktuálny počet kusov na sklade z vybraného elementu do premennej startAmount
                              let startAmount = (int)w1.Element("aktualne_mnozstvo_na_sklade")
+                             // Vyberie prvý element z kolekcie, ktorý má najbližší dátum ku dátumu "end"
                              from w2 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - end).Ticks)).Take(1)
+                              // Filter pre vybranú kategóriu a hodnotu
                              where (string)b.Element(selectedAtribute) == selectedValueAtribute ||
                              (selectedAtribute == "autor" && (string)b.Element("autori").Element("autor1") == selectedValueAtribute) ||
                              (selectedAtribute == "autor" && (string)b.Element("autori").Element("autor2") == selectedValueAtribute)
-                             select new
+                             select new //Vytvorí nový anonymný typ so zvolenými atribútmi a hodnotami
                              {
                                  BookID = (string)b.Element("id"),
                                  BookName = (string)b.Element("nazov"),
@@ -959,7 +969,7 @@ namespace knihy_jankech
                                  StartDate = start.ToString("yyyy-MM-dd"),
                                  EndDate = end.ToString("yyyy-MM-dd")
                              };
-                if (sortOrder == "ascending")
+                if (sortOrder == "ascending")// Zoradenie výsledkov podľa vybranej hodnoty
                 {
                     switch (sortField)
                     {
@@ -985,7 +995,7 @@ namespace knihy_jankech
                             break;
                     }
                 }
-                else if (sortOrder == "descending")
+                else if (sortOrder == "descending")// Zoradenie výsledkov zostupne podľa vybranej hodnoty
                 {
                     switch (sortField)
                     {
@@ -1017,30 +1027,28 @@ namespace knihy_jankech
                     Context.Response.Write("Žiadny záznam nespĺňa zadané kritériá");
 
                 };
+                // Vytvoriť objekt s výsledkami a serializovať ho do JSON formátu
                 var anoresult = new { result, };
                 var json = JsonConvert.SerializeObject(anoresult, Formatting.Indented);
+                // Konvertovať JSON reťazec do XML a uložiť ho do premennej doc
                 XmlDocument doc = JsonConvert.DeserializeXmlNode(json, "Root");
 
-                // Serialize the XmlDocument to a string
+                // Serializovať XmlDocument do XML reťazca a uložiť ho pomocou metódy SaveWebMethodResult
                 string xmlString = doc.OuterXml;
-                SaveWebMethodResult(xmlString, "SortedBookAmoutsByDateAndCategory", parameters, fileAmountFilterPath);
-                // Serialize the result to JSON using the Newtonsoft.Json library
+                SaveWebMethodResult(xmlString, "SortedBookAmoutsByDateAndAtribute", parameters, fileAmountFilterPath);
+                // Odošli odpoveď v JSON formáte
                 Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
                 Context.Response.Write(json);
-            }
+            }//ak selectedAtribute=="vsetky" tak sa vykona tato vetva, ktora bo skoro identicku logiku. jediny roziel možeme najst v absencii where v  linq dopyte 
             else
             {
 
                 var result = from b in booksXml.Descendants("book")
-                             join w1 in warehouseXml.Descendants("transakcia") on (string)b.Element("id") equals (string)w1.Element("id_knihy") into g
+                             join w1 in transactionXml.Descendants("transakcia") on (string)b.Element("id") equals (string)w1.Element("id_knihy") into g
                              from w1 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - start).Ticks)).Take(1)
                              let startAmount = (int)w1.Element("aktualne_mnozstvo_na_sklade")
 
                              from w2 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - end).Ticks)).Take(1)
-
-
-
-
                              select new
                              {
                                  BookID = (string)b.Element("id"),
@@ -1111,7 +1119,6 @@ namespace knihy_jankech
                     }
 
                 }
-
                 if (result.Count() == 0)
                 {
                     Context.Response.ContentType = "application/json";
@@ -1121,26 +1128,20 @@ namespace knihy_jankech
                 var anoresult = new { result, };
                 var json = JsonConvert.SerializeObject(anoresult, Formatting.Indented);
                 XmlDocument doc = JsonConvert.DeserializeXmlNode(json, "Root");
-
-                // Serialize the XmlDocument to a string
                 string xmlString = doc.OuterXml;
-                SaveWebMethodResult(xmlString, "SortedBookAmoutsByDateAndCategory", parameters, fileAmountFilterPath);
-                // Serialize the result to JSON using the Newtonsoft.Json library
+                SaveWebMethodResult(xmlString, "SortedBookAmoutsByDateAndAtribute", parameters, fileAmountFilterPath);
                 Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
                 Context.Response.Write(json);
             }
-
-
-
         }
 
-        [WebMethod (Description = "prida do xml súboru záznam o novej knihe")]
+        [WebMethod (Description = "vrati agregované udaje počtoch knih podľa atributu a zvoleneho obdobia")]
         public void AgregatedStatiscticsAmount(string selectedAtribute, string selectedValueAtribute, string startDate, string endDate)
         {
             string[] parameters = { selectedAtribute, selectedValueAtribute, startDate, endDate, };
             if (selectedAtribute != "vsetky")
             {
-                // Skontroluje ci su vlozene vsetky parametre 
+                // Kontrola, či sú všetky parametre zadané
                 if (string.IsNullOrEmpty(selectedAtribute) || string.IsNullOrEmpty(selectedValueAtribute) ||
                     string.IsNullOrEmpty(startDate) || string.IsNullOrEmpty(endDate))
                 {
@@ -1151,7 +1152,6 @@ namespace knihy_jankech
             }
             else
             {
-
                 if (string.IsNullOrEmpty(selectedAtribute) ||
                        string.IsNullOrEmpty(startDate) || string.IsNullOrEmpty(endDate))
                 {
@@ -1159,10 +1159,11 @@ namespace knihy_jankech
                     Context.Response.Write("Prosím zadajte všetky vstupné parametre");
                     return;
                 }
-
-
             }
-            // Try to parse the start and end dates
+            // Kľúčové slovo "out" sa v metóde TryParse() používa na odovzdanie premenných "start" a "end" ako argumentov prostredníctvom referencie,
+             // to znamená  že  možno upraviť vnútri metódy a ich aktualizované hodnoty možno vrátiť volajúcemu kódu.
+             // Ak konverzia nie je úspešná, metóda vráti false a premenné "start" a "end" zostanú neinicializované.
+           
             DateTime start, end;
             if (!DateTime.TryParse(startDate, out start) || !DateTime.TryParse(endDate, out end))
             {
@@ -1170,32 +1171,31 @@ namespace knihy_jankech
                 Context.Response.Write("Zadajte validný formát dútumu ( napr. 'yyyy-MM-dd')");
                 return;
             }
+            // kontrola či je konečný datum vačši ako začiatočny
             if (start > end)
             {
                 Context.Response.StatusCode = 400;
                 Context.Response.Write("Začiatočný dátum nemože byť neskorej ako konečný dátum");
                 return;
             }
-            // Load XML files containing book information and book transaction information
+            // Načítame XML súbory obsahujúce informácie o knihách a transakciách
             var booksXml = LoadXElement(fileBookInfo);
-            var warehouseXml = LoadXElement(fileBookTransactionInfo);
-            // Convert the start and end dates to DateTime format
-
-            // Use LINQ to join the information from the two XML files and filter the results based on selected category and selected value
+            var transactionsXml = LoadXElement(fileBookTransactionInfo);
+     
             if (selectedAtribute != "vsetky")
-            {
+            {// // Výber dát zo súborov booksXml a transactionsXml a zlúčenie pomocou JOIN
                 var result = from b in booksXml.Descendants("book")
-                             join w1 in warehouseXml.Descendants("transakcia") on (string)b.Element("id") equals (string)w1.Element("id_knihy") into g
+                             join w1 in transactionsXml.Descendants("transakcia") on (string)b.Element("id") equals (string)w1.Element("id_knihy") into g
+                             // Výber prvku s minimálnou absolútnou hodnotou rozdielu medzi dátumom a počiatkom intervalu
                              from w1 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - start).Ticks)).Take(1)
                              let startAmount = (int)w1.Element("aktualne_mnozstvo_na_sklade")
-
+                             // Výber prvku s minimálnou absolútnou hodnotou rozdielu medzi dátumom a koncom intervalu
                              from w2 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - end).Ticks)).Take(1)
+                                 // Výber prvkov, ktoré spĺňajú podmienku vybranej hodnoty atribútu alebo autora
                              where (string)b.Element(selectedAtribute) == selectedValueAtribute ||
                              (selectedAtribute == "autor" && (string)b.Element("autori").Element("autor1") == selectedValueAtribute) ||
                              (selectedAtribute == "autor" && (string)b.Element("autori").Element("autor2") == selectedValueAtribute)
-
-
-
+                             // Vytvorenie nového objektu so zvolenými hodnotami
                              select new
                              {
                                  StartAmount = startAmount,
@@ -1203,14 +1203,15 @@ namespace knihy_jankech
                                  StartDate = start.ToString("yyyy-MM-dd"),
                                  EndDate = end.ToString("yyyy-MM-dd")
                              };
-
-
+                // Výpočet celkového počtu kníh na začiatku a na konci intervalu
                 double TotalStartAmount = result.Sum(x => x.StartAmount);
                 double TotalEndAmount = result.Sum(x => x.EndAmount);
+                // Výpočet maximálneho a minimálneho počtu kníh na začiatku a na konci intervalu
                 double MaxStartAmount = result.Max(x => x.StartAmount);
                 double MinStartAmont = result.Min(x => x.StartAmount);
                 double MaxEndAmount = result.Max(x => x.EndAmount);
                 double MinEndAmont = result.Min(x => x.EndAmount);
+                // Výpočet priemeru počtu kníh na začiatku a na konci intervalu
                 double AvgStartAmont = result.Average(x => x.StartAmount);
                 double AvgEndAmont = result.Average(x => x.EndAmount);
                 var serializedResult = new
@@ -1246,7 +1247,7 @@ namespace knihy_jankech
             {
 
                 var result = from b in booksXml.Descendants("book")
-                             join w1 in warehouseXml.Descendants("transakcia") on (string)b.Element("id") equals (string)w1.Element("id_knihy") into g
+                             join w1 in transactionsXml.Descendants("transakcia") on (string)b.Element("id") equals (string)w1.Element("id_knihy") into g
                              from w1 in g.OrderBy(x => Math.Abs((DateTime.Parse((string)x.Element("datum")) - start).Ticks)).Take(1)
                              let startAmount = (int)w1.Element("aktualne_mnozstvo_na_sklade")
 
