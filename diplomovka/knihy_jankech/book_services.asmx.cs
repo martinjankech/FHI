@@ -1528,9 +1528,6 @@ namespace knihy_jankech
                 //Context.Response.ContentType = "application/xml";
                 //Context.Response.Write(xmlString);
 
-
-
-
             }
             else
             {
