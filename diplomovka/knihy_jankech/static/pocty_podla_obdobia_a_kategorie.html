@@ -245,7 +245,7 @@
 
 
     $.ajax({
-      url: "http://localhost:8050/book_services.asmx/SortedBookAmoutsByDateAndCategory",
+      url: "http://localhost:8050/book_services.asmx/SortedBookAmoutsByDateAndAtribute",
       method: "POST",
       data: { selectedAtribute: selectedAtributeValue, selectedValueAtribute: selectedValueAtributeValue, startDate: startDateValue, endDate: endDateValue, sortField: sortFieldValue, sortOrder: sortOrderValue },
       dataType: "json",
