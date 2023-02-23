@@ -1232,14 +1232,16 @@ namespace knihy_jankech
                     Context.Response.Write("Žiadny záznam nespĺňa zadané kritériá");
 
                 };
-                
+                // serializacia do json
                 var json = JsonConvert.SerializeObject(serializedResult, Formatting.Indented);
+                // serializacaia do xml 
                 XmlDocument doc = JsonConvert.DeserializeXmlNode(json, "Root");
 
-                // Serialize the XmlDocument to a string
+               
                 string xmlString = doc.OuterXml;
+                // uloženie do xml suboru 
                 SaveWebMethodResult(xmlString, " AgregatedStatiscticsAmount", parameters, fileAmountFilterPath);
-                // Serialize the result to JSON using the Newtonsoft.Json library
+          // odoslaie odpovede klientovi
                 Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
                 Context.Response.Write(json);
             }
@@ -1288,40 +1290,44 @@ namespace knihy_jankech
                 var json = JsonConvert.SerializeObject(serializedResult, Formatting.Indented);
                 XmlDocument doc = JsonConvert.DeserializeXmlNode(json, "Root");
 
-                // Serialize the XmlDocument to a string
+             // serializacia xml do retazca
                 string xmlString = doc.OuterXml;
                 SaveWebMethodResult(xmlString, " AgregatedStatiscticsAmount", parameters, fileAmountFilterPath);
-                // Serialize the result to JSON using the Newtonsoft.Json library
+              // odoslanie json odpovede klientovi
                 Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
                 Context.Response.Write(json);
             }
 
         }
 
-        // nemazat zatial najlesia uz ju len doplnit 
-
-        [WebMethod(Description = "prida do xml súboru záznam o novej knihe")]
+        [WebMethod(Description = "vytvori drill down report pre udaje o poctoch a prijmoch z predaja kníh")]
         public void SortedDrillDownByAtributeDataBetweenTwoDatesSell(string atribute, string startDate, string endDate, string sortingField = "", string sortingOrder = "", string optionalParameter = "")
-        {
+        {// Vytvorenie poľa parametrov
+
             string[] parameters = { atribute,startDate, endDate, sortingField,sortingOrder,optionalParameter };
-            // Load the books data from XML
+            // Načítanie údajov o knihách zo súboru XML
             XDocument booksData = LoadXDocument(fileBookInfo);
-            // Load the transactions data from XML
+            // Načítanie údajov o transakciách zo súboru XML
             XDocument transactionsData = LoadXDocument(fileBookTransactionInfo);
             DateTime start, end;
+            // Kontrola či dátumy sú v správnom formáte
+            // Kľúčové slovo "out" sa v metóde TryParse() používa na odovzdanie premenných "start" a "end" ako argumentov prostredníctvom referencie,
+            // to znamená  že ich  možno upraviť  vnútri metódy a ich aktualizované hodnoty možno vrátiť volajúcemu kódu.
+            // Ak konverzia nie je úspešná, metóda vráti false a premenné "start" a "end" zostanú neinicializované.
             if (!DateTime.TryParse(startDate, out start) || !DateTime.TryParse(endDate, out end))
             {
                 Context.Response.StatusCode = 400;
                 Context.Response.Write("Zadajte validný formát dútumu ( napr. 'yyyy-MM-dd')");
                 return;
             }
-
+            // Kontrola, či boli zadané všetky vstupy
             if (string.IsNullOrEmpty(atribute) || startDate == null || endDate == null || sortingOrder == null)
             {
                 Context.Response.StatusCode = 500;
                 Context.Response.Write("Jedna alebo viacero vstupov nebolo vyplnených");
                 return;
             }
+            // Kontrola či dátum 'start' je pred dátumom 'end'
             if (start > end)
             {
                 Context.Response.StatusCode = 500;
@@ -1330,58 +1336,58 @@ namespace knihy_jankech
 
                 return;
             }
-
+            // Kontrola, či bola zadaná správna hodnota 'sortingOrder'
             if (sortingOrder != "ascending" && sortingOrder != "descending")
             {
                 Context.Response.StatusCode = 500;
                 Context.Response.Write("Sortovanie može byť iba zostupne alebo vzostupne");
 
             }
-
+            // Kontrola, či bola zadaná správna hodnota 'sortingField'
             if (sortingField != "hodnota" && sortingField != "nazov")
             {
                 Context.Response.StatusCode = 500;
                 Context.Response.Write("zoradovat sa može iba podľa názvu alebo hodnoty");
 
             }
+            // Výpočet počtu dní medzi dátumami 'start' a 'end'
             double days = (end - start).Days + 1;
+            // Ak nie je zadaný atribút 'autor' alebo 'autori'
             if (atribute != "autor" && atribute != "autori")
             {
 
-                // Join the books data and transactions data on book id to get all information related to each transaction
+                // Spojenie údajov o knihách a transakciách podľa id knihy pre získanie všetkých informácií o každej transakcii
                 var aggregatedData = from book in booksData.Descendants("book")
                                      join transaction in transactionsData.Descendants("transakcia")
                                      on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
 
-                                     // Filter the transactions to only those with a date within the specified range and of type "predaj"
+                                     // Filtrujte transakcie tak, aby  sa zobrazovali len tie s dátumom v zadanom rozmedzí a typom "predaj"
                                      where (DateTime)transaction.Element("datum") >= start
                                      && (DateTime)transaction.Element("datum") <= end
                                      && transaction.Element("typ_transakcie").Value == "predaj"
-
-
-
-                                     // Group the transactions by the specified category element value
+                                     // Zoskupenie transakcií podľa zvoleného prvku kategórie
                                      group new { Book = book, Transaction = transaction } by book.Element(atribute).Value into g
                                      select new
                                      {
-                                         // Store the category value as Podkategoria
+                                         // Uloženie nazov podkategorie ako Podkategoria
                                          Podkategoria = g.Key,
 
 
-                                         // Calculate the total quantity of books sold and total revenue for each category
+                                         // Vypočet celkového množsstva predaných kníh a celkového príjmu pre každú podkategóriu
                                          TotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))),
                                          TotalRevenue = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")),
                                          AverageTotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))) / days,
                                          AverageTotalRevenue = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")) / days,
-
-                                         // Group the books by their id to get aggregated data for books with the same id
+                                         // pre každu pokategoriu aj zoskupenie knih patriacich do tejto podkategorie 
+                                         // Zoskupenie kníh podľa ich id, aby sme získali agregované údaje pre knihy s rovnakým id
                                          Books = g.GroupBy(x => x.Book.Element("id").Value)
                                              .Select(x => new
                                              {
                                                  Id = x.Key,
                                                  Name = x.First().Book.Element("nazov").Value,
 
-                                                 // Calculate the total quantity sold and total revenue for each book
+                                                 // Vypočet celkového množstva predaných kníh a celkový príjem pre každú knihu patriacu do potkategorie
+
                                                  TotalQuantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))),
                                                  TotalRevenue = x.Sum(y => (double)y.Transaction.Element("celkovo_cena")),
                                                  AverageTotalQuantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))) / days,
@@ -1397,10 +1403,11 @@ namespace knihy_jankech
                     return;
                 }
 
-                // Sort the aggregated data based on the sortingField and sortingOrder parameters
+                // Zoradenie agregovaných údajov podľa parametrov sortingField a sortingOrder
                 if (sortingField == "nazov")
-                {
-                    aggregatedData = sortingOrder == "ascending"
+                    if (sortingField == "nazov")
+                    {// triedenie podla nazvu vzostupne
+                        aggregatedData = sortingOrder == "ascending"
                     ? aggregatedData.OrderBy(x => x.Podkategoria)
                         .ThenBy(x => x.Books.OrderBy(y => y.Name))
                         .Select(x => new
@@ -1413,6 +1420,7 @@ namespace knihy_jankech
                             Books = x.Books.OrderBy(y => y.Name).ToList()
 
                         })
+                        // triedenie podla nazvu zostupne
                     : aggregatedData.OrderByDescending(x => x.Podkategoria)
                         .ThenBy(x => x.Books.OrderByDescending(y => y.Name))
                         .Select(x => new
@@ -1424,8 +1432,8 @@ namespace knihy_jankech
                             AverageTotalRevenue = x.AverageTotalRevenue,
                             Books = x.Books.OrderByDescending(y => y.Name).ToList()
                         });
-                }
-                else if (sortingField == "hodnota" && optionalParameter == "quantity")
+                    }// triedenie podla mnozstva a hodnoty vzostupne alebo zostupne
+                    else if (sortingField == "hodnota" && optionalParameter == "quantity")
                 {
                     aggregatedData = aggregatedData.OrderBy(x => x.TotalQuantity * (sortingOrder == "ascending" ? 1 : -1))
                     .ThenBy(x => x.Podkategoria)
@@ -1440,8 +1448,8 @@ namespace knihy_jankech
                     .ThenBy(y => y.Name)
                     .ToList()
                     });
-                }
-                else if (sortingField == "hodnota" && optionalParameter == "revenue")
+                    }// triedenie podla vynosu vzostupne alebo zostupne
+                    else if (sortingField == "hodnota" && optionalParameter == "revenue")
                 {
                     aggregatedData = aggregatedData.OrderBy(x => x.TotalRevenue * (sortingOrder == "ascending" ? 1 : -1))
                     .ThenBy(x => x.Podkategoria)
@@ -1456,7 +1464,8 @@ namespace knihy_jankech
                     .ThenBy(y => y.Name)
                     .ToList()
                     });
-                }
+                    }// Najvyšší a najnižší celkový výnos a množstvo pre podkategórii  a pre  knihe
+
                 var maxRevenuePodkategoria = aggregatedData.Max(x => x.TotalRevenue);
                 var minRevenuePodkategoria = aggregatedData.Min(x => x.TotalRevenue);
                 var maxQuantityPodkategoria = aggregatedData.Max(x => x.TotalQuantity);
@@ -1466,7 +1475,7 @@ namespace knihy_jankech
                 var minRevenueBook = aggregatedData.SelectMany(x => x.Books).Min(x => x.TotalRevenue);
                 var maxQuantityBook = aggregatedData.SelectMany(x => x.Books).Max(x => x.TotalQuantity);
                 var minQuantityBook = aggregatedData.SelectMany(x => x.Books).Min(x => x.TotalQuantity);
-
+                // premennej ktoré obsahujú mená maximálne a minimálne hodnoty pre kategórie a knihy
                 var namePodkategoriaMaxRevenue = aggregatedData.Where(x => x.TotalRevenue == maxRevenuePodkategoria).First().Podkategoria;
                 var namePodkategoriaMinRevenue = aggregatedData.Where(x => x.TotalRevenue == minRevenuePodkategoria).First().Podkategoria;
                 var namePodkategoriaMaxQuantity = aggregatedData.Where(x => x.TotalQuantity == maxQuantityPodkategoria).First().Podkategoria;
@@ -1476,8 +1485,10 @@ namespace knihy_jankech
                 var nameBookMaxQuantity = aggregatedData.SelectMany(x => x.Books).Where(x => x.TotalQuantity == maxQuantityBook).First().Name;
                 var nameBookMinQuantity = aggregatedData.SelectMany(x => x.Books).Where(x => x.TotalQuantity == minQuantityBook).First().Name;
 
+
+                // Definujeme premennú, ktorá obsahuje celkové súhrnné informácie celkove/celkove priemerne min max pre kategoriu a knihu plus nazvy
                 var totalAggregatedData = new
-                {
+                {// tu su ešte dopočitane ešte celkové a celkové priemerne udaje (prve 4)
                     totalQuantity = aggregatedData.Sum(x => x.TotalQuantity),
                     totalRevenue = aggregatedData.Sum(x => x.TotalRevenue),
                     averageTotalDailyQuantity = aggregatedData.Sum(x => x.TotalQuantity) / days,
@@ -1498,13 +1509,9 @@ namespace knihy_jankech
                     maxQuantityBook = maxQuantityBook,
                     nameBookMinQuantity = nameBookMinQuantity,
                     minQuantityBook = minQuantityBook,
-
-
-
-
                 };
 
-                // Combine the aggregated data and total aggregated data into a single object
+                // kombinueje objekt aggregateddata a totalaggregateddata do jedneho vysledneho objektu 
                 var result = new
 
                 {
@@ -1513,21 +1520,18 @@ namespace knihy_jankech
                 };
 
                 
-               
+               // serializacia objektu na json 
                 var json = JsonConvert.SerializeObject(result, Formatting.Indented);
+                // deserializacia jsonu na xml
                 XmlDocument doc = JsonConvert.DeserializeXmlNode(json, "Root");
 
-                // Serialize the XmlDocument to a string
+                // serializacia the XmlDocument na retazec
                 string xmlString = doc.OuterXml;
+                // zápis xml vysledku do diskového súboru
                 SaveWebMethodResult(xmlString, "SortedDrillDownByAtributeDataBetweenTwoDatesSell", parameters, fileAmountFilterPath);
-                // Serialize the result to JSON using the Newtonsoft.Json library
+                // odoslanie jsonu v utf8 klientovi
                 Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
                 Context.Response.Write(json);
-
-                // Write the XML string to the response
-                //Context.Response.ContentType = "application/xml";
-                //Context.Response.Write(xmlString);
-
             }
             else
             {
@@ -1540,7 +1544,7 @@ namespace knihy_jankech
                                      group new { Book = book, Transaction = transaction } by book.Element("autori").Element("autor1").Value into g
                                      select new
                                      {
-                                         // Store the author1 as Podkategoria
+                                         // ulozi author1 ako Podkategoria
                                          Podkategoria = g.Key,
                                          TotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))),
                                          TotalRevenue = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")),
@@ -1577,7 +1581,7 @@ namespace knihy_jankech
                                       group new { Book = book, Transaction = transaction } by book.Element("autori").Element("autor2").Value into g
                                       select new
                                       {
-                                          // Store the author2 as Podkategoria
+                                          // ulozi the author2 ako Podkategoria
                                           Podkategoria = g.Key,
                                           TotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))),
                                           TotalRevenue = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")),
@@ -1595,12 +1599,7 @@ namespace knihy_jankech
                                                   AverageTotalRevenue = x.Sum(y => (double)y.Transaction.Element("celkovo_cena")) / days
                                               }).ToList()
                                       };
-                if (!aggregatedData2.Any())
-                {
-                    Context.Response.StatusCode = 500;
-                    Context.Response.Write("Neboli nájdené žiadne záznamy pre zadané kritériá");
-                    return;
-                }
+                
                 if (sortingField == "nazov")
                 {
                     aggregatedData = sortingOrder == "ascending"
@@ -1628,7 +1627,7 @@ namespace knihy_jankech
                             Books = x.Books.OrderByDescending(y => y.Name).ToList()
                         });
                     aggregatedData2 = sortingOrder == "ascending"
-                   ? aggregatedData.OrderBy(x => x.Podkategoria)
+                   ? aggregatedData2.OrderBy(x => x.Podkategoria)
                        .ThenBy(x => x.Books.OrderBy(y => y.Name))
                        .Select(x => new
                        {
@@ -1667,7 +1666,7 @@ namespace knihy_jankech
                     .ThenBy(y => y.Name)
                     .ToList()
                     });
-                    aggregatedData2 = aggregatedData.OrderBy(x => x.TotalQuantity * (sortingOrder == "ascending" ? 1 : -1))
+                    aggregatedData2 = aggregatedData2.OrderBy(x => x.TotalQuantity * (sortingOrder == "ascending" ? 1 : -1))
                     .ThenBy(x => x.Podkategoria)
                     .Select(x => new
                     {
@@ -1696,7 +1695,7 @@ namespace knihy_jankech
                     .ThenBy(y => y.Name)
                     .ToList()
                     });
-                    aggregatedData2 = aggregatedData.OrderBy(x => x.TotalRevenue * (sortingOrder == "ascending" ? 1 : -1))
+                    aggregatedData2 = aggregatedData2.OrderBy(x => x.TotalRevenue * (sortingOrder == "ascending" ? 1 : -1))
                    .ThenBy(x => x.Podkategoria)
                    .Select(x => new
                    {
@@ -1709,7 +1708,7 @@ namespace knihy_jankech
                    .ThenBy(y => y.Name)
                    .ToList()
                    });
-                }
+                }// Definujeme premenné, ktoré nesú informácie o maximálnych a minimálnych hodnotách pre výpočty v kategóriách a knihách
                 var maxRevenuePodkategoria = aggregatedData.Max(x => x.TotalRevenue);
                 var minRevenuePodkategoria = aggregatedData.Min(x => x.TotalRevenue);
                 var maxQuantityPodkategoria = aggregatedData.Max(x => x.TotalQuantity);
@@ -1719,7 +1718,7 @@ namespace knihy_jankech
                 var minRevenueBook = aggregatedData.SelectMany(x => x.Books).Min(x => x.TotalRevenue);
                 var maxQuantityBook = aggregatedData.SelectMany(x => x.Books).Max(x => x.TotalQuantity);
                 var minQuantityBook = aggregatedData.SelectMany(x => x.Books).Min(x => x.TotalQuantity);
-
+               // Nastavujeme názvy pre premenné, ktoré obsahujú maximálne a minimálne hodnoty pre kategórie a knihy
                 var namePodkategoriaMaxRevenue = aggregatedData.Where(x => x.TotalRevenue == maxRevenuePodkategoria).First().Podkategoria;
                 var namePodkategoriaMinRevenue = aggregatedData.Where(x => x.TotalRevenue == minRevenuePodkategoria).First().Podkategoria;
                 var namePodkategoriaMaxQuantity = aggregatedData.Where(x => x.TotalQuantity == maxQuantityPodkategoria).First().Podkategoria;
@@ -1730,9 +1729,9 @@ namespace knihy_jankech
                 var nameBookMinQuantity = aggregatedData.SelectMany(x => x.Books).Where(x => x.TotalQuantity == minQuantityBook).First().Name;
 
 
-                // Calculate the total quantity and total revenue for all books
+                // Definujeme premennú, ktorá obsahuje celkové súhrnné informácie
                 var totalAggregatedData = new
-                {
+                {// tu su ešte dopočitane ešte celkové a celkové priemerne udaje (prve 4)
                     totalQuantity = aggregatedData.Sum(x => x.TotalQuantity),
                     totalRevenue = aggregatedData.Sum(x => x.TotalRevenue),
                     averageTotalDailyQuantity = aggregatedData.Sum(x => x.TotalQuantity) / days,
@@ -1755,7 +1754,7 @@ namespace knihy_jankech
                     minQuantityBook = minQuantityBook,
                 };
                 var combinedData = aggregatedData.Concat(aggregatedData2);
-                // Combine the aggregated data and total aggregated data into a single object
+                // kombinueje objekt aggregateddata a totalaggregateddata do jedneho vysledneho objektu 
                 var result = new
 
                 {
@@ -1763,13 +1762,16 @@ namespace knihy_jankech
                     TotalAggregatedData = totalAggregatedData
                 };
 
+                // serializacia objektu na json 
                 var json = JsonConvert.SerializeObject(result, Formatting.Indented);
+                // deserializacia jsonu na xml
                 XmlDocument doc = JsonConvert.DeserializeXmlNode(json, "Root");
 
-                // Serialize the XmlDocument to a string
+                // serializacia the XmlDocument na retazec
                 string xmlString = doc.OuterXml;
+                // zápis xml vysledku do diskového súboru
                 SaveWebMethodResult(xmlString, "SortedDrillDownByAtributeDataBetweenTwoDatesSell", parameters, fileAmountFilterPath);
-                // Serialize the result to JSON using the Newtonsoft.Json library
+                // odoslanie jsonu v utf8 klientovi
                 Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
                 Context.Response.Write(json);
 
@@ -1778,26 +1780,31 @@ namespace knihy_jankech
 
         [WebMethod(Description = "prida do xml súboru záznam o novej knihe")]
         public void SortedDrillDownByAtributeDataBetweenTwoDatesCost(string atribute, string startDate, string endDate, string sortingField = "", string sortingOrder = "", string optionalParameter = "")
-        {
+        {// Vytvorenie poľa parametrov
             string[] parameters = { atribute, startDate, endDate, sortingField, sortingOrder, optionalParameter };
-            // Load the books data from XML
+            // Načítanie údajov o knihách zo súboru XML
             XDocument booksData = LoadXDocument(fileBookInfo);
-            // Load the transactions data from XML
+            // Načítanie údajov o transakciách zo súboru XML
             XDocument transactionsData = LoadXDocument(fileBookTransactionInfo);
             DateTime start, end;
+            // Kontrola či dátumy sú v správnom formáte
+            // Kľúčové slovo "out" sa v metóde TryParse() používa na odovzdanie premenných "start" a "end" ako argumentov prostredníctvom referencie,
+            // to znamená  že  možno upraviť vnútri metódy a ich aktualizované hodnoty možno vrátiť volajúcemu kódu.
+            // Ak konverzia nie je úspešná, metóda vráti false a premenné "start" a "end" zostanú neinicializované.
             if (!DateTime.TryParse(startDate, out start) || !DateTime.TryParse(endDate, out end))
             {
                 Context.Response.StatusCode = 400;
                 Context.Response.Write("Zadajte validný formát dútumu ( napr. 'yyyy-MM-dd')");
                 return;
             }
-
+            // Kontrola, či boli zadané všetky vstupy
             if (string.IsNullOrEmpty(atribute) || startDate == null || endDate == null || sortingOrder == null)
             {
                 Context.Response.StatusCode = 500;
                 Context.Response.Write("Jedna alebo viacero vstupov nebolo vyplnených");
                 return;
             }
+            // Kontrola či dátum 'start' je pred dátumom 'end'
             if (start > end)
             {
                 Context.Response.StatusCode = 500;
@@ -1806,58 +1813,59 @@ namespace knihy_jankech
 
                 return;
             }
-
+            // Kontrola, či bola zadaná správna hodnota 'sortingOrder'
             if (sortingOrder != "ascending" && sortingOrder != "descending")
             {
                 Context.Response.StatusCode = 500;
                 Context.Response.Write("Sortovanie može byť iba zostupne alebo vzostupne");
 
             }
-
+            // Kontrola, či bola zadaná správna hodnota 'sortingField'
             if (sortingField != "hodnota" && sortingField != "nazov")
             {
                 Context.Response.StatusCode = 500;
                 Context.Response.Write("zoradovat sa može iba podľa názvu alebo hodnoty");
 
             }
+            // Výpočet počtu dní medzi dátumami 'start' a 'end'
             double days = (end - start).Days + 1;
             if (atribute != "autor" && atribute != "autori")
             {
 
-                // Join the books data and transactions data on book id to get all information related to each transaction
+                // Spojenie údajov o knihách a transakciách podľa id knihy pre získanie všetkých informácií o každej transakcii
                 var aggregatedData = from book in booksData.Descendants("book")
                                      join transaction in transactionsData.Descendants("transakcia")
                                      on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
 
-                                     // Filter the transactions to only those with a date within the specified range and of type "predaj"
+                                     // Filtrujte transakcie tak, aby zobrazovali len tie s dátumom v zadanom rozmedzí a typom "nakup"
                                      where (DateTime)transaction.Element("datum") >= start
                                      && (DateTime)transaction.Element("datum") <= end
                                      && transaction.Element("typ_transakcie").Value == "nákup"
 
 
 
-                                     // Group the transactions by the specified category element value
+                                     // Zoskupite transakcie podľa zvoleného prvku kategórie
                                      group new { Book = book, Transaction = transaction } by book.Element(atribute).Value into g
                                      select new
                                      {
-                                         // Store the category value as Podkategoria
+                                         // Uložte hodnotu kategórie ako Podkategoria
                                          Podkategoria = g.Key,
 
 
-                                         // Calculate the total quantity of books sold and total revenue for each category
+                                         /// Vypočítajte celkové množstvo nakupených kníh a celkové náklady pre každú kategóriu
                                          TotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))),
                                          TotalCost = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")),
                                          AverageTotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))) / days,
                                          AverageTotalCost = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")) / days,
 
-                                         // Group the books by their id to get aggregated data for books with the same id
+                                         // Zoskupite knihy podľa ich id, aby ste získali agregované údaje pre knihy s rovnakým id
                                          Books = g.GroupBy(x => x.Book.Element("id").Value)
                                              .Select(x => new
                                              {
                                                  Id = x.Key,
                                                  Name = x.First().Book.Element("nazov").Value,
 
-                                                 // Calculate the total quantity sold and total revenue for each book
+                                                 // Vypočítajte celkové množstvo nakupených kníh a celkové náklady pre každú knihu
                                                  TotalQuantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))),
                                                  TotalCost = x.Sum(y => (double)y.Transaction.Element("celkovo_cena")),
                                                  AverageTotalQuantity = x.Sum(y => Math.Abs((int)y.Transaction.Element("mnozstvo"))) / days,
@@ -1873,10 +1881,11 @@ namespace knihy_jankech
                     return;
                 }
 
-                // Sort the aggregated data based on the sortingField and sortingOrder parameters
+                // Zoradite agregované údaje podľa parametrov sortingField a sortingOrder
                 if (sortingField == "nazov")
-                {
+                {// triedenie podla nazvu vzostupne
                     aggregatedData = sortingOrder == "ascending"
+
                     ? aggregatedData.OrderBy(x => x.Podkategoria)
                         .ThenBy(x => x.Books.OrderBy(y => y.Name))
                         .Select(x => new
@@ -1889,6 +1898,7 @@ namespace knihy_jankech
                             Books = x.Books.OrderBy(y => y.Name).ToList()
 
                         })
+                    // triedenie podla nazvu zostupne
                     : aggregatedData.OrderByDescending(x => x.Podkategoria)
                         .ThenBy(x => x.Books.OrderByDescending(y => y.Name))
                         .Select(x => new
@@ -1900,7 +1910,7 @@ namespace knihy_jankech
                             AverageTotalCost = x.AverageTotalCost,
                             Books = x.Books.OrderByDescending(y => y.Name).ToList()
                         });
-                }
+                }// triedenie podla mnozstva a hodnoty vzostupne alebo zostupne
                 else if (sortingField == "hodnota" && optionalParameter == "quantity")
                 {
                     aggregatedData = aggregatedData.OrderBy(x => x.TotalQuantity * (sortingOrder == "ascending" ? 1 : -1))
@@ -1916,7 +1926,7 @@ namespace knihy_jankech
                     .ThenBy(y => y.Name)
                     .ToList()
                     });
-                }
+                }// triedenie podla nakladov vzostupne alebo zostupne
                 else if (sortingField == "hodnota" && optionalParameter == "cost")
                 {
                     aggregatedData = aggregatedData.OrderBy(x => x.TotalCost * (sortingOrder == "ascending" ? 1 : -1))
@@ -1933,6 +1943,7 @@ namespace knihy_jankech
                     .ToList()
                     });
                 }
+                // Najvyšší a najnižší celkový výnos a množstvo v kategórii a v knihe
                 var maxCostPodkategoria = aggregatedData.Max(x => x.TotalCost);
                 var minCostPodkategoria = aggregatedData.Min(x => x.TotalCost);
                 var maxQuantityPodkategoria = aggregatedData.Max(x => x.TotalQuantity);
@@ -1951,7 +1962,7 @@ namespace knihy_jankech
                 var nameBookMinCost = aggregatedData.SelectMany(x => x.Books).Where(x => x.TotalCost == minCostBook).First().Name;
                 var nameBookMaxQuantity = aggregatedData.SelectMany(x => x.Books).Where(x => x.TotalQuantity == maxQuantityBook).First().Name;
                 var nameBookMinQuantity = aggregatedData.SelectMany(x => x.Books).Where(x => x.TotalQuantity == minQuantityBook).First().Name;
-
+                // Definujeme premennú, ktorá obsahuje celkové súhrnné informácie
                 var totalAggregatedData = new
                 {
                     totalQuantity = aggregatedData.Sum(x => x.TotalQuantity),
@@ -1979,20 +1990,23 @@ namespace knihy_jankech
 
 
                 };
+                // kombinueje objekt aggregateddata a totalaggregateddata do jedneho
                 var result = new
 
                 {
                     AggregatedData = aggregatedData,
                     TotalAggregatedData = totalAggregatedData
                 };
-
+                // serializacia objektu na json 
                 var json = JsonConvert.SerializeObject(result, Formatting.Indented);
+                // deserializacia jsonu na xml
                 XmlDocument doc = JsonConvert.DeserializeXmlNode(json, "Root");
 
-                // Serialize the XmlDocument to a string
+                // serializacia the XmlDocument na retazec
                 string xmlString = doc.OuterXml;
+                // zápis xml vysledku do diskového súboru
                 SaveWebMethodResult(xmlString, "SortedDrillDownByAtributeDataBetweenTwoDatesCost", parameters, fileAmountFilterPath);
-                // Serialize the result to JSON using the Newtonsoft.Json library
+                // odoslanie jsonu v utf8 klientovi
                 Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
                 Context.Response.Write(json);
             }
@@ -2010,7 +2024,7 @@ namespace knihy_jankech
                                      group new { Book = book, Transaction = transaction } by book.Element("autori").Element("autor1").Value into g
                                      select new
                                      {
-                                         // Store the author1 as Podkategoria
+                                         // ulož  author1 ako Podkategoria
                                          Podkategoria = g.Key,
                                          TotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))),
                                          TotalCost = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")),
@@ -2047,7 +2061,7 @@ namespace knihy_jankech
                                       group new { Book = book, Transaction = transaction } by book.Element("autori").Element("autor2").Value into g
                                       select new
                                       {
-                                          // Store the author2 as Podkategoria
+                                          // ulož  author2 ako Podkategoria
                                           Podkategoria = g.Key,
                                           TotalQuantity = g.Sum(x => Math.Abs((int)x.Transaction.Element("mnozstvo"))),
                                           TotalCost = g.Sum(x => (double)x.Transaction.Element("celkovo_cena")),
@@ -2065,12 +2079,7 @@ namespace knihy_jankech
                                                   AverageTotalCost = x.Sum(y => (double)y.Transaction.Element("celkovo_cena")) / days
                                               }).ToList()
                                       };
-                if (!aggregatedData2.Any())
-                {
-                    Context.Response.StatusCode = 500;
-                    Context.Response.Write("Neboli nájdené žiadne záznamy pre zadané kritériá");
-                    return;
-                }
+                
                 if (sortingField == "nazov")
                 {
                     aggregatedData = sortingOrder == "ascending"
@@ -2098,7 +2107,7 @@ namespace knihy_jankech
                             Books = x.Books.OrderByDescending(y => y.Name).ToList()
                         });
                     aggregatedData2 = sortingOrder == "ascending"
-                   ? aggregatedData.OrderBy(x => x.Podkategoria)
+                   ? aggregatedData2.OrderBy(x => x.Podkategoria)
                        .ThenBy(x => x.Books.OrderBy(y => y.Name))
                        .Select(x => new
                        {
@@ -2137,7 +2146,7 @@ namespace knihy_jankech
                     .ThenBy(y => y.Name)
                     .ToList()
                     });
-                    aggregatedData2 = aggregatedData.OrderBy(x => x.TotalQuantity * (sortingOrder == "ascending" ? 1 : -1))
+                    aggregatedData2 = aggregatedData2.OrderBy(x => x.TotalQuantity * (sortingOrder == "ascending" ? 1 : -1))
                     .ThenBy(x => x.Podkategoria)
                     .Select(x => new
                     {
@@ -2166,7 +2175,7 @@ namespace knihy_jankech
                     .ThenBy(y => y.Name)
                     .ToList()
                     });
-                    aggregatedData2 = aggregatedData.OrderBy(x => x.TotalCost * (sortingOrder == "ascending" ? 1 : -1))
+                    aggregatedData2 = aggregatedData2.OrderBy(x => x.TotalCost * (sortingOrder == "ascending" ? 1 : -1))
                    .ThenBy(x => x.Podkategoria)
                    .Select(x => new
                    {
@@ -2200,7 +2209,7 @@ namespace knihy_jankech
                 var nameBookMinQuantity = aggregatedData.SelectMany(x => x.Books).Where(x => x.TotalQuantity == minQuantityBook).First().Name;
 
 
-                // Calculate the total quantity and total revenue for all books
+                // Vypocitaj celkove mnozstvé a celkove naklady pre vsetky knihy 
                 var totalAggregatedData = new
                 {
                     totalQuantity = aggregatedData.Sum(x => x.TotalQuantity),
@@ -2225,21 +2234,22 @@ namespace knihy_jankech
                     minQuantityBook = minQuantityBook,
                 };
                 var combinedData = aggregatedData.Concat(aggregatedData2);
-                // Combine the aggregated data and total aggregated data into a single object
+                // kombinácia oboch objektov 
                 var result = new
 
                 {
                     AggregatedData = combinedData,
                     TotalAggregatedData = totalAggregatedData
                 };
-
+                // serializacia objektu na json 
                 var json = JsonConvert.SerializeObject(result, Formatting.Indented);
+                // deserializacia jsonu na xml
                 XmlDocument doc = JsonConvert.DeserializeXmlNode(json, "Root");
-
-                // Serialize the XmlDocument to a string
+                // serializacia the XmlDocument na retazec
                 string xmlString = doc.OuterXml;
+                // zápis xml vysledku do diskového súboru
                 SaveWebMethodResult(xmlString, "SortedDrillDownByAtributeDataBetweenTwoDatesCost", parameters, fileAmountFilterPath);
-                // Serialize the result to JSON using the Newtonsoft.Json library
+  // odoslanie jsonu v utf8 klientovi
                 Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
                 Context.Response.Write(json);
             }
