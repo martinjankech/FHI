@@ -41,7 +41,7 @@
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
       integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
    <link rel="stylesheet" href="css/predaje.css">
-   <title>Calculate Revenue Cost Profit</title>
+   <title>Finančné ukazovatele</title>
 </head>
 
 <body>
@@ -212,7 +212,7 @@
 
                $.ajax({
                   type: "POST",
-                  url: "http://localhost:8050/book_services.asmx/CalculateRevenueCostProfit",
+                  url: "http://localhost:8050/book_services.asmx/CalculateFinancialIndicators",
                   data: { year: year, quarter: quarter, month: month },
                   dataType: "json",
                   encode: true,

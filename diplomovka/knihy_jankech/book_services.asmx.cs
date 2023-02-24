@@ -16,7 +16,7 @@ namespace knihy_jankech
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
-   // [System.Web.Script.Services.ScriptService]
+    [System.Web.Script.Services.ScriptService]
     public class book_services : System.Web.Services.WebService
     {// tieto cesty treba nastaviť 
         private String fileBookInfo = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\books.xml ";
@@ -1734,7 +1734,7 @@ namespace knihy_jankech
             }
         }
 
-        [WebMethod(Description = "prida do xml súboru záznam o novej knihe")]
+        [WebMethod(Description = "vytvori drill down report pre udaje o poctoch a nákladoch spojených s kníh")]
         public void SortedDrillDownByAtributeDataBetweenTwoDatesCost(string atribute, string startDate, string endDate, string sortingField = "", string sortingOrder = "", string optionalParameter = "")
         {// Vytvorenie poľa parametrov
             string[] parameters = { atribute, startDate, endDate, sortingField, sortingOrder, optionalParameter };
@@ -2166,13 +2166,14 @@ namespace knihy_jankech
                 Context.Response.Write(json);
             }
         }
-        
-        [WebMethod(Description = "prida do xml súboru záznam o novej knihe")]
-        public void CalculateRevenueCostProfit(int year, int quarter, int month)
+    
+        [WebMethod(Description = "slúži na výpočet celkového príjmu, nákladov, zisku a iných ukazovateľov")]
+        public void CalculateFinancialIndicators(int year, int quarter, int month)
         {
             string[] parameters =   { year.ToString(), quarter.ToString(), month.ToString() };
-         
+            // Načítanie xml súboru do objektu XDocument
             XDocument xDoc = LoadXDocument(fileBookTransactionInfo);
+            // Vytvorenie zoznamu transakcií na základe xml súboru
             var transactions = from transaction in xDoc.Descendants("transakcia")
                                select new
                                {
@@ -2181,13 +2182,14 @@ namespace knihy_jankech
                                    Amount = (int)transaction.Element("mnozstvo"),
                                    Price = (double)(transaction.Element("cena_za_jednotku"))
                                };
+            // Ak nie je zvolený rok, nastaví sa chybový kód 500 a vráti sa chybová správa
             if (year == 0)
             {
                 Context.Response.StatusCode = 500;
                 Context.Response.Write("Prosím zvoľte si rok ");
                 return;
             }
-
+            // Ak sú zvolené štvrťrok aj mesiac súčasne, nastaví sa chybový kód 500 a vráti sa chybová správa
 
             if (quarter != 0 && month != 0)
             {
@@ -2195,27 +2197,30 @@ namespace knihy_jankech
                 Context.Response.Write("štvrťrok a mesiac nemožu byť zvolené súčasne ");
                 return;
             }
+            // Ak je zvolený iba štvrťrok, filtrovania sa vykoná pre transakcie z daného štvrťroku
             else if (quarter != 0)
             {
                 transactions = transactions.Where(t => t.Date.Year == year && (t.Date.Month - 1) / 3 + 1 == quarter);
             }
+            // Ak je zvolený iba mesiac, filtrovania sa vykoná pre transakcie z daného mesiaca
             else if (month != 0)
             {
                 transactions = transactions.Where(t => t.Date.Year == year && t.Date.Month == month);
             }
+            // Ak nie je zvolený ani štvrťrok, ani mesiac, filtrovania sa vykoná pre transakcie z daného roku
             else
             {
                 transactions = transactions.Where(t => t.Date.Year == year);
             }
-
+            // Výpočet celkového príjmu na základe transakcií so záporným množstvom a typom "predaj"
             double totalRevenue = transactions.Where(t => t.Type == "predaj" && (t.Amount < 0))
                                                        .Sum(t => Math.Abs(t.Amount) * t.Price);
-
+            // Výpočet celkových nákladov na základe transakcií s kladným množstvom a typom "nakup"
             double totalCost = transactions.Where(t => t.Type == "nákup" && t.Amount > 0)
                                                     .Sum(t => t.Amount * t.Price);
-
+            // vypočet zisku
             double profit = totalRevenue - totalCost;
-
+            // celkovy počet objednavok a celkovy počet kusov v objednavkach 
             int numSellOrders = transactions.Count(t => t.Type == "predaj" && (t.Amount < 0));
             int numBuyOrders = transactions.Count(t => t.Type == "nákup" && t.Amount > 0);
             int totalQuantityOfBooksNakup = transactions.Where(t => t.Type == "nákup" && t.Amount > 0)
@@ -2223,19 +2228,19 @@ namespace knihy_jankech
 
             int totalQuantityOfBooksPredaj = transactions.Where(t => t.Type == "predaj" && (t.Amount < 0))
                                                                    .Sum(t => Math.Abs(t.Amount));
+            // vypočet netprofitmargin a ROI
             double netProfitMargin = profit / totalRevenue;
             double returnOnInvestment = profit / totalCost;
  
-
+            // zapis a odoslanie odpovede podobne ako v predošlých metodach 
             var result = new { totalRevenue, totalCost, profit, numSellOrders, numBuyOrders,totalQuantityOfBooksNakup,totalQuantityOfBooksPredaj,  netProfitMargin, returnOnInvestment, };
             
             var json = JsonConvert.SerializeObject(result, Formatting.Indented);
             XmlDocument doc = JsonConvert.DeserializeXmlNode(json, "Root");
 
-            // Serialize the XmlDocument to a string
             string xmlString = doc.OuterXml;
             SaveWebMethodResult(xmlString, " CalculateRevenueCostProfit", parameters, fileAmountFilterPath);
-            // Serialize the result to JSON using the Newtonsoft.Json library
+
             Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
             Context.Response.Write(json);
         }

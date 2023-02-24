@@ -276,4 +276,29 @@ A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole
     </book>
     <timestamp>2023-02-20 10:09:29</timestamp>
   </output>
+  <output>
+    <book>
+      <id>5</id>
+      <nazov>Setkání s Rámou</nazov>
+      <autori>
+        <autor1>Arthur C. Clarke</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788025738726</isbn>
+      <jazyk>cz</jazyk>
+      <pocet_stran>256</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2022</rok_vydania>
+      <vydavatelstvo>Argo</vydavatelstvo>
+      <predajna_cena>15.56</predajna_cena>
+      <nakupna_cena>8.29</nakupna_cena>
+      <marza>0.876960193003619</marza>
+      <zisk_kus>7.27</zisk_kus>
+      <obsah>V roku 2077 Taliansko zasiahla katastrofa po dopade meteoritu, čo viedlo najvyšších predstaviteľov ľudstva k rozhodnutiu vytvoriť systém radarov a teleskopov, ktorý sleduje všetky objekty prechádzajúce Slnečnou sústavou. V roku 2130 systém zachytil objekt mimoriadnych rozmerov, ktorý sa pohyboval priamo a nie po eliptickej dráhe ako ostatné asteroidy. Nazvali ho Ráma a na nejaký čas sa naň zabudlo. Až keď sa priblížil k Marsu, bola k nemu vyslaná sonda, ktorá zachytila kamerové snímky, ktoré vzali dych celému ľudstvu. Ráma je valec s dĺžkou päťdesiat kilometrov a priemerom dvadsať kilometrov. Jeho povrch je úplne hladký a kvôli slabému gravitačnému polu sa predpokladá, že je dutý. Ľudstvo sa pripravuje na prvú návštevu zo hviezd...</obsah>
+      <priemerne_hodnotenie>4.8</priemerne_hodnotenie>
+      <obrazok>../img/5.jpg</obrazok>
+    </book>
+    <timestamp>2023-02-24 19:12:12</timestamp>
+  </output>
 </root>
