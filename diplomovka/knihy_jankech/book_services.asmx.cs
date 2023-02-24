@@ -1405,7 +1405,7 @@ namespace knihy_jankech
 
                 // Zoradenie agregovaných údajov podľa parametrov sortingField a sortingOrder
                 if (sortingField == "nazov")
-                    if (sortingField == "nazov")
+                   
                     {// triedenie podla nazvu vzostupne
                         aggregatedData = sortingOrder == "ascending"
                     ? aggregatedData.OrderBy(x => x.Podkategoria)
@@ -1464,7 +1464,8 @@ namespace knihy_jankech
                     .ThenBy(y => y.Name)
                     .ToList()
                     });
-                    }// Najvyšší a najnižší celkový výnos a množstvo pre podkategórii  a pre  knihe
+                    }
+                // Najvyšší a najnižší celkový výnos a množstvo pre podkategórii  a pre  knihe
 
                 var maxRevenuePodkategoria = aggregatedData.Max(x => x.TotalRevenue);
                 var minRevenuePodkategoria = aggregatedData.Min(x => x.TotalRevenue);
@@ -1535,7 +1536,7 @@ namespace knihy_jankech
             }
             else
             {
-                var aggregatedData = from book in booksData.Descendants("book")
+                var aggregatedDataAuthor1 = from book in booksData.Descendants("book")
                                      join transaction in transactionsData.Descendants("transakcia")
                                      on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
                                      where (DateTime)transaction.Element("datum") >= start
@@ -1561,7 +1562,7 @@ namespace knihy_jankech
                                                  AverageTotalRevenue = x.Sum(y => (double)y.Transaction.Element("celkovo_cena")) / days
                                              }).ToList()
                                      };
-                if (!aggregatedData.Any())
+                if (!aggregatedDataAuthor1.Any())
                 {
                     Context.Response.StatusCode = 500;
                     Context.Response.Write("Neboli nájdené žiadne záznamy pre zadané kritériá");
@@ -1571,7 +1572,7 @@ namespace knihy_jankech
                 // aby sme mali prehlad o prijmi a predajoch knih aj podla autora dva a mohli to vyuzit pri drill down operacii 
 
 
-                var aggregatedData2 = from book in booksData.Descendants("book")
+                var aggregatedDataAuthor2 = from book in booksData.Descendants("book")
                                       join transaction in transactionsData.Descendants("transakcia")
                                       on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
                                       where (DateTime)transaction.Element("datum") >= start
@@ -1599,11 +1600,12 @@ namespace knihy_jankech
                                                   AverageTotalRevenue = x.Sum(y => (double)y.Transaction.Element("celkovo_cena")) / days
                                               }).ToList()
                                       };
-                
+                var combinedData = aggregatedDataAuthor1.Concat(aggregatedDataAuthor2);
+
                 if (sortingField == "nazov")
                 {
-                    aggregatedData = sortingOrder == "ascending"
-                    ? aggregatedData.OrderBy(x => x.Podkategoria)
+                    combinedData = sortingOrder == "ascending"
+                    ? combinedData.OrderBy(x => x.Podkategoria)
                         .ThenBy(x => x.Books.OrderBy(y => y.Name))
                         .Select(x => new
                         {
@@ -1615,7 +1617,7 @@ namespace knihy_jankech
                             Books = x.Books.OrderBy(y => y.Name).ToList()
 
                         })
-                    : aggregatedData.OrderByDescending(x => x.Podkategoria)
+                    : combinedData.OrderByDescending(x => x.Podkategoria)
                         .ThenBy(x => x.Books.OrderByDescending(y => y.Name))
                         .Select(x => new
                         {
@@ -1626,34 +1628,11 @@ namespace knihy_jankech
                             AverageTotalRevenue = x.AverageTotalRevenue,
                             Books = x.Books.OrderByDescending(y => y.Name).ToList()
                         });
-                    aggregatedData2 = sortingOrder == "ascending"
-                   ? aggregatedData2.OrderBy(x => x.Podkategoria)
-                       .ThenBy(x => x.Books.OrderBy(y => y.Name))
-                       .Select(x => new
-                       {
-                           Podkategoria = x.Podkategoria,
-                           TotalQuantity = x.TotalQuantity,
-                           TotalRevenue = x.TotalRevenue,
-                           AverageTotalQuantity = x.AverageTotalQuantity,
-                           AverageTotalRevenue = x.AverageTotalRevenue,
-                           Books = x.Books.OrderBy(y => y.Name).ToList()
-
-                       })
-                   : aggregatedData2.OrderByDescending(x => x.Podkategoria)
-                       .ThenBy(x => x.Books.OrderByDescending(y => y.Name))
-                       .Select(x => new
-                       {
-                           Podkategoria = x.Podkategoria,
-                           TotalQuantity = x.TotalQuantity,
-                           TotalRevenue = x.TotalRevenue,
-                           AverageTotalQuantity = x.AverageTotalQuantity,
-                           AverageTotalRevenue = x.AverageTotalRevenue,
-                           Books = x.Books.OrderByDescending(y => y.Name).ToList()
-                       });
+               
                 }
                 else if (sortingField == "hodnota" && optionalParameter == "quantity")
                 {
-                    aggregatedData = aggregatedData.OrderBy(x => x.TotalQuantity * (sortingOrder == "ascending" ? 1 : -1))
+                    combinedData = combinedData.OrderBy(x => x.TotalQuantity * (sortingOrder == "ascending" ? 1 : -1))
                     .ThenBy(x => x.Podkategoria)
                     .Select(x => new
                     {
@@ -1666,23 +1645,10 @@ namespace knihy_jankech
                     .ThenBy(y => y.Name)
                     .ToList()
                     });
-                    aggregatedData2 = aggregatedData2.OrderBy(x => x.TotalQuantity * (sortingOrder == "ascending" ? 1 : -1))
-                    .ThenBy(x => x.Podkategoria)
-                    .Select(x => new
-                    {
-                        Podkategoria = x.Podkategoria,
-                        TotalQuantity = x.TotalQuantity,
-                        TotalRevenue = x.TotalRevenue,
-                        AverageTotalQuantity = x.AverageTotalQuantity,
-                        AverageTotalRevenue = x.AverageTotalRevenue,
-                        Books = x.Books.OrderBy(y => y.TotalQuantity * (sortingOrder == "ascending" ? 1 : -1))
-                    .ThenBy(y => y.Name)
-                    .ToList()
-                    });
+                    
                 }
                 else if (sortingField == "hodnota" && optionalParameter == "revenue")
-                {
-                    aggregatedData = aggregatedData.OrderBy(x => x.TotalRevenue * (sortingOrder == "ascending" ? 1 : -1))
+                {combinedData = combinedData.OrderBy(x => x.TotalRevenue * (sortingOrder == "ascending" ? 1 : -1))
                     .ThenBy(x => x.Podkategoria)
                     .Select(x => new
                     {
@@ -1695,47 +1661,37 @@ namespace knihy_jankech
                     .ThenBy(y => y.Name)
                     .ToList()
                     });
-                    aggregatedData2 = aggregatedData2.OrderBy(x => x.TotalRevenue * (sortingOrder == "ascending" ? 1 : -1))
-                   .ThenBy(x => x.Podkategoria)
-                   .Select(x => new
-                   {
-                       Podkategoria = x.Podkategoria,
-                       TotalQuantity = x.TotalQuantity,
-                       TotalRevenue = x.TotalRevenue,
-                       AverageTotalQuantity = x.AverageTotalQuantity,
-                       AverageTotalRevenue = x.AverageTotalRevenue,
-                       Books = x.Books.OrderBy(y => y.TotalRevenue * (sortingOrder == "ascending" ? 1 : -1))
-                   .ThenBy(y => y.Name)
-                   .ToList()
-                   });
+                    
                 }// Definujeme premenné, ktoré nesú informácie o maximálnych a minimálnych hodnotách pre výpočty v kategóriách a knihách
-                var maxRevenuePodkategoria = aggregatedData.Max(x => x.TotalRevenue);
-                var minRevenuePodkategoria = aggregatedData.Min(x => x.TotalRevenue);
-                var maxQuantityPodkategoria = aggregatedData.Max(x => x.TotalQuantity);
-                var minQuantityPodkategoria = aggregatedData.Min(x => x.TotalQuantity);
+                var maxRevenuePodkategoria = combinedData.Max(x => x.TotalRevenue);
+                var minRevenuePodkategoria = combinedData.Min(x => x.TotalRevenue);
+                var maxQuantityPodkategoria = combinedData.Max(x => x.TotalQuantity);
+                var minQuantityPodkategoria = combinedData.Min(x => x.TotalQuantity);
 
-                var maxRevenueBook = aggregatedData.SelectMany(x => x.Books).Max(x => x.TotalRevenue);
-                var minRevenueBook = aggregatedData.SelectMany(x => x.Books).Min(x => x.TotalRevenue);
-                var maxQuantityBook = aggregatedData.SelectMany(x => x.Books).Max(x => x.TotalQuantity);
-                var minQuantityBook = aggregatedData.SelectMany(x => x.Books).Min(x => x.TotalQuantity);
+                var maxRevenueBook = combinedData.SelectMany(x => x.Books).Max(x => x.TotalRevenue);
+                var minRevenueBook = combinedData.SelectMany(x => x.Books).Min(x => x.TotalRevenue);
+                var maxQuantityBook = combinedData.SelectMany(x => x.Books).Max(x => x.TotalQuantity);
+                var minQuantityBook = combinedData.SelectMany(x => x.Books).Min(x => x.TotalQuantity);
                // Nastavujeme názvy pre premenné, ktoré obsahujú maximálne a minimálne hodnoty pre kategórie a knihy
-                var namePodkategoriaMaxRevenue = aggregatedData.Where(x => x.TotalRevenue == maxRevenuePodkategoria).First().Podkategoria;
-                var namePodkategoriaMinRevenue = aggregatedData.Where(x => x.TotalRevenue == minRevenuePodkategoria).First().Podkategoria;
-                var namePodkategoriaMaxQuantity = aggregatedData.Where(x => x.TotalQuantity == maxQuantityPodkategoria).First().Podkategoria;
-                var namePodkategoriaMinQuantity = aggregatedData.Where(x => x.TotalQuantity == minQuantityPodkategoria).First().Podkategoria;
-                var nameBookMaxRevenue = aggregatedData.SelectMany(x => x.Books).Where(x => x.TotalRevenue == maxRevenueBook).First().Name;
-                var nameBookMinRevenue = aggregatedData.SelectMany(x => x.Books).Where(x => x.TotalRevenue == minRevenueBook).First().Name;
-                var nameBookMaxQuantity = aggregatedData.SelectMany(x => x.Books).Where(x => x.TotalQuantity == maxQuantityBook).First().Name;
-                var nameBookMinQuantity = aggregatedData.SelectMany(x => x.Books).Where(x => x.TotalQuantity == minQuantityBook).First().Name;
+                var namePodkategoriaMaxRevenue = combinedData.Where(x => x.TotalRevenue == maxRevenuePodkategoria).First().Podkategoria;
+                var namePodkategoriaMinRevenue = combinedData.Where(x => x.TotalRevenue == minRevenuePodkategoria).First().Podkategoria;
+                var namePodkategoriaMaxQuantity = combinedData.Where(x => x.TotalQuantity == maxQuantityPodkategoria).First().Podkategoria;
+                var namePodkategoriaMinQuantity = combinedData.Where(x => x.TotalQuantity == minQuantityPodkategoria).First().Podkategoria;
+                var nameBookMaxRevenue = combinedData.SelectMany(x => x.Books).Where(x => x.TotalRevenue == maxRevenueBook).First().Name;
+                var nameBookMinRevenue = combinedData.SelectMany(x => x.Books).Where(x => x.TotalRevenue == minRevenueBook).First().Name;
+                var nameBookMaxQuantity = combinedData.SelectMany(x => x.Books).Where(x => x.TotalQuantity == maxQuantityBook).First().Name;
+                var nameBookMinQuantity = combinedData.SelectMany(x => x.Books).Where(x => x.TotalQuantity == minQuantityBook).First().Name;
 
 
                 // Definujeme premennú, ktorá obsahuje celkové súhrnné informácie
+                // poznamka pre total/average quantity totalrevenue berieme len udaje od prveho autora aby nam čisla sedeli(aby nebralo prijem za jeden titul pri oboch autoroch)
+                // pri ostatných ako max a min sme muselu skombinovat aj prveho aj druheho autora
                 var totalAggregatedData = new
                 {// tu su ešte dopočitane ešte celkové a celkové priemerne udaje (prve 4)
-                    totalQuantity = aggregatedData.Sum(x => x.TotalQuantity),
-                    totalRevenue = aggregatedData.Sum(x => x.TotalRevenue),
-                    averageTotalDailyQuantity = aggregatedData.Sum(x => x.TotalQuantity) / days,
-                    averageTotalDailyRevenue = aggregatedData.Sum(x => x.TotalRevenue) / days,
+                    totalQuantity = aggregatedDataAuthor1.Sum(x => x.TotalQuantity),
+                    totalRevenue = aggregatedDataAuthor1.Sum(x => x.TotalRevenue),
+                    averageTotalDailyQuantity = aggregatedDataAuthor1.Sum(x => x.TotalQuantity) / days,
+                    averageTotalDailyRevenue = aggregatedDataAuthor1.Sum(x => x.TotalRevenue) / days,
                     namePodkategoriaMaxRevenue = namePodkategoriaMaxRevenue,
                     maxRevenuePodkategoria = maxRevenuePodkategoria,
                     namePodkategoriaMinRevenue = namePodkategoriaMinRevenue,
@@ -1753,7 +1709,7 @@ namespace knihy_jankech
                     nameBookMinQuantity = nameBookMinQuantity,
                     minQuantityBook = minQuantityBook,
                 };
-                var combinedData = aggregatedData.Concat(aggregatedData2);
+               
                 // kombinueje objekt aggregateddata a totalaggregateddata do jedneho vysledneho objektu 
                 var result = new
 
@@ -2015,7 +1971,7 @@ namespace knihy_jankech
         
             else
             {
-                var aggregatedData = from book in booksData.Descendants("book")
+                var aggregatedDataAuthor1 = from book in booksData.Descendants("book")
                                      join transaction in transactionsData.Descendants("transakcia")
                                      on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
                                      where (DateTime)transaction.Element("datum") >= start
@@ -2041,7 +1997,7 @@ namespace knihy_jankech
                                                  AverageTotalCost = x.Sum(y => (double)y.Transaction.Element("celkovo_cena")) / days
                                              }).ToList()
                                      };
-                if (!aggregatedData.Any())
+                if (!aggregatedDataAuthor1.Any())
                 {
                     Context.Response.StatusCode = 500;
                     Context.Response.Write("Neboli nájdené žiadne záznamy pre zadané kritériá");
@@ -2051,7 +2007,7 @@ namespace knihy_jankech
                 // aby sme mali prehlad o prijmi a predajoch knih aj podla autora dva a mohli to vyuzit pri drill down operacii 
 
 
-                var aggregatedData2 = from book in booksData.Descendants("book")
+                var aggregatedDataAuthor2 = from book in booksData.Descendants("book")
                                       join transaction in transactionsData.Descendants("transakcia")
                                       on (int)book.Element("id") equals (int)transaction.Element("id_knihy")
                                       where (DateTime)transaction.Element("datum") >= start
@@ -2079,11 +2035,12 @@ namespace knihy_jankech
                                                   AverageTotalCost = x.Sum(y => (double)y.Transaction.Element("celkovo_cena")) / days
                                               }).ToList()
                                       };
-                
+                var combinedData = aggregatedDataAuthor1.Concat(aggregatedDataAuthor2);
+
                 if (sortingField == "nazov")
                 {
-                    aggregatedData = sortingOrder == "ascending"
-                    ? aggregatedData.OrderBy(x => x.Podkategoria)
+                    combinedData = sortingOrder == "ascending"
+                    ? combinedData.OrderBy(x => x.Podkategoria)
                         .ThenBy(x => x.Books.OrderBy(y => y.Name))
                         .Select(x => new
                         {
@@ -2095,7 +2052,7 @@ namespace knihy_jankech
                             Books = x.Books.OrderBy(y => y.Name).ToList()
 
                         })
-                    : aggregatedData.OrderByDescending(x => x.Podkategoria)
+                    : combinedData.OrderByDescending(x => x.Podkategoria)
                         .ThenBy(x => x.Books.OrderByDescending(y => y.Name))
                         .Select(x => new
                         {
@@ -2106,34 +2063,11 @@ namespace knihy_jankech
                             AverageTotalCost = x.AverageTotalCost,
                             Books = x.Books.OrderByDescending(y => y.Name).ToList()
                         });
-                    aggregatedData2 = sortingOrder == "ascending"
-                   ? aggregatedData2.OrderBy(x => x.Podkategoria)
-                       .ThenBy(x => x.Books.OrderBy(y => y.Name))
-                       .Select(x => new
-                       {
-                           Podkategoria = x.Podkategoria,
-                           TotalQuantity = x.TotalQuantity,
-                           TotalCost = x.TotalCost,
-                           AverageTotalQuantity = x.AverageTotalQuantity,
-                           AverageTotalCost = x.AverageTotalCost,
-                           Books = x.Books.OrderBy(y => y.Name).ToList()
-
-                       })
-                   : aggregatedData2.OrderByDescending(x => x.Podkategoria)
-                       .ThenBy(x => x.Books.OrderByDescending(y => y.Name))
-                       .Select(x => new
-                       {
-                           Podkategoria = x.Podkategoria,
-                           TotalQuantity = x.TotalQuantity,
-                           TotalCost = x.TotalCost,
-                           AverageTotalQuantity = x.AverageTotalQuantity,
-                           AverageTotalCost = x.AverageTotalCost,
-                           Books = x.Books.OrderByDescending(y => y.Name).ToList()
-                       });
+                   
                 }
                 else if (sortingField == "hodnota" && optionalParameter == "quantity")
                 {
-                    aggregatedData = aggregatedData.OrderBy(x => x.TotalQuantity * (sortingOrder == "ascending" ? 1 : -1))
+                    combinedData = combinedData.OrderBy(x => x.TotalQuantity * (sortingOrder == "ascending" ? 1 : -1))
                     .ThenBy(x => x.Podkategoria)
                     .Select(x => new
                     {
@@ -2146,23 +2080,11 @@ namespace knihy_jankech
                     .ThenBy(y => y.Name)
                     .ToList()
                     });
-                    aggregatedData2 = aggregatedData2.OrderBy(x => x.TotalQuantity * (sortingOrder == "ascending" ? 1 : -1))
-                    .ThenBy(x => x.Podkategoria)
-                    .Select(x => new
-                    {
-                        Podkategoria = x.Podkategoria,
-                        TotalQuantity = x.TotalQuantity,
-                        TotalCost = x.TotalCost,
-                        AverageTotalQuantity = x.AverageTotalQuantity,
-                        AverageTotalCost = x.AverageTotalCost,
-                        Books = x.Books.OrderBy(y => y.TotalQuantity * (sortingOrder == "ascending" ? 1 : -1))
-                    .ThenBy(y => y.Name)
-                    .ToList()
-                    });
+                    
                 }
                 else if (sortingField == "hodnota" && optionalParameter == "cost")
                 {
-                    aggregatedData = aggregatedData.OrderBy(x => x.TotalCost * (sortingOrder == "ascending" ? 1 : -1))
+                    combinedData = combinedData.OrderBy(x => x.TotalCost * (sortingOrder == "ascending" ? 1 : -1))
                     .ThenBy(x => x.Podkategoria)
                     .Select(x => new
                     {
@@ -2175,47 +2097,37 @@ namespace knihy_jankech
                     .ThenBy(y => y.Name)
                     .ToList()
                     });
-                    aggregatedData2 = aggregatedData2.OrderBy(x => x.TotalCost * (sortingOrder == "ascending" ? 1 : -1))
-                   .ThenBy(x => x.Podkategoria)
-                   .Select(x => new
-                   {
-                       Podkategoria = x.Podkategoria,
-                       TotalQuantity = x.TotalQuantity,
-                       TotalCost = x.TotalCost,
-                       AverageTotalQuantity = x.AverageTotalQuantity,
-                       AverageTotalCost = x.AverageTotalCost,
-                       Books = x.Books.OrderBy(y => y.TotalCost * (sortingOrder == "ascending" ? 1 : -1))
-                   .ThenBy(y => y.Name)
-                   .ToList()
-                   });
+                   
                 }
-                var maxCostPodkategoria = aggregatedData.Max(x => x.TotalCost);
-                var minCostPodkategoria = aggregatedData.Min(x => x.TotalCost);
-                var maxQuantityPodkategoria = aggregatedData.Max(x => x.TotalQuantity);
-                var minQuantityPodkategoria = aggregatedData.Min(x => x.TotalQuantity);
+                // vypocet max min hodnot pre jednotlive podkategorie a knihy plus vyber ich nazvov
+                var maxCostPodkategoria = combinedData.Max(x => x.TotalCost);
+                var minCostPodkategoria = combinedData.Min(x => x.TotalCost);
+                var maxQuantityPodkategoria = combinedData.Max(x => x.TotalQuantity);
+                var minQuantityPodkategoria = combinedData.Min(x => x.TotalQuantity);
 
-                var maxCostBook = aggregatedData.SelectMany(x => x.Books).Max(x => x.TotalCost);
-                var minCostBook = aggregatedData.SelectMany(x => x.Books).Min(x => x.TotalCost);
-                var maxQuantityBook = aggregatedData.SelectMany(x => x.Books).Max(x => x.TotalQuantity);
-                var minQuantityBook = aggregatedData.SelectMany(x => x.Books).Min(x => x.TotalQuantity);
+                var maxCostBook = combinedData.SelectMany(x => x.Books).Max(x => x.TotalCost);
+                var minCostBook = combinedData.SelectMany(x => x.Books).Min(x => x.TotalCost);
+                var maxQuantityBook = combinedData.SelectMany(x => x.Books).Max(x => x.TotalQuantity);
+                var minQuantityBook = combinedData.SelectMany(x => x.Books).Min(x => x.TotalQuantity);
 
-                var namePodkategoriaMaxCost = aggregatedData.Where(x => x.TotalCost == maxCostPodkategoria).First().Podkategoria;
-                var namePodkategoriaMinCost = aggregatedData.Where(x => x.TotalCost == minCostPodkategoria).First().Podkategoria;
-                var namePodkategoriaMaxQuantity = aggregatedData.Where(x => x.TotalQuantity == maxQuantityPodkategoria).First().Podkategoria;
-                var namePodkategoriaMinQuantity = aggregatedData.Where(x => x.TotalQuantity == minQuantityPodkategoria).First().Podkategoria;
-                var nameBookMaxCost = aggregatedData.SelectMany(x => x.Books).Where(x => x.TotalCost == maxCostBook).First().Name;
-                var nameBookMinCost = aggregatedData.SelectMany(x => x.Books).Where(x => x.TotalCost == minCostBook).First().Name;
-                var nameBookMaxQuantity = aggregatedData.SelectMany(x => x.Books).Where(x => x.TotalQuantity == maxQuantityBook).First().Name;
-                var nameBookMinQuantity = aggregatedData.SelectMany(x => x.Books).Where(x => x.TotalQuantity == minQuantityBook).First().Name;
+                var namePodkategoriaMaxCost = combinedData.Where(x => x.TotalCost == maxCostPodkategoria).First().Podkategoria;
+                var namePodkategoriaMinCost = combinedData.Where(x => x.TotalCost == minCostPodkategoria).First().Podkategoria;
+                var namePodkategoriaMaxQuantity = combinedData.Where(x => x.TotalQuantity == maxQuantityPodkategoria).First().Podkategoria;
+                var namePodkategoriaMinQuantity = combinedData.Where(x => x.TotalQuantity == minQuantityPodkategoria).First().Podkategoria;
+                var nameBookMaxCost = combinedData.SelectMany(x => x.Books).Where(x => x.TotalCost == maxCostBook).First().Name;
+                var nameBookMinCost = combinedData.SelectMany(x => x.Books).Where(x => x.TotalCost == minCostBook).First().Name;
+                var nameBookMaxQuantity = combinedData.SelectMany(x => x.Books).Where(x => x.TotalQuantity == maxQuantityBook).First().Name;
+                var nameBookMinQuantity = combinedData.SelectMany(x => x.Books).Where(x => x.TotalQuantity == minQuantityBook).First().Name;
 
 
                 // Vypocitaj celkove mnozstvé a celkove naklady pre vsetky knihy 
+                //opet do celkových/priemernych nakladov a poctov sme zaratali len autora 1 avšak max min sme robili pre oboch autoro pomocou combineddata
                 var totalAggregatedData = new
                 {
-                    totalQuantity = aggregatedData.Sum(x => x.TotalQuantity),
-                    totalCost = aggregatedData.Sum(x => x.TotalCost),
-                    averageTotalDailyQuantity = aggregatedData.Sum(x => x.TotalQuantity) / days,
-                    averageTotalDailyCost = aggregatedData.Sum(x => x.TotalCost) / days,
+                    totalQuantity = aggregatedDataAuthor1.Sum(x => x.TotalQuantity),
+                    totalCost = aggregatedDataAuthor1.Sum(x => x.TotalCost),
+                    averageTotalDailyQuantity = aggregatedDataAuthor1.Sum(x => x.TotalQuantity) / days,
+                    averageTotalDailyCost = aggregatedDataAuthor1.Sum(x => x.TotalCost) / days,
                     namePodkategoriaMaxCost = namePodkategoriaMaxCost,
                     maxCostPodkategoria = maxCostPodkategoria,
                     namePodkategoriaMinCost = namePodkategoriaMinCost,
@@ -2233,7 +2145,7 @@ namespace knihy_jankech
                     nameBookMinQuantity = nameBookMinQuantity,
                     minQuantityBook = minQuantityBook,
                 };
-                var combinedData = aggregatedData.Concat(aggregatedData2);
+               
                 // kombinácia oboch objektov 
                 var result = new
 
