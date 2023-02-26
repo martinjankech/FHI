@@ -1,0 +1,5 @@
+technologie 
+ukazka konzumacia služby
+vybrane funkcie - alerty,autocomplete, popis chart js a chart datatable len vytovrenie objektov a napapovanie premmench konceptualne 
+
+obrazovky

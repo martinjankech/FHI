@@ -673,49 +673,5 @@ Autor Saint-Exupéry svoju knižku venoval najlepšiemu priateľovi s jasným de
       <priemerne_hodnotenie>3.9</priemerne_hodnotenie>
       <obrazok>../img/30.jpg</obrazok>
     </book>
-    <book>
-      <id>31</id>
-      <nazov>123</nazov>
-      <autori>
-        <autor1>123</autor1>
-        <autor2>123</autor2>
-      </autori>
-      <kategoria>123</kategoria>
-      <isbn>123</isbn>
-      <jazyk>123</jazyk>
-      <pocet_stran>123</pocet_stran>
-      <vazba>123</vazba>
-      <rok_vydania>123</rok_vydania>
-      <vydavatelstvo>123</vydavatelstvo>
-      <predajna_cena>15</predajna_cena>
-      <nakupna_cena>5</nakupna_cena>
-      <marza>0.6666666666666666666666666667</marza>
-      <zisk_kus>10</zisk_kus>
-      <obsah>123123</obsah>
-      <priemerne_hodnotenie>123</priemerne_hodnotenie>
-      <obrazok>../img/31.jpg</obrazok>
-    </book>
-    <book>
-      <id>32</id>
-      <nazov>234</nazov>
-      <autori>
-        <autor1>23423</autor1>
-        <autor2>4234</autor2>
-      </autori>
-      <kategoria>234</kategoria>
-      <isbn>234</isbn>
-      <jazyk>234</jazyk>
-      <pocet_stran>234</pocet_stran>
-      <vazba>234</vazba>
-      <rok_vydania>234</rok_vydania>
-      <vydavatelstvo>234</vydavatelstvo>
-      <predajna_cena>2343</predajna_cena>
-      <nakupna_cena>234</nakupna_cena>
-      <marza>0.9001280409731113956466069142</marza>
-      <zisk_kus>2109</zisk_kus>
-      <obsah>234234</obsah>
-      <priemerne_hodnotenie>234</priemerne_hodnotenie>
-      <obrazok>../img/32.jpg</obrazok>
-    </book>
   </books>
 </Bookstore>
