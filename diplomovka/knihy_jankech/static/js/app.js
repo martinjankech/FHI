@@ -17,21 +17,6 @@
         $("#alert_success").slideUp(500);
       });
     }
-
-//     //Funkcia na zobrazenie alertu
-// function showAlert(message, type) {
-//   // Zobrazí hlavný div pre alert
-//   $("#alert_container").show()
-//   // Nastaví text v elemente pre zobrazovaný text
-//   $("#alert-text").html(message)
-//   // Odstráni predchádzajúce triedy pre alert a pridá novú triedu na základe parametra type
-//   $("#alert_container .alert").removeClass("alert-danger alert-success").addClass(`alert-${type}`)
-//   // Fade out a slide up efekt pre zobrazovaný div
-//   $("#alert_container").fadeTo(2000, 500).slideUp(500, function () {
-//     $("#alert_container").slideUp(500);
-//   });
-// }
-
 function showAlert(message, Id, type) {
     var alertContainer = "#" + Id + " #alert_container";
     var alertText = "#" + Id + " #alert-text";
@@ -53,23 +38,17 @@ function showAlert(message, Id, type) {
         var formData = {};
         formData[parameter] = $("#" + parameterdata).val().toLowerCase();
         console.log(formData)
-
         $.ajax({
           url: url,
           method: "POST",
           data: formData,
           dataType: "json",
           encode: true,
-          // 
-
         }).done(function (data) {
-
-           
           $(".card-body").show();
           $('html, body').animate({
     scrollTop: $("#nazov_hore").offset().top
   }, 1200);
-          
           if (data.book.autori.autor2 != "-") {
             $("#autori").html(data.book.autori.autor1 + "," + data.book.autori.autor2)
             $("#autori_hore").html(data.book.autori.autor1 + "," + data.book.autori.autor2)
