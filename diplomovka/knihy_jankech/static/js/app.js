@@ -126,7 +126,7 @@ let array=[]
      const uniqueArray = [...new Set(array)];
      return uniqueArray
    }
-  // do zadaneho inputu prida autonávrhy data ziska z poľa ktoré vytvorí funkcia ceateArrayFromOneAttribute  
+  // do zadaneho inputu prida autonávrhy data ziska z poľa ktoré vytvorí napr. funkcia ceateArrayFromOneAttribute  
   function autoCompleteInput(inputSelector, maxItem, sourceArray) {
     var selector = inputSelector;
     $(document).on("click", selector, function () {

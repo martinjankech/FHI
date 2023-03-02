@@ -627,7 +627,7 @@
         contentType: false,
         processData: false,
       }).done(function (response) {
-        showAlert("Kniha uspesne pridana", "addModal", "success");
+        showAlert("Kniha úspešne pridaná", "addModal", "success");
         setTimeout(function () {
           $('#addModal').modal('hide');
           $('#bookTable').DataTable().ajax.reload(null, false);

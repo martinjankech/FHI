@@ -673,5 +673,93 @@ Autor Saint-Exupéry svoju knižku venoval najlepšiemu priateľovi s jasným de
       <priemerne_hodnotenie>3.9</priemerne_hodnotenie>
       <obrazok>../img/30.jpg</obrazok>
     </book>
+    <book>
+      <id>31</id>
+      <nazov>Sila zvyku</nazov>
+      <autori>
+        <autor1>autor</autor1>
+        <autor2>autor</autor2>
+      </autori>
+      <kategoria>kategoria</kategoria>
+      <isbn>123</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>123</pocet_stran>
+      <vazba>pevna</vazba>
+      <rok_vydania>2000</rok_vydania>
+      <vydavatelstvo>ikar</vydavatelstvo>
+      <predajna_cena>20</predajna_cena>
+      <nakupna_cena>10</nakupna_cena>
+      <marza>0.5</marza>
+      <zisk_kus>10</zisk_kus>
+      <obsah>obsah</obsah>
+      <priemerne_hodnotenie>4,5</priemerne_hodnotenie>
+      <obrazok>../img/31.jpg</obrazok>
+    </book>
+    <book>
+      <id>32</id>
+      <nazov>Sila zvyku</nazov>
+      <autori>
+        <autor1>Marek Berith </autor1>
+        <autor2>autor2</autor2>
+      </autori>
+      <kategoria>kategoria</kategoria>
+      <isbn>2344564564</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>123</pocet_stran>
+      <vazba>pevna</vazba>
+      <rok_vydania>2000</rok_vydania>
+      <vydavatelstvo>ikar</vydavatelstvo>
+      <predajna_cena>20</predajna_cena>
+      <nakupna_cena>10</nakupna_cena>
+      <marza>0.5</marza>
+      <zisk_kus>10</zisk_kus>
+      <obsah>obsah je tu</obsah>
+      <priemerne_hodnotenie>4,5</priemerne_hodnotenie>
+      <obrazok>../img/32.jpg</obrazok>
+    </book>
+    <book>
+      <id>33</id>
+      <nazov>Sila zvyku1</nazov>
+      <autori>
+        <autor1>123</autor1>
+        <autor2>123</autor2>
+      </autori>
+      <kategoria>sport</kategoria>
+      <isbn>2344564564</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>123</pocet_stran>
+      <vazba>pevna</vazba>
+      <rok_vydania>2000</rok_vydania>
+      <vydavatelstvo>ikar</vydavatelstvo>
+      <predajna_cena>20</predajna_cena>
+      <nakupna_cena>10</nakupna_cena>
+      <marza>0.5</marza>
+      <zisk_kus>10</zisk_kus>
+      <obsah>obsah je tu bejbe</obsah>
+      <priemerne_hodnotenie>4,5</priemerne_hodnotenie>
+      <obrazok>../img/33.jpg</obrazok>
+    </book>
+    <book>
+      <id>34</id>
+      <nazov>Sila zvyku</nazov>
+      <autori>
+        <autor1>autor</autor1>
+        <autor2>autor2</autor2>
+      </autori>
+      <kategoria>kategoria</kategoria>
+      <isbn>123</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>123</pocet_stran>
+      <vazba>pevna</vazba>
+      <rok_vydania>2000</rok_vydania>
+      <vydavatelstvo>ikar</vydavatelstvo>
+      <predajna_cena>20</predajna_cena>
+      <nakupna_cena>10</nakupna_cena>
+      <marza>0.5</marza>
+      <zisk_kus>10</zisk_kus>
+      <obsah>obsah</obsah>
+      <priemerne_hodnotenie>123</priemerne_hodnotenie>
+      <obrazok>../img/34.jpg</obrazok>
+    </book>
   </books>
 </Bookstore>

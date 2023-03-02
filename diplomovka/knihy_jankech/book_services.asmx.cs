@@ -428,7 +428,7 @@ namespace knihy_jankech
                 // uloženie obrazka do súboru 
                 string imageFilePath = Path.Combine(Server.MapPath("~/img"), "../img/" + bookData.Id + ".jpg");
                 System.IO.File.WriteAllBytes(imageFilePath, bookData.ImageBytes);
-                Context.Response.Write("kniha uspesne pridana");
+                Context.Response.Write("kniha úspešne pridaná");
             }
             catch (Exception ex)
             {
@@ -2194,7 +2194,7 @@ namespace knihy_jankech
             if (quarter != 0 && month != 0)
             {
                 Context.Response.StatusCode = 500;
-                Context.Response.Write("štvrťrok a mesiac nemožu byť zvolené súčasne ");
+                Context.Response.Write("štvrťrok a mesiac nemôžu byť zvolené súčasne ! ");
                 return;
             }
             // Ak je zvolený iba štvrťrok, filtrovania sa vykoná pre transakcie z daného štvrťroku
