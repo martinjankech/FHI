@@ -20,3 +20,6 @@ https://opac.crzp.sk/?fn=detailBiblioForm&sid=1F20E14014F543F14C0050A60BD9 služ
 
 
 C:\Users\janke\source\repos\elektronicke_knihkupectvo_webove_sluzby_diplomovka\elektronicke_knihkupectvo_webove_sluzby_diplomovka\
+
+
+write longer introduction to master thesis about asp net xml web service in online bookstore, use some interesting quote  at begining
