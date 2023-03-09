@@ -21,8 +21,8 @@ namespace knihy_jankech
     {// tieto cesty treba nastaviť 
         private String fileBookInfo = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\books.xml ";
         private String fileBookTransactionInfo = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\books_transactions.xml ";
-        public String fileOutputSingleSearch = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\output.xml";
-        public String fileAmountFilterPath = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\outputfiles";
+        private String fileOutputSingleSearch = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\output.xml";
+        private String fileAmountFilterPath = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\outputfiles";
         // newebové metódy
         // 3 metoty na nacitanie xmldocumentu xdocumentu(pouzivaný pri linq nacita celý dokument ) a xelementu(tiež linq ale konkretny element  )
   public XmlDocument LoadXmlDocument(string filePath)

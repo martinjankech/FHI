@@ -776,4 +776,110 @@ A neklame. Keď Harry nastúpi do druhého ročníka, začnú sa diať na škole
     </book>
     <timestamp>2023-03-02 20:13:01</timestamp>
   </output>
+  <output>
+    <book>
+      <id>5</id>
+      <nazov>Setkání s Rámou</nazov>
+      <autori>
+        <autor1>Arthur C. Clarke</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788025738726</isbn>
+      <jazyk>cz</jazyk>
+      <pocet_stran>256</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2022</rok_vydania>
+      <vydavatelstvo>Argo</vydavatelstvo>
+      <predajna_cena>15.56</predajna_cena>
+      <nakupna_cena>8.29</nakupna_cena>
+      <marza>0.876960193003619</marza>
+      <zisk_kus>7.27</zisk_kus>
+      <obsah>V roku 2077 Taliansko zasiahla katastrofa po dopade meteoritu, čo viedlo najvyšších predstaviteľov ľudstva k rozhodnutiu vytvoriť systém radarov a teleskopov, ktorý sleduje všetky objekty prechádzajúce Slnečnou sústavou. V roku 2130 systém zachytil objekt mimoriadnych rozmerov, ktorý sa pohyboval priamo a nie po eliptickej dráhe ako ostatné asteroidy. Nazvali ho Ráma a na nejaký čas sa naň zabudlo. Až keď sa priblížil k Marsu, bola k nemu vyslaná sonda, ktorá zachytila kamerové snímky, ktoré vzali dych celému ľudstvu. Ráma je valec s dĺžkou päťdesiat kilometrov a priemerom dvadsať kilometrov. Jeho povrch je úplne hladký a kvôli slabému gravitačnému polu sa predpokladá, že je dutý. Ľudstvo sa pripravuje na prvú návštevu zo hviezd...</obsah>
+      <priemerne_hodnotenie>4.8</priemerne_hodnotenie>
+      <obrazok>../img/5.jpg</obrazok>
+    </book>
+    <timestamp>2023-03-09 12:17:39</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>16</id>
+      <nazov>Eiffel</nazov>
+      <autori>
+        <autor1>Nicolas d'Estienne d'Orves</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Spoločenská beletria</kategoria>
+      <isbn>9788056630006</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>256</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2022</rok_vydania>
+      <vydavatelstvo>Lindeni,</vydavatelstvo>
+      <predajna_cena>14.49</predajna_cena>
+      <nakupna_cena>7.68</nakupna_cena>
+      <marza>0.88671875</marza>
+      <zisk_kus>6.81</zisk_kus>
+      <obsah>V roku 1886 sa Paríž pripravoval na Svetovú výstavu a Gustave Eiffel chystal prekvapiť Francúzsko monumentálnym stavbou, 300-metrovou vežou, ktorá mala byť najvyššou na svete. Avšak, či je toto jediný dôvod pre jeho neustálu posedlosť touto kovovou stavbou, ktorá ho núti neustále pracovať, kresliť plány a hľadať dokonalý tvar?
+
+Ako sa hovorí, „cherchez la femme“ - za každým mužom stojí silná žena. Po opätovnom stretu so svojou osudovou, dlho stratenou láskou, sa zdá, že Adrienne vstúpila do Eiffelovho projektu. Je to krivka jej chrbta, ktorá ho inšpirovala, a veľké A, ktoré sa bude navždy týčiť k parížskemu nebu.</obsah>
+      <priemerne_hodnotenie>4.2</priemerne_hodnotenie>
+      <obrazok>../img/16.jpg</obrazok>
+    </book>
+    <timestamp>2023-03-09 12:17:46</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>18</id>
+      <nazov>Kaviareň v Kodani</nazov>
+      <autori>
+        <autor1>Julie Caplin</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Spoločenská beletria</kategoria>
+      <isbn>9788080900946</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>352</pocet_stran>
+      <vazba>brožovaná väzba</vazba>
+      <rok_vydania>2020</rok_vydania>
+      <vydavatelstvo>Grada</vydavatelstvo>
+      <predajna_cena>13.99</predajna_cena>
+      <nakupna_cena>6.89</nakupna_cena>
+      <marza>1.03047895500726</marza>
+      <zisk_kus>7.1</zisk_kus>
+      <obsah>Zahrejte si šálku teplej a aromatickej horúcej čokolády, obujte si hrubé ponožky, zosite sa do kresla a vyrazte s Katie do Kodane. Čaká na vás úžasná cesta za slávnym dánskym šťastím a... romantickou a sladkou láskou.</obsah>
+      <priemerne_hodnotenie>4.5</priemerne_hodnotenie>
+      <obrazok>../img/18.jpg</obrazok>
+    </book>
+    <timestamp>2023-03-09 12:17:50</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>23</id>
+      <nazov>Steve Jobs</nazov>
+      <autori>
+        <autor1>Walter Isaacson</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Životopisy</kategoria>
+      <isbn>9788081091940</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>562</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2011</rok_vydania>
+      <vydavatelstvo>Eastone Books</vydavatelstvo>
+      <predajna_cena>22.55</predajna_cena>
+      <nakupna_cena>9.65</nakupna_cena>
+      <marza>1.33678756476684</marza>
+      <zisk_kus>12.9</zisk_kus>
+      <obsah>Čitatelia slovenského prekladu autobiografie STEVE JOBS, publikovanej v rámci edície Business Class vydavateľstva Eastone Books, sa dozvedia pravdivý príbeh o ikone úspechu moderného technologického veku a jeho fenomenálnej spoločnosti Apple. Steve Jobs významne ovplyvnil vývoj počítačov pre osobné použitie, kreslených filmov, telefónov, hudby, tabletov a digitálnej tlače.
+
+
+
+      </obsah>
+      <priemerne_hodnotenie>4.6</priemerne_hodnotenie>
+      <obrazok>../img/23.jpg</obrazok>
+    </book>
+    <timestamp>2023-03-09 12:17:57</timestamp>
+  </output>
 </root>

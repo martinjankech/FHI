@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="knihy_jankech.book_services">
+    <Position X="3.5" Y="1" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>FBAAwACBAGAAFAAAEiCABAwAAAAgQgAKAAIAAAAAQAE=</HashCode>
+      <FileName>book_services.asmx.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="knihy_jankech.BookData">
+    <Position X="7.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAyCAAQIAAAAICAABgBAAAAAAQAAhACAAAQAAAAAAAA=</HashCode>
+      <FileName>dataClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="knihy_jankech.TransactionData">
+    <Position X="9.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIIAAAAAAAoAAAAACAAAAAAACAAAACAAAAAAAAQA=</HashCode>
+      <FileName>dataClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
