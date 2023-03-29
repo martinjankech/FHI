@@ -1,0 +1,38 @@
+prepodkladame že v čase sa intenzita prichodu zakaznikov zmení 
+advanced-work item types vytvorime svoju entitu s obrazkom
+data and rules - create distribution
+exponencionalne - doobena(average 0,8) poobede(average- 0,6) večer(0,4
+)
+potom jedno time dependent distribution a pridame na še rozdelenia s casmi 
+pridame input -  a dame mu distribution prichod ktore sa sklada s troch
+
+obrazok pridame k graphics
+pridame resource - bude pokladnica- shift dependend shift work patens a teraz vytvorime novu zmenu(new) doobedna poobedna večerna, behaviour
+shift work paterns-allow taks to complete 
+pre zmeny nastavime avaiblity počet poikladnic 3,4,6
+
+samotna obslohu je charaktirezovana normaknym rozdelenim 
+pridame aktivitu - rozdelenie uniform 0,5 -4 do pokladnice pride zakaznik pride raz za 4 minuty a maximalny vstupny prud je 0,5 (za každych 30 sekund pride zakaznik do pokdnice)
+odchod zakaznikov 
+oznacime obsluha a rad nezabudnut resources pridat 
+oznacime add wizadrd vytvorime 5 kopii
+
+musime na stavt do ktorej pokladnice pride zakaznik (routing out na prichod )
+uniform nahodne 
+priority podla toho do radu kde sa nevytvorik
+label - podla nalepky zakaznika
+shortes queu kde je rad nakrajtši tam 
+ešte nastaviť čas start time each daz 8:00  duration 12:00
+result collection period 3600 minut
+
+
+doobeda funguju len 
+
+nastavime distribution doobeda pre sample vl  right click a set 
+formula editor max rad 1 objects na lavel 1- maxsize
+calculation 1000
+urobime pre vsetky rady pre prve tri 1000
+a pre druhe 3 0
+
+poobede 4x1000
+vecer 6x1000

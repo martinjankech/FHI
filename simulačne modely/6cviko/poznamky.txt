@@ -1,0 +1,40 @@
+vykopovanie praznych flias 20 flias v prepravke aj je prepravka prva pracovnik je vymeni za prazdni prepravkui a plni položi na paletu ak je na palete 10 paliek tak ich pracovnik odnesie na sklad 
+advanced work item types - flaša  entita nalepka(rozny druhy pacentov 
+)
+pridame start point - vstup zakaznikov nastavime distribution exponencional average 10
+batching oit (kolko fliaš mož zakazniky doniest do systemu ) rouded uniform lower 1 upper bound 25 
+
+
+pridame resource vlastnosti nazov zdroja pracovnik  množstvo 1 
+pridame druhy zdroj vozik  množstvo 1 možeme zmeniť obrazky 
+
+pridame rad - nazov: čakanie na obsluhu
+
+
+(modelujme pracu pracovnika)
+pridame aktivitu (obsluha) properties, distribution- uniforms lower 0,2 a upper 1
+obsluha routing in collect 20 (musi nazbierať 20 fliaš až potom pokračuje) assemble
+routing out() more exit work item type (prepravka ) 
+priradime pracovnika resoruces add pracovnik
+ 
+
+
+po prvej aktivite pridame druhu aktivutu (paleta ) nic nemusime menit 
+po druhej pridame tretiu odvoz fliaš(uz mame 10 prepraviek )  distribution-triangural lower 12- mode 15- upper -20 (najčšstejšie trva odvoz 15 minut ), resources add (vozik) 
+
+po tretom create end sklad 
+
+vratime sa odvozu a roiting in collect 10
+routing out exit work item type paleta 
+priorites batching out fixed value 1 (koncom je jedna entita to iste aj obsliha ked je jedna ta )
+
+analyza vysledko
+
+spravime experiment triel setup 100
+average result 185 primerna flasa stravy v systeme 185 minut 
+prečo je to dobry vysledok pracije 12 hodin ked za 1/4 stihne flaša prebehnut systemu
+
+
+ideme analyzovať vysledky po jednom 65 percen času pracoval 30 nič nerobil
+vozijk pracuje 10 percent časoveho fondu 
+queque result 6 fliaš v priemere čakalo v systeme 

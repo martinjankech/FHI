@@ -1,0 +1,4 @@
+nahodne čislo 70kg 80kg
+nahodná premenná vaha
+pravdepodobnostne rozdelenie funckia ktora popisuje funkčným vztahom nahodne premmene pravdepobosnotsť že človek ma 80kg je 5%
+rovnomerne normalne exponencionale a diskretne rozdelenia  

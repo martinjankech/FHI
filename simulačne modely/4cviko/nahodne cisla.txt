@@ -1,0 +1,5 @@
+experimenty 
+home trial setup
+number of rienls pocet simulacii
+base random number set - prve simulacie vynecha
+intervaly spolahlivosti - keby sme vypočitali avg pre všetky priemery tak 95 percent by bolo z tohoto intervalu

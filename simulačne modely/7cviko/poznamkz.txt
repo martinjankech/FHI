@@ -1,0 +1,22 @@
+dnes vyrovnz problem potrebume 3 startpointy 
+1. objednavka
+2. surovina 1
+3. surovina 2
+
+mozme ich nechat ako povodne pravdepodobnstne rozdelenie 
+vztvorime queque pre kazdu 
+a vsetkz readi idu do jednej dalsej aktivitz a potom do jedneho konca 
+vytovrime nalepski data and riles add label - typ_produktu 
+nalepku priradime objenavk properties - actions add a label to change set to hodnota 1 
+
+spravovanie routing in collect label sheet / new spread sheet view otvori excel sheet 
+typ produktu Rad 1 Rad 2 Rad 3
+1
+
+select label - typ_produktu 
+
+novy simulacnz model 
+
+start rad obsliha(aktivitz|
+
+otvor visual logic new  if lese   ... object rad 4 nalavo count content (kralovksz dvojclick ) zvolim ohranicenie mensie rovne 

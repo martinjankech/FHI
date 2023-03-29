@@ -1,0 +1,8 @@
+hortonwork instalation - https://www.youtube.com/watch?v=8XMaVSOFygs
+Map reduce wordCount hadoop+java Linux - https://www.youtube.com/watch?v=6sK3LDY7Pp4
+
+hive instalation - https://phoenixnap.com/kb/install-hive-on-ubuntu?
+hive instalation video - https://www.youtube.com/watch?v=wPIawRML168&t=585s
+hive wordcount - https://www.youtube.com/watch?v=vei347bl9O4&t=216s
+fbclid=IwAR24s6Ri7fjHeiegE_aiCohwo9xG4hJT5CJMnnas6v_cqzmQiMMExpA_dz4
+map reduce explained edureka - https://www.youtube.com/watch?v=x-PCNX4prLA&t=1299s

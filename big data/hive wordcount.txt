@@ -1,0 +1,13 @@
+-create a table input 
+create table input (text_lines string)
+
+-Loading the data into table input
+-from local linux fs
+load data local inpath 'path' into table input 
+
+-from HDFS
+load data inpath 'path' into table input 
+
+-create table wordcount from table input to count the number of words 
+Create table wordcount as SELECT word,COUNT(*) FROM input LATERAL VIEW
+explode(split(text_lines,' '))1table as word GROUP BY word;
