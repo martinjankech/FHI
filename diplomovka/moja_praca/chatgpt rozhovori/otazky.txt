@@ -1,2 +1,0 @@
-i am writing my goal to mz master thesis about asmx web services in elecronical bookstrore i created crud operation different method that provided statistical data about sells costs revenue profit and so on i also created nice jqierz client with charts drill down chards datatbles and so on. 
-write me a prefece to to goals about asmx web service whz are thez import that i can componate it to my goal part of master thesis 

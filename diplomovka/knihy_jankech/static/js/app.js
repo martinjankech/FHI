@@ -1,3 +1,4 @@
+  var appPort = window.location.port;
   
   // zobrazi chybovu hlasku vo vybranom elemente  
   function showAlertError(message) {
@@ -83,7 +84,7 @@ function showAlert(message, Id, type) {
      async function Getallbook() {
       // await zabezpeci sychronny priebeh a caka kym nedostane promise 
       const result = await $.ajax({
-        url: 'http://localhost:8050/book_services.asmx/GetListAllBooks',
+        url: "http://localhost:" + appPort + "/book_services.asmx/GetListAllBooks",
         type: "POST",
         dataType: 'json',
       }).done(function (data) { })

@@ -281,6 +281,7 @@
   $("footer").load("footer.html")
 </script>
 <script>
+  alert(appPort)
 
   $(document).on('submit', "#formSellAtributesDates", function (event) {
 
@@ -294,7 +295,7 @@
 
     $.ajax({
       type: "POST",
-      url: "http://localhost:8050/book_services.asmx/SortedDrillDownByAtributeDataBetweenTwoDatesSell",
+      url: "http://localhost:" + appPort + "/book_services.asmx/SortedDrillDownByAtributeDataBetweenTwoDatesSell",
       data: {
         atribute: atribute,
         startDate: startDate,
@@ -436,7 +437,7 @@
       }).fail(function (jqXHR, textStatus, errorThrown) { showAlert(jqXHR.responseText, "alerts", "danger"); });
     $.ajax({
       type: "POST",
-      url: "http://localhost:8050/book_services.asmx/SortedDrillDownByAtributeDataBetweenTwoDatesSell",
+      url: "http://localhost:" + appPort + "/book_services.asmx/SortedDrillDownByAtributeDataBetweenTwoDatesSell",
       data: {
         atribute: atribute,
         startDate: startDate,

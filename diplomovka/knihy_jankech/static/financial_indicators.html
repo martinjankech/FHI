@@ -192,6 +192,8 @@
 
          </footer>
          <script>
+
+            alert(appPort)
             $(document).on('submit', "#formAg", function (event) {
                event.preventDefault()
                var year = $("#yearSelect").val();
@@ -207,7 +209,7 @@
                }
                $.ajax({
                   type: "POST",
-                  url: "http://localhost:8050/book_services.asmx/CalculateFinancialIndicators",
+                  url: "http://localhost:" + appPort + "/book_services.asmx/CalculateFinancialIndicators",
                   data: { year: year, quarter: quarter, month: month },
                   dataType: "json",
                   encode: true,

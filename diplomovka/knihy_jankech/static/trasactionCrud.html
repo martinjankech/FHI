@@ -230,6 +230,7 @@
 
   <script>
 
+    alert(appPort)
 
     $(document).ready(function () {
       $('#transactionTable').DataTable({
@@ -313,7 +314,7 @@
         //autoWidth: false,
         ajax: {
           type: 'GET',
-          url: 'http://localhost:8050/book_services.asmx/GetListAllTransactions',
+          url: "http://localhost:" + appPort + "/book_services.asmx/GetListAllTransactions",
           dataSrc: 'knihy_transakcie.transakcia',
         },
         success: function (res) {
@@ -372,7 +373,7 @@
 
       $.ajax({
         type: "POST",
-        url: "http://localhost:8050/book_services.asmx/AddTransaction",
+        url: "http://localhost:" + appPort + "/book_services.asmx/AddTransaction",
         data: {
 
           id_knihy: id_knihy,
@@ -414,7 +415,7 @@
 
       $.ajax({
         type: "POST",
-        url: "http://localhost:8050/book_services.asmx/UpdateTransaction",
+        url: "http://localhost:" + appPort + "/book_services.asmx/UpdateTransaction",
         data: {
           id_transakcie: id_transakcie,
           id_knihy: id_knihy,
@@ -446,7 +447,7 @@
       if (confirm("Ste si istý že chcete vymazať údaje o transakcii? Operácia je nezvratná!!")) {
         $.ajax({
           type: "POST",
-          url: 'http://localhost:8050/book_services.asmx/DeleteTransaction',
+          url: "http://localhost:" + appPort + "/book_services.asmx/DeleteTransaction",
           data: { id_transakcie: id_transakcie }
         })
           .done(function (response) {

@@ -424,7 +424,7 @@
         autoWidth: false,
         ajax: {
           type: 'GET',
-          url: 'http://localhost:8050/book_services.asmx/GetListAllBooks',
+          url: "http://localhost:" + appPort + "/book_services.asmx/GetListAllBooks",
           dataSrc: 'books.book',
 
         },
@@ -599,6 +599,7 @@
 
   </script>
   <script>
+    alert(appPort)
     // add book
     $(document).on('submit', "#addBook", function (event) {
       event.preventDefault();
@@ -618,7 +619,7 @@
       formData.append("obsah", $("#obsah").val());
       formData.append("priemerne_hodnotenie", $("#priemerne_hodnotenie").val());
       formData.append("file", $("#obrazok")[0].files[0]);
-      var ajaxUrl = 'http://localhost:8050/book_services.asmx/AddBook';
+      var ajaxUrl = "http://localhost:" + appPort + "/book_services.asmx/AddBook";
 
       $.ajax({
         type: "POST",
@@ -665,7 +666,7 @@
         var newFileName = fileName + "_" + timestamp + "." + fileExtension;
         formData.append("file", file, newFileName);
       }
-      var ajaxUrl = 'http://localhost:8050/book_services.asmx/UpdateBook';
+      var ajaxUrl = "http://localhost:" + appPort + "/book_services.asmx/UpdateBook";
 
       $.ajax({
         type: "POST",
@@ -694,7 +695,7 @@
       if (confirm("Ste si istý že chcete vymazať údaje o knihe? Operácia je nezvratná!!")) {
         $.ajax({
           type: "POST",
-          url: 'http://localhost:8050/book_services.asmx/DeleteBook',
+          url: "http://localhost:" + appPort + "/book_services.asmx/DeleteBook",
           data: { id: id },
         })
           .done(function (response) {

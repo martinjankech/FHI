@@ -107,6 +107,7 @@
 </body>
 
 <script>
+  alert(appPort)
   // na vytvori input pre formular na zaklade toho ktorý checkbox si vyberie pouzivatel 
   $(function () {
     $("#id_checkbox").click(function () {
@@ -153,9 +154,9 @@
       }
     })
   });
-  ajaxSingleBookForm("#formid", "http://localhost:8050/book_services.asmx/SinglebookDataById", "id", "id_input")
-  ajaxSingleBookForm("#formname", "http://localhost:8050/book_services.asmx/SinglebookDataByName", "name", "name_input")
-  ajaxSingleBookForm("#formisbn", "http://localhost:8050/book_services.asmx/SinglebookDataByIsbn", "isbn", "isbn_input")
+  ajaxSingleBookForm("#formid", "http://localhost:" + appPort + "/book_services.asmx/SinglebookDataById", "id", "id_input")
+  ajaxSingleBookForm("#formname", "http://localhost:" + appPort + "/book_services.asmx/SinglebookDataByName", "name", "name_input")
+  ajaxSingleBookForm("#formisbn", "http://localhost:" + appPort + "/book_services.asmx/SinglebookDataByIsbn", "isbn", "isbn_input")
 
 
   // naplnenie pola bookNamesArray s menami vsetkych knih ziskanych zo strany servera
