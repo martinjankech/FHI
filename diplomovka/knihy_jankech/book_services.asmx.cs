@@ -636,7 +636,7 @@ namespace knihy_jankech
                     throw new Exception("Záznam pre daný názov nebol nájdený");
 
                 }
-                // Zapísanie výsledku do súboru s časovým razítkom
+                // Zapísanie výsledku do súboru s časovou pečiatkou
                 WriteToTheFileWithTimeStamp(fileOutputSingleSearch, nodeListBook);
                 // Výpis výsledku v podobe JSONu
 
@@ -696,18 +696,21 @@ namespace knihy_jankech
                 Context.Response.Write(JsonConvert.SerializeXmlNode(nodeListBook.Item(0), Formatting.Indented));
             }
         }
-        [WebMethod(Description = "ziska zoznam vsetkých kníh v json formate")] // označenie pre volanie cez webový protokol
-        public void GetListAllBooks() // verejná funkcia na získanie zoznamu kníh
-        {
-            XmlDocument doc = LoadXmlDocument(fileBookInfo); ; // vytvorenie  a nacitanie XML dokumentu
-            XmlNodeList AllBook = doc.SelectNodes("Bookstore/books"); // získanie zoznamu všetkých kníh pomocou Xpathu ukazka kde je vhodny pre svoju jednoduchosť 
-            if (AllBook == null || AllBook.Item(0) == null) // v prípade, že zoznam je prázdny alebo neexistuje
-            {
-                Context.Response.StatusCode = 500; // nastavenie chybového kódu na 500
-                Context.Response.StatusDescription = "Chyba pri spracovávaní dát v dokumente"; // popis chyby
-                return; // ukončenie funkcie
-            }
+        [WebMethod(Description = "ziska zoznam vsetkých kníh v json formate")]
+        public void GetListAllBooks()
 
+        {   // vytvorenie  a nacitanie XML dokumentu
+            XmlDocument doc = LoadXmlDocument(fileBookInfo);
+            // získanie zoznamu všetkých kníh pomocou Xpathu ukazka kde je vhodny pre svoju jednoduchosť 
+            XmlNodeList AllBook = doc.SelectNodes("Bookstore/books");
+            // v prípade, že zoznam je prázdny alebo neexistuje
+            if (AllBook == null || AllBook.Item(0) == null)
+            {// nastavenie chybového kódu na 500
+                Context.Response.StatusCode = 500;
+                // popis chyby
+                Context.Response.StatusDescription = "Chyba pri spracovávaní dát v dokumente"; 
+                return; 
+            }
             // nastavenie UTF-8 sady pre http response 
             Context.Response.BinaryWrite(System.Text.Encoding.UTF8.GetPreamble());
             Context.Response.Write(JsonConvert.SerializeXmlNode(AllBook.Item(0), Formatting.Indented));
