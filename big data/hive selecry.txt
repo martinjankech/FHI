@@ -1,0 +1,29 @@
+nezabudni vybrat spravnu databazu
+//average rating
+select b.titleType, AVG(r.averageRating) AS avg_rating
+from ratings r join basics b on r.tconst=b.tconst
+group by b.titleType
+order by avg_rating DESC;
+
+
+// average rating with numvotes >100
+select b.titleType, AVG(r.averageRating) AS avg_rating, COUNT(r.numVotes) as vote_count 
+from ratings r join basics b on r.tconst=b.tconst
+where r.numVotes > 100
+group by b.titleType
+order by avg_rating DESC;
+
+
+select b.titleType, AVG(r.averageRating) AS avg_rating, SUM(r.numVotes) as vote_count 
+from ratings r join basics b on r.tconst=b.tconst
+where r.numVotes > 100
+group by b.titleType
+order by avg_rating DESC;
+
+// vytvorenie pohladu most_popular_movies
+create view  most_popular_movies as
+select b.tconst,b.primaryTitle,r.averageRating ,r.numVotes 
+from ratings r join basics b on r.tconst=b.tconst
+where r.numVotes > 100
+order by r.averageRating DESC,r.numVotes DESC;
+

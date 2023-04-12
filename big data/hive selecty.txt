@@ -1,0 +1,4 @@
+select b.titleType, AVG(r.averageRating) AS avg_rating
+from ratings r join basics b on r.tconst=b.tconst
+group by b.titleType
+order by avg_rating DESC;
