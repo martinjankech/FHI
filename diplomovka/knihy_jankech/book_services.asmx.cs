@@ -223,7 +223,7 @@ namespace knihy_jankech
             System.IO.File.WriteAllText(fullPath, xmlResult);
         }
 
-        [WebMethod (Description = "prida do xml súboru záznam o novej knihe")]
+        [WebMethod (Description = "pridá do xml súboru záznam o novej knihe")]
         public void AddBook()
         {
             try
@@ -457,8 +457,8 @@ namespace knihy_jankech
                 bookData.Vazba = request["vazba"];
                 bookData.Rok_vydania = request["rok_vydania"];
                 bookData.Vydavatelstvo = request["vydavatelstvo"];
-                bookData.Predajna_cena = Convert.ToDecimal(request["predajna_cena"]);
-                bookData.Nakupna_cena = Convert.ToDecimal(request["nakupna_cena"]);
+                bookData.Predajna_cena = decimal.Parse(request["predajna_cena"]);
+                bookData.Nakupna_cena = decimal.Parse(request["nakupna_cena"]);
                 bookData.Obsah = request["obsah"];
                 bookData.Priemerne_hodnotenie = request["priemerne_hodnotenie"];
 
@@ -491,8 +491,8 @@ namespace knihy_jankech
                 bookElement.SetElementValue("vazba", bookData.Vazba);
                 bookElement.SetElementValue("rok_vydania", bookData.Rok_vydania);
                 bookElement.SetElementValue("vydavatelstvo", bookData.Vydavatelstvo);
-                bookElement.SetElementValue("predajna_cena", bookData.Predajna_cena.ToString());
-                bookElement.SetElementValue("nakupna_cena", bookData.Nakupna_cena.ToString());
+                bookElement.SetElementValue("predajna_cena", bookData.Predajna_cena);
+                bookElement.SetElementValue("nakupna_cena", bookData.Nakupna_cena);
                 bookElement.SetElementValue("obsah", bookData.Obsah);
                 bookElement.SetElementValue("priemerne_hodnotenie", bookData.Priemerne_hodnotenie);
                 bookElement.SetElementValue("marza", (bookData.Predajna_cena - bookData.Nakupna_cena) / bookData.Predajna_cena );
@@ -519,7 +519,7 @@ namespace knihy_jankech
 
         }
 
-        [WebMethod(Description = "zmaze knihu podla zazadného id ")]
+        [WebMethod(Description = "zmaže knihu podľa zadaného id ")]
         public void DeleteBook(string id)
         {
             try
@@ -553,7 +553,7 @@ namespace knihy_jankech
                 Context.Response.Write("Error: " + ex.Message);
             }
         }
-        [WebMethod(Description = "odosle udaje o jednej knihe na zaklade id v json formate")]
+        [WebMethod(Description = "odošle údaje o jednej knihe na základe id v json formate")]
         public void SinglebookDataById(string id)
         {
             try
@@ -602,7 +602,7 @@ namespace knihy_jankech
                 Context.Response.Write("Vyskytla sa interná chyba servera: " + ex.Message);
             }
         }
-        [WebMethod(Description = "odosle udaje o jednej knihe na zaklade nazvu v json formate")]
+        [WebMethod(Description = "odošle údaje o jednej knihe na základe názvu v json formate")]
         public void SinglebookDataByName(string name)
         {
             try
@@ -653,7 +653,7 @@ namespace knihy_jankech
             }
         }
 
-        [WebMethod(Description = "odosle udaje o jednej knihe na zaklade isbn v json formate")]
+        [WebMethod(Description = "odošle údaje o jednej knihe na základe isbn v json formáte")]
         public void SinglebookDataByIsbn(string isbn)
         {
             //Nacitanie XML dokumentu z cesty ulozenej v premennej fileBookInfo
@@ -696,7 +696,7 @@ namespace knihy_jankech
                 Context.Response.Write(JsonConvert.SerializeXmlNode(nodeListBook.Item(0), Formatting.Indented));
             }
         }
-        [WebMethod(Description = "ziska zoznam vsetkých kníh v json formate")]
+        [WebMethod(Description = "získa zoznam všetkých kníh v json formate")]
         public void GetListAllBooks()
 
         {   // vytvorenie  a nacitanie XML dokumentu
@@ -742,7 +742,7 @@ namespace knihy_jankech
             // Prevod transakcií na JSON reťazec a odoslanie odpovede klientovi
             Context.Response.Write(JsonConvert.SerializeXmlNode(transactions, Formatting.Indented));
         }
-        [WebMethod(Description = "prida do xml súboru záznam o novej transakcii")]
+        [WebMethod(Description = "pridá do xml súboru záznam o novej transakcii")]
         public void AddTransaction(string id_knihy, string datum, string typ_transakcie, string mnozstvo, string cena_za_jednotku, string celkovo_cena, string aktualne_mnozstvo_na_sklade)
         {
 
@@ -804,7 +804,7 @@ namespace knihy_jankech
             }
         }
 
-        [WebMethod(Description = "aktualizuje udaje o transakcii")]
+        [WebMethod(Description = "aktualizuje údaje o transakcii")]
         public void UpdateTransaction(string id_transakcie, string id_knihy, string datum, string typ_transakcie, string mnozstvo, string cena_za_jednotku, string celkovo_cena, string aktualne_mnozstvo_na_sklade)
         {
             try
@@ -846,7 +846,7 @@ namespace knihy_jankech
 
 
 
-        [WebMethod (Description = "prida do xml súboru záznam o novej knihe") ]
+        [WebMethod (Description = "zmaže záznam o transakcii") ]
         public void DeleteTransaction(string id_transakcie)
         {
             try
@@ -879,7 +879,7 @@ namespace knihy_jankech
 
             }
         }
-        [WebMethod (Description = "poskytne  zoradené udaje o počtoch kníh na zaklade atributu v zadanom obdobi ")]
+        [WebMethod (Description = "poskytne zoradené údaje o počtoch kníh na sklade na zaklade atributu v zadanom obdobi ")]
         public void SortedBookAmoutsByDateAndAtribute(string selectedAtribute, string selectedValueAtribute, string startDate, string endDate, string sortField, string sortOrder)
         {
             string[] parameters = { selectedAtribute, selectedValueAtribute, startDate, endDate, sortField, sortOrder, };
@@ -1138,7 +1138,7 @@ namespace knihy_jankech
             }
         }
 
-        [WebMethod (Description = "vrati agregované udaje počtoch knih podľa atributu a zvoleneho obdobia")]
+        [WebMethod (Description = "vráti agregované údaje počtoch knih na sklade podľa atribútu a zvoleného obdobia")]
         public void AgregatedStatiscticsAmount(string selectedAtribute, string selectedValueAtribute, string startDate, string endDate)
         {
             string[] parameters = { selectedAtribute, selectedValueAtribute, startDate, endDate, };
@@ -1303,7 +1303,7 @@ namespace knihy_jankech
 
         }
 
-        [WebMethod(Description = "vytvori drill down report pre udaje o poctoch a prijmoch z predaja kníh")]
+        [WebMethod(Description = "vytvorí drill down report pre údaje o počtoch a príjmoch z predaja kníh")]
         public void SortedDrillDownByAtributeDataBetweenTwoDatesSell(string atribute, string startDate, string endDate, string sortingField = "", string sortingOrder = "", string optionalParameter = "")
         {// Vytvorenie poľa parametrov
 
@@ -1737,7 +1737,7 @@ namespace knihy_jankech
             }
         }
 
-        [WebMethod(Description = "vytvori drill down report pre udaje o poctoch a nákladoch spojených s kníh")]
+        [WebMethod(Description = "vytvorí drill down report pre údaje o počtoch a nákladoch spojených s nákupom kníh od dodávateľa")]
         public void SortedDrillDownByAtributeDataBetweenTwoDatesCost(string atribute, string startDate, string endDate, string sortingField = "", string sortingOrder = "", string optionalParameter = "")
         {// Vytvorenie poľa parametrov
             string[] parameters = { atribute, startDate, endDate, sortingField, sortingOrder, optionalParameter };
@@ -2170,7 +2170,7 @@ namespace knihy_jankech
             }
         }
     
-        [WebMethod(Description = "slúži na výpočet celkového príjmu, nákladov, zisku a iných ukazovateľov")]
+        [WebMethod(Description = "slúži na výpočet celkového príjmu, nákladov, zisku a iných finančných ukazovateľov")]
         public void CalculateFinancialIndicators(int year, int quarter, int month)
         {
             string[] parameters =   { year.ToString(), quarter.ToString(), month.ToString() };

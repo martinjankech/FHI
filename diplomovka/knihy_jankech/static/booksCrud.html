@@ -731,8 +731,8 @@
       var vazba = button.data('vazba');
       var rok_vydania = button.data('rok_vydania');
       var vydavatelstvo = button.data('vydavatelstvo');
-      var predajna_cena = button.data('predajna_cena');
-      var nakupna_cena = button.data('nakupna_cena');
+      var predajna_cena = button.data('predajna_cena').toString().replace(".", ",");;
+      var nakupna_cena = button.data('nakupna_cena').toString().replace(".", ",");;
       var marza = button.data('marza');
       var zisk_kus = button.data('zisk_kus');
       var priemerne_hodnotenie = button.data('priemerne_hodnotenie');
