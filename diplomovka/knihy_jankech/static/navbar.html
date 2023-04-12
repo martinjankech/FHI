@@ -16,8 +16,8 @@
     <nav class="navbar sticky-top navbar-expand-lg bg-dark">
         <div class="container">
 
-            <a class="navbar-brand" href="index.html"><img
-                    src="http://localhost:8045/img/imgbin_diwan-bookstore-logo-publishing-png.png" width="150"
+            <a class="navbar-brand" href="index.html"><img id="logo"
+                    src="http://localhost:8050/img/imgbin_diwan-bookstore-logo-publishing-png.png" width="150"
                     height="70" alt=""></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,7 +56,13 @@
     </nav>
 
     <body>
+        <script>
+            var appPort = window.location.port;
 
+            $(document).ready(function () {
+                $('#logo').attr('src', 'http://localhost:' + appPort + '/img/imgbin_diwan-bookstore-logo-publishing-png.png');
+            });
+        </script>
     </body>
 
 </html>

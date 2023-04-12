@@ -19,13 +19,17 @@ namespace knihy_jankech
     [System.Web.Script.Services.ScriptService]
     public class book_services : System.Web.Services.WebService
     {// tieto cesty treba nastaviť 
-        private String fileBookInfo = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\books.xml ";
-        private String fileBookTransactionInfo = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\books_transactions.xml ";
-        private String fileOutputSingleSearch = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\output.xml";
-        private String fileAmountFilterPath = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\outputfiles";
+        //private String fileBookInfo = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\books.xml ";
+        //private String fileBookTransactionInfo = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\books_transactions.xml ";
+        //private String fileOutputSingleSearch = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\output.xml";
+        //private String fileAmountFilterPath = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\outputfiles";
+        private String fileBookInfo = HttpContext.Current.Server.MapPath("~/xml/books.xml");
+        private String fileBookTransactionInfo = HttpContext.Current.Server.MapPath("~/xml/books_transactions.xml");
+        private String fileOutputSingleSearch = HttpContext.Current.Server.MapPath("~/xml/output.xml");
+        private String fileAmountFilterPath = HttpContext.Current.Server.MapPath("~/xml/outputfiles");
         // newebové metódy
         // 3 metoty na nacitanie xmldocumentu xdocumentu(pouzivaný pri linq nacita celý dokument ) a xelementu(tiež linq ale konkretny element  )
-  public XmlDocument LoadXmlDocument(string filePath)
+        public XmlDocument LoadXmlDocument(string filePath)
         {
             // Vytvorenie nového objektu XmlDocument
             XmlDocument doc = new XmlDocument();
