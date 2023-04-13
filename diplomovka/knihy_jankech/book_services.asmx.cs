@@ -18,7 +18,7 @@ namespace knihy_jankech
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
     [System.Web.Script.Services.ScriptService]
     public class book_services : System.Web.Services.WebService
-    {// tieto cesty treba nastaviť 
+    {// tieto cesty treba nastaviť pokiaľ využivame absolutne cesty
         //private String fileBookInfo = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\books.xml ";
         //private String fileBookTransactionInfo = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\books_transactions.xml ";
         //private String fileOutputSingleSearch = "D:\\git_repozitare\\FHI\\diplomovka\\knihy_jankech\\xml\\output.xml";
