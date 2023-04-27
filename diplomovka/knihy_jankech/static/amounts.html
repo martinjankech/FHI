@@ -269,6 +269,28 @@
         scrollTop: $("#bookData").offset().top
       }, 1000);
       var table = $('#bookData').DataTable({
+        language: {
+          "processing": "Spracúvanie...",
+          "search": "Hľadať:",
+          "lengthMenu": "Zobraziť _MENU_ záznamov",
+          "info": "Zobrazujem _START_ až _END_ z _TOTAL_ záznamov",
+          "infoEmpty": "Zobrazujem 0 až 0 z 0 záznamov",
+          "infoFiltered": "(filtrované z _MAX_ celkových záznamov)",
+          "infoPostFix": "",
+          "loadingRecords": "Načítavanie...",
+          "zeroRecords": "Neboli nájdené žiadne vyhovujúce záznamy",
+          "emptyTable": "V tabuľke nie sú žiadne dáta",
+          "paginate": {
+            "first": "Prvá",
+            "previous": "Predchádzajúca",
+            "next": "Ďalšia",
+            "last": "Posledná"
+          },
+          "aria": {
+            "sortAscending": ": aktivujte na zoradenie stĺpca vzostupne",
+            "sortDescending": ": aktivujte na zoradenie stĺpca zostupne"
+          }
+        },
         "ordering": false,
         "data": data,
         "columns": [

@@ -1,3 +1,203 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <root>
+  <output>
+    <book>
+      <id>1</id>
+      <nazov>Harry Potter a Tajomná komnata</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143088</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>360</pocet_stran>
+      <vazba>brožovaná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>11.9</predajna_cena>
+      <nakupna_cena>8.25</nakupna_cena>
+      <marza>0.442424242424242</marza>
+      <zisk_kus>3.65</zisk_kus>
+      <obsah>V lete boli Dursleyovci veľmi odporní, takže sa Harry Potter už netrpezlivo tešil na návrat do čarovnej školy. Jedného dňa sa v jeho izbe objavilo zvláštne a zákerné stvorenie menom Dobby. Dobby tvrdil, že ak sa Harry vráti na Rokfort, bude v ohrození života. A mal pravdu. Keď Harry nastúpil do druhého ročníka, začali sa diať na škole tajomné a strašidelné veci. Niečo alebo niekto napáda študentov Rokfortu a mení ich na kameň. Je to práca Draco Malfoya, Harryho hlavného nepriateľa? Alebo za tým stojí niekto, na koho najviac podozrievajú na Rokforte - možno aj sám Harry Potter?</obsah>
+      <priemerne_hodnotenie>4.7</priemerne_hodnotenie>
+      <obrazok>../img/1.jpg</obrazok>
+    </book>
+    <timestamp>2023-04-27 17:00:57</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>4</id>
+      <nazov>Jediná kniha o jídle, kterou potřebujete</nazov>
+      <autori>
+        <autor1>Karolína Fourová</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Kuchárky</kategoria>
+      <isbn>9788024271576</isbn>
+      <jazyk>cz</jazyk>
+      <pocet_stran>200</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2020</rok_vydania>
+      <vydavatelstvo>Esence</vydavatelstvo>
+      <predajna_cena>16</predajna_cena>
+      <nakupna_cena>8.36</nakupna_cena>
+      <marza>0.913875598086125</marza>
+      <zisk_kus>7.64</zisk_kus>
+      <obsah>Kniha od Karolíny Fourové, která je odbornicou na výživu a kvalitu potravín, vám umožní pochopiť základné princípy stravovania a predstaví vám jednotlivé zložky výživy a ich úlohu v ľudskom organizme. Získate návod, ako správne nakupovať a zodpovieme pre vás väčšinu otázok týkajúcich sa stravy a potravín. Ak sa pri zdravom stravovaní zatiaľ zatratili, kniha obsahuje aj 40 najobľúbenejších receptov autorky, ktoré vám usnadnia cestu.</obsah>
+      <priemerne_hodnotenie>3.8</priemerne_hodnotenie>
+      <obrazok>../img/4.jpg</obrazok>
+    </book>
+    <timestamp>2023-04-27 17:01:02</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>4</id>
+      <nazov>Jediná kniha o jídle, kterou potřebujete</nazov>
+      <autori>
+        <autor1>Karolína Fourová</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Kuchárky</kategoria>
+      <isbn>9788024271576</isbn>
+      <jazyk>cz</jazyk>
+      <pocet_stran>200</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2020</rok_vydania>
+      <vydavatelstvo>Esence</vydavatelstvo>
+      <predajna_cena>16</predajna_cena>
+      <nakupna_cena>8.36</nakupna_cena>
+      <marza>0.913875598086125</marza>
+      <zisk_kus>7.64</zisk_kus>
+      <obsah>Kniha od Karolíny Fourové, která je odbornicou na výživu a kvalitu potravín, vám umožní pochopiť základné princípy stravovania a predstaví vám jednotlivé zložky výživy a ich úlohu v ľudskom organizme. Získate návod, ako správne nakupovať a zodpovieme pre vás väčšinu otázok týkajúcich sa stravy a potravín. Ak sa pri zdravom stravovaní zatiaľ zatratili, kniha obsahuje aj 40 najobľúbenejších receptov autorky, ktoré vám usnadnia cestu.</obsah>
+      <priemerne_hodnotenie>3.8</priemerne_hodnotenie>
+      <obrazok>../img/4.jpg</obrazok>
+    </book>
+    <timestamp>2023-04-27 17:01:02</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>1</id>
+      <nazov>Harry Potter a Tajomná komnata</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143088</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>360</pocet_stran>
+      <vazba>brožovaná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>11.9</predajna_cena>
+      <nakupna_cena>8.25</nakupna_cena>
+      <marza>0.442424242424242</marza>
+      <zisk_kus>3.65</zisk_kus>
+      <obsah>V lete boli Dursleyovci veľmi odporní, takže sa Harry Potter už netrpezlivo tešil na návrat do čarovnej školy. Jedného dňa sa v jeho izbe objavilo zvláštne a zákerné stvorenie menom Dobby. Dobby tvrdil, že ak sa Harry vráti na Rokfort, bude v ohrození života. A mal pravdu. Keď Harry nastúpil do druhého ročníka, začali sa diať na škole tajomné a strašidelné veci. Niečo alebo niekto napáda študentov Rokfortu a mení ich na kameň. Je to práca Draco Malfoya, Harryho hlavného nepriateľa? Alebo za tým stojí niekto, na koho najviac podozrievajú na Rokforte - možno aj sám Harry Potter?</obsah>
+      <priemerne_hodnotenie>4.7</priemerne_hodnotenie>
+      <obrazok>../img/1.jpg</obrazok>
+    </book>
+    <timestamp>2023-04-27 17:01:07</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>5</id>
+      <nazov>Setkání s Rámou</nazov>
+      <autori>
+        <autor1>Arthur C. Clarke</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788025738726</isbn>
+      <jazyk>cz</jazyk>
+      <pocet_stran>256</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2022</rok_vydania>
+      <vydavatelstvo>Argo</vydavatelstvo>
+      <predajna_cena>15.56</predajna_cena>
+      <nakupna_cena>8.29</nakupna_cena>
+      <marza>0.876960193003619</marza>
+      <zisk_kus>7.27</zisk_kus>
+      <obsah>V roku 2077 Taliansko zasiahla katastrofa po dopade meteoritu, čo viedlo najvyšších predstaviteľov ľudstva k rozhodnutiu vytvoriť systém radarov a teleskopov, ktorý sleduje všetky objekty prechádzajúce Slnečnou sústavou. V roku 2130 systém zachytil objekt mimoriadnych rozmerov, ktorý sa pohyboval priamo a nie po eliptickej dráhe ako ostatné asteroidy. Nazvali ho Ráma a na nejaký čas sa naň zabudlo. Až keď sa priblížil k Marsu, bola k nemu vyslaná sonda, ktorá zachytila kamerové snímky, ktoré vzali dych celému ľudstvu. Ráma je valec s dĺžkou päťdesiat kilometrov a priemerom dvadsať kilometrov. Jeho povrch je úplne hladký a kvôli slabému gravitačnému polu sa predpokladá, že je dutý. Ľudstvo sa pripravuje na prvú návštevu zo hviezd...</obsah>
+      <priemerne_hodnotenie>4.8</priemerne_hodnotenie>
+      <obrazok>../img/5.jpg</obrazok>
+    </book>
+    <timestamp>2023-04-27 17:07:42</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>6</id>
+      <nazov>2010: Druhá vesmírná odysea</nazov>
+      <autori>
+        <autor1>Arthur C. Clarke</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788025720936</isbn>
+      <jazyk>cz</jazyk>
+      <pocet_stran>315</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2017</rok_vydania>
+      <vydavatelstvo>Argo</vydavatelstvo>
+      <predajna_cena>13.24</predajna_cena>
+      <nakupna_cena>9.35</nakupna_cena>
+      <marza>0.416042780748663</marza>
+      <zisk_kus>3.89</zisk_kus>
+      <obsah>Ku sosmickej lodi Discovery, osamelej plávajúcej hlbokým vesmírom od doby, čo David Bowman prešiel "Hviezdnou bránou", sa vydáva nová medzinárodná expedícia. Jeden z cieľov výpravy je objasnenie tragických udalostí, ktoré sa na Discovery odohrali. Ale najdôležitejším úlohou je prieskum záhadného vesmírneho telesa s celkom pravidelnými tvarmi. Je to prírodný jav alebo výtvor mimozemskéj civilizácie? Znamená toto telo hrozbu pre ľudstvo alebo mu môže naopak pomôcť? Vynárajú sa tisíce rôznych otázok a zodpovedanie aspoň časti z nich môže navždy zmeniť chápanie samotnej podstaty existencie vesmíru a tým aj budúcnosť ľudského druhu...</obsah>
+      <priemerne_hodnotenie>2.9</priemerne_hodnotenie>
+      <obrazok>../img/6.jpg</obrazok>
+    </book>
+    <timestamp>2023-04-27 17:07:47</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>6</id>
+      <nazov>2010: Druhá vesmírná odysea</nazov>
+      <autori>
+        <autor1>Arthur C. Clarke</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788025720936</isbn>
+      <jazyk>cz</jazyk>
+      <pocet_stran>315</pocet_stran>
+      <vazba>pevná väzba</vazba>
+      <rok_vydania>2017</rok_vydania>
+      <vydavatelstvo>Argo</vydavatelstvo>
+      <predajna_cena>13.24</predajna_cena>
+      <nakupna_cena>9.35</nakupna_cena>
+      <marza>0.416042780748663</marza>
+      <zisk_kus>3.89</zisk_kus>
+      <obsah>Ku sosmickej lodi Discovery, osamelej plávajúcej hlbokým vesmírom od doby, čo David Bowman prešiel "Hviezdnou bránou", sa vydáva nová medzinárodná expedícia. Jeden z cieľov výpravy je objasnenie tragických udalostí, ktoré sa na Discovery odohrali. Ale najdôležitejším úlohou je prieskum záhadného vesmírneho telesa s celkom pravidelnými tvarmi. Je to prírodný jav alebo výtvor mimozemskéj civilizácie? Znamená toto telo hrozbu pre ľudstvo alebo mu môže naopak pomôcť? Vynárajú sa tisíce rôznych otázok a zodpovedanie aspoň časti z nich môže navždy zmeniť chápanie samotnej podstaty existencie vesmíru a tým aj budúcnosť ľudského druhu...</obsah>
+      <priemerne_hodnotenie>2.9</priemerne_hodnotenie>
+      <obrazok>../img/6.jpg</obrazok>
+    </book>
+    <timestamp>2023-04-27 17:07:47</timestamp>
+  </output>
+  <output>
+    <book>
+      <id>1</id>
+      <nazov>Harry Potter a Tajomná komnata</nazov>
+      <autori>
+        <autor1>J.K. Rowling</autor1>
+        <autor2>-</autor2>
+      </autori>
+      <kategoria>Fantasy</kategoria>
+      <isbn>9788055143088</isbn>
+      <jazyk>sk</jazyk>
+      <pocet_stran>360</pocet_stran>
+      <vazba>brožovaná väzba</vazba>
+      <rok_vydania>2015</rok_vydania>
+      <vydavatelstvo>Ikar</vydavatelstvo>
+      <predajna_cena>11.9</predajna_cena>
+      <nakupna_cena>8.25</nakupna_cena>
+      <marza>0.442424242424242</marza>
+      <zisk_kus>3.65</zisk_kus>
+      <obsah>V lete boli Dursleyovci veľmi odporní, takže sa Harry Potter už netrpezlivo tešil na návrat do čarovnej školy. Jedného dňa sa v jeho izbe objavilo zvláštne a zákerné stvorenie menom Dobby. Dobby tvrdil, že ak sa Harry vráti na Rokfort, bude v ohrození života. A mal pravdu. Keď Harry nastúpil do druhého ročníka, začali sa diať na škole tajomné a strašidelné veci. Niečo alebo niekto napáda študentov Rokfortu a mení ich na kameň. Je to práca Draco Malfoya, Harryho hlavného nepriateľa? Alebo za tým stojí niekto, na koho najviac podozrievajú na Rokforte - možno aj sám Harry Potter?</obsah>
+      <priemerne_hodnotenie>4.7</priemerne_hodnotenie>
+      <obrazok>../img/1.jpg</obrazok>
+    </book>
+    <timestamp>2023-04-27 17:07:53</timestamp>
+  </output>
 </root>
