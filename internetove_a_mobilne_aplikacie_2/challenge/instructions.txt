@@ -1,0 +1,6 @@
+1. cd {challenge_dir}
+2. npm install
+3. nainstaluj jest
+   npm install -g jest
+4. spusti jest nad danou ulohou
+   jest reversestring/test.ts

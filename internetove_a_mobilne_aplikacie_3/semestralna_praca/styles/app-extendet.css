@@ -1,0 +1,101 @@
+/* general */
+body {
+  font-family: "Open Sans", sans-serif;
+}
+.text-brown {
+  color: #d2691e;
+}
+.text-brown:hover {
+  color: #d2691e;
+}
+.font-weight-semi-bold {
+  font-weight: 600;
+}
+section {
+  padding: 100px 0;
+}
+.e-title {
+  font-weight: bold;
+  font-size: 40px;
+}
+
+/* services */
+.text-yellow-own {
+  color: #ffce36;
+}
+
+/* s.works */
+.s-works .card-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+.s-works .card-detail {
+  display: block;
+  position: relative;
+}
+.s-works .card-detail:hover .btn {
+  opacity: 1;
+  top: 50%;
+}
+.s-works .card-detail .btn {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+.s-works .card-img-top {
+  max-height: 280px;
+  object-fit: cover;
+}
+
+.s-works .carousel-indicators {
+  bottom: -40px;
+}
+
+.s-works .carousel-indicators li {
+  background: #dddddd;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin: 0 5px;
+}
+.s-works .carousel-indicators li.active {
+  background: #fecf33;
+}
+
+.s-blog .card-img-top {
+  height: 320px;
+  object-fit: cover;
+}
+.s-blog .card-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+.s-blog .card-subtitle {
+  font-size: 14px;
+}
+
+.s-blog .btn:hover {
+  background: #fecf33;
+}
+.s-blog .card-img {
+  height: 100%;
+  object-fit: cover;
+  max-height: 470px;
+}
+.s-blog .card-img-overlay {
+  top: auto;
+}
+
+.message::placeholder {
+  top: 80px;
+}
+/* Contactus */
+.message {
+  padding: 5px 16px 100px 16px;
+}
+.btn-own-yellow {
+  background: #fecf33;
+}

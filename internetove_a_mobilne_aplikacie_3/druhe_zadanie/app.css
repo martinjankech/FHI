@@ -1,0 +1,33 @@
+.article-listing {
+  display: inline-block;
+  padding: 25px;
+  border-style: solid;
+  background-color: aquamarine;
+}
+.article-listing h3 {
+  font-size: 40px;
+}
+.article-listing h3:hover {
+  color: red;
+}
+h1 {
+  background-color: rosybrown;
+  padding-bottom: 40px;
+  margin-top: 0px;
+  position: relative;
+  text-align: center;
+  font-size: 60px;
+  font-family: "Courier New", Courier, monospace;
+}
+.weather-listing h2 {
+  border-style: dashed;
+  background-color: royalblue;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  border-style: groove;
+  text-align: center;
+}
+
+body {
+  background-color: chartreuse;
+}
